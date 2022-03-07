@@ -1,0 +1,12 @@
+{
+  "type": "phoenixtales:pressing",
+  "input": {
+    "item": "minecraft:gravel"
+  },
+  "output": {
+    "item": "minecraft:sand"
+  },
+  "count": 1,
+  "processTime": 200,
+  "energy": 600
+}

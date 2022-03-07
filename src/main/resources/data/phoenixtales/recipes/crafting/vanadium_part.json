@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/vanadium"
+    },
+    {
+      "item": "phoenixtales:metal_saw"
+    }
+  ],
+  "result": {
+    "item": "phoenixtales:vanadium_part",
+    "count": 2
+  }
+}

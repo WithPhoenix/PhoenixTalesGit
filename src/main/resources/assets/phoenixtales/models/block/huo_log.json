@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "phoenixtales:block/huo_log_top",
+    "side": "phoenixtales:block/huo_log"
+  }
+}

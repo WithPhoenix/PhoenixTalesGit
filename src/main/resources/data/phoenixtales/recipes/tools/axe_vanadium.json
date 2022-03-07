@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "#/",
+    " /"
+  ],
+  "key": {
+    "#": {
+      "item": "phoenixtales:vanadium_ingot"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:axe_vanadium",
+    "count": 1
+  }
+}

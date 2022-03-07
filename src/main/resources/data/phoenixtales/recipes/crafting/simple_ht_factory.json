@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S#V",
+    "# #",
+    "V#V"
+  ],
+  "key": {
+    "V": {
+      "item": "phoenixtales:vanadium_chassis"
+    },
+    "#": {
+      "item": "phoenixtales:burnt_ceramic_block"
+    },
+    "S": {
+      "item": "phoenixtales:simple_controller"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:simple_ht_factory",
+    "count": 1
+  }
+}

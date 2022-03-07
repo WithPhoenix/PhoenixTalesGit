@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "phoenixtales:block/press_factory",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "phoenixtales:block/press_factory"
+    },
+    "facing=south": {
+      "model": "phoenixtales:block/press_factory",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "phoenixtales:block/press_factory",
+      "y": 270
+    }
+  }
+}

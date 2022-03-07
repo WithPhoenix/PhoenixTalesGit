@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "phoenixtales:vanadium_ore"
+  },
+  "result": "phoenixtales:vanadium_ingot",
+  "experience": 1.5,
+  "cookingtime": 600
+}

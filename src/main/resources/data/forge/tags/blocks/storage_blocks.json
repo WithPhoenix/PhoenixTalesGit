@@ -1,0 +1,9 @@
+{
+
+  "replace": false,
+  "values": [
+    "#forge:storage_blocks/invar",
+    "#forge:storage_blocks/nickel",
+    "#forge:storage_blocks/vanadium"
+  ]
+}

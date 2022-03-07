@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "phoenixtales:huo_log",
+    "phoenixtales:huo_planks",
+    "phoenixtales:huo_stairs",
+    "phoenixtales:huo_slab",
+    "phoenixtales:huo_door",
+    "phoenixtales:huo_trapdoor"
+  ]
+}

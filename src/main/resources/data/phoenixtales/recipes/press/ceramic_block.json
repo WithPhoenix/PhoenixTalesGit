@@ -1,0 +1,12 @@
+{
+  "type": "phoenixtales:pressing",
+  "input": {
+    "item": "phoenixtales:ceramic"
+  },
+  "output": {
+    "item": "phoenixtales:ceramic_block"
+  },
+  "count": 1,
+  "processTime": 220,
+  "energy": 550
+}

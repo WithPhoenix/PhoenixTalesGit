@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "# #",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "phoenixtales:vanadium_part"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:vanadium_chassis",
+    "count": 1
+  }
+}

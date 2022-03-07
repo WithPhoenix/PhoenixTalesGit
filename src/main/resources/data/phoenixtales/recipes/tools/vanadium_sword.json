@@ -1,0 +1,22 @@
+{
+
+"type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#",
+        "#",
+        "D"
+    ],
+    "key": {
+        "#": {
+            "item": "phoenixtales:vanadium_ingot"
+        },
+        "D": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+        "item": "phoenixtales:vanadium_sword",
+        "count": 1
+    }
+
+}

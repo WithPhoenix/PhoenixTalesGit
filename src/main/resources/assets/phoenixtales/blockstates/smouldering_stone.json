@@ -1,0 +1,33 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "phoenixtales:block/smouldering_stone",
+        "weight": 200
+      },
+      {
+        "model": "phoenixtales:block/smouldering_stone",
+        "y": 180,
+        "weight": 100
+      },
+      {
+        "model": "phoenixtales:block/smouldering_stone_1",
+        "weight": 400
+      },
+      {
+        "model": "phoenixtales:block/smouldering_stone_1",
+        "y": 180,
+        "weight": 100
+      },
+      {
+        "model": "phoenixtales:block/smouldering_stone_2",
+        "weight": 200
+      },
+      {
+        "model": "phoenixtales:block/smouldering_stone_2",
+        "y": 180,
+        "weight": 100
+      }
+    ]
+  }
+}

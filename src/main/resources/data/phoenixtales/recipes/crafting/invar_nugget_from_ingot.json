@@ -1,0 +1,14 @@
+{
+
+"type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "phoenixtales:invar_ingot"
+        }
+    ],
+    "result": {
+        "item": "phoenixtales:invar_nugget",
+        "count": 9
+    }
+
+}

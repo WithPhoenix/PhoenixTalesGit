@@ -1,0 +1,6 @@
+{
+    "parent": "phoenixtales:item/enhanced_bow",
+    "textures": {
+        "layer0": "phoenixtales:item/enhanced_bow_pulling_1"
+    }
+}

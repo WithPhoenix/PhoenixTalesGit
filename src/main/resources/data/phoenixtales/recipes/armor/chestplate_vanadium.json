@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "phoenixtech:vanadium_ingot"
+    }
+  },
+  "result": {
+    "item": "phoenixtech:chestplate_vanadium",
+    "count": 1
+  }
+}

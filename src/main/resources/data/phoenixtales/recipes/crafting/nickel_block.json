@@ -1,0 +1,22 @@
+{
+
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#I#",
+    "###"
+  ],
+  "key": {
+    "I": {
+      "item": "phoenixtales:nickel_ingot"
+    },
+    "#": {
+      "tag": "forge:ingots/nickel"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:nickel_block",
+    "count": 1
+  }
+
+}

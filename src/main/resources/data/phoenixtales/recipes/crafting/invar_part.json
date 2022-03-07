@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:ingots/invar"
+    },
+    {
+      "item": "phoenixtales:metal_saw"
+    }
+  ],
+  "result": {
+    "item": "phoenixtales:invar_part",
+    "count": 2
+  }
+}

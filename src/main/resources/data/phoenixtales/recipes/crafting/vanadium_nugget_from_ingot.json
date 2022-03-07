@@ -1,0 +1,14 @@
+{
+
+"type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "phoenixtales:vanadium_ingot"
+        }
+    ],
+    "result": {
+        "item": "phoenixtales:vanadium_nugget",
+        "count": 9
+    }
+
+}

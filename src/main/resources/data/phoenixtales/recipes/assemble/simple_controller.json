@@ -1,0 +1,25 @@
+{
+  "type": "phoenixtales:assembling",
+  "ingredients": [
+    {
+      "item": "phoenixtales:silicon"
+    },
+    {
+      "item": "phoenixtales:enhanced_redstone"
+    },
+    {
+      "item": "phoenixtales:enhanced_redstone"
+    },
+    {
+      "item": "phoenixtales:enhanced_redstone"
+    },
+    {
+      "item": "phoenixtales:enhanced_redstone"
+    }
+  ],
+  "output": {
+    "item": "phoenixtales:simple_controller"
+  },
+  "processTime": 100,
+  "count": 1
+}

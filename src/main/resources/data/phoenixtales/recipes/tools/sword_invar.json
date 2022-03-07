@@ -1,0 +1,22 @@
+{
+
+"type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#",
+        "#",
+        "D"
+    ],
+    "key": {
+        "#": {
+            "item": "phoenixtales:invar_ingot"
+        },
+        "D": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+        "item": "phoenixtales:sword_invar",
+        "count": 1
+    }
+
+}

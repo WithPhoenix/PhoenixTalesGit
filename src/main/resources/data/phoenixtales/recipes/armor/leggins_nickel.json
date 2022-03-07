@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "phoenixtech:nickel_ingot"
+    }
+  },
+  "result": {
+    "item": "phoenixtech:leggins_nickel",
+    "count": 1
+  }
+}

@@ -1,0 +1,11 @@
+{
+
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "phoenixtales:nickel_ore"
+  },
+  "result": "phoenixtales:nickel_ingot",
+  "experience": 0.8,
+  "cookingtime": 300
+
+}

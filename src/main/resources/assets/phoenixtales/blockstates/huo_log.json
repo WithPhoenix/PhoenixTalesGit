@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "phoenixtales:block/huo_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z": {
+      "model": "phoenixtales:block/huo_log",
+      "x": 90
+    },
+    "axis=y": {
+      "model": "phoenixtales:block/huo_log"
+    }
+  }
+}

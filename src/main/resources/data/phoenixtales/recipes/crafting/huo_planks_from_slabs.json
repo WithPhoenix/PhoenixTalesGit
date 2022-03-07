@@ -1,0 +1,18 @@
+{
+
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "_",
+    "_"
+  ],
+  "key": {
+    "_": {
+      "item": "phoenixtales:huo_slab"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:huo_planks",
+    "count": 1
+  }
+
+}

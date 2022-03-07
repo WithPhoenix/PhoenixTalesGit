@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "phoenixtales:block/huo_planks",
+    "top": "phoenixtales:block/huo_planks",
+    "side": "phoenixtales:block/huo_planks"
+  }
+}

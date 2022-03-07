@@ -1,0 +1,16 @@
+{
+  "type": "phoenixtales:alloying",
+  "ingredients": [
+    {
+      "item": "phoenixtales:nickel_ingot"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "output": {
+    "item": "phoenixtales:invar_ingot"
+  },
+  "processTime": 300,
+  "count": 2
+}

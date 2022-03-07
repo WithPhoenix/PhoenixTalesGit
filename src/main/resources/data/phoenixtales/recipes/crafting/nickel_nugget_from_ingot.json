@@ -1,0 +1,14 @@
+{
+
+"type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "phoenixtales:nickel_ingot"
+        }
+    ],
+    "result": {
+        "item": "phoenixtales:nickel_nugget",
+        "count": 9
+    }
+
+}

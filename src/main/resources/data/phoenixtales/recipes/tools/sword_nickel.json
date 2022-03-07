@@ -1,0 +1,22 @@
+{
+
+"type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#",
+        "#",
+        "D"
+    ],
+    "key": {
+        "#": {
+            "item": "phoenixtales:nickel_ingot"
+        },
+        "D": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+        "item": "phoenixtales:sword_nickel",
+        "count": 1
+    }
+
+}

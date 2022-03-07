@@ -1,0 +1,14 @@
+{
+
+"type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "phoenixtales:huo_log"
+        }
+    ],
+    "result": {
+        "item": "phoenixtales:huo_planks",
+        "count": 4
+    }
+
+}

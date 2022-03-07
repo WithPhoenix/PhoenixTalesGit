@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R#R",
+    "# #",
+    "VNV"
+  ],
+  "key": {
+    "R": {
+      "item": "phoenixtales:enhanced_redstone"
+    },
+    "#": {
+      "item": "minecraft:piston"
+    },
+    "V": {
+      "item": "phoenixtales:vanadium_chassis"
+    },
+    "N": {
+      "item": "phoenixtales:nickel_block"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:simple_assembler",
+    "count": 1
+  }
+}

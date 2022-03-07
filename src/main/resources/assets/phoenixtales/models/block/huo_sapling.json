@@ -1,0 +1,7 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "phoenixtales:block/huo_sapling",
+    "particle": "phoenixtales:block/huo_sapling"
+  }
+}

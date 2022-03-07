@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "phoenixtech:invar_ingot"
+    }
+  },
+  "result": {
+    "item": "phoenixtech:chestplate_invar",
+    "count": 1
+  }
+}

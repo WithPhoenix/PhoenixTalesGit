@@ -1,0 +1,14 @@
+{
+  "type": "phoenixtales:enhancing",
+  "ingredients": [
+    {
+      "item": "minecraft:redstone_block"
+    },
+    {
+      "item": "minecraft:redstone_block"
+    }
+  ],
+  "output": {
+    "item": "phoenixtales:enhanced_redstone"
+  }
+}

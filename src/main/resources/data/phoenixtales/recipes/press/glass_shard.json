@@ -1,0 +1,12 @@
+{
+  "type": "phoenixtales:pressing",
+  "input": {
+    "tag": "forge:glass"
+  },
+  "output": {
+    "item": "phoenixtales:glass_shard"
+  },
+  "count": 2,
+  "processTime": 40,
+  "energy": 200
+}

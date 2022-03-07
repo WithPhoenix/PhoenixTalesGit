@@ -1,0 +1,22 @@
+{
+
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#I#",
+    "###"
+  ],
+  "key": {
+    "I": {
+      "item": "phoenixtales:vanadium_ingot"
+    },
+    "#": {
+      "tag": "forge:ingots/vanadium"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:vanadium_block",
+    "count": 1
+  }
+
+}

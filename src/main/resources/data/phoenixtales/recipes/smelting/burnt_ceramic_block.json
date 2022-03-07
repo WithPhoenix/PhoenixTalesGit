@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "phoenixtales:ceramic_block"
+  },
+  "result": "phoenixtales:burnt_ceramic_block",
+  "experience": 0,
+  "cookingtime": 300
+}

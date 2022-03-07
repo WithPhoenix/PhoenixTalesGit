@@ -1,0 +1,14 @@
+{
+  "type": "phoenixtales:enhancing",
+  "ingredients": [
+    {
+      "item": "phoenixtales:enhanced_redstone"
+    },
+    {
+      "item": "minecraft:bow"
+    }
+  ],
+  "output": {
+    "item": "phoenixtales:enhanced_bow"
+  }
+}

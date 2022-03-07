@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "phoenixtech:invar_ingot"
+    }
+  },
+  "result": {
+    "item": "phoenixtech:helmet_invar",
+    "count": 1
+  }
+}
