@@ -25,6 +25,7 @@
   "item.phoenixtales.enhanced_redstone": "Enhanced Redstone",
   "item.phoenixtales.simple_controller": "Simple Controller",
   "item.phoenixtales.advanced_controller": "Advanced Controller",
+  "item.phoenixtales.energy_holder": "§bEnergy Holder",
   "item.phoenixtales.ceramic_blend": "Ceramic Blend",
   "item.phoenixtales.ceramic": "Ceramic",
   "item.phoenixtales.slag": "Slag",
@@ -72,6 +73,8 @@
   "tooltip.phoenixtales.rotten_heart": "§7§oShould i eat this?",
   "tooltip.phoenixtales.saw": "§b§oCTRL",
   "tooltip.phoenixtales.saw_ctrl": "§7§oused to make machine parts",
+  "tooltip.phoenixtales.energyholder.autocharge.on": "§7auto charge: §aenabled",
+  "tooltip.phoenixtales.energyholder.autocharge.off": "§7auto charge: §cdisabled",
 
   "itemGroup.origins_item_group": "Phoenix Tales: Items",
   "itemGroup.origins_block_group": "Phoenix Tales: Blocks",
