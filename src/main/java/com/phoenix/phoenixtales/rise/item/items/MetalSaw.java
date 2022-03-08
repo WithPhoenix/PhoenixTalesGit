@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MetalSaw extends RiseItem {
     public MetalSaw() {
-        super(new Properties().group(ItemTab.ITEM_GROUP).maxDamage(150));
+        super(new Properties().group(ItemTab.ITEM_GROUP).maxDamage(150).maxStackSize(1));
     }
 
     @Override
