@@ -14,7 +14,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -46,7 +45,7 @@ public class EnergyHolder extends RiseItem {
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         if (stack.getTag().getBoolean("autocharge")) {
             tooltip.add(new TranslationTextComponent("tooltip.phoenixtales.energyholder.autocharge.on"));
-        }else {
+        } else {
             tooltip.add(new TranslationTextComponent("tooltip.phoenixtales.energyholder.autocharge.off"));
         }
         String energyString = this.energy + " kJ";
