@@ -6,6 +6,7 @@ import com.phoenix.phoenixtales.core.creativetab.ItemTab;
 import com.phoenix.phoenixtales.rise.RiseBlockItem;
 import com.phoenix.phoenixtales.rise.RiseItem;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
+import com.phoenix.phoenixtales.rise.item.items.EnergyHolder;
 import com.phoenix.phoenixtales.rise.item.items.MetalSaw;
 import com.phoenix.phoenixtales.rise.item.items.Phosphorus;
 import net.minecraft.item.Item;
@@ -66,6 +67,8 @@ public class RiseItems {
     public static final Item SIMPLE_CONTROLLER = createItem("simple_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item ADVANCED_CONTROLLER = createItem("advanced_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
+    public static final Item ENERGY_HOLDER = createItem("energy_holder", new EnergyHolder());
+
     public static final Item CERAMIC_BLEND = createItem("ceramic_blend", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item CERAMIC = createItem("ceramic", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item SLAG = createItem("slag", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
@@ -75,7 +78,6 @@ public class RiseItems {
     public static final Item PRESS_FACTORY = createItem("press_factory", new RiseBlockItem(RiseBlocks.PRESS_FACTORY, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ALLOY_FACTORY = createItem("alloy_factory", new RiseBlockItem(RiseBlocks.ALLOY_FACTORY, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ASSEMBLER = createItem("assembler", new RiseBlockItem(RiseBlocks.ASSEMBLER, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
-
 
     public static final Item TANK = createItem("tank", new RiseBlockItem(RiseBlocks.TANK, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 //    public static final Item HUO_BOAT = createItem("huo_boat", new HuoBoatItem(new Item.Properties().group(ItemTab.ITEM_GROUP), "huo"));
