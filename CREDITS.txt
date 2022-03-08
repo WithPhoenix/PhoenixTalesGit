@@ -1,5 +1,5 @@
-some methods from:
-@Kaupenjoe https://github.com/Tutorials-By-Kaupenjoe/Minecraft-1.16.5
+some methods from @Kaupenjoe, though im trying to replace them:
+ https://github.com/Tutorials-By-Kaupenjoe/Minecraft-1.16.5
 
 MIT License
 
