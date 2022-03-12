@@ -10,6 +10,7 @@ import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
 import com.phoenix.phoenixtales.rise.client.screen.AlloyScreen;
 import com.phoenix.phoenixtales.rise.client.screen.AssemblerScreen;
+import com.phoenix.phoenixtales.rise.client.screen.EnergyStoreScreen;
 import com.phoenix.phoenixtales.rise.client.screen.PressScreen;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -54,6 +55,7 @@ public class ClientSetup {
 
     private static void registerScreens() {
 //        ScreenManager.registerFactory(OriginsContainers.CHANGE_BLOCK_CONTAINER_TYPE.get(), ChangeScreen::new);
+        ScreenManager.registerFactory(RiseContainers.ENERGY_STORE_CONTAINER, EnergyStoreScreen::new);
         ScreenManager.registerFactory(RiseContainers.ASSEMBLER_CONTAINER, AssemblerScreen::new);
         ScreenManager.registerFactory(RiseContainers.PRESS_CONTAINER, PressScreen::new);
         ScreenManager.registerFactory(RiseContainers.ALLOY_CONTAINER, AlloyScreen::new);
