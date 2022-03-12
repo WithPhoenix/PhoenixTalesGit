@@ -1,6 +1,8 @@
 package com.phoenix.phoenixtales.rise.block.blocks.press;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
+import com.phoenix.phoenixtales.rise.item.RiseItems;
+import com.phoenix.phoenixtales.rise.item.items.EnergyHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -10,9 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -48,9 +48,15 @@ public class PressFactory extends Block {
             } else {
 
                 if (tileEntity instanceof PressTile) {
-                    //remove only for testing
+                    ItemStack stack = player.getHeldItem(handIn).getStack();
                     ((PressTile) tileEntity).addEnergy(500);
+                    if (stack.getItem().equals(RiseItems.ENERGY_HOLDER)) {
+                        ((EnergyHolder) stack.getItem()).setEnergy(stack, 5d);
+                        //remove only for testing
+
+
 //                    ((PressTile) tileEntity).receiveEnergy(1000, false);
+                    }
                 }
                 return ActionResultType.CONSUME;
             }

@@ -159,12 +159,4 @@ public class AssemblerContainer extends Container {
         return copyOfSourceStack;
     }
 
-//    @OnlyIn(Dist.CLIENT)
-//    public int getCookProgressionScaled() {
-//        int i = this.factoryData.get(2); // current Cook Time
-//        int j = this.factoryData.get(3); // TOTAL cook Time
-//        return j != 0 && i != 0 ? i * 79 / j : 0;
-//    }
-
-
 }
