@@ -3,6 +3,7 @@ package com.phoenix.phoenixtales.rise.block;
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.alloyfactory.AlloyFactory;
 import com.phoenix.phoenixtales.rise.block.blocks.assembler.Assembler;
+import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStore;
 import com.phoenix.phoenixtales.rise.block.blocks.press.PressFactory;
 import com.phoenix.phoenixtales.rise.block.blocks.tank.TankBlock;
 import net.minecraft.block.AbstractBlock;
@@ -42,6 +43,7 @@ public class RiseBlocks {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //machines and tech related blocks
+    public static final Block ENERGY_STORE = createBlock("energy_store", new EnergyStore());
     public static final Block ASSEMBLER = createBlock("assembler", new Assembler());
     public static final Block PRESS_FACTORY = createBlock("press_factory", new PressFactory());
     public static final Block ALLOY_FACTORY = createBlock("alloy_factory", new AlloyFactory());

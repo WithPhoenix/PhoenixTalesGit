@@ -3,6 +3,7 @@ package com.phoenix.phoenixtales.rise.block;
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.alloyfactory.AlloyContainer;
 import com.phoenix.phoenixtales.rise.block.blocks.assembler.AssemblerContainer;
+import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreContainer;
 import com.phoenix.phoenixtales.rise.block.blocks.press.PressContainer;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
@@ -16,6 +17,13 @@ import java.util.List;
 
 public class RiseContainers {
     public static List<ContainerType<?>> containers = new ArrayList<>();
+
+    public static ContainerType<EnergyStoreContainer> ENERGY_STORE_CONTAINER = createContainer("energy_store_container",
+            IForgeContainerType.create(((((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                World world = inv.player.getEntityWorld();
+                return new EnergyStoreContainer(windowId, world, pos, inv, inv.player);
+            })))));
 
     public static ContainerType<PressContainer> PRESS_CONTAINER = createContainer("press_container",
             IForgeContainerType.create((((windowId, inv, data) -> {
