@@ -36,6 +36,8 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     private int energy;
     private int maxEnergy; //this is a fixed value, with upgrades this will get higher
     private int energyPercent;
+    //what is the transfer rate?
+    //how do i calculate it, since i receive and extract energy
     private int transferRatePerTick;
     private int maxTransferRate;
     //does the side receive or export energy or non
@@ -59,6 +61,8 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
         itemHandler.deserializeNBT(nbt.getCompound("inv"));
+//        this.sideStatus = mapFromNBT(nbt);
+        this.sideStatus = readSides(nbt);
         this.energy = nbt.getInt("energy");
         this.maxEnergy = nbt.getInt("mE");
         this.maxTransferRate = nbt.getInt("mTRate");
@@ -68,6 +72,8 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         compound.put("inv", itemHandler.serializeNBT());
+//        mapToNBT(compound);
+        saveSides(compound);
         compound.putInt("energy", this.energy);
         compound.putInt("mE", this.maxEnergy);
         compound.putInt("mTRate", this.maxTransferRate);
@@ -118,6 +124,10 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
             handleWorld();
             handleInv();
 
+            if (this.energy > this.maxEnergy) {
+                this.energy = maxEnergy;
+            }
+
             this.energyPercent = (int) ((double) (energy) * 100d / (double) (maxEnergy));
         }
     }
@@ -149,10 +159,6 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
         return new EnergyStoreContainer(p_createMenu_1_, this.world, this.pos, p_createMenu_2_, p_createMenu_3_);
     }
 
-    public void setSideStatus(BlockSide side, Integer flag) {
-        this.sideStatus.replace(side, flag);
-    }
-
     public int getEnergy() {
         return this.energy;
     }
@@ -162,7 +168,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     }
 
     public int getTransferRatePerTick() {
-        return transferRatePerTick;
+        return this.transferRatePerTick;
     }
 
     public void setTransferRatePerTick(int transferRatePerTick) {
@@ -194,16 +200,76 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     }
 
     public void addEnergy(int amount) {
-        this.energy = this.energy + amount;
+        this.energy += amount;
     }
 
     public void removeEnergy(int amount) {
         this.energy = this.energy - amount;
     }
 
-    private void initializeSides() {
-        for (int i = 0; i < 6; i++) {
-            this.sideStatus.put(BlockSide.intToBlockSide(i), 2);
+    public void nextStatus(BlockSide side) {
+        if (sideStatus.get(side) == 0) {
+            sideStatus.replace(side, 1);
+        } else if (sideStatus.get(side) == 1) {
+            sideStatus.replace(side, 2);
+        } else {
+            sideStatus.replace(side, 0);
         }
     }
+
+    public void replaceSideStatus(BlockSide side, Integer flag) {
+        this.sideStatus.replace(side, flag);
+    }
+
+    public int getSideStatus(BlockSide side) {
+        return sideStatus.get(side);
+    }
+
+    private void initializeSides() {
+        for (BlockSide side : BlockSide.all) {
+            this.sideStatus.put(side, 2);
+        }
+    }
+
+
+    private void saveSides(CompoundNBT compound) {
+        for (BlockSide side : BlockSide.all) {
+            compound.putInt(side.name(), sideStatus.getOrDefault(side, 2));
+        }
+    }
+
+    private Map<BlockSide, Integer> readSides(CompoundNBT nbt) {
+        Map<BlockSide, Integer> temp = new HashMap<>();
+        for (BlockSide side : BlockSide.all) {
+            temp.put(side, nbt.getInt(side.name()));
+        }
+        return temp;
+    }
+
+
+    //    public void mapToNBT(CompoundNBT compound) {
+//        int i = 0;
+//        for (BlockSide side : sideStatus.keySet()) {
+//            CompoundNBT sideData = new CompoundNBT();
+//            sideData.putString("side", side.name());
+//            sideData.putInt("status", sideStatus.get(side));
+//            compound.put("sideData" + i, sideData);
+//            ++i;
+//        }
+//    }
+//
+//    public Map<BlockSide, Integer> mapFromNBT(CompoundNBT nbt) {
+//        Map<BlockSide, Integer> sideStatusTemp = new HashMap<>();
+//        for (int i = 0; nbt.contains("sideData" + i); i++) {
+//            CompoundNBT sideData = nbt.getCompound("sideData" + i);
+//            BlockSide side = BlockSide.fromName(sideData.getString("side"));
+//            int status = 2;
+//            if (sideData.contains("status")) {
+//                status = sideData.getInt("status");
+//            }
+//            sideStatusTemp.put(side, status);
+//        }
+//        return sideStatusTemp;
+//    }
+//
 }

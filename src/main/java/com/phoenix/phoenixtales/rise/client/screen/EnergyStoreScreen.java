@@ -47,8 +47,9 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
         int j = this.guiTop;
         this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
 
+        // r255 g37 b0
         double energyP = (double) (this.tile.getEnergyPercent()) / 100d;
-        this.blit(matrixStack, i + 161, j + 6, 178, 0, 8, 75 - ((int) (energyP * 75d)));
+        this.blit(matrixStack, i + 161, j + 5, 178, 0, 8, 75 - ((int) (energyP * 75d)));
 
     }
 
@@ -58,9 +59,9 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
         super.drawGuiContainerForegroundLayer(matrixStack, x, y);
 //        this.font.drawText(matrixStack, ITextComponent.getTextComponentOrEmpty(new TranslationTextComponent("screen.phoenixtales.energystore.energy").toString()), i + 20, i + 20, y, 4210752);
         this.font.drawString(matrixStack, "Stored: " + ((double) (this.tile.getEnergy() / 1000)) + " kJ", 12, 19, MathHelper.rgb(142, 143, 144));
-        this.font.drawString(matrixStack, "max. Stored: " + ((double) (this.tile.getMaxEnergy() / 1000)) + " kJ", 12, 30, MathHelper.rgb(142, 143, 144));
-        this.font.drawString(matrixStack, "Transfer Rate: " + this.tile.getTransferRatePerTick() + " J/t", 12, 41, MathHelper.rgb(142, 143, 144));
-        this.font.drawString(matrixStack, "max. Transfer Rate: " + this.tile.getMaxTransferRate() + " J/t", 12, 50, MathHelper.rgb(142, 143, 144));
+        this.font.drawString(matrixStack, "max. Stored: " + ((double) (this.tile.getMaxEnergy() / 1000)) + " kJ", 12, 31, MathHelper.rgb(142, 143, 144));
+        this.font.drawString(matrixStack, "Transfer Rate: " + this.tile.getTransferRatePerTick() + " J/t", 12, 46, MathHelper.rgb(142, 143, 144));
+        this.font.drawString(matrixStack, "max. Rate: " + this.tile.getMaxTransferRate() + " J/t", 12, 57, MathHelper.rgb(142, 143, 144));
     }
 
     private EnergyStoreTile getTileEntity() {

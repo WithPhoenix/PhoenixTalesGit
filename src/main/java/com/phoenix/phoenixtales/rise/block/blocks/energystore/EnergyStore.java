@@ -1,6 +1,7 @@
 package com.phoenix.phoenixtales.rise.block.blocks.energystore;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
+import com.phoenix.phoenixtales.rise.util.BlockSide;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -17,6 +18,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
@@ -33,7 +35,6 @@ public class EnergyStore extends Block {
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote()) {
             TileEntity tileEntity = worldIn.getTileEntity(pos);
-
             if (!player.isCrouching()) {
                 if (tileEntity instanceof EnergyStoreTile) {
                     NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, tileEntity.getPos());
@@ -41,11 +42,14 @@ public class EnergyStore extends Block {
                 } else {
                     throw new IllegalStateException("Missing Container Provider");
                 }
+
             } else {
                 if (tileEntity instanceof EnergyStoreTile) {
+                    BlockSide side = BlockSide.intToBlockSide(hit.getFace().getIndex());
+                    ((EnergyStoreTile) tileEntity).nextStatus(side);
+                    player.sendMessage(new StringTextComponent("set " + side + " to " + ((EnergyStoreTile) tileEntity).getSideStatus(side)), player.getUniqueID());
                     //remove only for testing
                     ((EnergyStoreTile) tileEntity).addEnergy(1000);
-//                    ((PressTile) tileEntity).receiveEnergy(1000, false);
                 }
             }
         }

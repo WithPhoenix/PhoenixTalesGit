@@ -36,12 +36,12 @@ public class EnergyStoreContainer extends Container {
 
         this.player = player;
         this.playerInv = new InvWrapper(playerInventory);
-        playerInventorySlots(8, 86);
+        playerInventorySlots(8, 84);
 
         if (tile != null) {
             tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(iItemHandler -> {
-                addSlot(new SlotItemHandler(iItemHandler, 0, 133, 10));
-                addSlot(new SlotItemHandler(iItemHandler, 1, 133, 61));
+                addSlot(new SlotItemHandler(iItemHandler, 0, 133, 9));
+                addSlot(new SlotItemHandler(iItemHandler, 1, 133, 60));
             });
         }
 
@@ -104,6 +104,8 @@ public class EnergyStoreContainer extends Container {
                 tile.setMaxTransferRate(value);
             }
         });
+
+
     }
 
     private void playerInventorySlots(int leftCol, int topRow) {
