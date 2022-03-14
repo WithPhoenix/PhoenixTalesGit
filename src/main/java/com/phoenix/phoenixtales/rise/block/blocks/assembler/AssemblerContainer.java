@@ -36,7 +36,7 @@ public class AssemblerContainer extends Container {
 
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
-        playerInventorySlots(8, 86);
+        playerInventorySlots(8, 84);
 
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
