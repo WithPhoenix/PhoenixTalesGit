@@ -1,4 +1,4 @@
-package com.phoenix.phoenixtales.rise.util;
+package com.phoenix.phoenixtales.rise.service;
 
 public enum BlockSide {
     DOWN, UP, NORTH, SOUTH, WEST, EAST;

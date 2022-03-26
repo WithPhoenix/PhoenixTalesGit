@@ -2,7 +2,7 @@ package com.phoenix.phoenixtales.rise.block.blocks.assembler;
 
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
-import com.phoenix.phoenixtales.rise.util.ModifiedIntReferenceHolder;
+import com.phoenix.phoenixtales.rise.service.ModifiedIntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;

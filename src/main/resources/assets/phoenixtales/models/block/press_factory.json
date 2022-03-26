@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
-    "top": "phoenixtales:block/press_factory_top",
-    "bottom": "phoenixtales:block/press_factory_bottom",
-    "side": "phoenixtales:block/press_factory_side",
-    "front": "phoenixtales:block/press_factory_front"
+    "top": "phoenixtales:block/press_top",
+    "bottom": "phoenixtales:block/press_bottom",
+    "side": "phoenixtales:block/press_side",
+    "front": "phoenixtales:block/press_front"
   }
 }

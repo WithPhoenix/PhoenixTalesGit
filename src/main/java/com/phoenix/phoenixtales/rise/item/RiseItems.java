@@ -60,6 +60,7 @@ public class RiseItems {
     public static final Item NUGGET_NICKEL = createItem("nickel_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NICKEL_MACHINE_PART = createItem("nickel_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item METAL_SAW = createItem("metal_saw", new MetalSaw());
+    public static final Item CONFIGURATOR = createItem("configurator", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //tech related
     public static final Item TRANSISTOR = createItem("transistor", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
@@ -75,6 +76,7 @@ public class RiseItems {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public static final Item CABLE = createItem("cable", new RiseBlockItem(RiseBlocks.CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ENERGY_STORE = createItem("energy_store", new RiseBlockItem(RiseBlocks.ENERGY_STORE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item PRESS_FACTORY = createItem("press_factory", new RiseBlockItem(RiseBlocks.PRESS_FACTORY, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ALLOY_FACTORY = createItem("alloy_factory", new RiseBlockItem(RiseBlocks.ALLOY_FACTORY, new Item.Properties().group(BlockTab.BLOCK_GROUP)));

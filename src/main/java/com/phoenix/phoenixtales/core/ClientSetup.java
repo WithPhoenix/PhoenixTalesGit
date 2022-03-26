@@ -10,7 +10,7 @@ import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
 import com.phoenix.phoenixtales.rise.client.screen.AlloyScreen;
 import com.phoenix.phoenixtales.rise.client.screen.AssemblerScreen;
-import com.phoenix.phoenixtales.rise.client.screen.EnergyStoreScreen;
+import com.phoenix.phoenixtales.rise.client.screen.energystore.EnergyStoreScreen;
 import com.phoenix.phoenixtales.rise.client.screen.PressScreen;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

@@ -5,7 +5,7 @@ import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
@@ -27,10 +27,12 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class PressTile extends TileEntity implements ITickableTileEntity, IInventory, INamedContainerProvider {
+public class PressTile extends TileEntity implements ITickableTileEntity, ISidedInventory, INamedContainerProvider {
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
+    private static final int[] slots_up = new int[]{0};
+    private static final int[] slots_down = new int[]{1};
     private int progress;
     private int totalTime;
     private int progressPercent;
@@ -161,7 +163,6 @@ public class PressTile extends TileEntity implements ITickableTileEntity, IInven
         this.energyPercent = (int) ((double) (energy) * 100d / (double) (maxEnergy));
     }
 
-
     private void press(ItemStack output, int count) {
         itemHandler.extractItem(0, 1, false);
 
@@ -177,13 +178,6 @@ public class PressTile extends TileEntity implements ITickableTileEntity, IInven
         }
     }
 
-//    public int getProgressScaled(int p) {
-//        int i = this.processTime;
-//        int j = this.totalTime;
-//        return j != 0 && i != 0 ? i * p / j : 0;
-//    }
-
-
     public int getProgressPercent() {
         return this.progressPercent;
     }
@@ -197,24 +191,34 @@ public class PressTile extends TileEntity implements ITickableTileEntity, IInven
         return 2;
     }
 
+
     @Override
     public boolean isEmpty() {
+//        for(ItemStack itemstack : this.items) {
+//            if (!itemstack.isEmpty()) {
+//                return false;
+//            }
+//        }
+//
+//        return true;
         return false;
     }
 
     @Override
     public ItemStack getStackInSlot(int index) {
-        return null;
+        return this.itemHandler.getStackInSlot(index);
     }
 
     @Override
     public ItemStack decrStackSize(int index, int count) {
-        return null;
+        return itemHandler.extractItem(index, count, false);
     }
 
     @Override
     public ItemStack removeStackFromSlot(int index) {
-        return null;
+        ItemStack stack = itemHandler.getStackInSlot(index);
+        itemHandler.extractItem(index, stack.getCount(), false);
+        return stack;
     }
 
     @Override
@@ -224,7 +228,11 @@ public class PressTile extends TileEntity implements ITickableTileEntity, IInven
 
     @Override
     public boolean isUsableByPlayer(PlayerEntity player) {
-        return false;
+        if (this.world.getTileEntity(this.pos) != this) {
+            return false;
+        } else {
+            return player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+        }
     }
 
     @Override
@@ -265,4 +273,30 @@ public class PressTile extends TileEntity implements ITickableTileEntity, IInven
     }
 
 
+    /**
+     * items can be inserted every side besides down, this is the extract side;
+     */
+    @Override
+    public int[] getSlotsForFace(Direction side) {
+        if (side == Direction.DOWN) {
+            return slots_down;
+        }
+        if (side == Direction.UP) {
+            return slots_up;
+        }
+        return null;
+    }
+
+    @Override
+    public boolean canInsertItem(int index, ItemStack itemStackIn, @org.jetbrains.annotations.Nullable Direction direction) {
+        return this.isItemValidForSlot(index, itemStackIn);
+    }
+
+    @Override
+    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+        if (direction == Direction.DOWN && index == 1) {
+            return true;
+        }
+        return direction == Direction.UP && index == 0;
+    }
 }
