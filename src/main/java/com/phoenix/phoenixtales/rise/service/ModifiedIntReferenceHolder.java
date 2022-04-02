@@ -1,8 +1,21 @@
-package com.phoenix.phoenixtales.rise.util;
+package com.phoenix.phoenixtales.rise.service;
 
+import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntReferenceHolder;
 
 public class ModifiedIntReferenceHolder extends IntReferenceHolder {
+
+    public static ModifiedIntReferenceHolder create(final IIntArray data, final int idx) {
+        return new ModifiedIntReferenceHolder() {
+            public int get() {
+                return data.get(idx);
+            }
+
+            public void set(int value) {
+                data.set(idx, value);
+            }
+        };
+    }
 
     protected int lastKnownValue = -1;
 

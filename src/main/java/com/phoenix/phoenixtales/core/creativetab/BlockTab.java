@@ -18,7 +18,6 @@ public class BlockTab extends ItemGroup {
     @Nonnull
     @Override
     public ItemStack createIcon() {
-        return new ItemStack(OriginsItems.CreativeTabBlock);
+        return new ItemStack(OriginsItems.SMOULDERING_STONE);
     }
-
 }
