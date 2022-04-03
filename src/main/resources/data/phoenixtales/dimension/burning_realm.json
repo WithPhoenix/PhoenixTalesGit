@@ -37,6 +37,16 @@
       },
       "biomes": [
         {
+          "biome": "phoenixtales:searing_woods",
+          "parameters": {
+            "altitude": 0,
+            "temperature": 0,
+            "humidity": 0,
+            "weirdness": 0.1,
+            "offset": 0
+          }
+        },
+        {
           "biome": "phoenixtales:ashen_plains",
           "parameters": {
             "altitude": 0,

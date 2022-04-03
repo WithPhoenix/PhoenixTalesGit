@@ -22,7 +22,8 @@ public class TalesFeatures {
 
     public static final Feature<NoFeatureConfig> SURFACE_MODIFICATION = createFeature("surface_modification", new SurfaceFeature(NoFeatureConfig.CODEC.stable()));
     public static final Feature<NoFeatureConfig> ROCK_FEATURE = createFeature("rock_feature", new RockFeature(NoFeatureConfig.CODEC.stable()));
-    public static final Feature<NoFeatureConfig> HUO_TREE_FEATURE = createFeature("huo_tree_feature", new HuoTreeFeature(NoFeatureConfig.CODEC.stable()));
+    public static final Feature<NoFeatureConfig> HUO_TREE_FEATURE = createFeature("huo_tree_feature", new HuoTreeFeature(NoFeatureConfig.CODEC.stable(), false));
+    public static final Feature<NoFeatureConfig> GIANT_HUO_TREE_FEATURE = createFeature("giant_huo_tree_feature", new HuoTreeFeature(NoFeatureConfig.CODEC.stable(), true));
 
     public static final class States {
         protected static final BlockState CRYSTAL = OriginsBlocks.CRYSTAL.getDefaultState();
