@@ -1,8 +1,6 @@
 {
-
-  "parent" : "item/generated",
-  "textures" : {
-    "layer0" : "phoenixtales:item/metal_saw"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "phoenixtales:item/metal_saw"
   }
-
 }

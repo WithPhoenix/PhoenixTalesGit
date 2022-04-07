@@ -10,8 +10,8 @@ import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
 import com.phoenix.phoenixtales.rise.client.screen.AlloyScreen;
 import com.phoenix.phoenixtales.rise.client.screen.AssemblerScreen;
-import com.phoenix.phoenixtales.rise.client.screen.energystore.EnergyStoreScreen;
 import com.phoenix.phoenixtales.rise.client.screen.PressScreen;
+import com.phoenix.phoenixtales.rise.client.screen.energystore.EnergyStoreScreen;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -45,12 +45,30 @@ public class ClientSetup {
     }
 
     private static void setRenderLayer() {
-        RenderTypeLookup.setRenderLayer(OriginsBlocks.HUO_LOG, RenderType.getCutout());
-//        RenderTypeLookup.setRenderLayer(OriginsBlocks.HUO_SAPLING, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(RiseBlocks.VANADIUM_CHASSIS, RenderType.getCutout());
+
+//        RenderTypeLookup.setRenderLayer(OriginsBlocks.HUO_LOG, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.HUO_SAPLING, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.HUO_DOOR, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.HUO_TRAPDOOR, RenderType.getCutout());
-//        RenderTypeLookup.setRenderLayer(RiseBlocks.CHANGE_BLOCK, RenderType.getCutout());
+
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.SEARING_GRASS, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.SEARING_FERN, RenderType.getCutout());
+
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.TALL_SEARING_GRASS, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.LARGE_SEARING_FERN, RenderType.getCutout());
+
+
+//        RenderTypeLookup.setRenderLayer(OriginsBlocks.HUI_LOG, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.HUI_SAPLING, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.HUI_DOOR, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.HUI_TRAPDOOR, RenderType.getCutout());
+
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.ASHEN_GRASS, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.ASHEN_FERN, RenderType.getCutout());
+
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.TALL_ASHEN_GRASS, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.LARGE_ASHEN_FERN, RenderType.getCutout());
     }
 
     private static void registerScreens() {

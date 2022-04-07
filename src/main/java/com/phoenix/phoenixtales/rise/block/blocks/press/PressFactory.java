@@ -51,15 +51,9 @@ public class PressFactory extends HorizontalBlock {
             } else {
 
                 if (tileEntity instanceof PressTile) {
-                    ItemStack stack = player.getHeldItem(handIn).getStack();
                     ((PressTile) tileEntity).addEnergy(500);
-                    if (stack.getItem().equals(RiseItems.ENERGY_HOLDER)) {
-                        ((EnergyHolder) stack.getItem()).setEnergy(stack, 5d);
                         //remove only for testing
-
-
 //                    ((PressTile) tileEntity).receiveEnergy(1000, false);
-                    }
                 }
                 return ActionResultType.CONSUME;
             }

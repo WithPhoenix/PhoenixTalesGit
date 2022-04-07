@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "phoenixtales:block/hui_slab"
+    },
+    "type=double": {
+      "model": "phoenixtales:block/hui_planks"
+    },
+    "type=top": {
+      "model": "phoenixtales:block/hui_slab_top"
+    }
+  }
+}

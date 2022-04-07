@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "phoenixtales:block/searing_dirt"
+      },
+      {
+        "model": "phoenixtales:block/searing_dirt",
+        "y": 90
+      },
+      {
+        "model": "phoenixtales:block/searing_dirt",
+        "y": 180
+      },
+      {
+        "model": "phoenixtales:block/searing_dirt",
+        "y": 270
+      }
+    ]
+  }
+}

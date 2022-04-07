@@ -1,6 +1,5 @@
 package com.phoenix.phoenixtales.rise;
 
-import com.phoenix.phoenixtales.core.creativetab.BlockTab;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.BlockItem;

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_rh",
+  "textures": {
+    "top": "phoenixtales:block/hui_door_top",
+    "bottom": "phoenixtales:block/hui_door_bottom"
+  }
+}

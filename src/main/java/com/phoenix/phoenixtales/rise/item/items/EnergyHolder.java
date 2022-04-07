@@ -1,16 +1,14 @@
 package com.phoenix.phoenixtales.rise.item.items;
 
-import com.phoenix.phoenixtales.core.creativetab.ItemTab;
+import com.phoenix.phoenixtales.core.creativetab.TalesTabItem;
 import com.phoenix.phoenixtales.rise.RiseItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -33,7 +31,7 @@ public class EnergyHolder extends RiseItem {
     //TODO how much energy will be transferred in a single click
 
     public EnergyHolder() {
-        super(new Properties().group(ItemTab.ITEM_GROUP).maxStackSize(1));
+        super(new Properties().group(TalesTabItem.TAB_ITEM).maxStackSize(1));
         updateTags(this.getDefaultInstance(), 0d, 120d, false);
     }
 
