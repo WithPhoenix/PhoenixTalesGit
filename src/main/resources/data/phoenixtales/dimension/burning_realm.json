@@ -85,7 +85,17 @@
             "altitude": 0,
             "temperature": 0,
             "humidity": 0,
-            "weirdness": 0.1,
+            "weirdness": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "phoenixtales:searing_lowlands",
+          "parameters": {
+            "altitude": 0,
+            "temperature": 0,
+            "humidity": -0.5,
+            "weirdness": 0,
             "offset": 0
           }
         },
@@ -94,9 +104,29 @@
           "parameters": {
             "altitude": 0,
             "temperature": 0,
+            "humidity": 0.3,
+            "weirdness": 0.3,
+            "offset": 0.250
+          }
+        },
+        {
+          "biome": "phoenixtales:ashen_forest",
+          "parameters": {
+            "altitude": 0,
+            "temperature": 0,
+            "humidity": 0.5,
+            "weirdness": 0.4,
+            "offset": 0.125
+          }
+        },
+        {
+          "biome": "phoenixtales:bleak_lands",
+          "parameters": {
+            "altitude": 0,
+            "temperature": -0.5,
             "humidity": 0,
-            "weirdness": 0,
-            "offset": 0
+            "weirdness": 0.9,
+            "offset": 0.325
           }
         }
       ]

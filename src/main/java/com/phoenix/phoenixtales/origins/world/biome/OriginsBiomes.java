@@ -12,8 +12,11 @@ import java.util.List;
 public class OriginsBiomes {
     public static List<Biome> biomes = new ArrayList<>();
 
-    public static Biome ASHEN_PLAINS = createBiome("ashen_plains", TalesBiomeMaker.makeAshenPlainsBiome());
-    public static Biome SEARING_WOODS = createBiome("searing_woods", TalesBiomeMaker.makeSearingWoodsBiome());
+    public static Biome ASHEN_PLAINS = createBiome("ashen_plains", TalesBiomeMaker.makeAshenPlains());
+    public static Biome ASHEN_FOREST = createBiome("ashen_forest", TalesBiomeMaker.makeAshenForest());
+    public static Biome SEARING_LOWLANDS = createBiome("searing_lowlands", TalesBiomeMaker.makeSearingPlains());
+    public static Biome SEARING_WOODS = createBiome("searing_woods", TalesBiomeMaker.makeSearingWoods());
+    public static Biome BLEAK_LANDS = createBiome("bleak_lands", TalesBiomeMaker.makePermaFrost());
 
     public static Biome createBiome(String id, Biome biome) {
         ResourceLocation location = new ResourceLocation(PhoenixTales.MOD_ID, id);

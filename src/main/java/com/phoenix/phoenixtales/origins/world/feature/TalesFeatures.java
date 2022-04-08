@@ -2,10 +2,7 @@ package com.phoenix.phoenixtales.origins.world.feature;
 
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
-import com.phoenix.phoenixtales.origins.world.feature.talesdim.HuiTreeFeature;
-import com.phoenix.phoenixtales.origins.world.feature.talesdim.HuoTreeFeature;
-import com.phoenix.phoenixtales.origins.world.feature.talesdim.RockFeature;
-import com.phoenix.phoenixtales.origins.world.feature.talesdim.SurfaceFeature;
+import com.phoenix.phoenixtales.origins.world.feature.talesdim.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -26,9 +23,9 @@ public class TalesFeatures {
     public static final Feature<NoFeatureConfig> HUO_TREE_FEATURE = createFeature("huo_tree_feature", new HuoTreeFeature(NoFeatureConfig.CODEC.stable(), false));
     public static final Feature<NoFeatureConfig> GIANT_HUO_TREE_FEATURE = createFeature("giant_huo_tree_feature", new HuoTreeFeature(NoFeatureConfig.CODEC.stable(), true));
     public static final Feature<NoFeatureConfig> HUI_TREE_FEATURE = createFeature("hui_tree_feature", new HuiTreeFeature(NoFeatureConfig.CODEC.stable()));
+    public static final Feature<NoFeatureConfig> HUI_BUSH_FEATURE = createFeature("hui_bush_feature", new HuiBushFeature(NoFeatureConfig.CODEC.stable()));
 
     public static final class States {
-        protected static final BlockState CRYSTAL = OriginsBlocks.CRYSTAL.getDefaultState();
         protected static final BlockState HUO_LEAVES = OriginsBlocks.HUO_LEAVES.getDefaultState();
         protected static final BlockState HUO_LOG = OriginsBlocks.HUO_LOG.getDefaultState();
         protected static final BlockState SMOULDERING_STONE = OriginsBlocks.SEARING_STONE.getDefaultState();

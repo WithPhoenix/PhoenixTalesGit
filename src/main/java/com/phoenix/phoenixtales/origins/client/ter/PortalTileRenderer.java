@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class PortalTileRenderer <T extends OriginsPortalTile> extends TileEntityRenderer<T> {
+public class PortalTileRenderer<T extends OriginsPortalTile> extends TileEntityRenderer<T> {
     public static final ResourceLocation SKY_TEXTURE = new ResourceLocation(PhoenixTales.MOD_ID, "textures/environment/dimension_sky.png");
     public static final ResourceLocation PORTAL_TEXTURE = new ResourceLocation(PhoenixTales.MOD_ID, "textures/entity/dimension_portal.png");
     protected static final Random RANDOM = new Random(31100L);
@@ -38,8 +38,6 @@ public class PortalTileRenderer <T extends OriginsPortalTile> extends TileEntity
         float f = this.getOffset();
         Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
         this.renderCube(tileEntityIn, f, 0.15F, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)));
-
-        //this.renderCube0(tileEntityIn, f, 0.15F, matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(0)));
 
         for (int j = 1; j < i; ++j) {
             this.renderCube(tileEntityIn, f, 2.0F / (float) (18 - j), matrix4f, bufferIn.getBuffer(RENDER_TYPES.get(j)));
@@ -63,7 +61,7 @@ public class PortalTileRenderer <T extends OriginsPortalTile> extends TileEntity
         float f = (RANDOM.nextFloat() * 0.5F + 0.1F) * p_228883_3_;
         float f1 = (RANDOM.nextFloat() * 0.5F + 0.4F) * p_228883_3_;
         float f2 = (RANDOM.nextFloat() * 0.5F + 0.5F) * p_228883_3_;
-//        this.renderFace(tileEntityIn, matrix4f, builder, 0.0F, 0.5F, p_228883_2_, 0.0F, 0.5F, 0.5F, 0.5F, 0.5F, f, f1, f2, Direction.SOUTH);
+         this.renderFace(tileEntityIn, matrix4f, builder, 0.0F, 0.5F, 0.0F, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F, f, f1, f2, Direction.SOUTH);
 //        this.renderFace(tileEntityIn, matrix4f, builder, 0.0F, 0.5F, p_228883_2_, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, f, f1, f2, Direction.NORTH);
 //        this.renderFace(tileEntityIn, matrix4f, builder, 0.5F, 0.5F, p_228883_2_, 0.0F, 0.0F, 0.5F, 0.5F, 0.0F, f, f1, f2, Direction.EAST);
 //        this.renderFace(tileEntityIn, matrix4f, builder, 0.0F, 0.0F, p_228883_2_, 0.0F, 0.0F, 0.5F, 0.5F, 0.0F, f, f1, f2, Direction.WEST);

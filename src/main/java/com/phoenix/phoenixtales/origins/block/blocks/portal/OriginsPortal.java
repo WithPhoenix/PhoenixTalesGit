@@ -1,5 +1,8 @@
 package com.phoenix.phoenixtales.origins.block.blocks.portal;
 
+import com.phoenix.phoenixtales.core.PhoenixTales;
+import com.phoenix.phoenixtales.origins.service.RealmTeleporter;
+import com.phoenix.phoenixtales.origins.world.TalesDimension;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
@@ -17,6 +20,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -50,24 +54,24 @@ public class OriginsPortal extends ContainerBlock {
         if (!worldIn.isRemote()) {
             MinecraftServer server = worldIn.getServer();
             if (server != null) {
-//                if (worldIn.getDimensionKey() == TalesDimensions.PHOENIX_DIMENSION) {
-//                    ServerWorld serverworld = server.getWorld(World.OVERWORLD);
-//                    if (serverworld != null) {
-//                        BlockPos p = BlockPos.fromLong(player.getPersistentData().getLong(PhoenixTales.MOD_ID + "_last"));
-//                        player.changeDimension(serverworld, new OriginsTeleporter(p, false));
-//                    }
-//                } else {
-//                    ServerWorld phoenix = server.getWorld(TalesDimensions.PHOENIX_DIMENSION);
-//                    if (phoenix != null) {
-//                        player.getPersistentData().putLong(PhoenixTales.MOD_ID + "_last", pos.toLong());
-//                        BlockPos p = new BlockPos(0, pos.getY(), 0);
-//                        player.changeDimension(phoenix, new OriginsTeleporter(p, true));
-//                    }
-//                }
+                if (worldIn.getDimensionKey() == TalesDimension.DIMENSION) {
+                    ServerWorld serverworld = server.getWorld(World.OVERWORLD);
+                    if (serverworld != null) {
+                        BlockPos p = BlockPos.fromLong(player.getPersistentData().getLong(PhoenixTales.MOD_ID + "_last"));
+                        player.changeDimension(serverworld, new RealmTeleporter(p, false));
+                    }
+                } else {
+                    ServerWorld realm = server.getWorld(TalesDimension.DIMENSION);
+                    if (realm != null) {
+                        player.getPersistentData().putLong(PhoenixTales.MOD_ID + "_last", pos.toLong());
+                        BlockPos p = new BlockPos(0, pos.getY(), 0);
+                        player.changeDimension(realm, new RealmTeleporter(p, true));
+                    }
+                }
                 return ActionResultType.SUCCESS;
             }
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        return ActionResultType.PASS;
     }
 
     //TODO check which portal type magic or tech

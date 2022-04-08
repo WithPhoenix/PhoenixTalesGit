@@ -14,7 +14,7 @@ public class OriginsPortalTile extends TileEntity {
 
 
     //TODO if true only usable in the magical portal if false use tech variant
-    private Boolean isMagic;
+//    private Boolean isMagic;
 
     public OriginsPortalTile(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
@@ -22,25 +22,25 @@ public class OriginsPortalTile extends TileEntity {
 
     public OriginsPortalTile() {
         this(OriginsTileEntities.PORTAL_TILE);
-        this.isMagic = null;
+//        this.isMagic = null;
     }
 
 
-    @Override
-    public void read(BlockState state, CompoundNBT nbt) {
-        this.isMagic = nbt.getBoolean("portal_type");
-        super.read(state, nbt);
-    }
+//    @Override
+//    public void read(BlockState state, CompoundNBT nbt) {
+//        this.isMagic = nbt.getBoolean("portal_type");
+//        super.read(state, nbt);
+//    }
 
-    @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        compound.putBoolean("portal_type", isMagic);
-        return super.write(compound);
-    }
+//    @Override
+//    public CompoundNBT write(CompoundNBT compound) {
+//        compound.putBoolean("portal_type", isMagic);
+//        return super.write(compound);
+//    }
 
-    public void setMagic(boolean flag) {
-        this.isMagic = flag;
-    }
+//    public void setMagic(boolean flag) {
+//        this.isMagic = flag;
+//    }
 
 
     @Override

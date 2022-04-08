@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.util.NonNullLazy;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -44,8 +45,13 @@ public class ClientSetup {
         });
     }
 
+//    @SubscribeEvent
+//    public static void renderOverlay(final RenderGameOverlayEvent event) {
+////TODO if in perma frost biome or special effect, aplly effect here
+//    }
+
     private static void setRenderLayer() {
-        RenderTypeLookup.setRenderLayer(RiseBlocks.VANADIUM_CHASSIS, RenderType.getCutout());
+
 
 //        RenderTypeLookup.setRenderLayer(OriginsBlocks.HUO_LOG, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.HUO_SAPLING, RenderType.getCutout());
@@ -69,6 +75,8 @@ public class ClientSetup {
 
         RenderTypeLookup.setRenderLayer(OriginsBlocks.TALL_ASHEN_GRASS, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.LARGE_ASHEN_FERN, RenderType.getCutout());
+
+        RenderTypeLookup.setRenderLayer(RiseBlocks.VANADIUM_CHASSIS, RenderType.getCutout());
     }
 
     private static void registerScreens() {
@@ -81,7 +89,6 @@ public class ClientSetup {
     }
 
     private static void bindTileRenderers() {
-//        ClientRegistry.bindTileEntityRenderer(OriginsTileEntities.CHANGE_TILE.get(), ChangeTileEntityRenderer::new);
         ClientRegistry.bindTileEntityRenderer(OriginsTileEntities.PORTAL_TILE, PortalTileRenderer::new);
         ClientRegistry.bindTileEntityRenderer(OriginsTileEntities.DECO_PORTAL_TILE, DecoPortalTileRenderer::new);
     }

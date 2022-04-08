@@ -22,8 +22,12 @@ public class TalesConfiguredFeatures {
     public static final ConfiguredFeature<?, ?> GIANT_HUO_TREE = createConfiguredFeature("giant_huo_tree", TalesFeatures.GIANT_HUO_TREE_FEATURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
     public static final ConfiguredFeature<?, ?> HUO_BUSH = createConfiguredFeature("huo_bush", Feature.TREE.withConfiguration((new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(TalesFeatures.States.HUO_LOG), new SimpleBlockStateProvider(TalesFeatures.States.HUO_LEAVES), new BushFoliagePlacer(FeatureSpread.create(2), FeatureSpread.create(1), 2), new StraightTrunkPlacer(1, 0, 0), new TwoLayerFeature(0, 0, 0))).setHeightmap(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES).build()));
     public static final ConfiguredFeature<?, ?> ROCKS = createConfiguredFeature("rocks", TalesFeatures.ROCK_FEATURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).chance(10));
+    public static final ConfiguredFeature<?, ?> HUI_BUSH = createConfiguredFeature("hui_bush", TalesFeatures.HUI_BUSH_FEATURE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
+    //    public static final ConfiguredFeature<?, ?> ASHEN_FEATURE = createConfiguredFeature("name", TalesFeatures);
 
     public static final ConfiguredFeature<?, ?> TREES_SEARING_WOODS = createConfiguredFeature("trees_huo", Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(HUO_BUSH.withChance(0.05F), GIANT_HUO_TREE.withChance(0.04F)), HUO_TREE)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(2, 0.05F, 1))));
+    public static final ConfiguredFeature<?, ?> TREES_ASHEN_FOREST = createConfiguredFeature("trees_hui", Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(HUI_BUSH.withChance(0.05F)), HUI_TREE)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(1, 0.02F, 1))));
+
 
     public static <FC extends IFeatureConfig, F extends Feature<FC>, CF extends ConfiguredFeature<FC, F>> CF createConfiguredFeature(String id, CF configuredFeature) {
         ResourceLocation location = new ResourceLocation(PhoenixTales.MOD_ID, id);
