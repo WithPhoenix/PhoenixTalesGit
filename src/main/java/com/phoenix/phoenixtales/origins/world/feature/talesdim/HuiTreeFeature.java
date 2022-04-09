@@ -3,6 +3,7 @@ package com.phoenix.phoenixtales.origins.world.feature.talesdim;
 import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -17,6 +18,7 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
     private final BlockState leave = OriginsBlocks.HUI_LEAVES.getDefaultState();
 
     private final Random ran = new Random();
+    private final Direction[] options = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
 
     public HuiTreeFeature(Codec<NoFeatureConfig> codec) {
         super(codec);
@@ -37,17 +39,11 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
         trunk = this.findGround(reader, trunk);
         this.placeTrunk(reader, trunk);
 
+        this.placeTreeTop(reader, trunk);
 
         return true;
     }
 
-    private BlockPos findGround(ISeedReader reader, BlockPos pos) {
-        BlockPos re = pos;
-        for (re = re.up(); reader.isAirBlock(re) && re.getY() > 1; re = re.down()) {
-        }
-        re = re.up();
-        return re;
-    }
 
     private void placeTrunk(ISeedReader reader, BlockPos posIn) {
         int height = ran.nextInt(5) + 5;
@@ -57,7 +53,19 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
         }
     }
 
-    private void placeTreeTop(ISeedReader reader, BlockPos posIn) {
 
+    private void placeTreeTop(ISeedReader reader, BlockPos posIn) {
+        boolean up = ran.nextFloat() >= 0.5f;
+        if (up) {
+
+        }
+    }
+
+    private BlockPos findGround(ISeedReader reader, BlockPos pos) {
+        BlockPos re = pos;
+        for (re = re.up(); reader.isAirBlock(re) && re.getY() > 1; re = re.down()) {
+        }
+        re = re.up();
+        return re;
     }
 }

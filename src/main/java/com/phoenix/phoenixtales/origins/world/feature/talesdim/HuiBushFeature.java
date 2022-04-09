@@ -34,65 +34,50 @@ public class HuiBushFeature extends Feature<NoFeatureConfig> {
             build = build.up();
         }
 
+        BlockPos temp = build;
         switch (rand.nextInt(8)) {
             case 0:
-                for (int i = 0; i < rand.nextInt(3); i++) {
-                    reader.setBlockState(build.north(), log, 3);
-                    placeAround(reader, build, 0.7f, rand, true);
-                    build = build.up();
-                }
+                temp.north();
+                this.placeOp(reader, temp, rand);
                 break;
             case 1:
-                for (int i = 0; i < rand.nextInt(2); i++) {
-                    reader.setBlockState(build.south(), log, 3);
-                    placeAround(reader, build, 0.7f, rand, true);
-                    build = build.up();
-                }
+                temp = temp.south();
+                this.placeOp(reader, temp, rand);
                 break;
             case 2:
-                for (int i = 0; i < rand.nextInt(2); i++) {
-                    reader.setBlockState(build.east(), log, 3);
-                    placeAround(reader, build, 0.7f, rand, true);
-                    build = build.up();
-                }
+                temp = temp.east();
+                this.placeOp(reader, temp, rand);
                 break;
             case 3:
-                for (int i = 0; i < rand.nextInt(2); i++) {
-                    reader.setBlockState(build.west(), log, 3);
-                    placeAround(reader, build, 0.7f, rand, true);
-                    build = build.up();
-                }
+                temp = temp.west();
+                this.placeOp(reader, temp, rand);
                 break;
             case 4:
-                for (int i = 0; i < rand.nextInt(2); i++) {
-                    reader.setBlockState(build.north().east(), log, 3);
-                    placeAround(reader, build, 0.7f, rand, true);
-                    build = build.up();
-                }
+                temp = temp.north().east();
+                this.placeOp(reader, temp, rand);
                 break;
             case 5:
-                for (int i = 0; i < rand.nextInt(2); i++) {
-                    reader.setBlockState(build.south().west(), log, 3);
-                    placeAround(reader, build, 0.7f, rand, true);
-                    build = build.up();
-                }
+                temp = build.south().west();
+                this.placeOp(reader, temp, rand);
                 break;
             case 6:
-                for (int i = 0; i < rand.nextInt(2); i++) {
-                    reader.setBlockState(build.east().south(), log, 3);
-                    placeAround(reader, build, 0.7f, rand, true);
-                    build = build.up();
-                }
+                temp = temp.east().south();
+                this.placeOp(reader, temp, rand);
                 break;
             case 7:
-                for (int i = 0; i < rand.nextInt(2); i++) {
-                    reader.setBlockState(build.west().north(), log, 3);
-                    placeAround(reader, build, 0.7f, rand, true);
-                    build = build.up();
-                }
+                temp = temp.west().north();
+                this.placeOp(reader, temp, rand);
                 break;
         }
         return true;
+    }
+
+    private void placeOp(ISeedReader reader, BlockPos temp, Random random) {
+        for (int i = 0; i < random.nextInt(3); i++) {
+            reader.setBlockState(temp, log, 3);
+            placeAround(reader, temp, 0.7f, random, true);
+            temp = temp.up();
+        }
     }
 
     private void placeAround(ISeedReader reader, BlockPos pos, float chance, Random random, boolean top) {

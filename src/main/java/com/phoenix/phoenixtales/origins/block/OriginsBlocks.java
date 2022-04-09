@@ -10,6 +10,8 @@ import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.ToolType;
 
 import java.util.ArrayList;
@@ -62,7 +64,7 @@ public class OriginsBlocks {
     public static final Block HUO_SLAB = createBlock("huo_slab", new SlabBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).setLightLevel(BlockState -> 5).harvestTool(ToolType.AXE)));
     public static final Block HUO_DOOR = createBlock("huo_door", new DoorBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).setLightLevel(BlockState -> 5).harvestTool(ToolType.AXE).notSolid()));
     public static final Block HUO_TRAPDOOR = createBlock("huo_trapdoor", new TrapDoorBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).setLightLevel(BlockState -> 5).harvestTool(ToolType.AXE).notSolid()));
-    public static final Block HUO_LEAVES = createBlock("huo_leaves", new LeavesBlock(AbstractBlock.Properties.create((Material.LEAVES), MaterialColor.RED_TERRACOTTA).sound(SoundType.PLANT).hardnessAndResistance(1f, 2f).setLightLevel(BlockState -> 5).tickRandomly().notSolid()));
+    public static final Block HUO_LEAVES = createBlock("huo_leaves", new LeavesBlock(AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid().setLightLevel(BlockState -> 5).setSuffocates(OriginsBlocks::isntSolid).setBlocksVision(OriginsBlocks::isntSolid)));
     public static final Block HUO_SAPLING = createBlock("huo_sapling", new OriginsSapling(new HuoTree(), AbstractBlock.Properties.create(Material.PLANTS).sound(SoundType.PLANT).doesNotBlockMovement().zeroHardnessAndResistance().tickRandomly().notSolid().setLightLevel(BlockState -> 10)));
 
     public static final Block HUI_LOG = createBlock("hui_log", new RotatedPillarBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).harvestTool(ToolType.AXE)));
@@ -71,7 +73,7 @@ public class OriginsBlocks {
     public static final Block HUI_SLAB = createBlock("hui_slab", new SlabBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).harvestTool(ToolType.AXE)));
     public static final Block HUI_DOOR = createBlock("hui_door", new DoorBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).harvestTool(ToolType.AXE).notSolid()));
     public static final Block HUI_TRAPDOOR = createBlock("hui_trapdoor", new TrapDoorBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).harvestTool(ToolType.AXE).notSolid()));
-    public static final Block HUI_LEAVES = createBlock("hui_leaves", new LeavesBlock(AbstractBlock.Properties.create((Material.LEAVES), MaterialColor.RED_TERRACOTTA).sound(SoundType.PLANT).hardnessAndResistance(1f, 2f).setLightLevel(BlockState -> 5).tickRandomly().notSolid()));
+    public static final Block HUI_LEAVES = createBlock("hui_leaves", new LeavesBlock(AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid().setLightLevel(BlockState -> 5).setSuffocates(OriginsBlocks::isntSolid).setBlocksVision(OriginsBlocks::isntSolid)));
     public static final Block HUI_SAPLING = createBlock("hui_sapling", new OriginsSapling(new HuiTree(), AbstractBlock.Properties.create(Material.PLANTS).sound(SoundType.PLANT).doesNotBlockMovement().zeroHardnessAndResistance().tickRandomly().notSolid().setLightLevel(BlockState -> 10)));
 
 
@@ -80,6 +82,10 @@ public class OriginsBlocks {
 
     //TODO add to saplings tag
 
+
+    private static boolean isntSolid(BlockState state, IBlockReader reader, BlockPos pos) {
+        return false;
+    }
 
     private static Block createBlock(String id, Block block) {
         block.setRegistryName(new ResourceLocation(PhoenixTales.MOD_ID, id));
