@@ -61,7 +61,7 @@ public class PortalTileRenderer<T extends OriginsPortalTile> extends TileEntityR
         float f = (RANDOM.nextFloat() * 0.5F + 0.1F) * p_228883_3_;
         float f1 = (RANDOM.nextFloat() * 0.5F + 0.4F) * p_228883_3_;
         float f2 = (RANDOM.nextFloat() * 0.5F + 0.5F) * p_228883_3_;
-         this.renderFace(tileEntityIn, matrix4f, builder, 0.0F, 0.5F, 0.0F, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F, f, f1, f2, Direction.SOUTH);
+        this.renderFace(tileEntityIn, matrix4f, builder, 0.0F, 0.5F, 0.0F, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F, f, f1, f2, Direction.SOUTH);
 //        this.renderFace(tileEntityIn, matrix4f, builder, 0.0F, 0.5F, p_228883_2_, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, f, f1, f2, Direction.NORTH);
 //        this.renderFace(tileEntityIn, matrix4f, builder, 0.5F, 0.5F, p_228883_2_, 0.0F, 0.0F, 0.5F, 0.5F, 0.0F, f, f1, f2, Direction.EAST);
 //        this.renderFace(tileEntityIn, matrix4f, builder, 0.0F, 0.0F, p_228883_2_, 0.0F, 0.0F, 0.5F, 0.5F, 0.0F, f, f1, f2, Direction.WEST);

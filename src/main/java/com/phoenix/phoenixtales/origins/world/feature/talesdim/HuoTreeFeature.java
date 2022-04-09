@@ -98,6 +98,7 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
     }
 
 
+    //with while loop: while not the same height build root
     //also decides if I should build up or not
     private BlockPos buildRoot(ISeedReader reader, BlockPos posIn, BlockPos midIn) {
         BlockPos build = posIn;
@@ -176,5 +177,9 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
         }
         re = findGround(reader, re);
         return re;
+    }
+
+    private void placeLeaves(ISeedReader reader, BlockPos pos) {
+
     }
 }

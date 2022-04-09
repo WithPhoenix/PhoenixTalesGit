@@ -14,13 +14,11 @@ import java.util.Random;
 public class AshenPlainsSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig> {
 
     public static final BlockState DIRT = OriginsBlocks.ASHEN_DIRT.getDefaultState();
-    public static final BlockState GRASS = OriginsBlocks.ASHEN_GRASS_BLOCK.getDefaultState();
     public static final BlockState GRAVEL = Blocks.GRAVEL.getDefaultState();
 
     public static final BlockState STONE = OriginsBlocks.ASHEN_STONE.getDefaultState();
 
     public static final SurfaceBuilderConfig DIRT_CONFIG = new SurfaceBuilderConfig(DIRT, STONE, STONE);
-    public static final SurfaceBuilderConfig GRASS_CONFIG = new SurfaceBuilderConfig(GRASS, STONE, STONE);
     public static final SurfaceBuilderConfig GRAVEL_CONFIG = new SurfaceBuilderConfig(GRAVEL, STONE, STONE);
 
     public AshenPlainsSurfaceBuilder(Codec<SurfaceBuilderConfig> codec) {
@@ -33,10 +31,9 @@ public class AshenPlainsSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConf
         if (temp == 0) {
             SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, DIRT_CONFIG);
         } else if (temp == 1) {
-            SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, GRASS_CONFIG);
+            SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, config);
         } else {
             SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, GRAVEL_CONFIG);
-
         }
     }
 }

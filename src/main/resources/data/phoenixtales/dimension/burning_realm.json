@@ -84,9 +84,9 @@
           "parameters": {
             "altitude": 0,
             "temperature": 0,
-            "humidity": 0,
+            "humidity": 0.2,
             "weirdness": 0,
-            "offset": 0
+            "offset": 0.125
           }
         },
         {
@@ -126,6 +126,16 @@
             "temperature": -0.5,
             "humidity": 0,
             "weirdness": 0.9,
+            "offset": 0.425
+          }
+        },
+        {
+          "biome": "phoenixtales:liquidated_area",
+          "parameters": {
+            "altitude": 0,
+            "temperature": 0.5,
+            "humidity": 0,
+            "weirdness": 0.2,
             "offset": 0.325
           }
         }
