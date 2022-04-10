@@ -39,9 +39,51 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
         trunk = this.findGround(reader, trunk);
         this.placeTrunk(reader, trunk);
 
-        this.placeTreeTop(reader, trunk);
+        float chance = ran.nextFloat();
+        if (chance <= 0.75f) {
+            placeTreeTop(reader, trunk, 2);
+        } else {
+            placeTreeTop(reader, trunk, 3);
+        }
 
         return true;
+    }
+
+    private void placeTreeTop(ISeedReader reader, BlockPos posIn, int a) {
+        BlockPos[] splits = new BlockPos[a];
+        BlockPos pos1;
+        for (int i = 0; i < a; i++) {
+            pos1 = posIn;
+            pos1 = around(pos1, splits);
+            splits[i] = pos1;
+        }
+        for (int i = 0; i < a; i++) {
+            pos1 = posIn;
+            int start = ran.nextInt(3) - 1;
+            pos1 = pos1.add(0, start, 0);
+            pos1 = around(pos1, splits);
+            //call this method in itself or maybe copy over the contents
+            //and then on the end place the leaves
+        }
+    }
+
+    private BlockPos around(BlockPos pos, BlockPos... existing) {
+        //find random around
+        int i = ran.nextInt(8);
+        if (i < 3) {
+            pos = pos.north(1).west(1);
+            pos = pos.east(i);
+        } else if (i < 5) {
+
+        } else {
+            pos = pos.south(1);
+        }
+        for (BlockPos t : existing) {
+            if (!valid(pos, t)) {
+                pos = around(pos, t);
+            }
+        }
+        return pos;
     }
 
 
@@ -53,12 +95,12 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
         }
     }
 
-
-    private void placeTreeTop(ISeedReader reader, BlockPos posIn) {
-        boolean up = ran.nextFloat() >= 0.5f;
-        if (up) {
-
-        }
+    private boolean valid(BlockPos pos, BlockPos t) {
+        return
+                //x check
+                pos.getX() != t.getX() || pos.getX() != t.getX() + 1 || pos.getX() != t.getX() - 1
+                        //z check
+                        && pos.getZ() != t.getZ() || pos.getZ() != t.getZ() + 1 || pos.getZ() != t.getZ() - 1;
     }
 
     private BlockPos findGround(ISeedReader reader, BlockPos pos) {

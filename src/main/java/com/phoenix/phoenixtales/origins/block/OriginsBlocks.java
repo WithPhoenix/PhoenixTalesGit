@@ -76,6 +76,7 @@ public class OriginsBlocks {
     public static final Block HUI_LEAVES = createBlock("hui_leaves", new LeavesBlock(AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid().setLightLevel(BlockState -> 5).setSuffocates(OriginsBlocks::isntSolid).setBlocksVision(OriginsBlocks::isntSolid)));
     public static final Block HUI_SAPLING = createBlock("hui_sapling", new OriginsSapling(new HuiTree(), AbstractBlock.Properties.create(Material.PLANTS).sound(SoundType.PLANT).doesNotBlockMovement().zeroHardnessAndResistance().tickRandomly().notSolid().setLightLevel(BlockState -> 10)));
 
+    public static final Block CHARRED_DEBRIS = createBlock("charred_debris", new DebrisBlock());
 
     //needs to be last to be next to the other ores
     public static final Block ORE_SULFUR_OVERWORLD = createBlock("sulfur_ore", new Block(AbstractBlock.Properties.create((Material.ROCK), MaterialColor.GRAY).hardnessAndResistance(5f, 5f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool()));
