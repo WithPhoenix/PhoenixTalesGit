@@ -2,6 +2,7 @@ package com.phoenix.phoenixtales.origins.world.biome;
 
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.origins.world.feature.TalesConfiguredFeatures;
+import com.phoenix.phoenixtales.origins.world.surfacebuilder.LiquidatedSurfaceBuilder;
 import com.phoenix.phoenixtales.origins.world.surfacebuilder.SearingSurfaceBuilder;
 import com.phoenix.phoenixtales.origins.world.surfacebuilder.TalesSurfaceBuilders;
 import net.minecraft.util.ResourceLocation;
@@ -84,8 +85,8 @@ public class TalesBiomeMaker {
     }
 
     public static Biome makeLiquidatedArea() {
-        BiomeGenerationSettings.Builder biomegenerationsettings$builder = (new BiomeGenerationSettings.Builder()).withSurfaceBuilder(ConfiguredSurfaceBuilders.NOPE);
-        return (new Biome.Builder()).precipitation(Biome.RainType.NONE).category(Biome.Category.NONE).depth(0.0f).scale(0.0f).temperature(2.0F).downfall(0.0F).setEffects((new BiomeAmbience.Builder()).setWaterColor(/*MathHelper.rgb(74,117,114)*/4879730).setWaterFogColor(4879730).setFogColor(/*MathHelper.rgb(117,91,74)*/7691082).withSkyColor(/*MathHelper.rgb(117,81,74)*/7688522).withFoliageColor(/*MathHelper.rgb(122,105,77)*/8022349).withGrassColor(8022349).build()).withMobSpawnSettings(MobSpawnInfo.EMPTY).withGenerationSettings(biomegenerationsettings$builder.build()).build();
+        BiomeGenerationSettings.Builder biomegenerationsettings$builder = (new BiomeGenerationSettings.Builder()).withSurfaceBuilder(TalesCSB.LIQUIDATED_SURFACE);
+        return (new Biome.Builder()).precipitation(Biome.RainType.NONE).category(Biome.Category.NONE).depth(0.0f).scale(0.0f).temperature(1.0F).downfall(0.0F).setEffects((new BiomeAmbience.Builder()).setWaterColor(/*MathHelper.rgb(74,117,114)*/4879730).setWaterFogColor(4879730).setFogColor(/*MathHelper.rgb(117,91,74)*/7691082).withSkyColor(/*MathHelper.rgb(117,81,74)*/7688522).withFoliageColor(/*MathHelper.rgb(122,105,77)*/8022349).withGrassColor(8022349).build()).withMobSpawnSettings(MobSpawnInfo.EMPTY).withGenerationSettings(biomegenerationsettings$builder.build()).build();
     }
 
     public static Biome makePermaFrost() {
@@ -99,6 +100,7 @@ public class TalesBiomeMaker {
     public static class TalesCSB {
         public static final ConfiguredSurfaceBuilder<?> ASHEN_PLAINS_SURFACE = createConfiguredSurfaceBuilder("ashen_plains_csb", new ConfiguredSurfaceBuilder<>(TalesSurfaceBuilders.ASHEN_PLAINS_SURFACE_BUILDER, TalesSurfaceBuilders.Configs.ASHEN_PLAINS));
         public static final ConfiguredSurfaceBuilder<?> SEARING_SURFACE = createConfiguredSurfaceBuilder("searing_csb", new ConfiguredSurfaceBuilder<>(TalesSurfaceBuilders.SEARING_SURFACE_BUILDER, SearingSurfaceBuilder.GRASS_CONFIG));
+        public static final ConfiguredSurfaceBuilder<?> LIQUIDATED_SURFACE = createConfiguredSurfaceBuilder("liquidated_csb", new ConfiguredSurfaceBuilder<>(TalesSurfaceBuilders.LIQUIDATED_SURFACE_BUILDER, LiquidatedSurfaceBuilder.CONFIG));
 
         public static <SC extends ISurfaceBuilderConfig, CSB extends ConfiguredSurfaceBuilder<SC>> CSB createConfiguredSurfaceBuilder(String id, CSB configuredSurfaceBuilder) {
             ResourceLocation location = new ResourceLocation(PhoenixTales.MOD_ID, id);
