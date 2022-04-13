@@ -3,6 +3,7 @@ package com.phoenix.phoenixtales.origins.world.feature.talesdim;
 import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -16,7 +17,7 @@ import java.util.Random;
 public class HuoTreeFeature extends Feature<NoFeatureConfig> {
 
     private final BlockState log = OriginsBlocks.HUO_LOG.getDefaultState();
-    private final BlockState leave = OriginsBlocks.HUO_LEAVES.getDefaultState();
+    private final BlockState leave = OriginsBlocks.HUO_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, 7);
 
     private boolean isGiant;
 

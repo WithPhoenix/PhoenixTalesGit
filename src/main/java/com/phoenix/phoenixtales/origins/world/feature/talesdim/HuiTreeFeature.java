@@ -3,6 +3,7 @@ package com.phoenix.phoenixtales.origins.world.feature.talesdim;
 import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -15,7 +16,7 @@ import java.util.Random;
 public class HuiTreeFeature extends Feature<NoFeatureConfig> {
 
     private final BlockState log = OriginsBlocks.HUI_LOG.getDefaultState();
-    private final BlockState leave = OriginsBlocks.HUI_LEAVES.getDefaultState();
+    private final BlockState leave = OriginsBlocks.HUI_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, 7);
 
     private final Direction[] options = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
     private BlockPos l0;
@@ -74,6 +75,21 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
             int start = random.nextInt(3) - 1;
             posIn = posIn.add(0, start, 0);
             reader.setBlockState(posIn, log, 3);
+            posIn = posIn.up();
+            //go diagonal  50%
+            int height = random.nextInt(2) + 1;
+            if (random.nextFloat() <= 0.5) {
+                posIn = this.goOut(posIn, random);
+                posIn = this.placeByHeight(reader, posIn, height);
+            }
+            height = random.nextInt(3) + 4;
+            posIn = posIn.down();
+            posIn = this.placeByHeight(reader, posIn, height);
+            //split into two
+            //branch should be at the half height of the one
+            BlockPos pos1 = this.goOut(posIn.down(height / 2), random);
+            reader.setBlockState(pos1, leave, 3);
+
         } else {
             int start = random.nextInt(3) - 1;
             posIn = posIn.add(0, start, 0);
@@ -172,7 +188,33 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
             }
             reader.setBlockState(posIn.south(3), leave, 3);
             reader.setBlockState(posIn.south(3).east(), leave, 3);
-
+            //second layer
+            posIn = posIn.up();
+            reader.setBlockState(posIn.north(2), leave, 3);
+            if (random.nextFloat() <= 0.5f) {
+                reader.setBlockState(posIn.north(2).east(), leave, 3);
+            }
+            reader.setBlockState(posIn.north().west(), leave, 3);
+            reader.setBlockState(posIn.north(), leave, 3);
+            reader.setBlockState(posIn.north().east(), leave, 3);
+            if (random.nextFloat() <= 0.5f) {
+                reader.setBlockState(posIn.north().east(2), leave, 3);
+            }
+            reader.setBlockState(posIn.west(2), leave, 3);
+            reader.setBlockState(posIn.west(), leave, 3);
+            reader.setBlockState(posIn, leave, 3);
+            reader.setBlockState(posIn.east(), leave, 3);
+            reader.setBlockState(posIn.east(2), leave, 3);
+            if (random.nextFloat() <= 0.5f) {
+                reader.setBlockState(posIn.south().west(2), leave, 3);
+            }
+            reader.setBlockState(posIn.south().west(), leave, 3);
+            reader.setBlockState(posIn.south(), leave, 3);
+            reader.setBlockState(posIn.south().east(), leave, 3);
+            reader.setBlockState(posIn.south(2), leave, 3);
+            if (random.nextFloat() <= 0.5f) {
+                reader.setBlockState(posIn.south(2).west(), leave, 3);
+            }
         } else if (type == 1) {
 
         } else {

@@ -3,6 +3,7 @@ package com.phoenix.phoenixtales.origins.world.feature.talesdim;
 import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -15,7 +16,7 @@ import java.util.Random;
 public class HuiBushFeature extends Feature<NoFeatureConfig> {
 
     private final BlockState log = OriginsBlocks.HUI_LOG.getDefaultState();
-    private final BlockState leave = OriginsBlocks.HUI_LEAVES.getDefaultState();
+    private final BlockState leave = OriginsBlocks.HUI_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, 7);
 
     public HuiBushFeature(Codec<NoFeatureConfig> codec) {
         super(codec);
