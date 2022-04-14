@@ -16,7 +16,7 @@ import java.util.Random;
 public class HuiBushFeature extends Feature<NoFeatureConfig> {
 
     private final BlockState log = OriginsBlocks.HUI_LOG.getDefaultState();
-    private final BlockState leave = OriginsBlocks.HUI_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, 7);
+    private final BlockState leave = OriginsBlocks.HUI_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, 2);
 
     public HuiBushFeature(Codec<NoFeatureConfig> codec) {
         super(codec);
