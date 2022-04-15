@@ -3,8 +3,8 @@ package com.phoenix.phoenixtales.origins.world.feature.talesdim;
 import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.block.blocks.OriginsLeavesBlock;
+import com.phoenix.phoenixtales.origins.world.feature.FeatureHelpers;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -16,9 +16,7 @@ import java.util.Random;
 public class HuiTreeFeature extends Feature<NoFeatureConfig> {
 
     private final BlockState log = OriginsBlocks.HUI_LOG.getDefaultState();
-    private final BlockState leave = OriginsBlocks.HUI_LEAVES.getDefaultState().with(OriginsLeavesBlock.DISTANCE, 10);
-
-    private final Direction[] options = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
+    private final BlockState leave = OriginsBlocks.HUI_LEAVES.getDefaultState().with(OriginsLeavesBlock.DISTANCE, 9);
     private BlockPos l0;
     private BlockPos l1;
     private BlockPos l2;
@@ -29,11 +27,14 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
         super(codec);
     }
 
+    //TODO every branch needs to go way more out
     @Override
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+        //is the ground valid
         BlockPos trunk = pos;
-        trunk = this.findGround(reader, trunk);
-        trunk = this.placeTrunk(reader, trunk, rand);
+        int height = rand.nextInt(4) + 4;
+        trunk = FeatureHelpers.findGround(reader, trunk);
+        trunk = FeatureHelpers.placeStraightTrunk(reader, trunk, this.log, height);
 
         //spit into two
         l0 = this.findAroundById(rand, trunk, 0);
@@ -45,7 +46,7 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
 
         //maybe place a third
         float chance = rand.nextFloat();
-        if (chance <= 0.25f) {
+        if (chance <= 0.3f) {
             l2 = this.findAroundById(rand, trunk, 2);
             //the third never splits
             this.placeBranch(reader, rand, l2, 2);
@@ -53,10 +54,9 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
         return true;
     }
 
-    //TODO do i need to make my own leavesBlock to increase the distance
     private void placeBranch(ISeedReader reader, Random random, BlockPos posIn, int id) {
         if (id == 0) {
-            //TODO this one needs to go far more out; also make the leaves a bit smaller extra type?
+            //TODO this one needs to go far more out; also make the leaves a bit smaller, extra type?
             int start = random.nextInt(3) - 1;
             posIn = posIn.add(0, start, 0);
             reader.setBlockState(posIn, log, 3);
@@ -65,13 +65,13 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
             int out = random.nextInt(8);
             int height = random.nextInt(2) + 1;
             if (random.nextFloat() <= 0.65) {
-                posIn = this.out(posIn, out);
+                posIn = FeatureHelpers.out(posIn, out);
             }
-            posIn = this.placeByHeight(reader, posIn, height);
+            posIn = FeatureHelpers.placeByHeight(reader, posIn, this.log, height);
             //go out and place leaves
-            posIn = this.out(posIn, out);
+            posIn = FeatureHelpers.out(posIn, out);
             height = random.nextInt(3) + 1;
-            posIn = this.placeByHeight(reader, posIn, height);
+            posIn = FeatureHelpers.placeByHeight(reader, posIn, this.log, height);
             //now place small leaves
             this.placeLeaves(reader, random, posIn, 0);
         } else if (id == 1) {
@@ -82,24 +82,24 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
             //go diagonal  50%
             int height = random.nextInt(2) + 1;
             if (random.nextFloat() <= 0.5) {
-                posIn = this.out(posIn, random.nextInt(8));
-                posIn = this.placeByHeight(reader, posIn, height);
+                posIn = FeatureHelpers.out(posIn, random.nextInt(8));
+                posIn = FeatureHelpers.placeByHeight(reader, posIn, this.log, height);
             }
             height = random.nextInt(4) + 8;
             posIn = posIn.down();
-            posIn = this.placeByHeight(reader, posIn, height);
+            posIn = FeatureHelpers.placeByHeight(reader, posIn, this.log, height);
             //place giant leaves here
             this.placeLeaves(reader, random, posIn, 2);
             //split into two
             //branch should be 3 under the half height of the one
             //TODO this one only has really small leaves at the end
             int flag = random.nextInt(8);
-            BlockPos pos1 = this.out(posIn.down((height / 2) + 1), flag);
+            BlockPos pos1 = FeatureHelpers.out(posIn.down((height / 2) + 1), flag);
             reader.setBlockState(pos1, log, 3);
             pos1 = pos1.up();
-            pos1 = this.out(pos1, flag);
+            pos1 = FeatureHelpers.out(pos1, flag);
             height = random.nextInt(2) + 2;
-            pos1 = this.placeByHeight(reader, pos1, height);
+            pos1 = FeatureHelpers.placeByHeight(reader, posIn, this.log, height);
             //place medium leaves here
             this.placeLeaves(reader, random, pos1, 1);
 
@@ -111,17 +111,18 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
                 posIn = posIn.add(0, start, 0);
                 reader.setBlockState(posIn, log, 3);
                 int out = random.nextInt(8);
-                int loop = random.nextInt(4) + 3;
+                int loop = random.nextInt(3) + 2;
                 for (int i = 0; i < loop; i++) {
-                    if (random.nextFloat() <= 0.6f) {
+                    if (random.nextFloat() <= 0.7f) {
                         //one up; height
                         posIn = posIn.up();
                     }
-                    posIn = this.out(posIn, out);
+                    posIn = FeatureHelpers.out(posIn, out);
                     reader.setBlockState(posIn, log, 3);
                 }
                 //place leaves
                 posIn = posIn.up();
+                reader.setBlockState(posIn, log, 3);
                 this.placeLeaves(reader, random, posIn, 0);
             } else {
                 //add to branch 0
@@ -129,48 +130,9 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
         }
     }
 
-    //returns the pos of the last block placed
-    private BlockPos placeByHeight(ISeedReader reader, BlockPos posIn, int height) {
-        for (int i = 0; i < height; i++) {
-            reader.setBlockState(posIn, log, 2);
-            posIn = posIn.up();
-        }
-        return posIn.down();
-    }
-
-    private BlockPos out(BlockPos pos, int i) {
-        switch (i) {
-            case 0:
-                pos = pos.north().west();
-                break;
-            case 1:
-                pos = pos.north();
-                break;
-            case 2:
-                pos = pos.north().east();
-                break;
-            case 3:
-                pos = pos.west();
-                break;
-            case 4:
-                pos = pos.east();
-                break;
-            case 5:
-                pos = pos.south().west();
-                break;
-            case 6:
-                pos = pos.south();
-                break;
-            case 7:
-                pos = pos.south().east();
-                break;
-        }
-        return pos;
-    }
-
     private BlockPos findAroundById(Random random, BlockPos pos, int id) {
         int i = this.findLocationById(id, random);
-        this.out(pos, i);
+        pos = FeatureHelpers.out(pos, i);
         return pos;
     }
 
@@ -193,23 +155,6 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
                 return this.findLocationById(id, random);
             }
         }
-    }
-
-    private BlockPos placeTrunk(ISeedReader reader, BlockPos posIn, Random random) {
-        int height = random.nextInt(5) + 5;
-        for (int i = 0; i < height; i++) {
-            reader.setBlockState(posIn, this.log, 3);
-            posIn = posIn.up();
-        }
-        return posIn.down();
-    }
-
-    private BlockPos findGround(ISeedReader reader, BlockPos pos) {
-        BlockPos re = pos;
-        for (re = re.up(); reader.isAirBlock(re) && re.getY() > 1; re = re.down()) {
-        }
-        re = re.up();
-        return re;
     }
 
     /**
@@ -466,7 +411,22 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
 
         }
     }
-
+//    private BlockPos placeTrunk(ISeedReader reader, BlockPos posIn, Random random) {
+//        int height = random.nextInt(4) + 4;
+//        for (int i = 0; i < height; i++) {
+//            reader.setBlockState(posIn, this.log, 3);
+//            posIn = posIn.up();
+//        }
+//        return posIn.down();
+//    }
+//
+//    private BlockPos findGround(ISeedReader reader, BlockPos pos) {
+//        BlockPos re = pos;
+//        for (re = re.up(); reader.isAirBlock(re) && re.getY() > 1; re = re.down()) {
+//        }
+//        re = re.up();
+//        return re;
+//    }
 
 //    private boolean valid(int id, int n) {
 //

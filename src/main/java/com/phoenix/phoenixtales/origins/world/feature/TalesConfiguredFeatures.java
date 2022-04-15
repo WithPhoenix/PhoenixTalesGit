@@ -26,7 +26,7 @@ public class TalesConfiguredFeatures {
     //    public static final ConfiguredFeature<?, ?> ASHEN_FEATURE = createConfiguredFeature("name", TalesFeatures);
 
     public static final ConfiguredFeature<?, ?> TREES_SEARING_WOODS = createConfiguredFeature("trees_huo", Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(HUO_BUSH.withChance(0.05F), GIANT_HUO_TREE.withChance(0.04F)), HUO_TREE)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(2, 0.05F, 1))));
-    public static final ConfiguredFeature<?, ?> TREES_ASHEN_FOREST = createConfiguredFeature("trees_hui", Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(HUI_BUSH.withChance(0.07F)), HUI_TREE)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(1, 0.02F, 1))));
+    public static final ConfiguredFeature<?, ?> TREES_ASHEN_FOREST = createConfiguredFeature("trees_hui", Feature.RANDOM_SELECTOR.withConfiguration(new MultipleRandomFeatureConfig(ImmutableList.of(HUI_BUSH.withChance(0.1F)), HUI_TREE)).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(1, 0.02F, 1))));
 
 
     public static <FC extends IFeatureConfig, F extends Feature<FC>, CF extends ConfiguredFeature<FC, F>> CF createConfiguredFeature(String id, CF configuredFeature) {

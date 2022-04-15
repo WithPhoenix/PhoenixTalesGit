@@ -57,6 +57,7 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(OriginsBlocks.HUO_SAPLING, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.HUO_DOOR, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.HUO_TRAPDOOR, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.HUO_LEAVES, RenderType.getCutout());
 
         RenderTypeLookup.setRenderLayer(OriginsBlocks.SEARING_GRASS, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.SEARING_FERN, RenderType.getCutout());
@@ -69,6 +70,7 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(OriginsBlocks.HUI_SAPLING, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.HUI_DOOR, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.HUI_TRAPDOOR, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(OriginsBlocks.HUI_LEAVES, RenderType.getCutout());
 
         RenderTypeLookup.setRenderLayer(OriginsBlocks.ASHEN_GRASS, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.ASHEN_FERN, RenderType.getCutout());

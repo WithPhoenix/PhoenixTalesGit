@@ -18,6 +18,10 @@ public class SurfaceFeature extends Feature<NoFeatureConfig> {
         super(codec);
     }
 
+    public boolean isValidPosition(ISeedReader world, BlockPos pos) {
+        return !(world.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LEAVES) || world.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LOG) || world.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LEAVES) || world.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LOG));
+    }
+
     @Override
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
         BlockPos pos1 = pos;
@@ -33,18 +37,18 @@ public class SurfaceFeature extends Feature<NoFeatureConfig> {
         for (int i = 0; i < count; i++) {
             pos2 = pos2.north();
             pos2 = goDown(reader, pos2);
-            reader.setBlockState(pos2, this.stone, 3);
+            this.setStone(reader, pos2);
             int amount = r.nextInt(5);
             for (int j = 0; j < amount; j++) {
                 BlockPos posA = pos2.west();
                 posA = goDown(reader, posA);
-                reader.setBlockState(posA, this.stone, 3);
+                this.setStone(reader, posA);
             }
             amount = r.nextInt(5);
             for (int k = 0; k < amount; k++) {
                 BlockPos posB = pos2.east();
                 posB = goDown(reader, posB);
-                reader.setBlockState(posB, this.stone, 3);
+                this.setStone(reader, posB);
             }
         }
         //east
@@ -53,18 +57,18 @@ public class SurfaceFeature extends Feature<NoFeatureConfig> {
         for (int i = 0; i < count; i++) {
             pos3 = pos3.east();
             pos3 = goDown(reader, pos3);
-            reader.setBlockState(pos3, this.stone, 3);
+            this.setStone(reader, pos3);
             int amount = r.nextInt(5);
             for (int j = 0; j < amount; j++) {
                 BlockPos posA = pos3.south();
                 posA = goDown(reader, posA);
-                reader.setBlockState(posA, this.stone, 3);
+                this.setStone(reader, posA);
             }
             amount = r.nextInt(5);
             for (int k = 0; k < amount; k++) {
                 BlockPos posB = pos3.north();
                 posB = goDown(reader, posB);
-                reader.setBlockState(posB, this.stone, 3);
+                this.setStone(reader, posB);
             }
         }
         //south
@@ -73,18 +77,18 @@ public class SurfaceFeature extends Feature<NoFeatureConfig> {
         for (int i = 0; i < count; i++) {
             pos4 = pos4.south();
             pos4 = goDown(reader, pos4);
-            reader.setBlockState(pos4, this.stone, 3);
+            this.setStone(reader, pos4);
             int amount = r.nextInt(5);
             for (int j = 0; j < amount; j++) {
                 BlockPos posA = pos4.west();
                 posA = goDown(reader, posA);
-                reader.setBlockState(posA, this.stone, 3);
+                this.setStone(reader, posA);
             }
             amount = r.nextInt(5);
             for (int k = 0; k < amount; k++) {
                 BlockPos posB = pos4.east();
                 posB = goDown(reader, posB);
-                reader.setBlockState(posB, this.stone, 3);
+                this.setStone(reader, posB);
             }
         }
         //west
@@ -93,21 +97,27 @@ public class SurfaceFeature extends Feature<NoFeatureConfig> {
         for (int i = 0; i < count; i++) {
             pos5 = pos5.west();
             pos5 = goDown(reader, pos5);
-            reader.setBlockState(pos5, this.stone, 3);
+            this.setStone(reader, pos5);
             int amount = r.nextInt(5);
             for (int j = 0; j < amount; j++) {
                 BlockPos posA = pos5.south();
                 posA = goDown(reader, posA);
-                reader.setBlockState(posA, this.stone, 3);
+                this.setStone(reader, posA);
             }
             amount = r.nextInt(5);
             for (int k = 0; k < amount; k++) {
                 BlockPos posB = pos5.north();
                 posB = goDown(reader, posB);
-                reader.setBlockState(posB, this.stone, 3);
+                this.setStone(reader, posB);
             }
         }
         return true;
+    }
+
+    private void setStone(ISeedReader reader, BlockPos pos) {
+        if (this.isValidPosition(reader, pos)) {
+            reader.setBlockState(pos, this.stone, 3);
+        }
     }
 
     private BlockPos goDown(ISeedReader reader, BlockPos pos) {

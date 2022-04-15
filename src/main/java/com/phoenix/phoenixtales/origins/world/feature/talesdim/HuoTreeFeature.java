@@ -20,7 +20,7 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
     //TODO trunk is min. 3 - 4 blocks in the air maybe make the trunk higher; place each root independent like the hui tree branches
 
     private final BlockState log = OriginsBlocks.HUO_LOG.getDefaultState();
-    private final BlockState leave = OriginsBlocks.HUO_LEAVES.getDefaultState().with(OriginsLeavesBlock.DISTANCE, 10);
+    private final BlockState leave = OriginsBlocks.HUO_LEAVES.getDefaultState().with(OriginsLeavesBlock.DISTANCE, 9);
 
     private boolean isGiant;
 
