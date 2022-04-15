@@ -2,8 +2,8 @@ package com.phoenix.phoenixtales.origins.world.feature.talesdim;
 
 import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
+import com.phoenix.phoenixtales.origins.block.blocks.OriginsLeavesBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -16,7 +16,7 @@ import java.util.Random;
 public class HuiTreeFeature extends Feature<NoFeatureConfig> {
 
     private final BlockState log = OriginsBlocks.HUI_LOG.getDefaultState();
-    private final BlockState leave = OriginsBlocks.HUI_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, 7);
+    private final BlockState leave = OriginsBlocks.HUI_LEAVES.getDefaultState().with(OriginsLeavesBlock.DISTANCE, 10);
 
     private final Direction[] options = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
     private BlockPos l0;
@@ -24,7 +24,6 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
     private BlockPos l2;
     private int picked0;
     private int picked1;
-    private int secOut;
 
     public HuiTreeFeature(Codec<NoFeatureConfig> codec) {
         super(codec);
@@ -54,21 +53,24 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
         return true;
     }
 
-    //TODO is it possible to move equal parts into a separate method
+    //TODO do i need to make my own leavesBlock to increase the distance
     private void placeBranch(ISeedReader reader, Random random, BlockPos posIn, int id) {
         if (id == 0) {
+            //TODO this one needs to go far more out; also make the leaves a bit smaller extra type?
             int start = random.nextInt(3) - 1;
             posIn = posIn.add(0, start, 0);
             reader.setBlockState(posIn, log, 3);
             posIn = posIn.up();
-            //go diagonal  50%
+            //go diagonal  70% or straight 30%
+            int out = random.nextInt(8);
             int height = random.nextInt(2) + 1;
-            if (random.nextFloat() <= 0.5) {
-                posIn = this.goOut(posIn, random.nextInt(8));
-                posIn = this.placeByHeight(reader, posIn, height);
+            if (random.nextFloat() <= 0.65) {
+                posIn = this.out(posIn, out);
             }
-            height = random.nextInt(3) + 2;
-            posIn = posIn.down();
+            posIn = this.placeByHeight(reader, posIn, height);
+            //go out and place leaves
+            posIn = this.out(posIn, out);
+            height = random.nextInt(3) + 1;
             posIn = this.placeByHeight(reader, posIn, height);
             //now place small leaves
             this.placeLeaves(reader, random, posIn, 0);
@@ -80,30 +82,50 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
             //go diagonal  50%
             int height = random.nextInt(2) + 1;
             if (random.nextFloat() <= 0.5) {
-                posIn = this.goOut(posIn, random.nextInt(8));
+                posIn = this.out(posIn, random.nextInt(8));
                 posIn = this.placeByHeight(reader, posIn, height);
             }
-            height = random.nextInt(4) + 7;
+            height = random.nextInt(4) + 8;
             posIn = posIn.down();
             posIn = this.placeByHeight(reader, posIn, height);
             //place giant leaves here
             this.placeLeaves(reader, random, posIn, 2);
             //split into two
-            //branch should be at the half height of the one
-            //how do i know in witch direction it went?
+            //branch should be 3 under the half height of the one
+            //TODO this one only has really small leaves at the end
             int flag = random.nextInt(8);
-            BlockPos pos1 = this.goOut(posIn.down(height / 2), flag);
+            BlockPos pos1 = this.out(posIn.down((height / 2) + 1), flag);
             reader.setBlockState(pos1, log, 3);
             pos1 = pos1.up();
-            pos1 = this.goOut(pos1, flag);
-            height = random.nextInt(3) + 3;
+            pos1 = this.out(pos1, flag);
+            height = random.nextInt(2) + 2;
             pos1 = this.placeByHeight(reader, pos1, height);
             //place medium leaves here
+            this.placeLeaves(reader, random, pos1, 1);
 
         } else {
-            int start = random.nextInt(3) - 1;
-            posIn = posIn.add(0, start, 0);
-            reader.setBlockState(posIn, log, 3);
+            //should I add this branch with a set chance to the first? then i need to save a pos in branch 0
+            if (random.nextFloat() <= 0.5f) {
+                //like branch 0 but far more out
+                int start = random.nextInt(3) - 1;
+                posIn = posIn.add(0, start, 0);
+                reader.setBlockState(posIn, log, 3);
+                int out = random.nextInt(8);
+                int loop = random.nextInt(4) + 3;
+                for (int i = 0; i < loop; i++) {
+                    if (random.nextFloat() <= 0.6f) {
+                        //one up; height
+                        posIn = posIn.up();
+                    }
+                    posIn = this.out(posIn, out);
+                    reader.setBlockState(posIn, log, 3);
+                }
+                //place leaves
+                posIn = posIn.up();
+                this.placeLeaves(reader, random, posIn, 0);
+            } else {
+                //add to branch 0
+            }
         }
     }
 
@@ -116,7 +138,7 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
         return posIn.down();
     }
 
-    private BlockPos goOut(BlockPos pos, int i) {
+    private BlockPos out(BlockPos pos, int i) {
         switch (i) {
             case 0:
                 pos = pos.north().west();
@@ -148,7 +170,7 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
 
     private BlockPos findAroundById(Random random, BlockPos pos, int id) {
         int i = this.findLocationById(id, random);
-        this.goOut(pos, i);
+        this.out(pos, i);
         return pos;
     }
 

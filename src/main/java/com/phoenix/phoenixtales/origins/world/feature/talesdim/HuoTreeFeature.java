@@ -2,6 +2,7 @@ package com.phoenix.phoenixtales.origins.world.feature.talesdim;
 
 import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
+import com.phoenix.phoenixtales.origins.block.blocks.OriginsLeavesBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.math.BlockPos;
@@ -16,8 +17,10 @@ import java.util.Random;
 
 public class HuoTreeFeature extends Feature<NoFeatureConfig> {
 
+    //TODO trunk is min. 3 - 4 blocks in the air maybe make the trunk higher; place each root independent like the hui tree branches
+
     private final BlockState log = OriginsBlocks.HUO_LOG.getDefaultState();
-    private final BlockState leave = OriginsBlocks.HUO_LEAVES.getDefaultState().with(LeavesBlock.DISTANCE, 7);
+    private final BlockState leave = OriginsBlocks.HUO_LEAVES.getDefaultState().with(OriginsLeavesBlock.DISTANCE, 10);
 
     private boolean isGiant;
 
@@ -30,16 +33,12 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
 
     @Override
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-
         BlockPos pos1 = pos;
         List<BlockPos> roots = new ArrayList<>();
         for (pos1 = pos1.up(); reader.isAirBlock(pos1) && pos1.getY() > 1; pos1 = pos1.down()) {
         }
-
         //starting point
         pos1 = pos1.up();
-
-        ////////*************fill root options************////////////
 
 
         if (!this.isGiant) {
