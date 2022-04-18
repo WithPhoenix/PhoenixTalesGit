@@ -3,7 +3,6 @@ package com.phoenix.phoenixtales.origins.world.feature.talesdim;
 import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.block.blocks.OriginsLeavesBlock;
-import com.phoenix.phoenixtales.origins.world.feature.FeatureHelpers;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -32,26 +31,28 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
         //is the ground valid
         BlockPos trunk = pos;
-        int height = rand.nextInt(4) + 4;
-        trunk = FeatureHelpers.findGround(reader, trunk);
-        trunk = FeatureHelpers.placeStraightTrunk(reader, trunk, this.log, height);
+        trunk = this.findGround(reader, trunk);
+        if (this.canPlace(reader, trunk.down())) {
+            trunk = this.placeStraightTrunk(reader, trunk, this.log, rand);
 
-        //spit into two
-        l0 = this.findAroundById(rand, trunk, 0);
-        l1 = this.findAroundById(rand, trunk, 1);
-        //the first never splits
-        this.placeBranch(reader, rand, l0, 0);
-        //the second always splits
-        this.placeBranch(reader, rand, l1, 1);
+            //spit into two
+            l0 = this.findAroundById(rand, trunk, 0);
+            l1 = this.findAroundById(rand, trunk, 1);
+            //the first never splits
+            this.placeBranch(reader, rand, l0, 0);
+            //the second always splits
+            this.placeBranch(reader, rand, l1, 1);
 
-        //maybe place a third
-        float chance = rand.nextFloat();
-        if (chance <= 0.3f) {
-            l2 = this.findAroundById(rand, trunk, 2);
-            //the third never splits
-            this.placeBranch(reader, rand, l2, 2);
+            //maybe place a third
+            float chance = rand.nextFloat();
+            if (chance <= 0.3f) {
+                l2 = this.findAroundById(rand, trunk, 2);
+                //the third never splits
+                this.placeBranch(reader, rand, l2, 2);
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     private void placeBranch(ISeedReader reader, Random random, BlockPos posIn, int id) {
@@ -65,74 +66,117 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
             int out = random.nextInt(8);
             int height = random.nextInt(2) + 1;
             if (random.nextFloat() <= 0.65) {
-                posIn = FeatureHelpers.out(posIn, out);
+                posIn = this.out(posIn, out);
             }
-            posIn = FeatureHelpers.placeByHeight(reader, posIn, this.log, height);
+            posIn = this.placeByHeight(reader, posIn, this.log, height);
             //go out and place leaves
-            posIn = FeatureHelpers.out(posIn, out);
+            posIn = this.out(posIn, out);
             height = random.nextInt(3) + 1;
-            posIn = FeatureHelpers.placeByHeight(reader, posIn, this.log, height);
+            posIn = this.placeByHeight(reader, posIn, this.log, height);
             //now place small leaves
-            this.placeLeaves(reader, random, posIn, 0);
+            this.placeLeaves(reader, random, posIn, 1);
         } else if (id == 1) {
             int start = random.nextInt(3) - 1;
             posIn = posIn.add(0, start, 0);
             reader.setBlockState(posIn, log, 3);
             posIn = posIn.up();
-            //go diagonal  50%
-            int height = random.nextInt(2) + 1;
-            if (random.nextFloat() <= 0.5) {
-                posIn = FeatureHelpers.out(posIn, random.nextInt(8));
-                posIn = FeatureHelpers.placeByHeight(reader, posIn, this.log, height);
+            reader.setBlockState(posIn, log, 3);
+            posIn = posIn.up();
+            //go diagonal  60%
+            int height = random.nextInt(2) + 2;
+            if (random.nextFloat() <= 0.6) {
+                posIn = this.out(posIn, random.nextInt(8));
+                posIn = this.placeByHeight(reader, posIn, this.log, height);
+                posIn = posIn.up();
             }
             height = random.nextInt(4) + 8;
             posIn = posIn.down();
-            posIn = FeatureHelpers.placeByHeight(reader, posIn, this.log, height);
+            posIn = this.placeByHeight(reader, posIn, this.log, height);
             //place giant leaves here
             this.placeLeaves(reader, random, posIn, 2);
             //split into two
             //branch should be 3 under the half height of the one
-            //TODO this one only has really small leaves at the end
+            //TODO the branch should be not to close to the leaves of the parent branch
             int flag = random.nextInt(8);
-            BlockPos pos1 = FeatureHelpers.out(posIn.down((height / 2) + 1), flag);
+            BlockPos pos1 = this.out(posIn.down((height / 2) + 2), flag);
             reader.setBlockState(pos1, log, 3);
             pos1 = pos1.up();
-            pos1 = FeatureHelpers.out(pos1, flag);
+            pos1 = this.out(pos1, flag);
             height = random.nextInt(2) + 2;
-            pos1 = FeatureHelpers.placeByHeight(reader, posIn, this.log, height);
+            pos1 = this.placeByHeight(reader, pos1, this.log, height);
             //place medium leaves here
-            this.placeLeaves(reader, random, pos1, 1);
-
+            this.placeLeaves(reader, random, pos1, 0);
         } else {
             //should I add this branch with a set chance to the first? then i need to save a pos in branch 0
-            if (random.nextFloat() <= 0.5f) {
-                //like branch 0 but far more out
-                int start = random.nextInt(3) - 1;
-                posIn = posIn.add(0, start, 0);
-                reader.setBlockState(posIn, log, 3);
-                int out = random.nextInt(8);
-                int loop = random.nextInt(3) + 2;
-                for (int i = 0; i < loop; i++) {
-                    if (random.nextFloat() <= 0.7f) {
-                        //one up; height
-                        posIn = posIn.up();
-                    }
-                    posIn = FeatureHelpers.out(posIn, out);
-                    reader.setBlockState(posIn, log, 3);
+            //like branch 0 but far more out
+            int start = random.nextInt(3) - 1;
+            posIn = posIn.add(0, start, 0);
+            reader.setBlockState(posIn, log, 3);
+            int out = random.nextInt(8);
+            int loop = random.nextInt(3) + 2;
+            for (int i = 0; i < loop; i++) {
+                if (random.nextFloat() <= 0.7f) {
+                    //one up; height
+                    posIn = posIn.up();
                 }
-                //place leaves
-                posIn = posIn.up();
+                posIn = this.out(posIn, out);
                 reader.setBlockState(posIn, log, 3);
-                this.placeLeaves(reader, random, posIn, 0);
-            } else {
-                //add to branch 0
             }
+            //place leaves
+            posIn = posIn.up();
+            reader.setBlockState(posIn, log, 3);
+            this.placeLeaves(reader, random, posIn, 0);
         }
+    }
+
+
+    //returns the pos of the last block placed
+    private BlockPos placeByHeight(ISeedReader reader, BlockPos posIn, BlockState state, int height) {
+        for (int i = 0; i < height; i++) {
+            reader.setBlockState(posIn, state, 2);
+            posIn = posIn.up();
+        }
+        return posIn.down();
+    }
+
+    private BlockPos out(BlockPos pos, int i) {
+        switch (i) {
+            case 0:
+                pos = pos.north().west();
+                break;
+            case 1:
+                pos = pos.north();
+                break;
+            case 2:
+                pos = pos.north().east();
+                break;
+            case 3:
+                pos = pos.west();
+                break;
+            case 4:
+                pos = pos.east();
+                break;
+            case 5:
+                pos = pos.south().west();
+                break;
+            case 6:
+                pos = pos.south();
+                break;
+            case 7:
+                pos = pos.south().east();
+                break;
+        }
+        return pos;
+    }
+
+    private BlockPos placeStraightTrunk(ISeedReader reader, BlockPos posIn, BlockState state, Random random) {
+        int height = random.nextInt(4) + 4;
+        return this.placeByHeight(reader, posIn, state, height);
     }
 
     private BlockPos findAroundById(Random random, BlockPos pos, int id) {
         int i = this.findLocationById(id, random);
-        pos = FeatureHelpers.out(pos, i);
+        pos = this.out(pos, i);
         return pos;
     }
 
@@ -157,86 +201,131 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
         }
     }
 
+    private BlockPos findGround(ISeedReader reader, BlockPos pos) {
+        BlockPos re = pos;
+        for (re = re.up(); reader.isAirBlock(re) && re.getY() > 1; re = re.down()) {
+        }
+        re = re.up();
+        return re;
+    }
+
+    private boolean canPlace(ISeedReader reader, BlockPos pos) {
+        return !(reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LOG));
+    }
+
+    private void placeLeave(ISeedReader reader, BlockPos posIn) {
+        if (!(reader.getBlockState(posIn).matchesBlock(OriginsBlocks.HUI_LOG))) {
+            reader.setBlockState(posIn, this.leave, 3);
+        }
+    }
+
     /**
-     * @param type 0 = small leaves, 1 = medium leaves, 1 = big leaves
+     * @param type 0 = medium leaves, 1 = small leaves , 2 = big leaves
      */
     private void placeLeaves(ISeedReader reader, Random random, BlockPos posIn, int type) {
         if (type == 0) {
             if (random.nextFloat() <= 0.5f) {
-                reader.setBlockState(posIn.north(3).west(), leave, 3);
+                this.placeLeave(reader, posIn.north(3).west());
             }
-            reader.setBlockState(posIn.north(3), leave, 3);
-            reader.setBlockState(posIn.north(3).east(), leave, 3);
+            this.placeLeave(reader, posIn.north(3));
+            this.placeLeave(reader, posIn.north(3).east());
             if (random.nextFloat() <= 0.5f) {
-                reader.setBlockState(posIn.north(2).west(2), leave, 3);
+                this.placeLeave(reader, posIn.north(2).west(2));
             }
-            reader.setBlockState(posIn.north(2).west(), leave, 3);
-            reader.setBlockState(posIn.north(2), leave, 3);
-            reader.setBlockState(posIn.north(2).east(), leave, 3);
-            reader.setBlockState(posIn.north(2).east(2), leave, 3);
+            this.placeLeave(reader, posIn.north(2).west());
+            this.placeLeave(reader, posIn.north(2));
+            this.placeLeave(reader, posIn.north(2).east());
+            this.placeLeave(reader, posIn.north(2).east(2));
             if (random.nextFloat() <= 0.5f) {
-                reader.setBlockState(posIn.north().west(3), leave, 3);
+                this.placeLeave(reader, posIn.north().west(3));
             }
-            reader.setBlockState(posIn.north().west(2), leave, 3);
-            reader.setBlockState(posIn.north().west(), leave, 3);
-            reader.setBlockState(posIn.north(), leave, 3);
-            reader.setBlockState(posIn.north().east(), leave, 3);
-            reader.setBlockState(posIn.north().east(2), leave, 3);
-            reader.setBlockState(posIn.north().east(3), leave, 3);
-            reader.setBlockState(posIn.west(3), leave, 3);
-            reader.setBlockState(posIn.west(2), leave, 3);
-            reader.setBlockState(posIn.west(), leave, 3);
-            reader.setBlockState(posIn.east(), leave, 3);
-            reader.setBlockState(posIn.east(2), leave, 3);
-            reader.setBlockState(posIn.east(3), leave, 3);
-            reader.setBlockState(posIn.south().west(3), leave, 3);
-            reader.setBlockState(posIn.south().west(2), leave, 3);
-            reader.setBlockState(posIn.south().west(), leave, 3);
-            reader.setBlockState(posIn.south(), leave, 3);
-            reader.setBlockState(posIn.south().east(), leave, 3);
-            reader.setBlockState(posIn.south().east(2), leave, 3);
+            this.placeLeave(reader, posIn.north().west(2));
+            this.placeLeave(reader, posIn.north().west());
+            this.placeLeave(reader, posIn.north());
+            this.placeLeave(reader, posIn.north().east());
+            this.placeLeave(reader, posIn.north().east(2));
+            this.placeLeave(reader, posIn.north().east(3));
+            this.placeLeave(reader, posIn.west(3));
+            this.placeLeave(reader, posIn.west(2));
+            this.placeLeave(reader, posIn.west());
+            this.placeLeave(reader, posIn.east());
+            this.placeLeave(reader, posIn.east(2));
+            this.placeLeave(reader, posIn.east(3));
+            this.placeLeave(reader, posIn.south().west(3));
+            this.placeLeave(reader, posIn.south().west(2));
+            this.placeLeave(reader, posIn.south().west());
+            this.placeLeave(reader, posIn.south());
+            this.placeLeave(reader, posIn.south().east());
+            this.placeLeave(reader, posIn.south().east(2));
             if (random.nextFloat() <= 0.5f) {
-                reader.setBlockState(posIn.south().east(3), leave, 3);
+                this.placeLeave(reader, posIn.south().east(3));
             }
-            reader.setBlockState(posIn.south(2).west(2), leave, 3);
-            reader.setBlockState(posIn.south(2).west(), leave, 3);
-            reader.setBlockState(posIn.south(2), leave, 3);
-            reader.setBlockState(posIn.south(2).east(), leave, 3);
-            reader.setBlockState(posIn.south(2).east(2), leave, 3);
+            this.placeLeave(reader, posIn.south(2).west(2));
+            this.placeLeave(reader, posIn.south(2).west());
+            this.placeLeave(reader, posIn.south(2));
+            this.placeLeave(reader, posIn.south(2).east());
+            this.placeLeave(reader, posIn.south(2).east(2));
             if (random.nextFloat() <= 0.5f) {
-                reader.setBlockState(posIn.south(3).west(), leave, 3);
+                this.placeLeave(reader, posIn.south(3).west());
             }
-            reader.setBlockState(posIn.south(3), leave, 3);
-            reader.setBlockState(posIn.south(3).east(), leave, 3);
+            this.placeLeave(reader, posIn.south(3));
+            this.placeLeave(reader, posIn.south(3).east());
             //second layer
             posIn = posIn.up();
-            reader.setBlockState(posIn.north(2), leave, 3);
+            this.placeLeave(reader, posIn.north(2));
             if (random.nextFloat() <= 0.5f) {
-                reader.setBlockState(posIn.north(2).east(), leave, 3);
+                this.placeLeave(reader, posIn.north(2).east());
             }
-            reader.setBlockState(posIn.north().west(), leave, 3);
-            reader.setBlockState(posIn.north(), leave, 3);
-            reader.setBlockState(posIn.north().east(), leave, 3);
+            this.placeLeave(reader, posIn.north().west());
+            this.placeLeave(reader, posIn.north());
+            this.placeLeave(reader, posIn.north().east());
             if (random.nextFloat() <= 0.5f) {
-                reader.setBlockState(posIn.north().east(2), leave, 3);
+                this.placeLeave(reader, posIn.north().east(2));
             }
-            reader.setBlockState(posIn.west(2), leave, 3);
-            reader.setBlockState(posIn.west(), leave, 3);
-            reader.setBlockState(posIn, leave, 3);
-            reader.setBlockState(posIn.east(), leave, 3);
-            reader.setBlockState(posIn.east(2), leave, 3);
+            this.placeLeave(reader, posIn.west(2));
+            this.placeLeave(reader, posIn.west());
+            this.placeLeave(reader, posIn);
+            this.placeLeave(reader, posIn.east());
+            this.placeLeave(reader, posIn.east(2));
             if (random.nextFloat() <= 0.5f) {
-                reader.setBlockState(posIn.south().west(2), leave, 3);
+                this.placeLeave(reader, posIn.south().west(2));
             }
-            reader.setBlockState(posIn.south().west(), leave, 3);
-            reader.setBlockState(posIn.south(), leave, 3);
-            reader.setBlockState(posIn.south().east(), leave, 3);
-            reader.setBlockState(posIn.south(2), leave, 3);
+            this.placeLeave(reader, posIn.south().west());
+            this.placeLeave(reader, posIn.south());
+            this.placeLeave(reader, posIn.south().east());
+            this.placeLeave(reader, posIn.south(2));
             if (random.nextFloat() <= 0.5f) {
-                reader.setBlockState(posIn.south(2).west(), leave, 3);
+                this.placeLeave(reader, posIn.south(2).west());
             }
         } else if (type == 1) {
-
+            //place via this.placeLeave because no log should be removed
+            if (random.nextFloat() <= 0.5f) {
+                this.placeLeave(reader, posIn.north().west());
+            }
+            this.placeLeave(reader, posIn.north());
+            if (random.nextFloat() <= 0.5f) {
+                this.placeLeave(reader, posIn.north().east());
+            }
+            this.placeLeave(reader, posIn.west());
+            this.placeLeave(reader, posIn.east());
+            if (random.nextFloat() <= 0.5f) {
+                this.placeLeave(reader, posIn.south().west());
+            }
+            this.placeLeave(reader, posIn.south());
+            if (random.nextFloat() <= 0.5f) {
+                this.placeLeave(reader, posIn.south().east());
+            }
+            posIn = posIn.up();
+            if (random.nextFloat() <= 0.5f) {
+                this.placeLeave(reader, posIn.north());
+            }
+            this.placeLeave(reader, posIn.west());
+            this.placeLeave(reader, posIn);
+            if (random.nextFloat() <= 0.5f) {
+                this.placeLeave(reader, posIn.east());
+            }
+            this.placeLeave(reader, posIn.south());
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         } else {
             reader.setBlockState(posIn.north(5).west(), leave, 3);
             reader.setBlockState(posIn.north(5), leave, 3);

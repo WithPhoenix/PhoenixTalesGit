@@ -65,6 +65,7 @@ public class OriginsItems {
     public static final Item HUI_SAPLING = createItem("hui_sapling", new OriginsBlockItem(OriginsBlocks.HUI_SAPLING, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
 
     public static final Item CHARRED_DEBRIS = createItem("charred_debris", new OriginsBlockItem(OriginsBlocks.CHARRED_DEBRIS, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
+    public static final Item CHARRED_LOG = createItem("charred_log", new OriginsBlockItem(OriginsBlocks.CHARRED_LOG, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
 
     public static final Item ASH = createItem("ash", new OriginsBlockItem(OriginsBlocks.ASH, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
     public static final Item CRYSTAL = createItem("crystal", new OriginsBlockItem(OriginsBlocks.CRYSTAL, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));

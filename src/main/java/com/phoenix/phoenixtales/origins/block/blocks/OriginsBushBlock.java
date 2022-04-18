@@ -14,8 +14,8 @@ public class OriginsBushBlock extends BushBlock {
 
     @Override
     protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return state.matchesBlock(OriginsBlocks.SEARING_GRASS_BLOCK) || state.matchesBlock(OriginsBlocks.SEARING_DIRT) || state.matchesBlock(OriginsBlocks.ASHEN_GRASS_BLOCK) || state.matchesBlock(OriginsBlocks.ASHEN_DIRT) || state.matchesBlock(Blocks.GRAVEL);
+        return state.matchesBlock(OriginsBlocks.ASHEN_DIRT) || state.matchesBlock(OriginsBlocks.ASHEN_GRASS_BLOCK)
+                || state.matchesBlock(OriginsBlocks.SEARING_DIRT) || state.matchesBlock(OriginsBlocks.SEARING_GRASS_BLOCK)
+                || state.matchesBlock(Blocks.GRAVEL) || super.isValidGround(state, worldIn, pos);
     }
-
-
 }

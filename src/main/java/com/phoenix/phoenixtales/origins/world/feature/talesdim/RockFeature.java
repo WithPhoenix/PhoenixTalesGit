@@ -10,6 +10,7 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import java.util.Random;
 
 public class RockFeature extends Feature<NoFeatureConfig> {
+    //random height 1 - 5 closer to mid higher on random area
     public RockFeature(Codec<NoFeatureConfig> codec) {
         super(codec);
     }

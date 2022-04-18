@@ -6,6 +6,7 @@ import com.phoenix.phoenixtales.origins.block.OriginsTileEntities;
 import com.phoenix.phoenixtales.origins.item.OriginsItems;
 import com.phoenix.phoenixtales.origins.world.biome.OriginsBiomes;
 import com.phoenix.phoenixtales.origins.world.feature.TalesFeatures;
+import com.phoenix.phoenixtales.origins.world.feature.placer.TalesPlacerType;
 import com.phoenix.phoenixtales.origins.world.surfacebuilder.TalesSurfaceBuilders;
 import com.phoenix.phoenixtales.rise.RiseRecipeTypes;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
@@ -18,6 +19,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.blockplacer.BlockPlacerType;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraftforge.event.RegistryEvent;
@@ -102,6 +104,14 @@ public class TalesRegistry {
             event.getRegistry().register(builder);
         }
         doneMsg("surface builders");
+    }
+
+    @SubscribeEvent
+    public static void registerPlacerTypes(RegistryEvent.Register<BlockPlacerType<?>> event) {
+        for (BlockPlacerType<?> placerType : TalesPlacerType.placertypes) {
+            event.getRegistry().register(placerType);
+        }
+        doneMsg("block placer types");
     }
 
     private static void doneMsg(String msg) {

@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.block.blocks.OriginsLeavesBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -18,147 +17,142 @@ import java.util.Random;
 public class HuoTreeFeature extends Feature<NoFeatureConfig> {
 
     //TODO trunk is min. 3 - 4 blocks in the air maybe make the trunk higher; place each root independent like the hui tree branches
+    //TODO this needs a rewrite
 
     private final BlockState log = OriginsBlocks.HUO_LOG.getDefaultState();
     private final BlockState leave = OriginsBlocks.HUO_LEAVES.getDefaultState().with(OriginsLeavesBlock.DISTANCE, 9);
-
-    private boolean isGiant;
-
-    private Random random = new Random();
+    private List<BlockPos> roots = new ArrayList<>();
+    private List<Integer> existing = new ArrayList<>();
+    private final boolean isGiant;
+    private int tries = 0;
 
     public HuoTreeFeature(Codec<NoFeatureConfig> codec, boolean isGiant) {
         super(codec);
         this.isGiant = isGiant;
     }
 
+    //this code sucks
     @Override
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-        BlockPos pos1 = pos;
-        List<BlockPos> roots = new ArrayList<>();
-        for (pos1 = pos1.up(); reader.isAirBlock(pos1) && pos1.getY() > 1; pos1 = pos1.down()) {
-        }
-        //starting point
-        pos1 = pos1.up();
-
-
-        if (!this.isGiant) {
-            //calculate height of the trunk
-            int trunkHeight = random.nextInt(2) + 2;
-            BlockPos trunk = pos1.up(trunkHeight);
-            ////////*************roots************////////////
-            //look for 2-4 locations
-            int rootCount = random.nextInt(3) + 2;
-            for (int i = 0; i < rootCount; i++) {
-                roots.add(getRootStart(reader, pos1, random.nextInt(25)));
-            }
-            //build on some up and on others to the middle
-            //the height is 2-3 blocks
-
-            //build each root after each other
-            for (BlockPos root : roots) {
-                //always build at the start
-                reader.setBlockState(root, this.log, 3);
-                //more logic deciding up or in, compare to @trunk
-//                boolean up = random.nextBoolean();
-//                root = up ? buildUp(reader, root, pos1) : buildRoot(reader, root, pos1);
-//                //more logic deciding up or in, compare to @trunk
-//                up = random.nextBoolean();
-//                root = up ? buildUp(reader, root, pos1) : buildRoot(reader, root, pos1);
-                //depending on distance to @trunk build even more
-            }
-
-
-            //repeat
-
-            ////////*************trunk************////////////
-            //now i should be 2-3 blocks  in the air in the middle
-            //build in the middle 3-6 blocks
-            for (int i = 0; i < random.nextInt(4) + 3; i++) {
-                reader.setBlockState(trunk.up(i), this.log, 3);
-            }
-
-            ////////*************treetop************////////////
-            //2-3/4 limbs
-            //first go side
-
-            //then build 1(30%)-2(70%) up and place leaves
-
-
-            ////////*************leaves************////////////
-
-
-        } else {
-
-            for (int i = 0; i < 14; i++) {
-                reader.setBlockState(pos1.up(i), this.log, 3);
-            }
-
-        }
-        return true;
-    }
-
-
-    //with while loop: while not the same height build root
-    //also decides if I should build up or not
-    private BlockPos buildRoot(ISeedReader reader, BlockPos posIn, BlockPos midIn) {
-        BlockPos build = posIn;
-        if (midIn.getY() - build.getY() > 4) {
-            //way under the mid
-            //so build up 10% it goes in not up
-            if (random.nextInt(10) != 9) {
-                build = build.up();
-                reader.setBlockState(build, this.log, 3);
-            } else {
-                buildIn(reader, build, midIn);
-            }
-        } else if (midIn.getY() - build.getY() < 1) {
-            //over the mid
-            //two options
-            //same height
-            if (midIn.getY() == build.getY()) {
-                if (random.nextInt(10) != 9) {
-                    //logic to decide diagonal or straight in
-                } else {
-                    //10% to build up or down
-                    if (random.nextBoolean()) {
-                        //up
-                        build = build.up();
-                        reader.setBlockState(build, this.log, 3);
-                    } else {
-                        //down
-                        build = build.down();
-                        reader.setBlockState(build, this.log, 3);
-                    }
+        BlockPos trunk = pos;
+        trunk = this.findGround(reader, trunk);
+        if (this.canPlace(reader, trunk.down())) {
+            if (!this.isGiant) {
+                int trunkHeight = rand.nextInt(3) + 3;
+                trunk = trunk.up(trunkHeight);
+                //roots
+                int rootCount = rand.nextInt(2) + 3;
+                for (int i = 0; i < rootCount; i++) {
+                    this.roots.add(this.getRootById(reader, trunk, this.findRoots(rand)));
                 }
-            //or up
+                for (BlockPos root : roots) {
+                    this.placeRoot(reader, root, trunk, rand);
+                }
+                //trunk
+                trunk = this.placeStraightTrunk(reader, trunk, this.log, rand);
+                //branches
+                //these should be fairly simple, can i use code from @hui_tree
             } else {
-                //build down to find to mid
+                trunk = this.placeStraightTrunk(reader, trunk, this.log, rand);
             }
-            build = build.down();
-            reader.setBlockState(build, this.log, 3);
+            return true;
+        }
+        return false;
+    }
+
+    private void placeRoot(ISeedReader reader, BlockPos posIn, BlockPos trunk, Random random) {
+        int dif = Math.abs(trunk.getY() - posIn.getY());
+        if (posIn.getY() < trunk.getY()) {
+            //the root is under the trunk, i end at the height of the trunk
+
+            for (int i = 0; i < dif; i++) {
+                reader.setBlockState(posIn, this.log, 3);
+                posIn = this.inOrUp(posIn, trunk, random, true);
+            }
+            //i need to calculate a value using trunk Y and root Y because if the root is really far under the trunk i want to make sure to build up
+            //the distance from root to trunk decides if i go up or in
+            //how do i know in what direction i have to build in, the root can be in every direction
+            //remove this
+
+
+//            //place one more log with a set chance 50% to get a bit more variation
+//            reader.setBlockState(posIn.up(), this.log, 3);
+        } else if (posIn.getY() > trunk.getY()) {
+            //the root is over the trunk, build down, i should always end at the height of the trunk
+            for (int i = 0; i < dif; i++) {
+                reader.setBlockState(posIn, this.log, 3);
+                posIn = this.inOrUp(posIn, trunk, random, false);
+            }
+        }
+    }
+
+    //this checks if i should go in and returns the calculated pos
+    private BlockPos inOrUp(BlockPos posIn, BlockPos trunk, Random random, boolean lower) {
+        int difY = Math.abs(trunk.getY() - posIn.getY());
+        int difX = Math.abs(trunk.getX() - posIn.getX());
+        int difZ = Math.abs(trunk.getZ() - posIn.getZ());
+        //make a float chance and add chance to it
+        //in the end i have a value telling me the chance to build in
+        //then i need to find out where i build in
+        float weightY = difY * 0.15f;
+        //the higher the dif the lower the chance to build in
+        float cY = 1 - (difY * 0.15f);
+        //the fare out the higher th chance to build in
+        float cX = difX == 2 ? 0.75f : 0;
+        float cZ = difZ == 2 ? 0.75f : 0;
+
+        float chance = (cY * weightY) + (cX * ((1 - weightY) / 2)) + (cZ * ((1 - weightY) / 2));
+
+        if (random.nextFloat() <= chance) {
+            posIn = this.in(posIn, trunk, difX == 2, difZ == 2);
+            if (random.nextFloat() <= 0.5f) {
+                posIn = lower ? posIn.up() : posIn.down();
+            }
         } else {
-
+            posIn = lower ? posIn.up() : posIn.down();
         }
-
-        return build;
+        return posIn;
     }
 
-    //also decide if i should even build up
-    private BlockPos buildIn(ISeedReader reader, BlockPos posIn, BlockPos midIn) {
-        BlockPos build = posIn;
-        build = build.south();
-        return build;
+    private BlockPos in(BlockPos posIn, BlockPos trunk, boolean xV, boolean zV) {
+        int x = xV ? (trunk.getX() > posIn.getX() ? 1 : -1) : 0;
+        int z = zV ? (trunk.getZ() > posIn.getZ() ? 1 : -1) : 0;
+        posIn.add(x, 0, z);
+        return posIn;
     }
 
-    private BlockPos findGround(ISeedReader reader, BlockPos pos) {
-        BlockPos re = pos;
-        for (re = re.up(); reader.isAirBlock(re) && re.getY() > 1; re = re.down()) {
+    private BlockPos placeStraightTrunk(ISeedReader reader, BlockPos posIn, BlockState state, Random random) {
+        int height = random.nextInt(3) + 4;
+        return this.placeByHeight(reader, posIn, state, height);
+    }
+
+    //returns the pos of the last block placed
+    private BlockPos placeByHeight(ISeedReader reader, BlockPos posIn, BlockState state, int height) {
+        for (int i = 0; i < height; i++) {
+            reader.setBlockState(posIn, state, 2);
+            posIn = posIn.up();
         }
-        re = re.up();
-        return re;
+        return posIn.down();
     }
 
-    private BlockPos getRootStart(ISeedReader reader, BlockPos pos, int id) {
+    private int findRoots(Random random) {
+        int id = random.nextInt(25);
+        if (this.tries <= 10) {
+            if (this.existing.contains(id)) {
+                return this.findRoots(random);
+            } else {
+                this.existing.add(id);
+                return id;
+            }
+        }
+        return id;
+    }
+
+    private boolean canPlace(ISeedReader reader, BlockPos pos) {
+        return !(reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LOG));
+    }
+
+    private BlockPos getRootById(ISeedReader reader, BlockPos pos, int id) {
         BlockPos re = pos.west(2);
         if (id >= 0 && id < 5) {
             re = re.north(2);
@@ -179,7 +173,11 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
         return re;
     }
 
-    private void placeLeaves(ISeedReader reader, BlockPos pos) {
-
+    private BlockPos findGround(ISeedReader reader, BlockPos pos) {
+        BlockPos re = pos;
+        for (re = re.up(); reader.isAirBlock(re) && re.getY() > 1; re = re.down()) {
+        }
+        re = re.up();
+        return re;
     }
 }

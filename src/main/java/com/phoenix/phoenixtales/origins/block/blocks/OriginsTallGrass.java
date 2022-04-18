@@ -14,10 +14,10 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class OriginsTallGrass extends OriginsBushBlock implements IGrowable, net.minecraftforge.common.IForgeShearable {
 
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
-
 
     public OriginsTallGrass(Properties properties) {
         super(properties);
@@ -28,9 +28,7 @@ public class OriginsTallGrass extends OriginsBushBlock implements IGrowable, net
         return SHAPE;
     }
 
-    /**
-     * Whether this IGrowable can grow
-     */
+
     @Override
     public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
         return true;
@@ -57,9 +55,6 @@ public class OriginsTallGrass extends OriginsBushBlock implements IGrowable, net
         }
     }
 
-    /**
-     * Get the OffsetType for this Block. Determines if the model is rendered slightly offset.
-     */
     @Override
     public AbstractBlock.OffsetType getOffsetType() {
         return AbstractBlock.OffsetType.XYZ;

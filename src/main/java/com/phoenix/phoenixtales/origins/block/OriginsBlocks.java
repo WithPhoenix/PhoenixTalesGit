@@ -42,13 +42,13 @@ public class OriginsBlocks {
     public static final Block ASHEN_GRASS_BLOCK = createBlock("ashen_grass_block", new OriginsGrassBlock(AbstractBlock.Properties.create(Material.ORGANIC).tickRandomly().hardnessAndResistance(0.6F).sound(SoundType.PLANT)));
 
     //plants
-    public static final Block SEARING_GRASS = createBlock("searing_grass", new TallGrassBlock(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
-    public static final Block SEARING_FERN = createBlock("searing_fern", new TallGrassBlock(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
+    public static final Block SEARING_GRASS = createBlock("searing_grass", new OriginsTallGrass(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
+    public static final Block SEARING_FERN = createBlock("searing_fern", new OriginsTallGrass(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
     public static final Block TALL_SEARING_GRASS = createBlock("tall_searing_grass", new OriginsDoublePlant(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
     public static final Block LARGE_SEARING_FERN = createBlock("large_searing_fern", new OriginsDoublePlant(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
 
-    public static final Block ASHEN_GRASS = createBlock("ashen_grass", new TallGrassBlock(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
-    public static final Block ASHEN_FERN = createBlock("ashen_fern", new TallGrassBlock(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
+    public static final Block ASHEN_GRASS = createBlock("ashen_grass", new OriginsTallGrass(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
+    public static final Block ASHEN_FERN = createBlock("ashen_fern", new OriginsTallGrass(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
     public static final Block TALL_ASHEN_GRASS = createBlock("tall_ashen_grass", new OriginsDoublePlant(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
     public static final Block LARGE_ASHEN_FERN = createBlock("large_ashen_fern", new OriginsDoublePlant(AbstractBlock.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
 
@@ -77,6 +77,7 @@ public class OriginsBlocks {
     public static final Block HUI_SAPLING = createBlock("hui_sapling", new OriginsSapling(new HuiTree(), AbstractBlock.Properties.create(Material.PLANTS).sound(SoundType.PLANT).doesNotBlockMovement().zeroHardnessAndResistance().tickRandomly().notSolid().setLightLevel(BlockState -> 10)));
 
     public static final Block CHARRED_DEBRIS = createBlock("charred_debris", new DebrisBlock());
+    public static final Block CHARRED_LOG = createBlock("charred_log", new RotatedPillarBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.BLACK).sound(SoundType.WOOD).hardnessAndResistance(8f, 14f).harvestLevel(0).harvestTool(ToolType.AXE)));
 
     //needs to be last to be next to the other ores
     public static final Block ORE_SULFUR_OVERWORLD = createBlock("sulfur_ore", new Block(AbstractBlock.Properties.create((Material.ROCK), MaterialColor.GRAY).hardnessAndResistance(5f, 5f).harvestLevel(1).harvestTool(ToolType.PICKAXE).setRequiresTool()));

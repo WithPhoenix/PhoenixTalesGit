@@ -95,8 +95,8 @@
             "altitude": 0,
             "temperature": 0,
             "humidity": -0.5,
-            "weirdness": 0,
-            "offset": 0
+            "weirdness": 0.3,
+            "offset": 0.175
           }
         },
         {
@@ -126,7 +126,7 @@
             "temperature": -0.5,
             "humidity": 0,
             "weirdness": 0.9,
-            "offset": 0.425
+            "offset": 0.525
           }
         },
         {
