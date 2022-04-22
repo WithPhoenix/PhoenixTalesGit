@@ -1,6 +1,10 @@
 # PhoenixTales: Origins
-this project is still in dev and only at the beginning
+this project is still in dev
 
-PhoenixTales: Rise
+# Plans for this mod
+    -custom Dimension with really hard boss-fight, and maybe with quests(?)
+  																			
+    -magic branch 
+  
+    -technic branch
 
-PhoenixTales: Fall
