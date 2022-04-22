@@ -9,23 +9,22 @@ import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class HuoTreeFeature extends Feature<NoFeatureConfig> {
 
     //TODO trunk is min. 3 - 4 blocks in the air maybe make the trunk higher; place each root independent like the hui tree branches
     //TODO this needs a rewrite
 
+    //this seed is cool 4761177788959882551
 
     private final BlockState log = OriginsBlocks.HUO_LOG.getDefaultState();
     private final BlockState leave = OriginsBlocks.HUO_LEAVES.getDefaultState().with(OriginsLeavesBlock.DISTANCE, 9);
-    private List<BlockPos> roots = new ArrayList<>();
-    private List<Integer> existing = new ArrayList<>();
     private final boolean isGiant;
     private int tries = 0;
+    private List<Integer> existing;
 
     public HuoTreeFeature(Codec<NoFeatureConfig> codec, boolean isGiant) {
         super(codec);
@@ -34,19 +33,24 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
 
     @Override
     public boolean generate(ISeedReader reader, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+        Map<BlockPos, Integer> roots = new HashMap<>();
+        this.existing = new ArrayList<>();
+        this.tries = 0;
         BlockPos trunk = pos;
         trunk = this.findGround(reader, trunk);
         if (this.canPlace(reader, trunk.down())) {
             if (!this.isGiant) {
-                int trunkHeight = rand.nextInt(3) + 3;
+                int trunkHeight = rand.nextInt(2) + 2;
                 trunk = trunk.up(trunkHeight);
                 //roots
-                int rootCount = rand.nextInt(2) + 3;
-                for (int i = 0; i < rootCount; i++) {
-                    this.roots.add(this.getRootById(trunk, this.findRoots(rand)));
+                roots.putAll(this.getRootLocation(trunk, rand));
+                roots.putAll(this.getRootLocation(trunk, rand));
+                roots.putAll(this.getRootLocation(trunk, rand));
+                if (rand.nextFloat() <= 0.5f) {
+                    roots.putAll(this.getRootLocation(trunk, rand));
                 }
-                for (BlockPos root : roots) {
-                    this.placeRoot(reader, root, trunk, rand);
+                for (BlockPos root : roots.keySet()) {
+                    this.placeRoot(reader, root, trunk, rand, roots.get(root));
                 }
                 //trunk
                 trunk = this.placeStraightTrunk(reader, trunk, this.log, rand);
@@ -60,10 +64,52 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
         return false;
     }
 
-    private void placeRoot(ISeedReader reader, BlockPos posIn, BlockPos trunk, Random random) {
+    //TODo may be even decide which one im using
+    //TODO should the roots go out at the beginning and then go down
+    /*
+            #
+           ##
+           #
+           #
+          #
+     */
+    //TODO or should the roots go out and at the end down
+    /*
+               ##
+            ###
+          ##
+     */
+    private void placeRoot(ISeedReader reader, BlockPos posIn, BlockPos trunk, Random random, int out) {
+        int start = random.nextInt(2) - 1;
+        posIn = posIn.add(0, start, 0);
+        //always place block at the beginning, then loop
+        reader.setBlockState(posIn, this.log, 3);
+        //the more placed the higher the chance to build down
+        int placed = 1;
+        float chance_down = 0.6f;
+        int count_down = 0;
+        int length = random.nextInt(2) + 4;
 
+        for (int i = 0; i < length; i++) {
+            // if (placed / 2 >)
+            if (placed == 2 && count_down < 2 || placed == 4 && count_down < 3) {
+                posIn = posIn.down();
+                ++count_down;
+            } else {
+                if (random.nextFloat() <= chance_down) {
+                    posIn = posIn.down();
+                    ++count_down;
+                } else {
+                    if (random.nextFloat() <= 0.1f && placed > (length / 2)) {
+                        out = random.nextInt(8);
+                    }
+                    posIn = this.out(posIn, out);
+                }
+            }
+            reader.setBlockState(posIn, this.log, 3);
+            ++placed;
+        }
     }
-
 
     private BlockPos placeStraightTrunk(ISeedReader reader, BlockPos posIn, BlockState state, Random random) {
         int height = random.nextInt(3) + 4;
@@ -79,22 +125,8 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
         return posIn.down();
     }
 
-    private int findRoots(Random random) {
-        int id = random.nextInt(8);
-        if (this.existing.contains(id)) {
-            return this.findRoots(random);
-        } else {
-            this.existing.add(id);
-            return id;
-        }
-    }
-
-    private boolean canPlace(ISeedReader reader, BlockPos pos) {
-        return !(reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LOG));
-    }
-
-    private BlockPos getRootById(BlockPos pos, int id) {
-        switch (id) {
+    private BlockPos out(BlockPos pos, int i) {
+        switch (i) {
             case 0:
                 pos = pos.north().west();
                 break;
@@ -123,7 +155,42 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
         return pos;
     }
 
-    //4x4 not 3x3
+    private @NotNull Map<BlockPos, Integer> getRootLocation(BlockPos trunk, Random random) {
+        Map<BlockPos, Integer> temp = new HashMap<>();
+        int id = this.findRootLocation(random);
+        BlockPos pos = this.out(trunk, id);
+        temp.put(pos, id);
+        return temp;
+    }
+
+    private int findRootLocation(Random random) {
+        int id = random.nextInt(9);
+        if (this.tries <= 18) {
+            if (this.existing.contains(id)) {
+                ++this.tries;
+                return this.findRootLocation(random);
+            } else {
+                this.tries = 0;
+                this.existing.add(id);
+                return id;
+            }
+        }
+        return id;
+    }
+
+    private boolean canPlace(ISeedReader reader, BlockPos pos) {
+        return !(reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LOG));
+    }
+
+    private BlockPos findGround(ISeedReader reader, BlockPos pos) {
+        BlockPos re = pos;
+        for (re = re.up(); reader.isAirBlock(re) && re.getY() > 1; re = re.down()) {
+        }
+        re = re.up();
+        return re;
+    }
+
+    //7x7 not 5x5
 //    private BlockPos getRootById(ISeedReader reader, BlockPos pos, int id) {
 //        BlockPos re = pos.west(2);
 //        if (id >= 0 && id < 5) {
@@ -145,13 +212,7 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
 //        return re;
 //    }
 
-    private BlockPos findGround(ISeedReader reader, BlockPos pos) {
-        BlockPos re = pos;
-        for (re = re.up(); reader.isAirBlock(re) && re.getY() > 1; re = re.down()) {
-        }
-        re = re.up();
-        return re;
-    }//
+
 //    private void placeRoot(ISeedReader reader, BlockPos posIn, BlockPos trunk, Random random) {
 //
 //

@@ -14,10 +14,6 @@ public class FeatureHelpers {
         return re;
     }
 
-    public static BlockPos placeStraightTrunk(ISeedReader reader, BlockPos posIn, BlockState state, int height) {
-        return placeByHeight(reader, posIn, state, height);
-    }
-
     //returns the pos of the last block placed
     public static BlockPos placeByHeight(ISeedReader reader, BlockPos posIn, BlockState state, int height) {
         for (int i = 0; i < height; i++) {

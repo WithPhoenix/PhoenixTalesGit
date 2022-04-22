@@ -3,6 +3,7 @@ package com.phoenix.phoenixtales.origins.world.feature.talesdim;
 import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.block.blocks.OriginsLeavesBlock;
+import com.phoenix.phoenixtales.origins.world.feature.FeatureHelpers;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -201,14 +202,6 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
         }
     }
 
-    private BlockPos findGround(ISeedReader reader, BlockPos pos) {
-        BlockPos re = pos;
-        for (re = re.up(); reader.isAirBlock(re) && re.getY() > 1; re = re.down()) {
-        }
-        re = re.up();
-        return re;
-    }
-
     private boolean canPlace(ISeedReader reader, BlockPos pos) {
         return !(reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LOG));
     }
@@ -217,6 +210,14 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
         if (!(reader.getBlockState(posIn).matchesBlock(OriginsBlocks.HUI_LOG))) {
             reader.setBlockState(posIn, this.leave, 3);
         }
+    }
+
+    private BlockPos findGround(ISeedReader reader, BlockPos pos) {
+        BlockPos re = pos;
+        for (re = re.up(); reader.isAirBlock(re) && re.getY() > 1; re = re.down()) {
+        }
+        re = re.up();
+        return re;
     }
 
     /**
