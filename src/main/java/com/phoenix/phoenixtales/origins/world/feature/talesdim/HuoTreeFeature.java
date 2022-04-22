@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.block.blocks.OriginsLeavesBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -16,9 +17,9 @@ import java.util.*;
 public class HuoTreeFeature extends Feature<NoFeatureConfig> {
 
     //TODO trunk is min. 3 - 4 blocks in the air maybe make the trunk higher; place each root independent like the hui tree branches
-    //TODO this needs a rewrite
 
     //this seed is cool 4761177788959882551
+    //this seed to 1129351448522801061
 
     private final BlockState log = OriginsBlocks.HUO_LOG.getDefaultState();
     private final BlockState leave = OriginsBlocks.HUO_LEAVES.getDefaultState().with(OriginsLeavesBlock.DISTANCE, 9);
@@ -45,7 +46,7 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
                 //roots
                 roots.putAll(this.getRootLocation(trunk, rand));
                 roots.putAll(this.getRootLocation(trunk, rand));
-                roots.putAll(this.getRootLocation(trunk, rand));
+//                roots.putAll(this.getRootLocation(trunk, rand));
                 if (rand.nextFloat() <= 0.5f) {
                     roots.putAll(this.getRootLocation(trunk, rand));
                 }
@@ -56,6 +57,7 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
                 trunk = this.placeStraightTrunk(reader, trunk, this.log, rand);
                 //branches
                 //these should be fairly simple, can i use code from @hui_tree
+                this.placeTreeTop(reader, trunk, rand);
             } else {
                 trunk = this.placeByHeight(reader, trunk, this.log, 20);
             }
@@ -64,7 +66,154 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
         return false;
     }
 
-    //TODo may be even decide which one im using
+    //these methods are for the treetop
+/////////////*******************************************************************************************************\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    private void placeTreeTop(ISeedReader reader, BlockPos trunk, Random random) {
+        Map<BlockPos, Integer> branchesOutMap = this.chooseBranches(trunk, random);
+        //change the height of the branches
+        // down same up
+        for (BlockPos pos : branchesOutMap.keySet()) {
+            reader.setBlockState(pos, this.log, 3);
+            //build a bit out and go 1-2 times up and then place the end
+        }
+        //60% to build in the middle
+        if (random.nextFloat() <= 0.6f) {
+            //place branch in the middle
+            //this could be to high
+            int height = random.nextInt(3) + 2;
+            trunk = this.placeByHeight(reader, trunk.up(), this.log, height);
+            this.endBranch(reader, trunk, random);
+        }
+    }
+
+    private Map<BlockPos, Integer> chooseBranches(BlockPos trunk, Random random) {
+        Map<BlockPos, Integer> temp = new HashMap<>();
+        int id = random.nextInt(8);
+        BlockPos l0 = trunk;
+        BlockPos l1 = trunk;
+        BlockPos l2 = trunk;
+        int i0 = 9;
+        int i1 = 9;
+        int i2 = 9;
+
+        switch (id) {
+            case 0:
+                l0 = trunk.south();
+                l1 = trunk.west();
+                l2 = trunk.north().east();
+                i0 = 6;
+                i1 = 3;
+                i2 = 2;
+                break;
+            case 1:
+                l0 = trunk.west();
+                l1 = trunk.north();
+                l2 = trunk.south().east();
+                i0 = 3;
+                i1 = 1;
+                i2 = 7;
+                break;
+            case 2:
+                l0 = trunk.north();
+                l1 = trunk.east();
+                l2 = trunk.south().west();
+                i0 = 1;
+                i1 = 4;
+                i2 = 5;
+                break;
+            case 3:
+                l0 = trunk.east();
+                l1 = trunk.south();
+                l2 = trunk.north().west();
+                i0 = 4;
+                i1 = 6;
+                i2 = 0;
+                break;
+            case 4:
+                l0 = trunk.east();
+                l1 = trunk.south().west();
+                l2 = trunk.north().west();
+                i0 = 4;
+                i1 = 5;
+                i2 = 0;
+                break;
+            case 5:
+                l0 = trunk.south();
+                l1 = trunk.north().west();
+                l2 = trunk.north().east();
+                i0 = 6;
+                i1 = 0;
+                i2 = 2;
+                break;
+            case 6:
+                l0 = trunk.west();
+                l1 = trunk.north().east();
+                l2 = trunk.south().east();
+                i0 = 3;
+                i1 = 2;
+                i2 = 7;
+                break;
+            case 7:
+                l0 = trunk.north();
+                l1 = trunk.south().east();
+                l2 = trunk.south().west();
+                i0 = 1;
+                i1 = 7;
+                i2 = 5;
+                break;
+        }
+        temp.put(l0, i0);
+        temp.put(l1, i1);
+        temp.put(l2, i2);
+        return temp;
+    }
+
+    private void endBranch(ISeedReader reader, BlockPos posIn, Random random) {
+        int height;
+        float rand = random.nextFloat();
+        if (rand <= 0.1f) {
+            height = 1;
+        } else if (rand <= 0.6f) {
+            height = 2;
+        } else {
+            height = 3;
+        }
+        for (int i = 0; i < height; i++) {
+            posIn = posIn.up();
+            reader.setBlockState(posIn, this.log, 3);
+            if (i == height - 1) {
+                this.placeAround(reader, posIn, true);
+            }
+            this.placeAround(reader, posIn, false);
+        }
+    }
+
+    private void placeAround(ISeedReader reader, BlockPos pos, boolean top) {
+        if (top) {
+            Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST, Direction.UP};
+            for (Direction d : directions) {
+                BlockPos pos1 = pos.offset(d);
+                if (reader.getBlockState(pos1) != log) {
+                    reader.setBlockState(pos1, leave, 3);
+                }
+            }
+        } else {
+            Direction[] directions = new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};
+            for (Direction d : directions) {
+                BlockPos pos1 = pos.offset(d);
+                if (reader.getBlockState(pos1) != log) {
+                    reader.setBlockState(pos1, leave, 3);
+
+                }
+            }
+        }
+    }
+
+    //the following methods are for the roots
+/////////////*******************************************************************************************************\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    //todo may be even decide which one im using
     //TODO should the roots go out at the beginning and then go down
     /*
             #
@@ -111,6 +260,32 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
         }
     }
 
+    private @NotNull Map<BlockPos, Integer> getRootLocation(BlockPos trunk, Random random) {
+        Map<BlockPos, Integer> temp = new HashMap<>();
+        int id = this.findRootLocation(random);
+        BlockPos pos = this.out(trunk, id);
+        temp.put(pos, id);
+        return temp;
+    }
+
+    private int findRootLocation(Random random) {
+        int id = random.nextInt(9);
+        if (this.tries <= 18) {
+            if (this.existing.contains(id)) {
+                ++this.tries;
+                return this.findRootLocation(random);
+            } else {
+                this.tries = 0;
+                this.existing.add(id);
+                return id;
+            }
+        }
+        return id;
+    }
+
+    //these methods are for the trunk or both the treetop and toots
+////////////*******************************************************************************************************\\\\\\\\\\\\\\\\\\\\\\\\\\
+
     private BlockPos placeStraightTrunk(ISeedReader reader, BlockPos posIn, BlockState state, Random random) {
         int height = random.nextInt(3) + 4;
         return this.placeByHeight(reader, posIn, state, height);
@@ -155,28 +330,7 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
         return pos;
     }
 
-    private @NotNull Map<BlockPos, Integer> getRootLocation(BlockPos trunk, Random random) {
-        Map<BlockPos, Integer> temp = new HashMap<>();
-        int id = this.findRootLocation(random);
-        BlockPos pos = this.out(trunk, id);
-        temp.put(pos, id);
-        return temp;
-    }
 
-    private int findRootLocation(Random random) {
-        int id = random.nextInt(9);
-        if (this.tries <= 18) {
-            if (this.existing.contains(id)) {
-                ++this.tries;
-                return this.findRootLocation(random);
-            } else {
-                this.tries = 0;
-                this.existing.add(id);
-                return id;
-            }
-        }
-        return id;
-    }
 
     private boolean canPlace(ISeedReader reader, BlockPos pos) {
         return !(reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LOG));
