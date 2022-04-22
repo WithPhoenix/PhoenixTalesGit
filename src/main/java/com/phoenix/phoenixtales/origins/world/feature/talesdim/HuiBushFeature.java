@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.block.blocks.OriginsLeavesBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
@@ -28,50 +27,58 @@ public class HuiBushFeature extends Feature<NoFeatureConfig> {
         BlockPos build = pos;
         for (build = build.up(); reader.isAirBlock(build) && build.getY() > 1; build = build.down()) {
         }
-        build = build.up();
 
-        for (int i = 0; i < rand.nextInt(3); i++) {
-            reader.setBlockState(build, log, 3);
-            placeAround(reader, build, 0.7f, rand, false);
+        if (this.canPlace(reader, build)) {
             build = build.up();
-        }
 
-        BlockPos temp = build;
-        switch (rand.nextInt(8)) {
-            case 0:
-                temp.north();
-                this.placeOp(reader, temp, rand);
-                break;
-            case 1:
-                temp = temp.south();
-                this.placeOp(reader, temp, rand);
-                break;
-            case 2:
-                temp = temp.east();
-                this.placeOp(reader, temp, rand);
-                break;
-            case 3:
-                temp = temp.west();
-                this.placeOp(reader, temp, rand);
-                break;
-            case 4:
-                temp = temp.north().east();
-                this.placeOp(reader, temp, rand);
-                break;
-            case 5:
-                temp = build.south().west();
-                this.placeOp(reader, temp, rand);
-                break;
-            case 6:
-                temp = temp.east().south();
-                this.placeOp(reader, temp, rand);
-                break;
-            case 7:
-                temp = temp.west().north();
-                this.placeOp(reader, temp, rand);
-                break;
+            for (int i = 0; i < rand.nextInt(3); i++) {
+                reader.setBlockState(build, log, 3);
+                placeAround(reader, build, 0.7f, rand, false);
+                build = build.up();
+            }
+
+            BlockPos temp = build;
+            switch (rand.nextInt(8)) {
+                case 0:
+                    temp.north();
+                    this.placeOp(reader, temp, rand);
+                    break;
+                case 1:
+                    temp = temp.south();
+                    this.placeOp(reader, temp, rand);
+                    break;
+                case 2:
+                    temp = temp.east();
+                    this.placeOp(reader, temp, rand);
+                    break;
+                case 3:
+                    temp = temp.west();
+                    this.placeOp(reader, temp, rand);
+                    break;
+                case 4:
+                    temp = temp.north().east();
+                    this.placeOp(reader, temp, rand);
+                    break;
+                case 5:
+                    temp = build.south().west();
+                    this.placeOp(reader, temp, rand);
+                    break;
+                case 6:
+                    temp = temp.east().south();
+                    this.placeOp(reader, temp, rand);
+                    break;
+                case 7:
+                    temp = temp.west().north();
+                    this.placeOp(reader, temp, rand);
+                    break;
+            }
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    private boolean canPlace(ISeedReader reader, BlockPos pos) {
+        return !(reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LOG) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LOG));
     }
 
     private void placeOp(ISeedReader reader, BlockPos temp, Random random) {

@@ -58,7 +58,7 @@ public class OriginsBlocks {
 
     //wood
     //TODO animate the wood a bit and change texture of sapling and leaves
-    public static final Block HUO_LOG = createBlock("huo_log", new RotatedPillarBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).setLightLevel(BlockState -> 5).harvestTool(ToolType.AXE)));
+    public static final Block HUO_LOG = createBlock("huo_log", new RotatedPillarBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).harvestTool(ToolType.AXE)));
     public static final Block HUO_PLANKS = createBlock("huo_planks", new Block(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).setLightLevel(BlockState -> 5).harvestTool(ToolType.AXE)));
     public static final Block HUO_STAIRS = createBlock("huo_stairs", new StairsBlock(HUO_PLANKS::getDefaultState, AbstractBlock.Properties.create(Material.NETHER_WOOD, MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).harvestTool(ToolType.AXE).setLightLevel(BlockState -> 5).harvestLevel(0).hardnessAndResistance(6f, 12f)));
     public static final Block HUO_SLAB = createBlock("huo_slab", new SlabBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).setLightLevel(BlockState -> 5).harvestTool(ToolType.AXE)));

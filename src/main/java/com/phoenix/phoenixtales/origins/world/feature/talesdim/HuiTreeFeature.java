@@ -203,7 +203,7 @@ public class HuiTreeFeature extends Feature<NoFeatureConfig> {
     }
 
     private boolean canPlace(ISeedReader reader, BlockPos pos) {
-        return !(reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LOG));
+        return !(reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LOG) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LOG));
     }
 
     private void placeLeave(ISeedReader reader, BlockPos posIn) {

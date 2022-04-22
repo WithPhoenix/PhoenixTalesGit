@@ -71,11 +71,25 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
 
     private void placeTreeTop(ISeedReader reader, BlockPos trunk, Random random) {
         Map<BlockPos, Integer> branchesOutMap = this.chooseBranches(trunk, random);
-        //change the height of the branches
-        // down same up
         for (BlockPos pos : branchesOutMap.keySet()) {
             reader.setBlockState(pos, this.log, 3);
             //build a bit out and go 1-2 times up and then place the end
+            int length = random.nextInt(3) + 3;
+            float chance_up = 0.3f;
+            for (int i = 0; i < length; i++) {
+                if (random.nextFloat() <= chance_up) {
+                    pos = pos.up();
+                }
+                if (branchesOutMap.containsKey(pos)) {
+                    pos = this.out(pos, branchesOutMap.get(pos));
+                }
+                reader.setBlockState(pos, this.log, 3);
+            }
+            if (random.nextFloat() <= 0.5f) {
+                pos = pos.up();
+                reader.setBlockState(pos, this.log, 3);
+            }
+            this.endBranch(reader, pos, random);
         }
         //60% to build in the middle
         if (random.nextFloat() <= 0.6f) {
@@ -163,6 +177,14 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
                 i2 = 5;
                 break;
         }
+        int start_height;
+        start_height = random.nextInt(2) - 1;
+        l0 = l0.add(0, start_height, 0);
+        start_height = random.nextInt(2) - 1;
+        l1 = l1.add(0, start_height, 0);
+        start_height = random.nextInt(2) - 1;
+        l2 = l2.add(0, start_height, 0);
+
         temp.put(l0, i0);
         temp.put(l1, i1);
         temp.put(l2, i2);
@@ -173,7 +195,7 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
         int height;
         float rand = random.nextFloat();
         if (rand <= 0.1f) {
-            height = 1;
+            height = 4;
         } else if (rand <= 0.6f) {
             height = 2;
         } else {
@@ -287,7 +309,7 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
 ////////////*******************************************************************************************************\\\\\\\\\\\\\\\\\\\\\\\\\\
 
     private BlockPos placeStraightTrunk(ISeedReader reader, BlockPos posIn, BlockState state, Random random) {
-        int height = random.nextInt(3) + 4;
+        int height = random.nextInt(3) + 6;
         return this.placeByHeight(reader, posIn, state, height);
     }
 
@@ -331,9 +353,8 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
     }
 
 
-
     private boolean canPlace(ISeedReader reader, BlockPos pos) {
-        return !(reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LOG));
+        return !(reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUI_LOG) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LEAVES) || reader.getBlockState(pos).matchesBlock(OriginsBlocks.HUO_LOG));
     }
 
     private BlockPos findGround(ISeedReader reader, BlockPos pos) {

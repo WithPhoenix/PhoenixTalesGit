@@ -40,6 +40,8 @@ public class TalesBiomeMaker {
 
         biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, TalesConfiguredFeatures.STONY_SURFACE);
         biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, TalesConfiguredFeatures.HUI_BUSH_CONFIGURED);
+        biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, TalesConfiguredFeatures.TALL_ASHEN_GRASS);
+        biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, TalesConfiguredFeatures.TALL_ASHEN_GRASS_VAR);
         DefaultBiomeFeatures.withNoiseTallGrass(biomegenerationsettings$builder);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.NONE).category(Biome.Category.DESERT).depth(0.4f).scale(0.1f).temperature(2.5F).downfall(0.2F).setEffects((new BiomeAmbience.Builder()).setWaterColor(/*MathHelper.rgb(74,117,114)*/4879730).setWaterFogColor(4879730).setFogColor(/*MathHelper.rgb(117,91,74)*/7691082).withSkyColor(/*MathHelper.rgb(117,81,74)*/7688522).withFoliageColor(/*MathHelper.rgb(122,105,77)*/8022349).withGrassColor(8022349).build()).withMobSpawnSettings(MobSpawnInfo.EMPTY).withGenerationSettings(biomegenerationsettings$builder.build()).build();
@@ -54,7 +56,8 @@ public class TalesBiomeMaker {
         biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, TalesConfiguredFeatures.ROCKS);
         biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, TalesConfiguredFeatures.PILE_STONE);
         biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, TalesConfiguredFeatures.TREES_ASHEN_FOREST);
-        biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, TalesConfiguredFeatures.ASHEN_TALL_GRASS);
+        biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, TalesConfiguredFeatures.TALL_ASHEN_GRASS);
+        biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, TalesConfiguredFeatures.TALL_ASHEN_GRASS_VAR);
         biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, TalesConfiguredFeatures.ASHEN_GRASS);
         DefaultBiomeFeatures.withNoiseTallGrass(biomegenerationsettings$builder);
 
