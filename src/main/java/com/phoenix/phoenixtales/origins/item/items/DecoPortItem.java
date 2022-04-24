@@ -2,7 +2,7 @@ package com.phoenix.phoenixtales.origins.item.items;
 
 import com.phoenix.phoenixtales.core.ClientSetup;
 import com.phoenix.phoenixtales.core.creativetab.TalesTabBlock;
-import com.phoenix.phoenixtales.origins.OriginsBlockItem;
+import com.phoenix.phoenixtales.origins.item.OriginsBlockItem;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import net.minecraft.item.Item;
 

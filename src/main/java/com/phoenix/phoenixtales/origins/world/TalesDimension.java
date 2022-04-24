@@ -13,7 +13,7 @@ public class TalesDimension {
 
     //289762104965873554 this seed has a desert temple at spawn
 
-    public static final RegistryKey<DimensionType> DIMENSION_TYPE = RegistryKey.getOrCreateKey(Registry.DIMENSION_TYPE_KEY, new ResourceLocation(PhoenixTales.MOD_ID, "burning_realm"));
-    public static final RegistryKey<World> DIMENSION = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(PhoenixTales.MOD_ID, "burning_realm"));
+    public static final RegistryKey<DimensionType> BURNING_REALM_TYPE = RegistryKey.getOrCreateKey(Registry.DIMENSION_TYPE_KEY, new ResourceLocation(PhoenixTales.MOD_ID, "burning_realm"));
+    public static final RegistryKey<World> BURNING_REALM = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(PhoenixTales.MOD_ID, "burning_realm"));
 
 }

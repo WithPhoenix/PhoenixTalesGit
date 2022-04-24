@@ -3,8 +3,6 @@ package com.phoenix.phoenixtales.origins.item;
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.core.creativetab.TalesTabBlock;
 import com.phoenix.phoenixtales.core.creativetab.TalesTabItem;
-import com.phoenix.phoenixtales.origins.OriginsBlockItem;
-import com.phoenix.phoenixtales.origins.OriginsItem;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.item.items.DecoPortItem;
 import com.phoenix.phoenixtales.rise.item.items.Sulfur;
@@ -80,7 +78,7 @@ public class OriginsItems {
     public static final Item GLASS_SHARD = createItem("glass_shard", new OriginsItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
     public static final Item SULFUR = createItem("sulfur", new Sulfur());
 
-    private static Item createItem(String id, Item item) {
+    public static Item createItem(String id, Item item) {
         item.setRegistryName(new ResourceLocation(PhoenixTales.MOD_ID, id));
         items.add(item);
         return item;

@@ -1,9 +1,8 @@
-package com.phoenix.phoenixtales.origins.world.feature.talesdim;
+package com.phoenix.phoenixtales.origins.world.feature.realm;
 
 import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.block.blocks.OriginsLeavesBlock;
-import com.phoenix.phoenixtales.origins.world.feature.FeatureHelpers;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;

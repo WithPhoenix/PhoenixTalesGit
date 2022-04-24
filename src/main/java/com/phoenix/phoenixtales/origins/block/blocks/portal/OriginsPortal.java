@@ -54,14 +54,14 @@ public class OriginsPortal extends ContainerBlock {
         if (!worldIn.isRemote()) {
             MinecraftServer server = worldIn.getServer();
             if (server != null) {
-                if (worldIn.getDimensionKey() == TalesDimension.DIMENSION) {
+                if (worldIn.getDimensionKey() == TalesDimension.BURNING_REALM) {
                     ServerWorld serverworld = server.getWorld(World.OVERWORLD);
                     if (serverworld != null) {
                         BlockPos p = BlockPos.fromLong(player.getPersistentData().getLong(PhoenixTales.MOD_ID + "_last"));
                         player.changeDimension(serverworld, new RealmTeleporter(p, false));
                     }
                 } else {
-                    ServerWorld realm = server.getWorld(TalesDimension.DIMENSION);
+                    ServerWorld realm = server.getWorld(TalesDimension.BURNING_REALM);
                     if (realm != null) {
                         player.getPersistentData().putLong(PhoenixTales.MOD_ID + "_last", pos.toLong());
                         BlockPos p = new BlockPos(0, pos.getY(), 0);

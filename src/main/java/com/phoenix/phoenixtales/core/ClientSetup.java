@@ -4,8 +4,10 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.block.OriginsTileEntities;
 import com.phoenix.phoenixtales.origins.block.blocks.decoportal.DecoPortalTile;
+import com.phoenix.phoenixtales.origins.client.entity.render.WraithRenderer;
 import com.phoenix.phoenixtales.origins.client.ter.DecoPortalTileRenderer;
 import com.phoenix.phoenixtales.origins.client.ter.PortalTileRenderer;
+import com.phoenix.phoenixtales.origins.entity.OriginsEntityTypes;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
 import com.phoenix.phoenixtales.rise.client.screen.AlloyScreen;
@@ -20,10 +22,10 @@ import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.util.NonNullLazy;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -40,9 +42,8 @@ public class ClientSetup {
 
             bindTileRenderers();
 
-            bindEntityRenderers();
-
         });
+        bindEntityRenderers();
     }
 
 //    @SubscribeEvent
@@ -65,7 +66,6 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(OriginsBlocks.TALL_SEARING_GRASS, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.LARGE_SEARING_FERN, RenderType.getCutout());
 
-
 //        RenderTypeLookup.setRenderLayer(OriginsBlocks.HUI_LOG, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.HUI_SAPLING, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.HUI_DOOR, RenderType.getCutout());
@@ -74,7 +74,6 @@ public class ClientSetup {
 
         RenderTypeLookup.setRenderLayer(OriginsBlocks.ASHEN_GRASS, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.ASHEN_FERN, RenderType.getCutout());
-
         RenderTypeLookup.setRenderLayer(OriginsBlocks.TALL_ASHEN_GRASS, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.LARGE_ASHEN_FERN, RenderType.getCutout());
 
@@ -96,9 +95,7 @@ public class ClientSetup {
     }
 
     private static void bindEntityRenderers() {
-//        RenderingRegistry.registerEntityRenderingHandler(OriginsEntities.HUO_BOAT.get(), HuoBoatRenderer::new);
-//        RenderingRegistry.registerEntityRenderingHandler(OriginsEntities.SAKURA_FOX.get(), SakuraFoxRenderer::new);
-//        RenderingRegistry.registerEntityRenderingHandler(OriginsEntities.ENTITY_A.get(), OriginsEntityRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(OriginsEntityTypes.WRAITH, WraithRenderer::new);
     }
 
     private static final DecoPortalTile deco_tile = new DecoPortalTile();

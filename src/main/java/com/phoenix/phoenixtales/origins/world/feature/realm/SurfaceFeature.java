@@ -1,4 +1,4 @@
-package com.phoenix.phoenixtales.origins.world.feature.talesdim;
+package com.phoenix.phoenixtales.origins.world.feature.realm;
 
 import com.mojang.serialization.Codec;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;

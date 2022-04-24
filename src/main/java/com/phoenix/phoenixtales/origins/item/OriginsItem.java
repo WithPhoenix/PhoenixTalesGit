@@ -1,4 +1,4 @@
-package com.phoenix.phoenixtales.origins;
+package com.phoenix.phoenixtales.origins.item;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;

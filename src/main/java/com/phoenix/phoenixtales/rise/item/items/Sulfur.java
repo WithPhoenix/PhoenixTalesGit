@@ -1,7 +1,7 @@
 package com.phoenix.phoenixtales.rise.item.items;
 
 import com.phoenix.phoenixtales.core.creativetab.TalesTabItem;
-import com.phoenix.phoenixtales.origins.OriginsItem;
+import com.phoenix.phoenixtales.origins.item.OriginsItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeType;

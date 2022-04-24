@@ -3,15 +3,12 @@ package com.phoenix.phoenixtales.origins.world.feature;
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.world.feature.placer.TalesDoublePlantBlockPlacer;
-import com.phoenix.phoenixtales.origins.world.feature.talesdim.*;
-import com.phoenix.phoenixtales.rise.block.RiseBlocks;
+import com.phoenix.phoenixtales.origins.world.feature.realm.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.blockplacer.DoublePlantBlockPlacer;
 import net.minecraft.world.gen.blockplacer.SimpleBlockPlacer;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.blockstateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.feature.*;
 
 import java.util.ArrayList;
