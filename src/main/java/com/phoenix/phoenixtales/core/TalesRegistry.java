@@ -73,6 +73,7 @@ public class TalesRegistry {
         for (EntityType<?> entity : OriginsEntityTypes.entityTypes) {
             event.getRegistry().register(entity);
         }
+        doneMsg("entities");
     }
 
     @SubscribeEvent
