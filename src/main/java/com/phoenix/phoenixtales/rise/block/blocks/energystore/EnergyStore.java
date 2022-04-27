@@ -95,7 +95,7 @@ public class EnergyStore extends EnergyBaseBlock {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return RiseTileEntities.ENERGY_STORE_TILE.create();
+        return new EnergyStoreTile();
     }
 
     @Override

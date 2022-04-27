@@ -1,7 +1,7 @@
 package com.phoenix.phoenixtales.rise.block.blocks.energystore;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
-import com.phoenix.phoenixtales.rise.service.BlockSide;
+import com.phoenix.phoenixtales.rise.service.EnergyHandlingType;
 import com.phoenix.phoenixtales.rise.service.RiseEnergyStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,8 +29,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.Map;
 
 public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
@@ -111,7 +109,12 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     //all things in the world
     //receive or extract energy
     private void handleWorld() {
-
+        for (Direction d : Direction.values()) {
+            if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(d)) == EnergyHandlingType.RECEIVE) {
+                this.world.getTileEntity(this.pos.offset(d)).getCapability(CapabilityEnergy.ENERGY, d).ifPresent(cap -> cap.extractEnergy(this.storage.getMaxReceive(), false));
+                this.storage.receiveEnergy(this.storage.getMaxReceive(), false);
+            }
+        }
     }
 
     //all events in the inventory
@@ -144,7 +147,6 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
         this.data.set(4, this.storage.getMaxExtract());
         return this.data;
     }
-
 
 
     private ItemStackHandler createHandler() {
