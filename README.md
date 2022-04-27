@@ -2,7 +2,7 @@
 this project is still in dev
 
 # Plans for this mod
-    -custom Dimension with really hard boss-fight, and maybe with quests(?)
+    -custom Dimension with boss-fight, and maybe with quests(?)
   																			
     -magic branch 
   
