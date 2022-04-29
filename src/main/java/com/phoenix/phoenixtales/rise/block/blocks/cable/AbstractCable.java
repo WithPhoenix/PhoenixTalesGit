@@ -3,13 +3,18 @@ package com.phoenix.phoenixtales.rise.block.blocks.cable;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.EnergyBaseBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraftforge.common.ToolType;
 
+//TODO an Interface that opens if right clicked with a wrench showing information (transfer rate, tier)
 public class AbstractCable extends ConduitBlock {
-    public AbstractCable(Properties p_i48355_2_) {
-        super(p_i48355_2_);
+    public AbstractCable() {
+        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f, 2.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.METAL));
     }
 
     @Override
@@ -29,5 +34,8 @@ public class AbstractCable extends ConduitBlock {
         return flag;
     }
 
-
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
 }
