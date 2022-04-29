@@ -3,8 +3,6 @@ package com.phoenix.phoenixtales.rise.item;
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.core.creativetab.BlockTab;
 import com.phoenix.phoenixtales.core.creativetab.ItemTab;
-import com.phoenix.phoenixtales.rise.RiseBlockItem;
-import com.phoenix.phoenixtales.rise.RiseItem;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.item.items.EnergyHolder;
 import com.phoenix.phoenixtales.rise.item.items.MetalSaw;
@@ -76,7 +74,10 @@ public class RiseItems {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public static final Item SIMPLE_CABLE = createItem("simple_cable", new RiseBlockItem(RiseBlocks.SIMPLE_CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item CABLE = createItem("cable", new RiseBlockItem(RiseBlocks.CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item ADVANCED_CABLE = createItem("advanced_cable", new RiseBlockItem(RiseBlocks.ADVANCED_CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item PHOENIX_CABLE = createItem("phoenix_cable", new RiseBlockItem(RiseBlocks.OVERLOADED_CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ENERGY_STORE = createItem("energy_store", new RiseBlockItem(RiseBlocks.ENERGY_STORE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item PRESS_FACTORY = createItem("press_factory", new RiseBlockItem(RiseBlocks.PRESS_FACTORY, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ALLOY_FACTORY = createItem("alloy_factory", new RiseBlockItem(RiseBlocks.ALLOY_FACTORY, new Item.Properties().group(BlockTab.BLOCK_GROUP)));

@@ -1,6 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.assembler;
 
-import com.phoenix.phoenixtales.rise.RiseRecipeTypes;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

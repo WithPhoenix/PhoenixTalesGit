@@ -5,7 +5,7 @@ import com.phoenix.phoenixtales.rise.block.blocks.alloyfactory.AlloyTile;
 import com.phoenix.phoenixtales.rise.block.blocks.assembler.AssemblerTile;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.AdvancedCableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.CableTile;
-import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.PhoenixCableTile;
+import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.OverloadedCableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.SimpleCableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
 import com.phoenix.phoenixtales.rise.block.blocks.press.PressTile;
@@ -23,7 +23,7 @@ public class RiseTileEntities {
     public static final TileEntityType<SimpleCableTile> SIMPLE_CABLE = createTile("simple_cable_tile", TileEntityType.Builder.create(SimpleCableTile::new, RiseBlocks.SIMPLE_CABLE).build(null));
     public static final TileEntityType<CableTile> CABLE = createTile("cable_tile", TileEntityType.Builder.create(CableTile::new, RiseBlocks.CABLE).build(null));
     public static final TileEntityType<AdvancedCableTile> ADVANCED_CABLE = createTile("advanced_cable_tile", TileEntityType.Builder.create(AdvancedCableTile::new, RiseBlocks.ADVANCED_CABLE).build(null));
-    public static final TileEntityType<PhoenixCableTile> PHOENIX_CABLE = createTile("phoenix_cable_tile", TileEntityType.Builder.create(PhoenixCableTile::new, RiseBlocks.PHOENIX_CABLE).build(null));
+    public static final TileEntityType<OverloadedCableTile> OVERLOADED_CABLE = createTile("overloaded_cable_tile", TileEntityType.Builder.create(OverloadedCableTile::new, RiseBlocks.OVERLOADED_CABLE).build(null));
     public static final TileEntityType<PressTile> PRESS_TILE = createTile("press_tile", TileEntityType.Builder.create(PressTile::new, RiseBlocks.PRESS_FACTORY).build(null));
     public static final TileEntityType<AlloyTile> ALLOY_TILE = createTile("alloy_tile", TileEntityType.Builder.create(AlloyTile::new, RiseBlocks.ALLOY_FACTORY).build(null));
     public static final TileEntityType<AssemblerTile> ASSEMBLER_TILE = createTile("assembler_tile", TileEntityType.Builder.create(AssemblerTile::new, RiseBlocks.ASSEMBLER).build(null));

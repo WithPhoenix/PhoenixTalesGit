@@ -1,7 +1,8 @@
-package com.phoenix.phoenixtales.rise;
+package com.phoenix.phoenixtales.rise.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -10,9 +11,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class RiseItem extends Item {
-    public RiseItem(Properties properties) {
-        super(properties);
+public class RiseBlockItem extends BlockItem {
+    public RiseBlockItem(Block blockIn, Properties builder) {
+        super(blockIn, builder);
     }
 
     @Override

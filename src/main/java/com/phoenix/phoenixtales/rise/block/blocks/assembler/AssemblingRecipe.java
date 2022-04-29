@@ -2,7 +2,7 @@ package com.phoenix.phoenixtales.rise.block.blocks.assembler;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.phoenix.phoenixtales.rise.RiseRecipeTypes;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

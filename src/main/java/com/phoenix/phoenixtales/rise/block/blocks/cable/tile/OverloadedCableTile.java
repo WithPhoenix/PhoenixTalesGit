@@ -4,12 +4,12 @@ import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import com.phoenix.phoenixtales.rise.service.TechnologyTier;
 import net.minecraft.tileentity.TileEntityType;
 
-public class PhoenixCableTile extends AbstractCableTile {
-    public PhoenixCableTile(TileEntityType<?> tileEntityTypeIn) {
+public class OverloadedCableTile extends AbstractCableTile {
+    public OverloadedCableTile(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn, TechnologyTier.PHOENIX);
     }
 
-    public PhoenixCableTile() {
-        this(RiseTileEntities.PHOENIX_CABLE);
+    public OverloadedCableTile() {
+        this(RiseTileEntities.OVERLOADED_CABLE);
     }
 }

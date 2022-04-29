@@ -1,6 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.alloyfactory;
 
-import com.phoenix.phoenixtales.rise.RiseRecipeTypes;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import com.phoenix.phoenixtales.rise.item.RiseItems;
 import net.minecraft.block.BlockState;

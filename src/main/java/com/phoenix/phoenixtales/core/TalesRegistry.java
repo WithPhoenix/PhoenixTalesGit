@@ -7,7 +7,7 @@ import com.phoenix.phoenixtales.origins.item.OriginsItems;
 import com.phoenix.phoenixtales.origins.world.gen.biome.OriginsBiomes;
 import com.phoenix.phoenixtales.origins.world.gen.feature.TalesFeatures;
 import com.phoenix.phoenixtales.origins.world.gen.surfacebuilder.TalesSurfaceBuilders;
-import com.phoenix.phoenixtales.rise.RiseRecipeTypes;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
