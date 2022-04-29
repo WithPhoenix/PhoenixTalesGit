@@ -3,6 +3,8 @@ package com.phoenix.phoenixtales.rise.block.blocks.cable;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.EnergyBaseBlock;
+import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.CableTile;
+import com.phoenix.phoenixtales.rise.service.TechnologyTier;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 //TODO an Interface that opens if right clicked with a wrench showing information (transfer rate, tier)
 public class Cable extends ConduitBlock {
+    TechnologyTier tier;
 
     public Cable() {
         super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f, 2.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.METAL));

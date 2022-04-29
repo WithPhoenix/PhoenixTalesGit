@@ -3,7 +3,7 @@ package com.phoenix.phoenixtales.rise.block;
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.alloyfactory.AlloyTile;
 import com.phoenix.phoenixtales.rise.block.blocks.assembler.AssemblerTile;
-import com.phoenix.phoenixtales.rise.block.blocks.cable.CableTile;
+import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.CableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
 import com.phoenix.phoenixtales.rise.block.blocks.press.PressTile;
 import com.phoenix.phoenixtales.rise.block.blocks.tank.TankTile;

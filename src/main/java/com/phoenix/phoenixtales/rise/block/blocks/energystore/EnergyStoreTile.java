@@ -40,23 +40,12 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     private final LazyOptional<IEnergyStorage> storageOpt = LazyOptional.of(() -> storage);
     private IIntArray data;
     private IIntArray sideData;
-    private int energy;
-    private int capacity; //this is a fixed value, with upgrades this will get higher
     private int energyPercent;
-    //what is the transfer rate?
-    //how do i calculate it, since i receive and extract energy
-    private int transferRatePerTick;
-    private int maxTransferRate;
-    //does the side receive or export energy or non
-    //0 = receive; 1 = export; 2 = non
-//    private Map<BlockSide, Integer> sideStatus;
 
     public EnergyStoreTile(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
         this.data = new IntArray(5);
         this.sideData = new IntArray(6);
-//        this.sideStatus = new HashMap<>();
-//        this.initializeSides();
     }
 
     public EnergyStoreTile() {
@@ -65,27 +54,28 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
 
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
-        itemHandler.deserializeNBT(nbt.getCompound("inv"));
-        storage.deserializeNBT(nbt.getCompound("energystore"));
-//        this.sideStatus = readSides(nbt);
+        itemHandler.deserializeNBT(nbt.getCompound("items"));
+        storage.deserializeNBT(nbt.getCompound("store"));
         super.read(state, nbt);
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
-        compound.put("inv", itemHandler.serializeNBT());
-        compound.put("energystore", storage.serializeNBT());
-//        saveSides(compound);
+        compound.put("items", itemHandler.serializeNBT());
+        compound.put("store", storage.serializeNBT());
         return super.write(compound);
     }
 
+    //logic to item handler
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return handlerOpt.cast();
         } else if (cap == CapabilityEnergy.ENERGY) {
-            return storageOpt.cast();
+            if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.RECEIVE) {
+                return storageOpt.cast();
+            }
         }
         return super.getCapability(cap, side);
     }
@@ -93,7 +83,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
-        return super.getCapability(cap);
+        return this.getCapability(cap, Direction.DOWN);
     }
 
     @Override
@@ -107,12 +97,15 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     }
 
     //all things in the world
-    //receive or extract energy
+    //extract energy
     private void handleWorld() {
         for (Direction d : Direction.values()) {
-            if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(d)) == EnergyHandlingType.RECEIVE) {
-                this.world.getTileEntity(this.pos.offset(d)).getCapability(CapabilityEnergy.ENERGY, d).ifPresent(cap -> cap.extractEnergy(this.storage.getMaxReceive(), false));
-                this.storage.receiveEnergy(this.storage.getMaxReceive(), false);
+            if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(d)) == EnergyHandlingType.EXTRACT) {
+                int push = this.storage.extractEnergy(this.storage.getMaxExtract(), true);
+                if (push > 0) {
+                    this.world.getTileEntity(this.pos.offset(d)).getCapability(CapabilityEnergy.ENERGY, d).ifPresent(cap -> cap.receiveEnergy(push, false));
+                    this.storage.extractEnergy(push, false);
+                }
             }
         }
     }
