@@ -1,13 +1,14 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable.tile;
 
-import com.phoenix.phoenixtales.rise.service.RiseEnergyStorage;
 import com.phoenix.phoenixtales.rise.service.TechnologyTier;
+import com.phoenix.phoenixtales.rise.service.conduit.CableNetwork;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -15,39 +16,54 @@ import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class AbstractCableTile extends TileEntity implements ITickableTileEntity {
-    private final RiseEnergyStorage storage;
-    private final LazyOptional<IEnergyStorage> storageOpt;
+    private CableNetwork network;
+    private LazyOptional<IEnergyStorage> storageOpt;
     private TechnologyTier tier;
 
     public AbstractCableTile(TileEntityType<?> tileEntityTypeIn, TechnologyTier tier) {
         super(tileEntityTypeIn);
         this.tier = tier;
-        int cap = 500;
-        switch (tier) {
-            case NORMAL:
-                cap = 1000;
-                break;
-            case ADVANCED:
-                cap = 2500;
-                break;
-            case PHOENIX:
-                cap = 5000;
-                break;
-        }
-        this.storage = new RiseEnergyStorage(cap, cap, cap);
-        this.storageOpt = LazyOptional.of(() -> storage);
+    }
+
+    public void initNetwork(World world, int id) {
+        this.network = new CableNetwork(world, id);
+        this.storageOpt = LazyOptional.of(() -> network);
+    }
+
+    public void initNetworkFromExisting(CableNetwork network) {
+        this.network = network;
+    }
+
+    public void initNetworkFromExisting(List<CableNetwork> networks) {
+        this.network = CableNetwork.merge(networks, world);
+    }
+
+    public void changeNetwork(CableNetwork network) {
+        this.network = network;
+    }
+
+    public CableNetwork getNetwork() {
+        return this.network;
+    }
+
+    public TechnologyTier getTier() {
+        return this.tier;
     }
 
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
-        storage.deserializeNBT(nbt.getCompound("cap"));
+        network.deserializeNBT(nbt.getCompound("net"));
+        this.tier = TechnologyTier.fromInt(nbt.getInt("tier"));
         super.read(state, nbt);
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
-        compound.put("cap", storage.serializeNBT());
+        compound.put("net", this.network.serializeNBT());
+        compound.putInt("tier", TechnologyTier.toInt(this.tier));
         return super.write(compound);
     }
 
@@ -69,13 +85,14 @@ public class AbstractCableTile extends TileEntity implements ITickableTileEntity
     @Override
     public void tick() {
         if (!world.isRemote) {
-            for (Direction d : Direction.values()) {
-                int push = this.storage.extractEnergy(this.storage.getMaxExtract(), true);
-                if (push > 0) {
-                    this.world.getTileEntity(this.pos.offset(d)).getCapability(CapabilityEnergy.ENERGY, d).ifPresent(cap -> cap.receiveEnergy(push, false));
-                    this.storage.extractEnergy(push, false);
-                }
-            }
+//            for (Direction d : Direction.values()) {
+//                int push = this.storage.extractEnergy(this.storage.getMaxExtract(), true);
+//                if (push > 0) {
+//                    this.world.getTileEntity(this.pos.offset(d)).getCapability(CapabilityEnergy.ENERGY, d).ifPresent(cap -> cap.receiveEnergy(push, false));
+//                    this.storage.extractEnergy(push, false);
+//                }
+//            }
         }
     }
+
 }

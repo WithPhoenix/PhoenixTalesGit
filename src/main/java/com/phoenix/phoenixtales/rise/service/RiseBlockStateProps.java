@@ -1,8 +1,9 @@
 package com.phoenix.phoenixtales.rise.service;
 
 import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.IntegerProperty;
 
 public class RiseBlockStateProps {
-    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
+    public static final IntegerProperty NETWORK = IntegerProperty.create("network", 0, Integer.MAX_VALUE);
     public static final BooleanProperty CONNECTED = BooleanProperty.create("connected");
 }

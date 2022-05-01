@@ -25,8 +25,7 @@ import org.jetbrains.annotations.Nullable;
 //TODO if this is under water, make the performance worse
 @SuppressWarnings("deprecation")
 public abstract class ConduitBlock extends Block implements IWaterLoggable {
-
-    protected static final VoxelShape SHAPE = Block.makeCuboidShape(5, 5, 5, 11, 11, 11);
+    protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.5, 5.5, 5.5, 10.5, 10.5, 10.5);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty CONNECTED = RiseBlockStateProps.CONNECTED;
     private final BlockState optionalState;

@@ -6,7 +6,7 @@ import net.minecraft.tileentity.TileEntityType;
 
 public class OverloadedCableTile extends AbstractCableTile {
     public OverloadedCableTile(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn, TechnologyTier.PHOENIX);
+        super(tileEntityTypeIn, TechnologyTier.OVERLOADED);
     }
 
     public OverloadedCableTile() {
