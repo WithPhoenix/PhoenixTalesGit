@@ -3,7 +3,6 @@ package com.phoenix.phoenixtales.rise.block.blocks.cable;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.EnergyBaseBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.AbstractCableTile;
-import com.phoenix.phoenixtales.rise.service.conduit.CableNetwork;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -49,41 +48,41 @@ public class AbstractCable extends ConduitBlock {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
-        if (tileEntity instanceof AbstractCableTile) {
-            AbstractCableTile tile = (AbstractCableTile) tileEntity;
-            List<CableNetwork> networks = new ArrayList<>();
-            for (Direction d : Direction.values()) {
-                TileEntity offset = worldIn.getTileEntity(pos.offset(d));
-                if (offset instanceof AbstractCableTile) {
-                    networks.add(((AbstractCableTile) offset).getNetwork());
-                }
-            }
-            if (networks.isEmpty()) {
-                tile.initNetwork(worldIn, 0);
-                placer.sendMessage(new StringTextComponent("Empty"), placer.getUniqueID());
-            } else if (networks.size() == 1) {
-                tile.initNetworkFromExisting(networks.get(0));
-                placer.sendMessage(new StringTextComponent("one"), placer.getUniqueID());
-            } else {
-                tile.initNetworkFromExisting(networks);
-                placer.sendMessage(new StringTextComponent("merged"), placer.getUniqueID());
-            }
-            tile.getNetwork().add(pos);
-        }
+//        TileEntity tileEntity = worldIn.getTileEntity(pos);
+//        if (tileEntity instanceof AbstractCableTile) {
+//            AbstractCableTile tile = (AbstractCableTile) tileEntity;
+//            List<CableNetwork> networks = new ArrayList<>();
+//            for (Direction d : Direction.values()) {
+//                TileEntity offset = worldIn.getTileEntity(pos.offset(d));
+//                if (offset instanceof AbstractCableTile) {
+//                    networks.add(((AbstractCableTile) offset).getNetwork());
+//                }
+//            }
+//            if (networks.isEmpty()) {
+//                tile.initNetwork(worldIn, 0);
+//                placer.sendMessage(new StringTextComponent("Empty"), placer.getUniqueID());
+//            } else if (networks.size() == 1) {
+//                tile.initNetworkFromExisting(networks.get(0));
+//                placer.sendMessage(new StringTextComponent("one"), placer.getUniqueID());
+//            } else {
+//                tile.initNetworkFromExisting(networks);
+//                placer.sendMessage(new StringTextComponent("merged"), placer.getUniqueID());
+//            }
+//            tile.getNetwork().add(pos);
+//        }
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
 
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        TileEntity tile = worldIn.getTileEntity(pos);
-        if (tile instanceof AbstractCableTile) {
-            if (newState.getBlock() == state.getBlock()) {
-                //the Tier could be changed
-            } else {
-                ((AbstractCableTile) tile).getNetwork().add(pos);
-            }
-        }
+//        TileEntity tile = worldIn.getTileEntity(pos);
+//        if (tile instanceof AbstractCableTile) {
+//            if (newState.getBlock() == state.getBlock()) {
+//                //the Tier could be changed
+//            } else {
+//                ((AbstractCableTile) tile).getNetwork().add(pos);
+//            }
+//        }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 

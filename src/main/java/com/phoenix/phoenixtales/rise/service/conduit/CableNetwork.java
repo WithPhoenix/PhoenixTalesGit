@@ -39,7 +39,7 @@ public class CableNetwork {
             for (BlockPos pos : n.cables()) {
                 TileEntity tile = world.getTileEntity(pos);
                 if (tile instanceof AbstractCableTile) {
-                    ((AbstractCableTile) tile).changeNetwork(temp);
+//                    ((AbstractCableTile) tile).changeNetwork(temp);
                 }
             }
             temp.cables().addAll(n.cables());
