@@ -22,7 +22,7 @@ import java.util.List;
 public class AbstractCableTile extends TileEntity implements ITickableTileEntity {
     private CableNetwork network;
     private final RiseEnergyStorage storage;
-    private LazyOptional<IEnergyStorage> storageOpt;
+    private final LazyOptional<IEnergyStorage> storageOpt;
     private TechnologyTier tier;
 
     public AbstractCableTile(TileEntityType<?> tileEntityTypeIn, TechnologyTier tier) {
@@ -81,7 +81,6 @@ public class AbstractCableTile extends TileEntity implements ITickableTileEntity
         compound.put("cap", this.storage.serializeNBT());
         compound.put("net", this.network.serializeNBT());
         compound.putInt("tier", TechnologyTier.toInt(this.tier));
-        compound.putString("t", this.tier.name());
         return super.write(compound);
     }
 

@@ -14,7 +14,7 @@ public enum TechnologyTier {
             case 3:
                 return OVERLOADED;
             default:
-                throw new IllegalArgumentException(i + " is not a valid argument");
+                throw new IllegalArgumentException();
         }
     }
 
