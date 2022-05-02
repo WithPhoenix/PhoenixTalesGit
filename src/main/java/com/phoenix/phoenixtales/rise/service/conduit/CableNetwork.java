@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.IEnergyStorage;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,12 @@ public class CableNetwork implements IEnergyStorage {
                 this.capacity += 5000;
                 break;
         }
+    }
+
+    @Nullable
+    private AbstractCableTile getTile(BlockPos pos) {
+        TileEntity tile = world.getTileEntity(pos);
+        return tile instanceof AbstractCableTile ? (AbstractCableTile) tile : null;
     }
 
     private void updateNetwork(BlockPos pos) {

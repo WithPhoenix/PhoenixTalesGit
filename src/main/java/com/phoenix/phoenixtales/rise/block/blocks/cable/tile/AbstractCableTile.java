@@ -1,5 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable.tile;
 
+import com.phoenix.phoenixtales.rise.service.RiseEnergyStorage;
 import com.phoenix.phoenixtales.rise.service.TechnologyTier;
 import com.phoenix.phoenixtales.rise.service.conduit.CableNetwork;
 import net.minecraft.block.BlockState;
@@ -20,17 +21,31 @@ import java.util.List;
 
 public class AbstractCableTile extends TileEntity implements ITickableTileEntity {
     private CableNetwork network;
+    private final RiseEnergyStorage storage;
     private LazyOptional<IEnergyStorage> storageOpt;
     private TechnologyTier tier;
 
     public AbstractCableTile(TileEntityType<?> tileEntityTypeIn, TechnologyTier tier) {
         super(tileEntityTypeIn);
         this.tier = tier;
+        int cap = 500;
+        switch (tier) {
+            case NORMAL:
+                cap = 1000;
+                break;
+            case ADVANCED:
+                cap = 2500;
+                break;
+            case OVERLOADED:
+                cap = 5000;
+                break;
+        }
+        this.storage = new RiseEnergyStorage(cap, cap, cap);
+        this.storageOpt = LazyOptional.of(() -> this.storage);
     }
 
     public void initNetwork(World world, int id) {
         this.network = new CableNetwork(world, id);
-        this.storageOpt = LazyOptional.of(() -> network);
     }
 
     public void initNetworkFromExisting(CableNetwork network) {
@@ -55,15 +70,18 @@ public class AbstractCableTile extends TileEntity implements ITickableTileEntity
 
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
-        network.deserializeNBT(nbt.getCompound("net"));
+        this.storage.deserializeNBT(nbt.getCompound("cap"));
+        this.network.deserializeNBT(nbt.getCompound("net"));
         this.tier = TechnologyTier.fromInt(nbt.getInt("tier"));
         super.read(state, nbt);
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
+        compound.put("cap", this.storage.serializeNBT());
         compound.put("net", this.network.serializeNBT());
         compound.putInt("tier", TechnologyTier.toInt(this.tier));
+        compound.putString("t", this.tier.name());
         return super.write(compound);
     }
 
