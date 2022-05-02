@@ -5,8 +5,10 @@ this project is still in dev
 >custom dimension with boss-fight
 
 >quests and lore (?)
-  																			
-    -magic branch 
+
+>magic branch
+    -dark themed?
+>technic branch
+    -near on real live sience    
   
-    -technic branch
 
