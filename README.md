@@ -6,10 +6,10 @@ this project is still in dev
     -quests and lore (?)
 
 ## Choose between
->magic branch
+>**magic branch**
 
     -dark themed?
->technic branch
+>**technic branch**
 
     -near on real live sience    
   
