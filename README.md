@@ -5,7 +5,7 @@ this project is still in dev
     -custom dimension with boss-fight
     -quests and lore (?)
 
-##Choose between
+## Choose between
 >magic branch
 
     -dark themed?
