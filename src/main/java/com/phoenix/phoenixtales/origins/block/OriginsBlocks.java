@@ -18,8 +18,12 @@ public class OriginsBlocks {
 
     public static List<Block> blocks = new ArrayList<>();
 
-    public static final Block PORTAL = createBlock("portal", new OriginsPortal(AbstractBlock.Properties.create(Material.PORTAL, MaterialColor.BLACK).doesNotBlockMovement().setLightLevel((state) -> {return 15;}).hardnessAndResistance(-1.0F, 3600000.0F).noDrops()));
-    public static final Block DECO_PORTAL = createBlock("deco_portal", new DecoPortal(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BLACK).setLightLevel((state) -> {return 15;}).hardnessAndResistance(50.0F, 1200.0F).harvestLevel(2).harvestTool(ToolType.PICKAXE).sound(SoundType.LODESTONE).setRequiresTool()));
+    public static final Block PORTAL = createBlock("portal", new OriginsPortal(AbstractBlock.Properties.create(Material.PORTAL, MaterialColor.BLACK).doesNotBlockMovement().setLightLevel((state) -> {
+        return 15;
+    }).hardnessAndResistance(-1.0F, 3600000.0F).noDrops()));
+    public static final Block DECO_PORTAL = createBlock("deco_portal", new DecoPortal(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.BLACK).setLightLevel((state) -> {
+        return 15;
+    }).hardnessAndResistance(50.0F, 1200.0F).harvestLevel(2).harvestTool(ToolType.PICKAXE).sound(SoundType.LODESTONE).setRequiresTool()));
     //block in dimension
     public static final Block SMOULDERING_STONE = createBlock("smouldering_stone", new Block(AbstractBlock.Properties.create((Material.ROCK), MaterialColor.ORANGE_TERRACOTTA).hardnessAndResistance(10f, 10f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
     public static final Block ASH = createBlock("ash", new Ash());
@@ -29,6 +33,7 @@ public class OriginsBlocks {
     //TODO animate the wood a bit and change texture of sapling and leaves
     public static final Block HUO_LOG = createBlock("huo_log", new RotatedPillarBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).setLightLevel(BlockState -> 5).harvestTool(ToolType.AXE)));
     public static final Block HUO_PLANKS = createBlock("huo_planks", new Block(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).setLightLevel(BlockState -> 5).harvestTool(ToolType.AXE)));
+    @SuppressWarnings("deprecation")
     public static final Block HUO_STAIRS = createBlock("huo_stairs", new StairsBlock(HUO_PLANKS.getDefaultState(), AbstractBlock.Properties.create(Material.NETHER_WOOD, MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).harvestTool(ToolType.AXE).setLightLevel(BlockState -> 5).harvestLevel(0).hardnessAndResistance(6f, 12f)));
     public static final Block HUO_SLAB = createBlock("huo_slab", new SlabBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).setLightLevel(BlockState -> 5).harvestTool(ToolType.AXE)));
     public static final Block HUO_DOOR = createBlock("huo_door", new DoorBlock(AbstractBlock.Properties.create((Material.NETHER_WOOD), MaterialColor.RED_TERRACOTTA).sound(SoundType.WOOD).hardnessAndResistance(6f, 12f).harvestLevel(0).setLightLevel(BlockState -> 5).harvestTool(ToolType.AXE).notSolid()));

@@ -42,14 +42,10 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     private IIntArray sideData;
     private int energyPercent;
 
-    public EnergyStoreTile(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public EnergyStoreTile() {
+        super(RiseTileEntities.ENERGY_STORE_TILE);
         this.data = new IntArray(5);
         this.sideData = new IntArray(6);
-    }
-
-    public EnergyStoreTile() {
-        this(RiseTileEntities.ENERGY_STORE_TILE);
     }
 
     @Override

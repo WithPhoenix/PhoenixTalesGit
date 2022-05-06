@@ -11,12 +11,8 @@ public class TankTile extends TileEntity {
 
     private FluidStack fluid = FluidStack.EMPTY;
 
-    public TankTile(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
-    }
-
     public TankTile() {
-        this(RiseTileEntities.TANK_TILE);
+        super(RiseTileEntities.TANK_TILE);
     }
 
     @Override

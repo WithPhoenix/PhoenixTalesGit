@@ -1,7 +1,7 @@
 package com.phoenix.phoenixtales.rise.block.blocks.assembler;
 
-import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -37,17 +36,14 @@ public class AssemblerTile extends TileEntity implements ITickableTileEntity, IN
     private int maxEnergy; //this is a fixed value, with upgrades this will get higher
     private int energyPercent;
 
-    public AssemblerTile(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public AssemblerTile() {
+        super(RiseTileEntities.ASSEMBLER_TILE);
         this.progress = 0;
         this.totalTime = 1;
         this.energy = 0;
         this.maxEnergy = 10000;
     }
 
-    public AssemblerTile() {
-        this(RiseTileEntities.ASSEMBLER_TILE);
-    }
 
     @Override
     public void read(BlockState state, CompoundNBT nbt) {

@@ -40,16 +40,12 @@ public class PressTile extends TileEntity implements ITickableTileEntity, ISided
     private int maxEnergy; //this is a fixed value, with upgrades this will get higher
     private int energyPercent;
 
-    public PressTile(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public PressTile() {
+        super(RiseTileEntities.PRESS_TILE);
         this.progress = 0;
         this.totalTime = 1;
         this.energy = 0;
         this.maxEnergy = 10000;
-    }
-
-    public PressTile() {
-        this(RiseTileEntities.PRESS_TILE);
     }
 
     @Override

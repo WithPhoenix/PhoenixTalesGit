@@ -1,5 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable;
 
+import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.AdvancedCableTile;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
@@ -11,6 +12,6 @@ public class AdvancedCable extends AbstractCable {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new AdvancedCableTile();
+        return RiseTileEntities.ADVANCED_CABLE.create();
     }
 }

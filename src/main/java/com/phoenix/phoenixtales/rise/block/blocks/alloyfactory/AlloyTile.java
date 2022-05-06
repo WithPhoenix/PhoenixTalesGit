@@ -31,12 +31,8 @@ public class AlloyTile extends TileEntity implements ITickableTileEntity {
     private int totalTime;
     private int energy;
 
-    public AlloyTile(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
-    }
-
     public AlloyTile() {
-        this(RiseTileEntities.ALLOY_TILE);
+        super(RiseTileEntities.ALLOY_TILE);
     }
 
     @Override

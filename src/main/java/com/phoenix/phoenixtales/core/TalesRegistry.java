@@ -53,16 +53,16 @@ public class TalesRegistry {
         doneMsg("items");
     }
 
-    @SubscribeEvent
-    public static void registerTiles(RegistryEvent.Register<TileEntityType<?>> event) {
-        for (TileEntityType<?> tile : RiseTileEntities.tiles) {
-            event.getRegistry().register(tile);
-        }
-        for (TileEntityType<?> tile : OriginsTileEntities.tiles) {
-            event.getRegistry().register(tile);
-        }
-        doneMsg("tiles");
-    }
+//    @SubscribeEvent
+//    public static void registerTiles(RegistryEvent.Register<TileEntityType<?>> event) {
+//        for (TileEntityType<?> tile : RiseTileEntities.tiles) {
+//            event.getRegistry().register(tile);
+//        }
+//        for (TileEntityType<?> tile : OriginsTileEntities.tiles) {
+//            event.getRegistry().register(tile);
+//        }
+//        doneMsg("tiles");
+//    }
 
     @SubscribeEvent
     public static void registerContainers(RegistryEvent.Register<ContainerType<?>> event) {
