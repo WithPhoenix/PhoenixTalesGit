@@ -166,6 +166,6 @@ public class AlloyTile extends TileEntity implements ITickableTileEntity, INamed
     @Nullable
     @Override
     public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-        return new AlloyContainer(i, world, pos, playerInventory, playerEntity);
+        return new AlloyContainer(i, this.world, this.pos, playerInventory, playerEntity);
     }
 }

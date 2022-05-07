@@ -1,34 +1,39 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable.tile;
 
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
+import net.minecraft.block.BlockState;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
-public class AbstractCableTile extends TileEntity {
-    //    private CableNetwork network;
-//    private RiseEnergyStorage storage;
-//    private LazyOptional<IEnergyStorage> storageOpt;
+public class GenericCableTile extends TileEntity implements ITickableTileEntity {
 
-    public AbstractCableTile(TileEntityType<?> tileEntityTypeIn) {
+    private TechnologyType type;
+
+    protected GenericCableTile(TileEntityType<?> tileEntityTypeIn, TechnologyType type) {
         super(tileEntityTypeIn);
-//        int cap = 500;
-//        switch (tier) {
-//            case NORMAL:
-//                cap = 1000;
-//                break;
-//            case ADVANCED:
-//                cap = 2500;
-//                break;
-//            case OVERLOADED:
-//                cap = 5000;
-//                break;
-//        }
+        this.type = type;
     }
 
-    public TechnologyType getTier() {
-        return null;
+    @Override
+    public void read(BlockState state, CompoundNBT nbt) {
+        super.read(state, nbt);
     }
 
+    @Override
+    public CompoundNBT write(CompoundNBT compound) {
+        return super.write(compound);
+    }
+
+    public TechnologyType getTechnologyType() {
+        return type;
+    }
+
+    @Override
+    public void tick() {
+
+    }
 
 //        this.storage = new RiseEnergyStorage(cap, cap, cap, 0);
 //        this.storageOpt = LazyOptional.of(() -> this.storage);

@@ -11,7 +11,6 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
@@ -59,9 +58,6 @@ public class EnergyStore extends EnergyBaseBlock {
                 if (!player.isCrouching()) {
                     NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, tileEntity.getPos());
                 } else {
-//                    BlockSide side = BlockSide.intToBlockSide(hit.getFace().getIndex());
-//                    ((EnergyStoreTile) tileEntity).nextStatus(side);
-//                    player.sendMessage(new StringTextComponent("set " + side + " to " + ((EnergyStoreTile) tileEntity).getSideStatus(side)), player.getUniqueID());
                     //remove only for testing
                     tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent((iEnergyStorage -> iEnergyStorage.receiveEnergy(2000, false)));
                 }

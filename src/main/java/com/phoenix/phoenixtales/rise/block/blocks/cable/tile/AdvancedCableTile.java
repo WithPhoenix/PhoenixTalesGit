@@ -1,19 +1,11 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable.tile;
 
+import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
+import com.phoenix.phoenixtales.rise.service.TechnologyType;
+
 public class AdvancedCableTile {
-//        extends TileEntity implements ITickableTileEntity, ITier {
-//
-//    @Override
-//    public TechnologyTier getTier() {
-//        return TechnologyTier.ADVANCED;
-//    }
-//
+//        extends GenericCableTile
 //    public AdvancedCableTile() {
-//        super(RiseTileEntities.ADVANCED_CABLE);
-//    }
-//
-//    @Override
-//    public void tick() {
-//
+//        super(RiseTileEntities.ADVANCED_CABLE, TechnologyType.ADVANCED);
 //    }
 }

@@ -1,6 +1,6 @@
 package com.phoenix.phoenixtales.rise.service.conduit;
 
-import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.AbstractCableTile;
+import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -26,9 +26,9 @@ public class CableNetwork {
 
     public void add(BlockPos pos) {
         TileEntity tile = world.getTileEntity(pos);
-        if (tile instanceof AbstractCableTile) {
+        if (tile instanceof GenericCableTile) {
             this.cables.add(pos);
-            this.increaseCapacity(((AbstractCableTile) tile).getTier());
+            this.increaseCapacity(((GenericCableTile) tile).getTechnologyType());
         }
     }
 
@@ -38,7 +38,7 @@ public class CableNetwork {
         for (CableNetwork n : networks) {
             for (BlockPos pos : n.cables()) {
                 TileEntity tile = world.getTileEntity(pos);
-                if (tile instanceof AbstractCableTile) {
+                if (tile instanceof GenericCableTile) {
 //                    ((AbstractCableTile) tile).changeNetwork(temp);
                 }
             }
@@ -66,9 +66,9 @@ public class CableNetwork {
     }
 
     @Nullable
-    private AbstractCableTile getTile(BlockPos pos) {
+    private GenericCableTile getTile(BlockPos pos) {
         TileEntity tile = world.getTileEntity(pos);
-        return tile instanceof AbstractCableTile ? (AbstractCableTile) tile : null;
+        return tile instanceof GenericCableTile ? (GenericCableTile) tile : null;
     }
 
     private void updateNetwork(BlockPos pos) {

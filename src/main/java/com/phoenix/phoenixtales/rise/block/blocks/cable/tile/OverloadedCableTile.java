@@ -1,19 +1,12 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable.tile;
 
+import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
+import com.phoenix.phoenixtales.rise.service.TechnologyType;
+
 public class OverloadedCableTile {
-//        extends TileEntity implements ITickableTileEntity, ITier {
-//
-//    @Override
-//    public TechnologyTier getTier() {
-//        return TechnologyTier.OVERLOADED;
-//    }
-//
+//    extends GenericCableTile
 //    public OverloadedCableTile() {
-//        super(RiseTileEntities.OVERLOADED_CABLE);
-//    }
-//
-//    @Override
-//    public void tick() {
-//
+//        super(RiseTileEntities.OVERLOADED_CABLE, TechnologyType.OVERLOADED);
 //    }
 }
+

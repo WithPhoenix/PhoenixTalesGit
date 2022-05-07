@@ -31,13 +31,11 @@ public class AlloyFactory extends Block {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote()) {
-            if (player.isCrouching()) {
-                AlloyTile tileEntity = (AlloyTile) worldIn.getTileEntity(pos);
-                if (tileEntity != null) {
+        if (!worldIn.isRemote) {
+            AlloyTile tileEntity = (AlloyTile) worldIn.getTileEntity(pos);
+            if (tileEntity != null) {
+                if (!player.isCrouching()) {
                     NetworkHooks.openGui(((ServerPlayerEntity) player), tileEntity, tileEntity.getPos());
-                } else {
-                    throw new IllegalStateException("Container provider is missing!");
                 }
             }
         }
