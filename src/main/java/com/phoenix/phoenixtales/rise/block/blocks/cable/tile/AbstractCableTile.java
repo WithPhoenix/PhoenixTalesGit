@@ -1,6 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable.tile;
 
-import com.phoenix.phoenixtales.rise.service.TechnologyTier;
+import com.phoenix.phoenixtales.rise.service.TechnologyType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
@@ -25,9 +25,9 @@ public class AbstractCableTile extends TileEntity {
 //        }
     }
 
-   public TechnologyTier getTier() {
+    public TechnologyType getTier() {
         return null;
-   }
+    }
 
 
 //        this.storage = new RiseEnergyStorage(cap, cap, cap, 0);

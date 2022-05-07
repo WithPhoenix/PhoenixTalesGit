@@ -2,6 +2,7 @@ package com.phoenix.phoenixtales.rise.block.blocks.cable;
 
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.EnergyBaseBlock;
+import com.phoenix.phoenixtales.rise.service.TechnologyType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -17,10 +18,13 @@ import net.minecraftforge.common.ToolType;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-public class AbstractCable extends ConduitBlock {
+public class GenericCable extends ConduitBlock {
 
-    public AbstractCable() {
+    private final TechnologyType type;
+
+    public GenericCable(TechnologyType type) {
         super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f, 2.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.METAL));
+        this.type = type;
     }
 
     @Override
@@ -32,12 +36,16 @@ public class AbstractCable extends ConduitBlock {
             BlockState blockstate = reader.getBlockState(blockpos$mutable);
             blockpos$mutable.setAndMove(pos, direction);
             blockstate = reader.getBlockState(blockpos$mutable);
-            if (blockstate.getBlock() instanceof AbstractCable || blockstate.getBlock() instanceof EnergyBaseBlock) {
+            if (blockstate.getBlock() instanceof GenericCable || blockstate.getBlock() instanceof EnergyBaseBlock) {
                 flag = true;
                 break;
             }
         }
         return flag;
+    }
+
+    public TechnologyType getType() {
+        return type;
     }
 
     @Override
@@ -85,9 +93,9 @@ public class AbstractCable extends ConduitBlock {
         super.neighborChanged(state, world, pos, block, pos2, b);
     }
 
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
+//    @Override
+//    public boolean hasTileEntity(BlockState state) {
+//        return true;
+//    }
 
 }

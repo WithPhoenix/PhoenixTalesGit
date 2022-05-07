@@ -1,7 +1,7 @@
 package com.phoenix.phoenixtales.rise.service.conduit;
 
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.AbstractCableTile;
-import com.phoenix.phoenixtales.rise.service.TechnologyTier;
+import com.phoenix.phoenixtales.rise.service.TechnologyType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -48,7 +48,7 @@ public class CableNetwork {
         return temp;
     }
 
-    private void increaseCapacity(TechnologyTier tier) {
+    private void increaseCapacity(TechnologyType tier) {
         switch (tier) {
             case SIMPLE:
                 this.capacity += 500;

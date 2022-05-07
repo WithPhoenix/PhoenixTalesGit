@@ -4,13 +4,19 @@ import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import com.phoenix.phoenixtales.rise.item.RiseItems;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -23,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class AlloyTile extends TileEntity implements ITickableTileEntity {
+public class AlloyTile extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
@@ -150,5 +156,16 @@ public class AlloyTile extends TileEntity implements ITickableTileEntity {
         if (!world.isRemote()) {
             craft();
         }
+    }
+
+    @Override
+    public ITextComponent getDisplayName() {
+        return new TranslationTextComponent("screen.phoenixtales.alloy");
+    }
+
+    @Nullable
+    @Override
+    public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        return new AlloyContainer(i, world, pos, playerInventory, playerEntity);
     }
 }

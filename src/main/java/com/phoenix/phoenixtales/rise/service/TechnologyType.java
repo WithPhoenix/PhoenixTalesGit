@@ -1,5 +1,5 @@
 package com.phoenix.phoenixtales.rise.service;
 
-public enum TechnologyTier {
+public enum TechnologyType {
     SIMPLE, NORMAL, ADVANCED, OVERLOADED;
 }

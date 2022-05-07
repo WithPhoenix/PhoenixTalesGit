@@ -47,10 +47,10 @@ public class RiseBlocks {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //machines and tech related blocks
-    public static final Block SIMPLE_CABLE = createBlock("simple_cable", new SimpleCable());
-    public static final Block CABLE = createBlock("cable", new Cable());
-    public static final Block ADVANCED_CABLE = createBlock("advanced_cable", new AdvancedCable());
-    public static final Block OVERLOADED_CABLE = createBlock("overloaded_cable", new OverloadedCable());
+//    public static final Block SIMPLE_CABLE = createBlock("simple_cable", new SimpleCable());
+//    public static final Block CABLE = createBlock("cable", new Cable());
+//    public static final Block ADVANCED_CABLE = createBlock("advanced_cable", new AdvancedCable());
+//    public static final Block OVERLOADED_CABLE = createBlock("overloaded_cable", new OverloadedCable());
     public static final Block ENERGY_STORE = createBlock("energy_store", new EnergyStore());
     public static final Block ASSEMBLER = createBlock("assembler", new Assembler());
     public static final Block PRESS_FACTORY = createBlock("press_factory", new PressFactory());

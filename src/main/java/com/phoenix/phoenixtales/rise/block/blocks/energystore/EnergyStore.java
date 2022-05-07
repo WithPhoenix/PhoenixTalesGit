@@ -1,7 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.energystore;
 
 import com.google.common.collect.Maps;
-import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import com.phoenix.phoenixtales.rise.block.blocks.EnergyBaseBlock;
 import com.phoenix.phoenixtales.rise.service.EnergyHandlingType;
 import net.minecraft.block.Block;
@@ -54,17 +53,12 @@ public class EnergyStore extends EnergyBaseBlock {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote()) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (!player.isCrouching()) {
-                if (tileEntity instanceof EnergyStoreTile) {
-                    NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileEntity, tileEntity.getPos());
-                    return ActionResultType.SUCCESS;
+        if (!worldIn.isRemote) {
+            EnergyStoreTile tileEntity = (EnergyStoreTile) worldIn.getTileEntity(pos);
+            if (tileEntity != null) {
+                if (!player.isCrouching()) {
+                    NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, tileEntity.getPos());
                 } else {
-                    throw new IllegalStateException("Missing Container Provider");
-                }
-            } else {
-                if (tileEntity instanceof EnergyStoreTile) {
 //                    BlockSide side = BlockSide.intToBlockSide(hit.getFace().getIndex());
 //                    ((EnergyStoreTile) tileEntity).nextStatus(side);
 //                    player.sendMessage(new StringTextComponent("set " + side + " to " + ((EnergyStoreTile) tileEntity).getSideStatus(side)), player.getUniqueID());
@@ -73,8 +67,15 @@ public class EnergyStore extends EnergyBaseBlock {
                 }
             }
         }
-        return ActionResultType.PASS;
+        return ActionResultType.SUCCESS;
     }
+
+//    @Nullable
+//    @Override
+//    public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
+//       TileEntity tile = worldIn.getTileEntity(pos);
+//       return tile instanceof INamedContainerProvider ? (INamedContainerProvider) tile : null;
+//    }
 
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
