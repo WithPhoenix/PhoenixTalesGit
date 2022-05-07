@@ -80,7 +80,7 @@ public class Assembler extends Block {
                 if (!player.isCrouching()) {
                     NetworkHooks.openGui(((ServerPlayerEntity) player), tileEntity, tileEntity.getPos());
                 } else {
-                  tileEntity.addEnergy(500);
+
                 }
             }
         }

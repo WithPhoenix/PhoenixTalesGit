@@ -59,7 +59,7 @@ public class EnergyStore extends EnergyBaseBlock {
                     NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, tileEntity.getPos());
                 } else {
                     //remove only for testing
-                    tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent((iEnergyStorage -> iEnergyStorage.receiveEnergy(2000, false)));
+                    tileEntity.getCapability(CapabilityEnergy.ENERGY, Direction.DOWN).ifPresent((iEnergyStorage -> iEnergyStorage.receiveEnergy(20000, false)));
                 }
             }
         }

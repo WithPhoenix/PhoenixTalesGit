@@ -12,10 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -36,16 +33,13 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handlerOpt = LazyOptional.of(() -> itemHandler);
-    private final RiseEnergyStorage storage = new RiseEnergyStorage(1000000, 2500, 2500, 0);
+    private final RiseEnergyStorage storage = new RiseEnergyStorage(1000000, 1500, 1500, 0);
     private final LazyOptional<IEnergyStorage> storageOpt = LazyOptional.of(() -> storage);
-    private IIntArray data;
-    private IIntArray sideData;
     private int energyPercent;
+    private int stored;
 
     public EnergyStoreTile() {
         super(RiseTileEntities.ENERGY_STORE_TILE);
-        this.data = new IntArray(5);
-        this.sideData = new IntArray(6);
     }
 
     @Override
@@ -60,6 +54,26 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
         compound.put("items", itemHandler.serializeNBT());
         compound.put("store", storage.serializeNBT());
         return super.write(compound);
+    }
+
+    public int getEnergyPercent() {
+        return this.energyPercent;
+    }
+
+    public int getStored() {
+        return this.stored;
+    }
+
+    public int getCapacity() {
+        return this.storage.getMaxEnergyStored();
+    }
+
+    public int getR() {
+        return this.storage.getMaxReceive();
+    }
+
+    public int getE() {
+        return this.storage.getMaxExtract();
     }
 
     //logic to item handler
@@ -79,7 +93,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
-        return this.getCapability(cap, Direction.DOWN);
+        return this.getCapability(cap, null);
     }
 
     @Override
@@ -89,6 +103,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
             handleInv();
 
             this.energyPercent = (int) ((double) (this.storage.getEnergyStored()) * 100d / (double) (this.storage.getMaxEnergyStored()));
+            this.stored = this.storage.getEnergyStored();
         }
     }
 
@@ -97,10 +112,18 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     private void handleWorld() {
         for (Direction d : Direction.values()) {
             if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(d)) == EnergyHandlingType.EXTRACT) {
-                int push = this.storage.extractEnergy(this.storage.getMaxExtract(), true);
-                if (push > 0) {
-                    this.world.getTileEntity(this.pos.offset(d)).getCapability(CapabilityEnergy.ENERGY, d).ifPresent(cap -> cap.receiveEnergy(push, false));
-                    this.storage.extractEnergy(push, false);
+                TileEntity neighbor = world != null ? world.getTileEntity(this.pos.offset(d)) : null;
+                if (neighbor != null) {
+                    if (neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).isPresent()) {
+                        if (this.canPush(neighbor, d.getOpposite())) {
+                            int push = this.storage.extractEnergy(this.storage.getMaxExtract(), true);
+                            if (push > 0) {
+                                neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).ifPresent(cap -> cap.receiveEnergy(push, false));
+                                this.storage.extractEnergy(push, false);
+                            }
+
+                        }
+                    }
                 }
             }
         }
@@ -110,6 +133,16 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     //receiving energy from items or charging items
     private void handleInv() {
 
+    }
+
+    private boolean canPush(TileEntity tile, Direction d) {
+        final int[] a = {0};
+        final int[] b = {0};
+        tile.getCapability(CapabilityEnergy.ENERGY, d).ifPresent(cap -> {
+            a[0] = cap.getEnergyStored();
+            b[0] = cap.getMaxEnergyStored();
+        });
+        return a[0] == b[0];
     }
 
     public ItemStack getItemOn(int slot) {
@@ -125,16 +158,6 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     @Override
     public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
         return new EnergyStoreContainer(p_createMenu_1_, this.world, this.pos, p_createMenu_2_, p_createMenu_3_);
-    }
-
-    public IIntArray getData() {
-        //update with new values
-        this.data.set(0, this.storage.getEnergyStored());
-        this.data.set(1, this.storage.getMaxEnergyStored());
-        this.data.set(2, this.energyPercent);
-        this.data.set(3, this.storage.getMaxReceive());
-        this.data.set(4, this.storage.getMaxExtract());
-        return this.data;
     }
 
 
@@ -165,6 +188,14 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
             }
         };
     }
+
+    public void setEnergyPercent(int percent) {
+        this.energyPercent = percent;
+    }
+
+    public void setStored(int v) {
+    }
+
 
     //    public IIntArray getSideData() {
 //        //update values

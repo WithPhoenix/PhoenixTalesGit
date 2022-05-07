@@ -1,8 +1,9 @@
 package com.phoenix.phoenixtales.rise.block.blocks.alloyfactory;
 
-import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import com.phoenix.phoenixtales.rise.item.RiseItems;
+import com.phoenix.phoenixtales.rise.service.RiseEnergyStorage;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -13,12 +14,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -33,9 +34,10 @@ public class AlloyTile extends TileEntity implements ITickableTileEntity, INamed
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
+    private final RiseEnergyStorage storage = new RiseEnergyStorage(200000, 2500, 2500, 0);
+    private final LazyOptional<IEnergyStorage> storageOpt = LazyOptional.of(() -> storage);
     private int processTime;
     private int totalTime;
-    private int energy;
 
     public AlloyTile() {
         super(RiseTileEntities.ALLOY_TILE);
@@ -44,6 +46,7 @@ public class AlloyTile extends TileEntity implements ITickableTileEntity, INamed
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
         itemHandler.deserializeNBT(nbt.getCompound("inv"));
+        storage.deserializeNBT(nbt.getCompound("storage"));
         this.processTime = nbt.getInt("processTime");
         this.totalTime = nbt.getInt("totalTime");
         super.read(state, nbt);
@@ -52,6 +55,7 @@ public class AlloyTile extends TileEntity implements ITickableTileEntity, INamed
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         compound.put("inv", itemHandler.serializeNBT());
+        compound.put("storage", storage.serializeNBT());
         compound.putInt("processTime", this.processTime);
         compound.putInt("totalTime", this.totalTime);
         return super.write(compound);
@@ -67,7 +71,6 @@ public class AlloyTile extends TileEntity implements ITickableTileEntity, INamed
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 if (slot == 2) {
-//                    return stack.equals(RiseItems.SLAG.getDefaultInstance());
                     return stack.getItem() == RiseItems.SLAG;
                 } else {
                     return true;
@@ -116,7 +119,7 @@ public class AlloyTile extends TileEntity implements ITickableTileEntity, INamed
         if (r != null) {
             this.totalTime = r.getProcessTime();
             if (ItemHandlerHelper.canItemStacksStack(r.getRecipeOutput(), itemHandler.getStackInSlot(3)) || itemHandler.getStackInSlot(3).equals(ItemStack.EMPTY)
-            && ItemHandlerHelper.canItemStacksStack(RiseItems.SLAG.getDefaultInstance(), itemHandler.getStackInSlot(2)) || itemHandler.getStackInSlot(2).equals(ItemStack.EMPTY)) {
+                    && ItemHandlerHelper.canItemStacksStack(RiseItems.SLAG.getDefaultInstance(), itemHandler.getStackInSlot(2)) || itemHandler.getStackInSlot(2).equals(ItemStack.EMPTY)) {
                 ++this.processTime;
                 if (this.processTime >= r.getProcessTime()) {
                     this.processTime = 0;
@@ -136,7 +139,6 @@ public class AlloyTile extends TileEntity implements ITickableTileEntity, INamed
         }
 
     }
-
 
     private void alloying(ItemStack output, int count) {
         Random r = new Random();

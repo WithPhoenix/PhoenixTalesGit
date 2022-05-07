@@ -44,8 +44,61 @@ public class EnergyStoreContainer extends Container {
                 addSlot(new SlotItemHandler(iItemHandler, 0, 133, 9));
                 addSlot(new SlotItemHandler(iItemHandler, 1, 133, 60));
             });
-            trackIntArray(tile.getData());
+
         }
+
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tile.getEnergyPercent();
+            }
+            @Override
+            public void set(int value) {
+                tile.setEnergyPercent(value);
+            }
+        });
+
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tile.getStored();
+            }
+            @Override
+            public void set(int value) {
+                tile.setStored(value);
+            }
+        });
+
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tile.getCapacity();
+            }
+            @Override
+            public void set(int value) {
+                tile.setStored(value);
+            }
+        });
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tile.getR();
+            }
+            @Override
+            public void set(int value) {
+                tile.setStored(value);
+            }
+        });
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tile.getE();
+            }
+            @Override
+            public void set(int value) {
+                tile.setStored(value);
+            }
+        });
 
 //        trackInt(new ModifiedIntReferenceHolder() {
 //            @Override
