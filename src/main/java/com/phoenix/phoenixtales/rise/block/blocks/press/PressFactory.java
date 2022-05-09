@@ -1,8 +1,11 @@
 package com.phoenix.phoenixtales.rise.block.blocks.press;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
+import com.phoenix.phoenixtales.rise.item.RiseItems;
+import com.phoenix.phoenixtales.rise.item.items.EnergyHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -10,9 +13,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.Item;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -27,7 +30,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class PressFactory extends Block {
+public class PressFactory extends HorizontalBlock {
 
     public PressFactory() {
         super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(5.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).setRequiresTool().sound(SoundType.METAL));
@@ -48,8 +51,8 @@ public class PressFactory extends Block {
             } else {
 
                 if (tileEntity instanceof PressTile) {
-                    //remove only for testing
                     ((PressTile) tileEntity).addEnergy(500);
+                        //remove only for testing
 //                    ((PressTile) tileEntity).receiveEnergy(1000, false);
                 }
                 return ActionResultType.CONSUME;
@@ -60,6 +63,15 @@ public class PressFactory extends Block {
         return ActionResultType.PASS;
     }
 
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite());
+    }
+
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(HORIZONTAL_FACING);
+    }
 
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {

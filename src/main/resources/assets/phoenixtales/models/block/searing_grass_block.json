@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "phoenixtales:block/searing_grass_block_top",
+    "bottom": "phoenixtales:block/searing_dirt",
+    "side": "phoenixtales:block/searing_grass_block_side",
+    "particle": "phoenixtales:block/searing_dirt"
+  }
+}

@@ -84,7 +84,7 @@ public class Assembler extends Block {
                 if (tileEntity instanceof AssemblerTile) {
                     NetworkHooks.openGui(((ServerPlayerEntity) player), (INamedContainerProvider) tileEntity, tileEntity.getPos());
                 } else {
-                    throw new IllegalStateException("Container provider is missing!");
+                    throw new IllegalStateException("Missing Container Provider");
                 }
                 return ActionResultType.SUCCESS;
             } else {

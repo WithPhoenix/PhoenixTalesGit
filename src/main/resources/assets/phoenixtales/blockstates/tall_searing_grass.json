@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "phoenixtales:block/tall_searing_grass_bottom"
+    },
+    "half=upper": {
+      "model": "phoenixtales:block/tall_searing_grass_top"
+    }
+  }
+}

@@ -17,7 +17,7 @@ license = "Source Code: MIT License; Assets: All Rights Reserved"
 # The modid of the mod
 modId = "phoenixtales" #mandatory
 version = "${file.jarVersion}" #mandatory
-displayName = "Phoenix Tales: Origins" #mandatory
+displayName = "PhoenixTales: Origins" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI

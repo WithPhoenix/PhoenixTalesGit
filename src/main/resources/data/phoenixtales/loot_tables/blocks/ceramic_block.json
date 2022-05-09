@@ -1,13 +1,12 @@
 {
-
-  "type" : "minecraft:block",
-  "pools" : [
+  "type": "minecraft:block",
+  "pools": [
     {
-      "rolls" : 1,
-      "entries" : [
+      "rolls": 1,
+      "entries": [
         {
-          "type" : "minecraft:item",
-          "name" : "phoenixtales:ceramic_block"
+          "type": "minecraft:item",
+          "name": "phoenixtales:ceramic_block"
         }
       ]
     }

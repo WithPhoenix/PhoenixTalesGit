@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "phoenixtales:block/searing_grass_block"
+      },
+      {
+        "model": "phoenixtales:block/searing_grass_block",
+        "y": 90
+      },
+      {
+        "model": "phoenixtales:block/searing_grass_block",
+        "y": 180
+      },
+      {
+        "model": "phoenixtales:block/searing_grass_block",
+        "y": 270
+      }
+    ]
+  }
+}

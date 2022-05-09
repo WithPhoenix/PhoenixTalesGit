@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "phoenixtales:block/tall_ashen_grass_bottom"
+    },
+    "half=upper": {
+      "model": "phoenixtales:block/tall_ashen_grass_top"
+    }
+  }
+}

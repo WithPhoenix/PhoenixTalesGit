@@ -2,7 +2,7 @@ package com.phoenix.phoenixtales.rise.block.blocks.assembler;
 
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
-import com.phoenix.phoenixtales.rise.util.ModifiedIntReferenceHolder;
+import com.phoenix.phoenixtales.rise.service.ModifiedIntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -36,7 +36,7 @@ public class AssemblerContainer extends Container {
 
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
-        playerInventorySlots(8, 86);
+        playerInventorySlots(8, 84);
 
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
@@ -158,13 +158,5 @@ public class AssemblerContainer extends Container {
         sourceSlot.onTake(playerEntity, sourceStack);
         return copyOfSourceStack;
     }
-
-//    @OnlyIn(Dist.CLIENT)
-//    public int getCookProgressionScaled() {
-//        int i = this.factoryData.get(2); // current Cook Time
-//        int j = this.factoryData.get(3); // TOTAL cook Time
-//        return j != 0 && i != 0 ? i * 79 / j : 0;
-//    }
-
 
 }

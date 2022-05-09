@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "phoenixtales:block/ashen_grass_block_top",
+    "bottom": "phoenixtales:block/ashen_dirt",
+    "side": "phoenixtales:block/ashen_grass_block_side",
+    "particle": "phoenixtales:block/ashen_dirt"
+  }
+}

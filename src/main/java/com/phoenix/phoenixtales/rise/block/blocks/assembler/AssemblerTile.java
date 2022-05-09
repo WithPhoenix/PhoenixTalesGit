@@ -198,10 +198,6 @@ public class AssemblerTile extends TileEntity implements ITickableTileEntity, IN
         return maxEnergy;
     }
 
-    public void setMaxEnergy(int maxEnergy) {
-        this.maxEnergy = maxEnergy;
-    }
-
     public int getEnergyPercent() {
         return this.energyPercent;
     }

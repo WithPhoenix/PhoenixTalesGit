@@ -1,5 +1,6 @@
 package com.phoenix.phoenixtales.core;
 
+import com.phoenix.phoenixtales.rise.network.PacketHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -18,48 +19,31 @@ public class PhoenixTales {
     public static final String MOD_ID = "phoenixtales";
 
     public PhoenixTales() {
-
-
-        // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        // Register the enqueueIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        // Register the processIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-//        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+        PacketHandler.init();
     }
 
-    private void enqueueIMC(final InterModEnqueueEvent event) {
+    @SubscribeEvent
+    public void onServerStarting(FMLServerStartingEvent event) {
+        log.info("loaded");
+    }
+
+//    private void enqueueIMC(final InterModEnqueueEvent event) {
         // some example code to dispatch IMC to another mod
 //        InterModComms.sendTo("examplemod", "helloworld", () -> {
 //            LOGGER.info("Hello world from the MDK");
 //            return "Hello world";
 //        });
-    }
+//    }
 
-    private void processIMC(final InterModProcessEvent event) {
+//    private void processIMC(final InterModProcessEvent event) {
         // some example code to receive and process InterModComms from other mods
 //        LOGGER.info("Got IMC {}", event.getIMCStream().
 //                map(m -> m.getMessageSupplier().get()).
 //                collect(Collectors.toList()));
-    }
-
-    @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
-        log.info("loaded successfully");
-    }
-
-
-//    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-//    public static class RegistryEvents {
-//        @SubscribeEvent
-//        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-//
-//        }
 //    }
 }

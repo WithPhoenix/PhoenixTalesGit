@@ -1,6 +1,6 @@
 package com.phoenix.phoenixtales.rise.item.items;
 
-import com.phoenix.phoenixtales.core.creativetab.ItemTab;
+import com.phoenix.phoenixtales.core.creativetab.TalesTabItem;
 import com.phoenix.phoenixtales.fall.FallItem;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -29,7 +29,7 @@ public class RottenHeart extends FallItem {
                 .effect(new EffectInstance(Effects.POISON, 140, 1), 0.17F)
                 .effect(new EffectInstance(Effects.HUNGER, 500, 1), 0.17F)
                 .saturation(0.1F).hunger(1)
-                .build()).group(ItemTab.ITEM_GROUP));
+                .build()).group(TalesTabItem.TAB_ITEM));
     }
 
     @NotNull

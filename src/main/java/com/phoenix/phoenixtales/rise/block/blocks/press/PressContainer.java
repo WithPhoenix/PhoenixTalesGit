@@ -2,7 +2,7 @@ package com.phoenix.phoenixtales.rise.block.blocks.press;
 
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
-import com.phoenix.phoenixtales.rise.util.ModifiedIntReferenceHolder;
+import com.phoenix.phoenixtales.rise.service.ModifiedIntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -36,7 +36,7 @@ public class PressContainer extends Container {
         }
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
-        layoutPlayerInventorySlots(8, 86);
+        layoutPlayerInventorySlots(8, 84);
 
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {

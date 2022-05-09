@@ -16,7 +16,6 @@ import java.util.List;
 public class RiseRecipeTypes {
 
     public static List<IRecipeSerializer<?>> serializers = new ArrayList<>();
-    public static List<IRecipeType<?>> recipe_types = new ArrayList<>();
 
     public static final PressingRecipe.Serializer PRESSING_SERIALIZER = createRecipeSerializer("pressing", new PressingRecipe.Serializer());
     public static final AssemblingRecipe.Serializer ASSEMBLING_SERIALIZER = createRecipeSerializer("assembling", new AssemblingRecipe.Serializer());
@@ -25,7 +24,6 @@ public class RiseRecipeTypes {
     public static IRecipeType<PressingRecipe> PRESS_RECIPE = new PressingRecipe.PressRecipeType();
     public static IRecipeType<AssemblingRecipe> ASSEMBLING_RECIPE = new AssemblingRecipe.AssemblingRecipeType();
     public static IRecipeType<AlloyingRecipe> ALLOYING_RECIPE = new AlloyingRecipe.AlloyingRecipeType();
-
 
     public static <S extends IRecipeSerializer<T>, T extends IRecipe<?>> S createRecipeSerializer(String key, S recipeSerializer) {
         recipeSerializer.setRegistryName(new ResourceLocation(PhoenixTales.MOD_ID, key));
