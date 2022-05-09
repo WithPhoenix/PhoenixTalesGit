@@ -104,7 +104,7 @@
   "tooltip.phoenixtales.energyholder.autocharge.on": "§7auto charge: §aenabled",
   "tooltip.phoenixtales.energyholder.autocharge.off": "§7auto charge: §cdisabled",
 
-  "itemGroup.tab_item": "PhoenixTales: Items",
+  "itemGroup.origins_item_group": "PhoenixTales: Items",
   "itemGroup.tab_block": "PhoenixTales: Blocks",
 
   "jei.phoenixtales.press": "Pressing"

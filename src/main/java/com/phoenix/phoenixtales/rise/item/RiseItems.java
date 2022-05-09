@@ -1,12 +1,11 @@
 package com.phoenix.phoenixtales.rise.item;
 
 import com.phoenix.phoenixtales.core.PhoenixTales;
+import com.phoenix.phoenixtales.core.creativetab.ItemTab;
 import com.phoenix.phoenixtales.core.creativetab.TalesTabBlock;
-import com.phoenix.phoenixtales.core.creativetab.TalesTabItem;
 import com.phoenix.phoenixtales.rise.RiseBlockItem;
 import com.phoenix.phoenixtales.rise.RiseItem;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
-import com.phoenix.phoenixtales.rise.item.items.EnergyHolder;
 import com.phoenix.phoenixtales.rise.item.items.MetalSaw;
 import com.phoenix.phoenixtales.rise.item.items.Phosphorus;
 import net.minecraft.item.Item;
@@ -39,40 +38,40 @@ public class RiseItems {
     // items
 
     //elements and minerals
-    public static final Item APATITE = createItem("apatite", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item KERNITE = createItem("kernite", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
+    public static final Item APATITE = createItem("apatite", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item KERNITE = createItem("kernite", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item PHOSPHORUS = createItem("red_phosphorus", new Phosphorus());
-    public static final Item BORON = createItem("boron", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item SILICON = createItem("silicon", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item P_DOPED_SILICON = createItem("p_doped_silicon", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item N_DOPED_SILICON = createItem("n_doped_silicon", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
+    public static final Item BORON = createItem("boron", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item SILICON = createItem("silicon", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item P_DOPED_SILICON = createItem("p_doped_silicon", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item N_DOPED_SILICON = createItem("n_doped_silicon", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //vanadium based
-    public static final Item INGOT_VANADIUM = createItem("vanadium_ingot", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item NUGGET_VANADIUM = createItem("vanadium_nugget", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item VANADIUM_MACHINE_PART = createItem("vanadium_part", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
+    public static final Item INGOT_VANADIUM = createItem("vanadium_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item NUGGET_VANADIUM = createItem("vanadium_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item VANADIUM_MACHINE_PART = createItem("vanadium_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     //invar based
-    public static final Item INGOT_INVAR = createItem("invar_ingot", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item NUGGET_INVAR = createItem("invar_nugget", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item INVAR_MACHINE_PART = createItem("invar_part", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
+    public static final Item INGOT_INVAR = createItem("invar_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item NUGGET_INVAR = createItem("invar_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item INVAR_MACHINE_PART = createItem("invar_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     //nickel based
-    public static final Item INGOT_NICKEL = createItem("nickel_ingot", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item NUGGET_NICKEL = createItem("nickel_nugget", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item NICKEL_MACHINE_PART = createItem("nickel_part", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
+    public static final Item INGOT_NICKEL = createItem("nickel_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item NUGGET_NICKEL = createItem("nickel_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item NICKEL_MACHINE_PART = createItem("nickel_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item METAL_SAW = createItem("metal_saw", new MetalSaw());
-    public static final Item CONFIGURATOR = createItem("configurator", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
+    public static final Item CONFIGURATOR = createItem("configurator", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //tech related
-    public static final Item TRANSISTOR = createItem("transistor", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item ENHANCED_REDSTONE = createItem("enhanced_redstone", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item SIMPLE_CONTROLLER = createItem("simple_controller", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item ADVANCED_CONTROLLER = createItem("advanced_controller", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
+    public static final Item TRANSISTOR = createItem("transistor", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item ENHANCED_REDSTONE = createItem("enhanced_redstone", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item SIMPLE_CONTROLLER = createItem("simple_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item ADVANCED_CONTROLLER = createItem("advanced_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
 //    public static final Item ENERGY_HOLDER = createItem("energy_holder", new EnergyHolder());
 
-    public static final Item CERAMIC_BLEND = createItem("ceramic_blend", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item CERAMIC = createItem("ceramic", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
-    public static final Item SLAG = createItem("slag", new RiseItem(new Item.Properties().group(TalesTabItem.TAB_ITEM)));
+    public static final Item CERAMIC_BLEND = createItem("ceramic_blend", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item CERAMIC = createItem("ceramic", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item SLAG = createItem("slag", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -83,8 +82,8 @@ public class RiseItems {
     public static final Item ASSEMBLER = createItem("assembler", new RiseBlockItem(RiseBlocks.ASSEMBLER, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
 
     public static final Item TANK = createItem("tank", new RiseBlockItem(RiseBlocks.TANK, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-//    public static final Item HUO_BOAT = createItem("huo_boat", new HuoBoatItem(new Item.Properties().group(TalesTabItem.TAB_ITEM), "huo"));
-//    public static final Item BAD_BEAT_MUSIC_DISC = createItem("bad_beat_music_disc", new MusicDiscItem(1, () -> TechSoundEvents.BAD_BEAT.get(), new Item.Properties().maxStackSize(1).group(TalesTabItem.TAB_ITEM)));
+//    public static final Item HUO_BOAT = createItem("huo_boat", new HuoBoatItem(new Item.Properties().group(ItemTab.ITEM_GROUP), "huo"));
+//    public static final Item BAD_BEAT_MUSIC_DISC = createItem("bad_beat_music_disc", new MusicDiscItem(1, () -> TechSoundEvents.BAD_BEAT.get(), new Item.Properties().maxStackSize(1).group(ItemTab.ITEM_GROUP)));
 
     private static Item createItem(String id, Item item) {
         item.setRegistryName(new ResourceLocation(PhoenixTales.MOD_ID, id));
