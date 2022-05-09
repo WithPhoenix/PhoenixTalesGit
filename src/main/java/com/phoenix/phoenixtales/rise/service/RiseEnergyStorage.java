@@ -73,9 +73,6 @@ public class RiseEnergyStorage implements IEnergyStorage {
         return this.maxExtract;
     }
 
-    public int getStored() {return this.stored;}
-    public int getCapacity() {return this.capacity;}
-
     public CompoundNBT serializeNBT() {
         CompoundNBT values = new CompoundNBT();
         values.putInt("cap", this.capacity);

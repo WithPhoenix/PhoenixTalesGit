@@ -29,13 +29,15 @@ public class AlloyingRecipe implements IAlloying {
     private final ItemStack output;
     private final int count;
     private final int processTime;
+    private final int energy;
 
-    public AlloyingRecipe(ResourceLocation id, NonNullList<Ingredient> inputs, ItemStack output, int count, int processTime) {
+    public AlloyingRecipe(ResourceLocation id, NonNullList<Ingredient> inputs, ItemStack output, int count, int processTime, int energy) {
         this.id = id;
         this.output = output;
         this.inputs = inputs;
         this.count = count;
         this.processTime = processTime;
+        this.energy = energy;
     }
 
 
@@ -62,12 +64,16 @@ public class AlloyingRecipe implements IAlloying {
         return output.copy();
     }
 
-    public int getProcessTime() {
+    public int getProgressTime() {
         return this.processTime;
     }
 
     public int getCount() {
         return this.count;
+    }
+
+    public int neededEnergy() {
+        return this.energy;
     }
 
     @Nonnull
@@ -103,12 +109,13 @@ public class AlloyingRecipe implements IAlloying {
             NonNullList<Ingredient> inputs = NonNullList.withSize(2, Ingredient.EMPTY);
             int count = JSONUtils.getInt(json, "count", 1);
             int processTime = JSONUtils.getInt(json, "processTime", 300);
+            int energy = JSONUtils.getInt(json, "energy", 500);
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.deserialize(ingredients.get(i)));
             }
 
-            return new AlloyingRecipe(recipeId, inputs, output, count, processTime);
+            return new AlloyingRecipe(recipeId, inputs, output, count, processTime, energy);
         }
 
         @Nullable
@@ -121,7 +128,8 @@ public class AlloyingRecipe implements IAlloying {
             ItemStack output = buffer.readItemStack();
             int count = buffer.readVarInt();
             int processTime = buffer.readVarInt();
-            return new AlloyingRecipe(recipeId, inputs, output, count, processTime);
+            int energy = buffer.readVarInt();
+            return new AlloyingRecipe(recipeId, inputs, output, count, processTime, energy);
         }
 
         @Override
@@ -132,6 +140,7 @@ public class AlloyingRecipe implements IAlloying {
             buffer.writeItemStack(recipe.getRecipeOutput(), false);
             buffer.writeInt(recipe.count);
             buffer.writeVarInt(recipe.processTime);
+            buffer.writeVarInt(recipe.energy);
         }
     }
 }

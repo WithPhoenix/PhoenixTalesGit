@@ -2,6 +2,7 @@ package com.phoenix.phoenixtales.rise.block.blocks.alloyfactory;
 
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
+import com.phoenix.phoenixtales.rise.service.ModifiedIntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -44,6 +45,30 @@ public class AlloyContainer extends Container {
                 addSlot(new SlotItemHandler(h, 3, 80, 61));
             });
         }
+
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tileEntity.getProgressPercent();
+            }
+
+            @Override
+            public void set(int value) {
+                tileEntity.setProcessPercent(value);
+            }
+        });
+
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tileEntity.getEnergyPercent();
+            }
+
+            @Override
+            public void set(int value) {
+                tileEntity.setEnergyPercent(value);
+            }
+        });
     }
 
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {

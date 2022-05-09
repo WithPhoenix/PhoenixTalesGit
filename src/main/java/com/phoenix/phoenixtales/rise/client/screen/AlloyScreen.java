@@ -46,6 +46,12 @@ public class AlloyScreen extends ContainerScreen<AlloyContainer> {
         int j = this.guiTop;
         this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
 
+//        double percent = (double) (this.tile.getProgressPercent()) / 100d;
+//        this.blit(matrixStack, i + 84, j + 28, 219, 2, 10, (int) (percent * 13d));
+
+        double energyP = (double) (this.tile.getEnergyPercent()) / 100d;
+        this.blit(matrixStack, i + 167, j + 5, 218, 1, 3, 75 - ((int) (energyP * 75d)));
+
 
 //        if (container.getProgress() > 0) {
 //            this.playerInventory.player.sendMessage(new StringTextComponent("progress = " + this.getProgress() + " and total = " + this.getTotal()), playerInventory.player.getUniqueID());

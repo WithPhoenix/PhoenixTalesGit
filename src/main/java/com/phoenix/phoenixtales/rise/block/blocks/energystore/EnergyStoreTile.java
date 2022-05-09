@@ -33,10 +33,9 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handlerOpt = LazyOptional.of(() -> itemHandler);
-    private final RiseEnergyStorage storage = new RiseEnergyStorage(1000000, 1500, 1500, 0);
+    private final RiseEnergyStorage storage = new RiseEnergyStorage(1000000, 15000, 1500, 0);
     private final LazyOptional<IEnergyStorage> storageOpt = LazyOptional.of(() -> storage);
     private int energyPercent;
-    private int stored;
 
     public EnergyStoreTile() {
         super(RiseTileEntities.ENERGY_STORE_TILE);
@@ -61,7 +60,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     }
 
     public int getStored() {
-        return this.stored;
+        return this.storage.getEnergyStored();
     }
 
     public int getCapacity() {
@@ -103,7 +102,6 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
             handleInv();
 
             this.energyPercent = (int) ((double) (this.storage.getEnergyStored()) * 100d / (double) (this.storage.getMaxEnergyStored()));
-            this.stored = this.storage.getEnergyStored();
         }
     }
 
@@ -114,20 +112,18 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
             if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(d)) == EnergyHandlingType.EXTRACT) {
                 TileEntity neighbor = world != null ? world.getTileEntity(this.pos.offset(d)) : null;
                 if (neighbor != null) {
-                    if (neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).isPresent()) {
-                        if (this.canPush(neighbor, d.getOpposite())) {
-                            int push = this.storage.extractEnergy(this.storage.getMaxExtract(), true);
-                            if (push > 0) {
-                                neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).ifPresent(cap -> cap.receiveEnergy(push, false));
-                                this.storage.extractEnergy(push, false);
-                            }
-
+                    neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).ifPresent(cap -> {
+                        int push = this.storage.extractEnergy(this.storage.getMaxExtract(), true);
+                        if (push > 0) {
+                            push = cap.receiveEnergy(push, false);
+                            this.storage.extractEnergy(push, false);
                         }
-                    }
+                    });
                 }
             }
         }
     }
+
 
     //all events in the inventory
     //receiving energy from items or charging items
@@ -135,15 +131,6 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
 
     }
 
-    private boolean canPush(TileEntity tile, Direction d) {
-        final int[] a = {0};
-        final int[] b = {0};
-        tile.getCapability(CapabilityEnergy.ENERGY, d).ifPresent(cap -> {
-            a[0] = cap.getEnergyStored();
-            b[0] = cap.getMaxEnergyStored();
-        });
-        return a[0] == b[0];
-    }
 
     public ItemStack getItemOn(int slot) {
         return itemHandler.getStackInSlot(slot);

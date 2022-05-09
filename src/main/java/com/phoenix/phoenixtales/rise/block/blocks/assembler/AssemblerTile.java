@@ -51,7 +51,7 @@ public class AssemblerTile extends TileEntity implements ITickableTileEntity, IN
     public void read(BlockState state, CompoundNBT nbt) {
         itemHandler.deserializeNBT(nbt.getCompound("inv"));
         this.storage.deserializeNBT(nbt.getCompound("storage"));
-        this.progress = nbt.getInt("processTime");
+        this.progress = nbt.getInt("progress");
         this.totalTime = nbt.getInt("totalTime");
         super.read(state, nbt);
     }
@@ -60,7 +60,7 @@ public class AssemblerTile extends TileEntity implements ITickableTileEntity, IN
     public CompoundNBT write(CompoundNBT compound) {
         compound.put("inv", itemHandler.serializeNBT());
         compound.put("storage", storage.serializeNBT());
-        compound.putInt("processTime", this.progress);
+        compound.putInt("progress", this.progress);
         compound.putInt("totalTime", this.totalTime);
         return super.write(compound);
     }
@@ -108,7 +108,7 @@ public class AssemblerTile extends TileEntity implements ITickableTileEntity, IN
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
-        return this.getCapability(cap, Direction.DOWN);
+        return this.getCapability(cap, null);
     }
 
     public void craft() {
@@ -118,27 +118,29 @@ public class AssemblerTile extends TileEntity implements ITickableTileEntity, IN
             inventory.setInventorySlotContents(i, itemHandler.getStackInSlot(i));
         }
 
-        AssemblingRecipe recipe = world.getRecipeManager().getRecipe(RiseRecipeTypes.ASSEMBLING_RECIPE, inventory, world).orElse(null);
+        AssemblingRecipe recipe = world != null ? world.getRecipeManager().getRecipe(RiseRecipeTypes.ASSEMBLING_RECIPE, inventory, world).orElse(null) : null;
 
         if (recipe != null) {
             this.totalTime = recipe.getProcessingTime();
             if (ItemHandlerHelper.canItemStacksStack(recipe.getRecipeOutput(), itemHandler.getStackInSlot(5)) || itemHandler.getStackInSlot(5).equals(ItemStack.EMPTY)) {
-                if (this.storage.getEnergyStored() >= recipe.neededEnergy()) {
-                    //calculate how much energy needs to be used per tick
-                    energyUsagePerTick = recipe.neededEnergy() / recipe.getProcessingTime();
-                    removeEnergy(energyUsagePerTick);
+                if (itemHandler.getStackInSlot(5).getCount() < 64) {
+                    if (this.storage.getEnergyStored() >= recipe.neededEnergy()) {
+                        //calculate how much energy needs to be used per tick
+                        energyUsagePerTick = recipe.neededEnergy() / recipe.getProcessingTime();
+                        removeEnergy(energyUsagePerTick);
 
-                    ++this.progress;
-                    if (this.progress >= recipe.getProcessingTime()) {
-                        this.progress = 0;
+                        ++this.progress;
+                        if (this.progress >= recipe.getProcessingTime()) {
+                            this.progress = 0;
 
-                        ItemStack output = recipe.getRecipeOutput();
+                            ItemStack output = recipe.getRecipeOutput();
 
-                        assemble(output, recipe.getCount());
+                            assemble(output, recipe.getCount());
 
-                        markDirty();
-                    }
-                } //progress will be saved if not enough energy is present
+                            markDirty();
+                        }
+                    } //progress will be saved if not enough energy is present
+                }
             }
         } else {
             if (this.progress > 0) {
@@ -184,16 +186,16 @@ public class AssemblerTile extends TileEntity implements ITickableTileEntity, IN
         return new AssemblerContainer(i, this.world, this.pos, playerInventory, playerEntity);
     }
 
+    public void removeEnergy(int energy) {
+        this.storage.extractEnergy(energy, false);
+    }
+
     public int getEnergyPercent() {
         return this.energyPercent;
     }
 
     public void setEnergyPercent(int n) {
         this.energyPercent = n;
-    }
-
-    public void removeEnergy(int energy) {
-        this.storage.extractEnergy(energy, false);
     }
 
     public int getProgressPercent() {
