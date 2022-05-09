@@ -6,10 +6,11 @@ import net.minecraft.item.ItemStack;
 
 public class BlockTab extends ItemGroup {
 
-    public static final BlockTab BLOCK_GROUP = new BlockTab(ItemGroup.GROUPS.length, "tab_block");
+    public static final BlockTab BLOCK_GROUP = new BlockTab(ItemGroup.GROUPS.length, "origins_block_group");
 
     public BlockTab(int index, String label) {
         super(index, label);
+//        setBackgroundImageName("phoenixtech.png");
     }
 
     @Override
