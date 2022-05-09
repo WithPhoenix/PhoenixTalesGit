@@ -1,7 +1,7 @@
 package com.phoenix.phoenixtales.rise.item.items;
 
-import com.phoenix.phoenixtales.core.creativetab.TalesTabItem;
-import com.phoenix.phoenixtales.rise.RiseItem;
+import com.phoenix.phoenixtales.core.creativetab.ItemTab;
+import com.phoenix.phoenixtales.rise.item.RiseItem;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MetalSaw extends RiseItem {
     public MetalSaw() {
-        super(new Properties().group(TalesTabItem.TAB_ITEM).maxDamage(150));
+        super(new Properties().group(ItemTab.ITEM_GROUP).maxDamage(150));
     }
 
     @Override

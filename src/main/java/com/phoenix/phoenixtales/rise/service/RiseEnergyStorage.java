@@ -83,9 +83,9 @@ public class RiseEnergyStorage implements IEnergyStorage {
     }
 
     public void deserializeNBT(CompoundNBT nbt) {
-        this.capacity = nbt.contains("cap") ? this.capacity = nbt.getInt("cap") : 0;
-        this.stored = nbt.contains("stored") ? this.capacity = nbt.getInt("stored") : 0;
-        this.maxReceive = nbt.contains("receive") ? this.capacity = nbt.getInt("receive") : 0;
-        this.maxExtract = nbt.contains("extract") ? this.capacity = nbt.getInt("extract") : 0;
+        this.capacity = nbt.contains("cap") ? nbt.getInt("cap") : 0;
+        this.stored = nbt.contains("stored") ? nbt.getInt("stored") : 0;
+        this.maxReceive = nbt.contains("receive") ? nbt.getInt("receive") : 0;
+        this.maxExtract = nbt.contains("extract") ? nbt.getInt("extract") : 0;
     }
 }

@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "connected=false": {
+      "model": "phoenixtales:block/overloaded_cable"
+    },
+    "connected=true": {
+      "model": "phoenixtales:block/overloaded_cable"
+    }
+  }
+}
+

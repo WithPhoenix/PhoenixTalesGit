@@ -12,5 +12,6 @@
     "item": "phoenixtales:invar_ingot"
   },
   "processTime": 300,
-  "count": 2
+  "count": 2,
+  "energy": 1000
 }

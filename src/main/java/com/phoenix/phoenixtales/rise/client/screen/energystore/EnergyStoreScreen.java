@@ -99,7 +99,7 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
         this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
 
         // r255 g37 b0
-        double energyP = (double) (this.tile.getData().get(2)) / 100d;
+        double energyP = (double) (this.tile.getEnergyPercent()) / 100d;
         this.blit(matrixStack, i + 161, j + 5, 178, 0, 8, 75 - ((int) (energyP * 75d)));
 
     }
@@ -109,10 +109,10 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
         super.drawGuiContainerForegroundLayer(matrixStack, x, y);
         if (page == 0) {
-            this.font.drawString(matrixStack, "Stored: " + ((double) (this.tile.getData().get(0) / 1000)) + " kJ", 12, 19, MathHelper.rgb(142, 143, 144));
-            this.font.drawString(matrixStack, "Capacity: " + ((double) (this.tile.getData().get(1) / 1000)) + " kJ", 12, 31, MathHelper.rgb(142, 143, 144));
-            this.font.drawString(matrixStack, "max Receive: " + ((double) (this.tile.getData().get(3) / 1000)) + " kJ", 12, 46, MathHelper.rgb(142, 143, 144));
-            this.font.drawString(matrixStack, "max Extract: " + ((double) (this.tile.getData().get(4) / 1000)) + " kJ", 12, 57, MathHelper.rgb(142, 143, 144));
+            this.font.drawString(matrixStack, "Stored: " + this.tile.getStored()  + " kJ", 12, 19, MathHelper.rgb(142, 143, 144));
+            this.font.drawString(matrixStack, "Capacity: " + ((double) (this.tile.getCapacity() / 1000)) + " kJ", 12, 31, MathHelper.rgb(142, 143, 144));
+            this.font.drawString(matrixStack, "max Receive: " + this.tile.getR()  + " J", 12, 46, MathHelper.rgb(142, 143, 144));
+            this.font.drawString(matrixStack, "max Extract: " + this.tile.getE() + " J", 12, 57, MathHelper.rgb(142, 143, 144));
         } else if (page == 1) {
             this.font.drawString(matrixStack, "north", 12, 22, MathHelper.rgb(142, 143, 144));
             this.font.drawString(matrixStack, "west", 12, 38, MathHelper.rgb(142, 143, 144));

@@ -1,7 +1,7 @@
 package com.phoenix.phoenixtales.rise.block.blocks.energystore;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
-import com.phoenix.phoenixtales.rise.service.BlockSide;
+import com.phoenix.phoenixtales.rise.service.EnergyHandlingType;
 import com.phoenix.phoenixtales.rise.service.RiseEnergyStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,10 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -29,8 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.Map;
 
 public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
@@ -38,56 +33,58 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handlerOpt = LazyOptional.of(() -> itemHandler);
-    private final RiseEnergyStorage storage = new RiseEnergyStorage(1000000, 2500, 2500, 0);
+    private final RiseEnergyStorage storage = new RiseEnergyStorage(1000000, 15000, 1500, 0);
     private final LazyOptional<IEnergyStorage> storageOpt = LazyOptional.of(() -> storage);
-    private IIntArray data;
-    private IIntArray sideData;
-    private int energy;
-    private int capacity; //this is a fixed value, with upgrades this will get higher
     private int energyPercent;
-    //what is the transfer rate?
-    //how do i calculate it, since i receive and extract energy
-    private int transferRatePerTick;
-    private int maxTransferRate;
-    //does the side receive or export energy or non
-    //0 = receive; 1 = export; 2 = non
-//    private Map<BlockSide, Integer> sideStatus;
-
-    public EnergyStoreTile(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
-        this.data = new IntArray(5);
-        this.sideData = new IntArray(6);
-//        this.sideStatus = new HashMap<>();
-//        this.initializeSides();
-    }
 
     public EnergyStoreTile() {
-        this(RiseTileEntities.ENERGY_STORE_TILE);
+        super(RiseTileEntities.ENERGY_STORE_TILE);
     }
 
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
-        itemHandler.deserializeNBT(nbt.getCompound("inv"));
-        storage.deserializeNBT(nbt.getCompound("energystore"));
-//        this.sideStatus = readSides(nbt);
+        itemHandler.deserializeNBT(nbt.getCompound("items"));
+        storage.deserializeNBT(nbt.getCompound("store"));
         super.read(state, nbt);
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
-        compound.put("inv", itemHandler.serializeNBT());
-        compound.put("energystore", storage.serializeNBT());
-//        saveSides(compound);
+        compound.put("items", itemHandler.serializeNBT());
+        compound.put("store", storage.serializeNBT());
         return super.write(compound);
     }
 
+    public int getEnergyPercent() {
+        return this.energyPercent;
+    }
+
+    public int getStored() {
+        return this.storage.getEnergyStored();
+    }
+
+    public int getCapacity() {
+        return this.storage.getMaxEnergyStored();
+    }
+
+    public int getR() {
+        return this.storage.getMaxReceive();
+    }
+
+    public int getE() {
+        return this.storage.getMaxExtract();
+    }
+
+    //logic to item handler
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return handlerOpt.cast();
         } else if (cap == CapabilityEnergy.ENERGY) {
-            return storageOpt.cast();
+            if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.RECEIVE) {
+                return storageOpt.cast();
+            }
         }
         return super.getCapability(cap, side);
     }
@@ -95,7 +92,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
-        return super.getCapability(cap);
+        return this.getCapability(cap, null);
     }
 
     @Override
@@ -109,16 +106,31 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     }
 
     //all things in the world
-    //receive or extract energy
+    //extract energy
     private void handleWorld() {
-
+        for (Direction d : Direction.values()) {
+            if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(d)) == EnergyHandlingType.EXTRACT) {
+                TileEntity neighbor = world != null ? world.getTileEntity(this.pos.offset(d)) : null;
+                if (neighbor != null) {
+                    neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).ifPresent(cap -> {
+                        int push = this.storage.extractEnergy(this.storage.getMaxExtract(), true);
+                        if (push > 0) {
+                            push = cap.receiveEnergy(push, false);
+                            this.storage.extractEnergy(push, false);
+                        }
+                    });
+                }
+            }
+        }
     }
+
 
     //all events in the inventory
     //receiving energy from items or charging items
     private void handleInv() {
 
     }
+
 
     public ItemStack getItemOn(int slot) {
         return itemHandler.getStackInSlot(slot);
@@ -134,17 +146,6 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
         return new EnergyStoreContainer(p_createMenu_1_, this.world, this.pos, p_createMenu_2_, p_createMenu_3_);
     }
-
-    public IIntArray getData() {
-        //update with new values
-        this.data.set(0, this.storage.getEnergyStored());
-        this.data.set(1, this.storage.getMaxEnergyStored());
-        this.data.set(2, this.energyPercent);
-        this.data.set(3, this.storage.getMaxReceive());
-        this.data.set(4, this.storage.getMaxExtract());
-        return this.data;
-    }
-
 
 
     private ItemStackHandler createHandler() {
@@ -174,6 +175,14 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
             }
         };
     }
+
+    public void setEnergyPercent(int percent) {
+        this.energyPercent = percent;
+    }
+
+    public void setStored(int v) {
+    }
+
 
     //    public IIntArray getSideData() {
 //        //update values

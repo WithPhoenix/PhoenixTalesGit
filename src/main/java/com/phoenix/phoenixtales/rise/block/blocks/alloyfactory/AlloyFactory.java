@@ -7,11 +7,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -19,8 +16,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
@@ -36,35 +31,15 @@ public class AlloyFactory extends Block {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote()) {
-//            if (Helpers.isTechnician(player)) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
-
-            if (tileEntity instanceof AlloyTile) {
-                INamedContainerProvider containerProvider = createContainerProvider(worldIn, pos, (AlloyTile) tileEntity);
-                NetworkHooks.openGui(((ServerPlayerEntity) player), containerProvider, tileEntity.getPos());
-            } else {
-                throw new IllegalStateException("Container provider is missing!");
+        if (!worldIn.isRemote) {
+            AlloyTile tileEntity = (AlloyTile) worldIn.getTileEntity(pos);
+            if (tileEntity != null) {
+                if (!player.isCrouching()) {
+                    NetworkHooks.openGui(((ServerPlayerEntity) player), tileEntity, tileEntity.getPos());
+                }
             }
         }
-//        }
         return ActionResultType.SUCCESS;
-    }
-
-
-    private INamedContainerProvider createContainerProvider(World worldIn, BlockPos pos, AlloyTile tile) {
-        return new INamedContainerProvider() {
-            @Override
-            public ITextComponent getDisplayName() {
-                return new TranslationTextComponent("screen.phoenixtales.alloy");
-            }
-
-            @Nullable
-            @Override
-            public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-                return new AlloyContainer(i, worldIn, pos, playerInventory, playerEntity);
-            }
-        };
     }
 
     @Override

@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "connected=false": {
+      "model": "phoenixtales:block/simple_cable"
+    },
+    "connected=true": {
+      "model": "phoenixtales:block/simple_cable"
+    }
+  }
+}
+

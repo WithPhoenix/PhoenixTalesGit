@@ -1,4 +1,4 @@
-package com.phoenix.phoenixtales.rise;
+package com.phoenix.phoenixtales.rise.service;
 
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.alloyfactory.AlloyingRecipe;

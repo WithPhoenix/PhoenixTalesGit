@@ -47,7 +47,6 @@ public class PressFactory extends HorizontalBlock {
                 } else {
                     throw new IllegalStateException("Container provider is missing");
                 }
-                return ActionResultType.SUCCESS;
             } else {
 
                 if (tileEntity instanceof PressTile) {
@@ -55,12 +54,11 @@ public class PressFactory extends HorizontalBlock {
                         //remove only for testing
 //                    ((PressTile) tileEntity).receiveEnergy(1000, false);
                 }
-                return ActionResultType.CONSUME;
             }
 //        }
 
         }
-        return ActionResultType.PASS;
+        return ActionResultType.SUCCESS;
     }
 
     @Override

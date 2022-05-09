@@ -9,7 +9,6 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -76,30 +75,16 @@ public class Assembler extends Block {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote()) {
-            //TODO only technicians
-//            if (Helpers.isTechnician(player)) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (!player.isCrouching()) {
-
-                if (tileEntity instanceof AssemblerTile) {
-                    NetworkHooks.openGui(((ServerPlayerEntity) player), (INamedContainerProvider) tileEntity, tileEntity.getPos());
+            AssemblerTile tileEntity = (AssemblerTile) worldIn.getTileEntity(pos);
+            if (tileEntity != null) {
+                if (!player.isCrouching()) {
+                    NetworkHooks.openGui(((ServerPlayerEntity) player), tileEntity, tileEntity.getPos());
                 } else {
-                    throw new IllegalStateException("Missing Container Provider");
+
                 }
-                return ActionResultType.SUCCESS;
-            } else {
-                if (tileEntity instanceof AssemblerTile) {
-                    //remove only for testing
-                    ((AssemblerTile) tileEntity).addEnergy(500);
-//                    ((PressTile) tileEntity).receiveEnergy(1000, false);
-                }
-                return ActionResultType.CONSUME;
             }
-//        } else {
-//            player.sendMessage(new StringTextComponent("You are not a Technician"), player.getUniqueID());
-//        }
         }
-        return ActionResultType.PASS;
+        return ActionResultType.SUCCESS;
     }
 
 

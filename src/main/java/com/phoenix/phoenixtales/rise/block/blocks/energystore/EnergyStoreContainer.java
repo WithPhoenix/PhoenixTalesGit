@@ -2,20 +2,16 @@ package com.phoenix.phoenixtales.rise.block.blocks.energystore;
 
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
-import com.phoenix.phoenixtales.rise.service.BlockSide;
 import com.phoenix.phoenixtales.rise.service.ModifiedIntReferenceHolder;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -48,8 +44,61 @@ public class EnergyStoreContainer extends Container {
                 addSlot(new SlotItemHandler(iItemHandler, 0, 133, 9));
                 addSlot(new SlotItemHandler(iItemHandler, 1, 133, 60));
             });
-            trackIntArray(tile.getData());
+
         }
+
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tile.getEnergyPercent();
+            }
+            @Override
+            public void set(int value) {
+                tile.setEnergyPercent(value);
+            }
+        });
+
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tile.getStored();
+            }
+            @Override
+            public void set(int value) {
+                tile.setStored(value);
+            }
+        });
+
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tile.getCapacity();
+            }
+            @Override
+            public void set(int value) {
+                tile.setStored(value);
+            }
+        });
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tile.getR();
+            }
+            @Override
+            public void set(int value) {
+                tile.setStored(value);
+            }
+        });
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tile.getE();
+            }
+            @Override
+            public void set(int value) {
+                tile.setStored(value);
+            }
+        });
 
 //        trackInt(new ModifiedIntReferenceHolder() {
 //            @Override
@@ -67,7 +116,7 @@ public class EnergyStoreContainer extends Container {
 
     @Override
     protected void trackIntArray(IIntArray arrayIn) {
-        for(int i = 0; i < arrayIn.size(); ++i) {
+        for (int i = 0; i < arrayIn.size(); ++i) {
             this.trackInt(ModifiedIntReferenceHolder.create(arrayIn, i));
         }
     }

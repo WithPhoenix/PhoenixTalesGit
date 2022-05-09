@@ -10,6 +10,8 @@ import com.phoenix.phoenixtales.origins.client.ter.PortalTileRenderer;
 import com.phoenix.phoenixtales.origins.entity.OriginsEntityTypes;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
+import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
+import com.phoenix.phoenixtales.rise.client.render.GenericCableRender;
 import com.phoenix.phoenixtales.rise.client.screen.AlloyScreen;
 import com.phoenix.phoenixtales.rise.client.screen.AssemblerScreen;
 import com.phoenix.phoenixtales.rise.client.screen.PressScreen;
