@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 
-public class ItemTab extends ItemGroup {
+public class  ItemTab extends ItemGroup {
 
     public static final ItemTab ITEM_GROUP = new ItemTab(ItemGroup.GROUPS.length, "origins_item_group");
 

@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 
 public class BlockTab extends ItemGroup {
 
-    public static final ItemTab BLOCK_GROUP = new ItemTab(ItemGroup.GROUPS.length, "origins_block_group");
+    public static final BlockTab BLOCK_GROUP = new BlockTab(ItemGroup.GROUPS.length, "origins_block_group");
 
     public BlockTab(int index, String label) {
         super(index, label);
@@ -20,4 +20,5 @@ public class BlockTab extends ItemGroup {
     public ItemStack createIcon() {
         return new ItemStack(OriginsItems.SMOULDERING_STONE);
     }
+
 }
