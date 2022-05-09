@@ -4,11 +4,11 @@ import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
-public class TalesTabBlock extends ItemGroup {
+public class BlockTab extends ItemGroup {
 
-    public static final TalesTabBlock TAB_BLOCK = new TalesTabBlock(ItemGroup.GROUPS.length, "tab_block");
+    public static final BlockTab BLOCK_GROUP = new BlockTab(ItemGroup.GROUPS.length, "tab_block");
 
-    public TalesTabBlock(int index, String label) {
+    public BlockTab(int index, String label) {
         super(index, label);
     }
 

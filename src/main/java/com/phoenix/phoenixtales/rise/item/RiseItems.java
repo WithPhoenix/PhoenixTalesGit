@@ -2,7 +2,7 @@ package com.phoenix.phoenixtales.rise.item;
 
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.core.creativetab.ItemTab;
-import com.phoenix.phoenixtales.core.creativetab.TalesTabBlock;
+import com.phoenix.phoenixtales.core.creativetab.BlockTab;
 import com.phoenix.phoenixtales.rise.RiseBlockItem;
 import com.phoenix.phoenixtales.rise.RiseItem;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
@@ -22,16 +22,16 @@ public class RiseItems {
 
     //block items
 
-    public static final Item ORE_VANADIUM = createItem("vanadium_ore", new RiseBlockItem(RiseBlocks.ORE_VANADIUM, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item ORE_NICKEL = createItem("nickel_ore", new RiseBlockItem(RiseBlocks.ORE_NICKEL, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item ORE_APATITE = createItem("apatite_ore", new RiseBlockItem(RiseBlocks.ORE_APATITE, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item ORE_KERNITE = createItem("kernite_ore", new RiseBlockItem(RiseBlocks.ORE_KERNITE, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item BLOCK_VANADIUM = createItem("vanadium_block", new RiseBlockItem(RiseBlocks.BLOCK_VANADIUM, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item BLOCK_NICKEL = createItem("nickel_block", new RiseBlockItem(RiseBlocks.BLOCK_NICKEL, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item BLOCK_INVAR = createItem("invar_block", new RiseBlockItem(RiseBlocks.BLOCK_INVAR, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item VANADIUM_CHASSIS = createItem("vanadium_chassis", new RiseBlockItem(RiseBlocks.VANADIUM_CHASSIS, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item CERAMIC_BLOCK = createItem("ceramic_block", new RiseBlockItem(RiseBlocks.CERAMIC_BLOCK, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item BURNT_CERAMIC_BLOCK = createItem("burnt_ceramic_block", new RiseBlockItem(RiseBlocks.BURNT_CERAMIC_BLOCK, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
+    public static final Item ORE_VANADIUM = createItem("vanadium_ore", new RiseBlockItem(RiseBlocks.ORE_VANADIUM, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item ORE_NICKEL = createItem("nickel_ore", new RiseBlockItem(RiseBlocks.ORE_NICKEL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item ORE_APATITE = createItem("apatite_ore", new RiseBlockItem(RiseBlocks.ORE_APATITE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item ORE_KERNITE = createItem("kernite_ore", new RiseBlockItem(RiseBlocks.ORE_KERNITE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item BLOCK_VANADIUM = createItem("vanadium_block", new RiseBlockItem(RiseBlocks.BLOCK_VANADIUM, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item BLOCK_NICKEL = createItem("nickel_block", new RiseBlockItem(RiseBlocks.BLOCK_NICKEL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item BLOCK_INVAR = createItem("invar_block", new RiseBlockItem(RiseBlocks.BLOCK_INVAR, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item VANADIUM_CHASSIS = createItem("vanadium_chassis", new RiseBlockItem(RiseBlocks.VANADIUM_CHASSIS, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item CERAMIC_BLOCK = createItem("ceramic_block", new RiseBlockItem(RiseBlocks.CERAMIC_BLOCK, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item BURNT_CERAMIC_BLOCK = createItem("burnt_ceramic_block", new RiseBlockItem(RiseBlocks.BURNT_CERAMIC_BLOCK, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 //    public static final Item PORTAL_PART_0 = createItem("portal_part_0", new RiseBlockItem(RiseBlocks.PORTAL_PART_0, new Item.Properties().group(BlockTab.ITEM_GROUP)));
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,13 +75,13 @@ public class RiseItems {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public static final Item CABLE = createItem("cable", new RiseBlockItem(RiseBlocks.CABLE, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item ENERGY_STORE = createItem("energy_store", new RiseBlockItem(RiseBlocks.ENERGY_STORE, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item PRESS_FACTORY = createItem("press_factory", new RiseBlockItem(RiseBlocks.PRESS_FACTORY, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item ALLOY_FACTORY = createItem("alloy_factory", new RiseBlockItem(RiseBlocks.ALLOY_FACTORY, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
-    public static final Item ASSEMBLER = createItem("assembler", new RiseBlockItem(RiseBlocks.ASSEMBLER, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
+    public static final Item CABLE = createItem("cable", new RiseBlockItem(RiseBlocks.CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item ENERGY_STORE = createItem("energy_store", new RiseBlockItem(RiseBlocks.ENERGY_STORE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item PRESS_FACTORY = createItem("press_factory", new RiseBlockItem(RiseBlocks.PRESS_FACTORY, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item ALLOY_FACTORY = createItem("alloy_factory", new RiseBlockItem(RiseBlocks.ALLOY_FACTORY, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item ASSEMBLER = createItem("assembler", new RiseBlockItem(RiseBlocks.ASSEMBLER, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 
-    public static final Item TANK = createItem("tank", new RiseBlockItem(RiseBlocks.TANK, new Item.Properties().group(TalesTabBlock.TAB_BLOCK)));
+    public static final Item TANK = createItem("tank", new RiseBlockItem(RiseBlocks.TANK, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 //    public static final Item HUO_BOAT = createItem("huo_boat", new HuoBoatItem(new Item.Properties().group(ItemTab.ITEM_GROUP), "huo"));
 //    public static final Item BAD_BEAT_MUSIC_DISC = createItem("bad_beat_music_disc", new MusicDiscItem(1, () -> TechSoundEvents.BAD_BEAT.get(), new Item.Properties().maxStackSize(1).group(ItemTab.ITEM_GROUP)));
 
