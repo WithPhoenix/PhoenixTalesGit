@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "progress=0": {
+      "model": "phoenixtales:block/alembic0"
+    },
+    "progress=1": {
+      "model": "phoenixtales:block/alembic1"
+    },
+    "progress=2": {
+      "model": "phoenixtales:block/alembic2"
+    },
+    "progress=3": {
+      "model": "phoenixtales:block/alembic3"
+    },
+    "progress=4": {
+      "model": "phoenixtales:block/alembic4"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 package com.phoenix.phoenixtales.core;
 
+import com.phoenix.phoenixtales.fall.block.FallBlocks;
 import com.phoenix.phoenixtales.fall.item.FallItems;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.block.OriginsTileEntities;
@@ -29,6 +30,9 @@ public class TalesRegistry {
             event.getRegistry().register(block);
         }
         for (Block block : RiseBlocks.blocks) {
+            event.getRegistry().register(block);
+        }
+        for (Block block : FallBlocks.blocks) {
             event.getRegistry().register(block);
         }
     }
