@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "phoenixtales:block/tinkers_anvil",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "phoenixtales:block/tinkers_anvil",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "phoenixtales:block/tinkers_anvil",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "phoenixtales:block/tinkers_anvil"
+    }
+  }
+}

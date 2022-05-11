@@ -24,7 +24,6 @@ import java.util.stream.Stream;
 
 @SuppressWarnings("deprecation")
 public class Crystal extends Block {
-
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public Crystal() {
