@@ -5,6 +5,7 @@ import com.phoenix.phoenixtales.rise.block.blocks.alloyfactory.AlloyTile;
 import com.phoenix.phoenixtales.rise.block.blocks.assembler.AssemblerTile;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.TestCableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
+import com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil.EngineersAnvilTile;
 import com.phoenix.phoenixtales.rise.block.blocks.press.PressTile;
 import com.phoenix.phoenixtales.rise.block.blocks.tank.TankTile;
 import net.minecraft.tileentity.TileEntityType;
@@ -35,6 +36,8 @@ public class RiseTileEntities {
     public static TileEntityType<AssemblerTile> ASSEMBLER_TILE;
     @ObjectHolder(PhoenixTales.MOD_ID + ":energy_store_tile")
     public static TileEntityType<EnergyStoreTile> ENERGY_STORE_TILE;
+    @ObjectHolder(PhoenixTales.MOD_ID+":engineers_anvil")
+    public static TileEntityType<EngineersAnvilTile> ENGINEERS_ANVIL;
     @ObjectHolder(PhoenixTales.MOD_ID + ":tank_tile")
     public static TileEntityType<TankTile> TANK_TILE;
 
@@ -55,6 +58,7 @@ public class RiseTileEntities {
             r.register(TileEntityType.Builder.create(AlloyTile::new, RiseBlocks.ALLOY_FACTORY).build(null).setRegistryName("alloy_tile"));
             r.register(TileEntityType.Builder.create(AssemblerTile::new, RiseBlocks.ASSEMBLER).build(null).setRegistryName("assembler_tile"));
             r.register(TileEntityType.Builder.create(EnergyStoreTile::new, RiseBlocks.ENERGY_STORE).build(null).setRegistryName("energy_store_tile"));
+            r.register(TileEntityType.Builder.create(EngineersAnvilTile::new, RiseBlocks.ENGINEERS_ANVIL).build(null).setRegistryName("engineers_anvil"));
             r.register(TileEntityType.Builder.create(TankTile::new, RiseBlocks.TANK).build(null).setRegistryName("tank_tile"));
 
             r.register(TileEntityType.Builder.create(TestCableTile::new, RiseBlocks.TEST).build(null).setRegistryName("test"));

@@ -5,6 +5,7 @@ import com.phoenix.phoenixtales.core.creativetab.BlockTab;
 import com.phoenix.phoenixtales.core.creativetab.ItemTab;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.item.items.EnergyHolder;
+import com.phoenix.phoenixtales.rise.item.items.Hammer;
 import com.phoenix.phoenixtales.rise.item.items.MetalSaw;
 import com.phoenix.phoenixtales.rise.item.items.Phosphorus;
 import net.minecraft.item.Item;
@@ -28,7 +29,7 @@ public class RiseItems {
     public static final Item BLOCK_VANADIUM = createItem("vanadium_block", new RiseBlockItem(RiseBlocks.BLOCK_VANADIUM, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BLOCK_NICKEL = createItem("nickel_block", new RiseBlockItem(RiseBlocks.BLOCK_NICKEL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BLOCK_INVAR = createItem("invar_block", new RiseBlockItem(RiseBlocks.BLOCK_INVAR, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
-    public static final Item TINKERS_ANVIL = createItem("tinkers_anvil", new RiseBlockItem(RiseBlocks.TINKERS_ANVIL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item TINKERS_ANVIL = createItem("engineers_anvil", new RiseBlockItem(RiseBlocks.ENGINEERS_ANVIL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 
     public static final Item VANADIUM_CHASSIS = createItem("vanadium_chassis", new RiseBlockItem(RiseBlocks.VANADIUM_CHASSIS, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item CERAMIC_BLOCK = createItem("ceramic_block", new RiseBlockItem(RiseBlocks.CERAMIC_BLOCK, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
@@ -60,6 +61,7 @@ public class RiseItems {
     public static final Item NUGGET_NICKEL = createItem("nickel_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NICKEL_MACHINE_PART = createItem("nickel_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item METAL_SAW = createItem("metal_saw", new MetalSaw());
+    public static final Item HAMMER = createItem("hammer", new Hammer());
     public static final Item CONFIGURATOR = createItem("configurator", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //tech related

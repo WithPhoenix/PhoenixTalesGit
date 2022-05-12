@@ -9,6 +9,7 @@ import com.phoenix.phoenixtales.origins.client.ter.PortalTileRenderer;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
+import com.phoenix.phoenixtales.rise.client.render.EngineersAnvilRenderer;
 import com.phoenix.phoenixtales.rise.client.render.GenericCableRender;
 import com.phoenix.phoenixtales.rise.client.screen.AlloyScreen;
 import com.phoenix.phoenixtales.rise.client.screen.AssemblerScreen;
@@ -68,6 +69,8 @@ public class ClientSetup {
 //        ClientRegistry.bindTileEntityRenderer(OriginsTileEntities.CHANGE_TILE.get(), ChangeTileEntityRenderer::new);
         ClientRegistry.bindTileEntityRenderer(OriginsTileEntities.PORTAL_TILE, PortalTileRenderer::new);
         ClientRegistry.bindTileEntityRenderer(OriginsTileEntities.DECO_PORTAL_TILE, DecoPortalTileRenderer::new);
+
+        ClientRegistry.bindTileEntityRenderer(RiseTileEntities.ENGINEERS_ANVIL, EngineersAnvilRenderer::new);
     }
 
     private static void bindEntityRenderers() {
