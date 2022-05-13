@@ -9,8 +9,11 @@ this project is still in dev
 >**magic branch**
 
     -dark themed?
+    -i have absolutely no plan what i should out in this branch
+    -alchemie?
 >**technic branch**
 
     -near on real live sience    
+    -you start by doing most things with yout hands
   
 
