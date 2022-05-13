@@ -21,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public class AssemblingRecipe implements IAssembling {
-
     private final ResourceLocation id;
     private final ItemStack output;
     private final NonNullList<Ingredient> ingredients;

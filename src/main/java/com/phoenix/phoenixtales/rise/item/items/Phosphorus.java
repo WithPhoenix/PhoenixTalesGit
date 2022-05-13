@@ -18,4 +18,9 @@ public class Phosphorus extends RiseItem {
     public int getBurnTime(ItemStack itemStack, @Nullable IRecipeType<?> recipeType) {
         return 3000;
     }
+
+    @Override
+    public boolean isRepairable(ItemStack stack) {
+        return super.isRepairable(stack);
+    }
 }

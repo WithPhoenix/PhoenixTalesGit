@@ -2,8 +2,8 @@ package com.phoenix.phoenixtales.rise.block.blocks.alloyfactory;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -43,7 +43,7 @@ public class AlloyingRecipe implements IAlloying {
 
     @Override
     public boolean matches(IInventory inv, World worldIn) {
-        return inputs.get(0).test(inv.getStackInSlot(0)) && inputs.get(1).test(inv.getStackInSlot(1));
+        return (inputs.get(0).test(inv.getStackInSlot(0)) && inputs.get(1).test(inv.getStackInSlot(1))) || (inputs.get(1).test(inv.getStackInSlot(0)) && inputs.get(0).test(inv.getStackInSlot(1)));
     }
 
     @Nonnull

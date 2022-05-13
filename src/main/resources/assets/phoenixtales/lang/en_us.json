@@ -5,6 +5,7 @@
 
   "item.phoenixtales.vanadium_ingot": "Vanadium Ingot",
   "item.phoenixtales.vanadium_nugget": "Vanadium Nugget",
+  "item.phoenixtales.vanadium_plate": "Vanadium Plate",
   "item.phoenixtales.vanadium_part": "Vanadium Machine Part",
   "item.phoenixtales.nickel_ingot": "Nickel Ingot",
   "item.phoenixtales.nickel_nugget": "Nickel Nugget",
@@ -13,6 +14,7 @@
   "item.phoenixtales.invar_nugget": "Invar Nugget",
   "item.phoenixtales.invar_part": "Invar Machine Part",
   "item.phoenixtales.metal_saw": "Metal Saw",
+  "item.phoenixtales.hammer": "Hammer",
   "item.phoenixtales.silicon": "Silicon",
   "item.phoenixtales.p_doped_silicon": "Silicon (p-doped)",
   "item.phoenixtales.n_doped_silicon": "Silicon (n-doped)",
@@ -32,6 +34,7 @@
   "item.phoenixtales.slag": "Slag",
   "item.phoenixtales.glass_shard": "Glass Shard",
   "item.phoenixtales.rotten_heart": "Rotten Heart",
+
 
   "block.phoenixtales.vanadium_ore": "Vanadium Ore",
   "block.phoenixtales.sulfur_ore": "Sulfur Ore",
@@ -91,6 +94,7 @@
   "block.phoenixtales.press_factory": "Press Factory",
   "block.phoenixtales.enhancing_factory": "Enhancing Factory",
   "block.phoenixtales.simple_ht_factory": "Simple HT-Factory",
+  "block.phoenixtales.engineers_anvil": "Engineer's Anvil",
 
   "screen.phoenixtales.energy_store": "Energy Store",
   "screen.phoenixtales.assembler": "Assembler",
