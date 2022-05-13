@@ -2,7 +2,6 @@ package com.phoenix.phoenixtales.core;
 
 import com.phoenix.phoenixtales.fall.item.FallItems;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
-import com.phoenix.phoenixtales.origins.block.OriginsTileEntities;
 import com.phoenix.phoenixtales.origins.item.OriginsItems;
 import com.phoenix.phoenixtales.origins.world.feature.TalesFeatures;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
@@ -13,7 +12,6 @@ import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
