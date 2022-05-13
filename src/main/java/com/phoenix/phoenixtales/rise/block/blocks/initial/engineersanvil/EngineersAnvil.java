@@ -32,7 +32,7 @@ public class EngineersAnvil extends Block {
     private final VoxelShape SHAPE = Block.makeCuboidShape(0, 0, 0, 16, 9, 16);
 
     public EngineersAnvil() {
-        super(AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.IRON).setRequiresTool().hardnessAndResistance(7.0F, 1200.0F).sound(SoundType.ANVIL));
+        super(AbstractBlock.Properties.create(Material.ANVIL, MaterialColor.IRON).setRequiresTool().notSolid().hardnessAndResistance(7.0F, 1200.0F).sound(SoundType.ANVIL));
         this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH));
     }
 
@@ -43,11 +43,11 @@ public class EngineersAnvil extends Block {
             EngineersAnvilTile tile = (EngineersAnvilTile) tileEntity;
             ItemStack item = player.getHeldItem(handIn);
             if (item.getItem() instanceof Hammer) {
-                if (!player.abilities.isCreativeMode) {
-                    Hammer.damage(item, 7);
+                if (tile.craft()) {
+                    if (!player.abilities.isCreativeMode) {
+                        Hammer.damage(item, 7);
+                    }
                 }
-                //craft here
-                tile.craft();
                 return ActionResultType.SUCCESS;
             } else {
                 InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tile.getStackCopied());

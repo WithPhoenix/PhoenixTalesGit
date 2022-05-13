@@ -22,13 +22,14 @@ public class EngineersAnvilRenderer extends TileEntityRenderer<EngineersAnvilTil
         Direction direction = tileEntityIn.getBlockState().get(EngineersAnvil.FACING).getOpposite();
         ItemStack stack = tileEntityIn.getStack();
 
+        //TODO change ingot textures
         if (stack != ItemStack.EMPTY) {
             matrixStackIn.push();
             matrixStackIn.translate(0.5d, 0.55d, 0.5d);
             Direction direction1 = Direction.byHorizontalIndex((direction.getHorizontalIndex()) % 4);
             float f = direction1.getHorizontalAngle();
             matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
-            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(270.0F));
+            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
             matrixStackIn.scale(0.5F, 0.5F, 0.5F);
             Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn,combinedOverlayIn,matrixStackIn, bufferIn);
             matrixStackIn.pop();

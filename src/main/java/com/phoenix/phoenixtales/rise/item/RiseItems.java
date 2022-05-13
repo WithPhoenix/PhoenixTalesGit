@@ -51,15 +51,19 @@ public class RiseItems {
     //vanadium based
     public static final Item INGOT_VANADIUM = createItem("vanadium_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NUGGET_VANADIUM = createItem("vanadium_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item VANADIUM_PLATE = createItem("vanadium_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item VANADIUM_MACHINE_PART = createItem("vanadium_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     //invar based
     public static final Item INGOT_INVAR = createItem("invar_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NUGGET_INVAR = createItem("invar_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item INVAR_PLATE = createItem("invar_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item INVAR_MACHINE_PART = createItem("invar_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     //nickel based
     public static final Item INGOT_NICKEL = createItem("nickel_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NUGGET_NICKEL = createItem("nickel_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item NICKEL_PLATE = createItem("nickel_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NICKEL_MACHINE_PART = createItem("nickel_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+
     public static final Item METAL_SAW = createItem("metal_saw", new MetalSaw());
     public static final Item HAMMER = createItem("hammer", new Hammer());
     public static final Item CONFIGURATOR = createItem("configurator", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));

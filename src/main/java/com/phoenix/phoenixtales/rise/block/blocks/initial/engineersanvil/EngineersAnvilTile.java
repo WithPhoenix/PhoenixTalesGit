@@ -1,9 +1,10 @@
 package com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.IClearable;
-import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -44,16 +45,14 @@ public class EngineersAnvilTile extends TileEntity implements IClearable {
         this.markDirty();
     }
 
-    public void craft() {
-        //drop Item, after crafting
-    }
-
-    public void dropAllItems() {
-        if (this.world != null) {
-            if (!this.world.isRemote) {
-                InventoryHelper.spawnItemStack(world, (double) this.pos.getX(), (double) pos.getY(), (double) pos.getZ(), this.getStack());
-            }
+    public boolean craft() {
+        ForgingRecipe recipe = world != null ? world.getRecipeManager().getRecipe(RiseRecipeTypes.FORGING_RECIPE, new Inventory(this.getStack()), world).orElse(null) : null;
+        if (recipe != null) {
+            this.setStack(recipe.getRecipeOutput());
+            return true;
         }
+        //drop Item, after crafting
+        return false;
     }
 
     @Override

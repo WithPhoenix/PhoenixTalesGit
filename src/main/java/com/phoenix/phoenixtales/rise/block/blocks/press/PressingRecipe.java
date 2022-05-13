@@ -20,7 +20,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class PressingRecipe implements IPressing {
-
     private final ResourceLocation id;
     private final Ingredient input;
     private final ItemStack output;
