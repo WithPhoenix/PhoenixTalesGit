@@ -4,6 +4,8 @@ import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.core.creativetab.BlockTab;
 import com.phoenix.phoenixtales.core.creativetab.ItemTab;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
+import com.phoenix.phoenixtales.rise.item.items.EnergyHolder;
+import com.phoenix.phoenixtales.rise.item.items.Hammer;
 import com.phoenix.phoenixtales.rise.item.items.MetalSaw;
 import com.phoenix.phoenixtales.rise.item.items.Phosphorus;
 import net.minecraft.item.Item;
@@ -71,8 +73,6 @@ public class RiseItems {
     public static final Item ENHANCED_REDSTONE = createItem("enhanced_redstone", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item SIMPLE_CONTROLLER = createItem("simple_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item ADVANCED_CONTROLLER = createItem("advanced_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
-
-    public static final Item ENERGY_HOLDER = createItem("energy_holder", new EnergyHolder());
 
     public static final Item CERAMIC_BLEND = createItem("ceramic_blend", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item CERAMIC = createItem("ceramic", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
