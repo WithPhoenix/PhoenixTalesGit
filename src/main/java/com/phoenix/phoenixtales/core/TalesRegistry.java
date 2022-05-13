@@ -46,15 +46,6 @@ public class TalesRegistry {
     }
 
     @SubscribeEvent
-    public static void registerTiles(RegistryEvent.Register<TileEntityType<?>> event) {
-
-        //TODO replace this with @Object holder
-        for (TileEntityType<?> tile : OriginsTileEntities.tiles) {
-            event.getRegistry().register(tile);
-        }
-    }
-
-    @SubscribeEvent
     public static void registerContainers(RegistryEvent.Register<ContainerType<?>> event) {
         for (ContainerType<?> container : RiseContainers.containers) {
             event.getRegistry().register(container);
