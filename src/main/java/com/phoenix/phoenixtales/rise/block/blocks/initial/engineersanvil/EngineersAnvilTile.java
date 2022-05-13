@@ -62,7 +62,6 @@ public class EngineersAnvilTile extends TileEntity implements IClearable {
             this.setStack(recipe.getRecipeOutput());
             return true;
         }
-        //drop Item, after crafting
         return false;
     }
 

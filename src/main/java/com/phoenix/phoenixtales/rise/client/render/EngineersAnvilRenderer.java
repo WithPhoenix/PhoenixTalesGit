@@ -22,7 +22,6 @@ public class EngineersAnvilRenderer extends TileEntityRenderer<EngineersAnvilTil
         Direction direction = tileEntityIn.getBlockState().get(EngineersAnvil.FACING).getOpposite();
         ItemStack stack = tileEntityIn.getStack();
 
-        //TODO change ingot textures
         if (stack != ItemStack.EMPTY) {
             matrixStackIn.push();
             matrixStackIn.translate(0.5d, 0.55d, 0.5d);
