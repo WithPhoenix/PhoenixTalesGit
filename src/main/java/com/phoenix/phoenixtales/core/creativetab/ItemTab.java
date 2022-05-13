@@ -4,16 +4,21 @@ import com.phoenix.phoenixtales.origins.item.OriginsItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
-public class TalesTabItem extends ItemGroup {
+import javax.annotation.Nonnull;
 
-    public static final TalesTabItem TAB_ITEM = new TalesTabItem(ItemGroup.GROUPS.length, "tab_item");
+public class ItemTab extends ItemGroup {
 
-    public TalesTabItem(int index, String label) {
+    public static final ItemTab ITEM_GROUP = new ItemTab(ItemGroup.GROUPS.length, "origins_item_group");
+
+    public ItemTab(int index, String label) {
         super(index, label);
+//        setBackgroundImageName("phoenixtech.png");
     }
 
+    @Nonnull
     @Override
     public ItemStack createIcon() {
         return new ItemStack(OriginsItems.SULFUR);
     }
+
 }

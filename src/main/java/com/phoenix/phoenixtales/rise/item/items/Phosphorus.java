@@ -12,15 +12,11 @@ public class Phosphorus extends RiseItem {
     public Phosphorus() {
         super(new Item.Properties().group(ItemTab.ITEM_GROUP));
     }
+
     //TODO implement the different types of phosphor and change the burn time also you have to put it into a special item (storage vessel? vial? phial?)
 //can i use the bundle and change it a bit
     @Override
     public int getBurnTime(ItemStack itemStack, @Nullable IRecipeType<?> recipeType) {
         return 3000;
-    }
-
-    @Override
-    public boolean isRepairable(ItemStack stack) {
-        return super.isRepairable(stack);
     }
 }
