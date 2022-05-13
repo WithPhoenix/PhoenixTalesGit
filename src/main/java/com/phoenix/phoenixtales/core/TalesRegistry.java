@@ -4,12 +4,11 @@ import com.phoenix.phoenixtales.fall.item.FallItems;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.block.OriginsTileEntities;
 import com.phoenix.phoenixtales.origins.item.OriginsItems;
-import com.phoenix.phoenixtales.origins.world.gen.feature.TalesFeatures;
-import com.phoenix.phoenixtales.rise.RiseRecipeTypes;
+import com.phoenix.phoenixtales.origins.world.feature.TalesFeatures;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
-import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import com.phoenix.phoenixtales.rise.item.RiseItems;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
@@ -48,9 +47,8 @@ public class TalesRegistry {
 
     @SubscribeEvent
     public static void registerTiles(RegistryEvent.Register<TileEntityType<?>> event) {
-        for (TileEntityType<?> tile : RiseTileEntities.tiles) {
-            event.getRegistry().register(tile);
-        }
+
+        //TODO replace this with @Object holder
         for (TileEntityType<?> tile : OriginsTileEntities.tiles) {
             event.getRegistry().register(tile);
         }
