@@ -26,10 +26,21 @@ public class EngineersAnvilTile extends TileEntity implements IClearable {
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
+        this.writeStack(compound);
+        return compound;
+    }
+
+    private CompoundNBT writeStack(CompoundNBT compound) {
+        super.write(compound);
         if (!this.getStack().isEmpty()) {
             compound.put("stack", this.getStack().write(new CompoundNBT()));
         }
-        return super.write(compound);
+        return compound;
+    }
+
+    @Override
+    public CompoundNBT getUpdateTag() {
+        return this.writeStack(new CompoundNBT());
     }
 
     public ItemStack getStack() {
