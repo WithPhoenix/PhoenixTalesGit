@@ -226,7 +226,6 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
                 BlockPos pos1 = pos.offset(d);
                 if (reader.getBlockState(pos1) != log) {
                     reader.setBlockState(pos1, leave, 3);
-
                 }
             }
         }
@@ -235,21 +234,6 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
     //the following methods are for the roots
 /////////////*******************************************************************************************************\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    //todo may be even decide which one im using
-    //TODO should the roots go out at the beginning and then go down
-    /*
-            #
-           ##
-           #
-           #
-          #
-     */
-    //TODO or should the roots go out and at the end down
-    /*
-               ##
-            ###
-          ##
-     */
     private void placeRoot(ISeedReader reader, BlockPos posIn, BlockPos trunk, Random random, int out) {
         int start = random.nextInt(2) - 1;
         posIn = posIn.add(0, start, 0);

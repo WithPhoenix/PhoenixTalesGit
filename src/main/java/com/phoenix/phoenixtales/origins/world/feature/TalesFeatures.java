@@ -26,6 +26,7 @@ public class TalesFeatures {
     public static final Feature<NoFeatureConfig> HUI_TREE_FEATURE = createFeature("hui_tree_feature", new HuiTreeFeature(NoFeatureConfig.CODEC.stable()));
     public static final Feature<NoFeatureConfig> HUI_BUSH_FEATURE = createFeature("hui_bush_feature", new HuiBushFeature(NoFeatureConfig.CODEC.stable()));
 
+
     public static final class States {
         protected static final BlockState HUO_LEAVES = OriginsBlocks.HUO_LEAVES.getDefaultState();
         protected static final BlockState HUO_LOG = OriginsBlocks.HUO_LOG.getDefaultState();
