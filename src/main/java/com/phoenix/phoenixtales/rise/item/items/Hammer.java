@@ -12,15 +12,20 @@ public class Hammer extends RiseItem {
     @Override
     public ItemStack getContainerItem(ItemStack itemStack) {
         ItemStack stack = itemStack.copy();
-        if (stack.attemptDamageItem(1, random, null)) {
+        if (stack.attemptDamageItem(5, random, null)) {
             return ItemStack.EMPTY;
         } else {
             return stack;
         }
     }
 
-    public static void damage(ItemStack stack, int amount) {
-        stack.attemptDamageItem(amount, random, null);
+    public static ItemStack damage(ItemStack stack, int amount) {
+        ItemStack stack1 = stack.copy();
+        if (stack1.attemptDamageItem(amount, random, null)) {
+            return ItemStack.EMPTY;
+        } else {
+            return stack1;
+        }
     }
 
     @Override

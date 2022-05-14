@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    " i ",
+    "iii"
+  ],
+  "key": {
+    "#": {
+      "item": "phoenixtales:vanadium_block"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:engineers_anvil",
+    "count": 1
+  }
+}

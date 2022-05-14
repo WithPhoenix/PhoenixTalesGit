@@ -45,7 +45,9 @@ public class EngineersAnvil extends Block {
             if (item.getItem() instanceof Hammer) {
                 if (tile.craft()) {
                     if (!player.abilities.isCreativeMode) {
-                        Hammer.damage(item, 7);
+                      item.damageItem(5, player, onBroken -> {
+                          player.setHeldItem(handIn, ItemStack.EMPTY);
+                      });
                     }
                 }
                 return ActionResultType.SUCCESS;
