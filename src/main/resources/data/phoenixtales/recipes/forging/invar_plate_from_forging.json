@@ -1,0 +1,9 @@
+{
+  "type": "phoenixtales:forging",
+  "input": {
+    "item": "phoenixtales:invar_ingot"
+  },
+  "output": {
+    "item": "phoenixtales:invar_plate"
+  }
+}
