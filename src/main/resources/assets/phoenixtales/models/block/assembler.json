@@ -2,7 +2,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "phoenixtales:block/assembler",
-		"particle": "phoenixtales:block/assembler"
+		"particle": "phoenixtales:block/invar_block"
 	},
 	"elements": [
 		{

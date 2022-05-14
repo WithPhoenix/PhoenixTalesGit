@@ -1,13 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " # ",
-    "# #",
-    " # "
+    "PPP",
+    "###",
+    "PPP"
   ],
   "key": {
     "#": {
       "item": "phoenixtales:vanadium_part"
+    },
+    "P": {
+      "item": "phoenixtales:vanadium_plate"
     }
   },
   "result": {
