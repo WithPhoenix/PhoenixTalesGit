@@ -44,7 +44,6 @@ public class ClientSetup {
             registerScreens();
 
             bindTileRenderers();
-
         });
         bindEntityRenderers();
     }
@@ -80,12 +79,10 @@ public class ClientSetup {
     }
 
     private static void registerScreens() {
-//        ScreenManager.registerFactory(OriginsContainers.CHANGE_BLOCK_CONTAINER_TYPE.get(), ChangeScreen::new);
         ScreenManager.registerFactory(RiseContainers.ENERGY_STORE_CONTAINER, EnergyStoreScreen::new);
         ScreenManager.registerFactory(RiseContainers.ASSEMBLER_CONTAINER, AssemblerScreen::new);
         ScreenManager.registerFactory(RiseContainers.PRESS_CONTAINER, PressScreen::new);
         ScreenManager.registerFactory(RiseContainers.ALLOY_CONTAINER, AlloyScreen::new);
-//        ScreenManager.registerFactory(OriginsContainers.ENHANCING_CONTAINER.get(), EnhancingScreen::new);
     }
 
     private static void bindTileRenderers() {
