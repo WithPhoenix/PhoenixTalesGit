@@ -4,7 +4,6 @@ import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.core.creativetab.BlockTab;
 import com.phoenix.phoenixtales.core.creativetab.ItemTab;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
-import com.phoenix.phoenixtales.rise.item.items.EnergyHolder;
 import com.phoenix.phoenixtales.rise.item.items.Hammer;
 import com.phoenix.phoenixtales.rise.item.items.MetalSaw;
 import com.phoenix.phoenixtales.rise.item.items.Phosphorus;
@@ -53,16 +52,16 @@ public class RiseItems {
     public static final Item NUGGET_VANADIUM = createItem("vanadium_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item VANADIUM_PLATE = createItem("vanadium_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item VANADIUM_MACHINE_PART = createItem("vanadium_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
-    //invar based
-    public static final Item INGOT_INVAR = createItem("invar_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
-    public static final Item NUGGET_INVAR = createItem("invar_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
-    public static final Item INVAR_PLATE = createItem("invar_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
-    public static final Item INVAR_MACHINE_PART = createItem("invar_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     //nickel based
     public static final Item INGOT_NICKEL = createItem("nickel_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NUGGET_NICKEL = createItem("nickel_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NICKEL_PLATE = createItem("nickel_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NICKEL_MACHINE_PART = createItem("nickel_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    //invar based
+    public static final Item INGOT_INVAR = createItem("invar_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item NUGGET_INVAR = createItem("invar_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item INVAR_PLATE = createItem("invar_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item INVAR_MACHINE_PART = createItem("invar_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     public static final Item METAL_SAW = createItem("metal_saw", new MetalSaw());
     public static final Item HAMMER = createItem("hammer", new Hammer());
@@ -73,6 +72,8 @@ public class RiseItems {
     public static final Item ENHANCED_REDSTONE = createItem("enhanced_redstone", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item SIMPLE_CONTROLLER = createItem("simple_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item ADVANCED_CONTROLLER = createItem("advanced_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+
+    public static final Item MECHANICAL_ARM = createItem("mechanical_arm", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     public static final Item CERAMIC_BLEND = createItem("ceramic_blend", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item CERAMIC = createItem("ceramic", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
