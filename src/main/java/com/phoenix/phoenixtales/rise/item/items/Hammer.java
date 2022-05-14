@@ -19,15 +19,6 @@ public class Hammer extends RiseItem {
         }
     }
 
-    public static ItemStack damage(ItemStack stack, int amount) {
-        ItemStack stack1 = stack.copy();
-        if (stack1.attemptDamageItem(amount, random, null)) {
-            return ItemStack.EMPTY;
-        } else {
-            return stack1;
-        }
-    }
-
     @Override
     public boolean hasContainerItem(ItemStack stack) {
         return true;
