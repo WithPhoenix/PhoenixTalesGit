@@ -22,7 +22,6 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,9 +44,9 @@ public class EngineersAnvil extends Block {
             if (item.getItem() instanceof Hammer) {
                 if (tile.craft()) {
                     if (!player.abilities.isCreativeMode) {
-                      item.damageItem(5, player, onBroken -> {
-                          player.setHeldItem(handIn, ItemStack.EMPTY);
-                      });
+                        item.damageItem(5, player, onBroken -> {
+                            player.setHeldItem(handIn, ItemStack.EMPTY);
+                        });
                     }
                 }
                 return ActionResultType.SUCCESS;
@@ -93,7 +92,7 @@ public class EngineersAnvil extends Block {
     }
 
     @Override
-    public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
+    public BlockState rotate(BlockState state, Rotation direction) {
         return state.with(FACING, direction.rotate(state.get(FACING)));
     }
 
