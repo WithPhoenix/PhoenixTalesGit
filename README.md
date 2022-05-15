@@ -1,9 +1,9 @@
 # PhoenixTales: Origins
-this project is still in dev
 
-# Plans for this mod
+# Content
     -custom dimension with boss-fight
     -quests and lore (?)
+    -you'll have to decide between magic or science/technic
 
 ## Choose between
 >**magic branch**
