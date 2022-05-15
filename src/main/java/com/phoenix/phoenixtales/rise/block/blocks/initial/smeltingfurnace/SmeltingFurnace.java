@@ -46,15 +46,13 @@ public abstract class SmeltingFurnace extends Block {
         builder.add(LIT);
     }
 
-    public static boolean isBuild(BlockState state, World world, int id) {
-        switch (id) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 3:
-                break;
-        }
+    public static boolean isBuild(BlockState state, BlockPos pod, World world) {
+       if(state.getBlock() instanceof SmeltingFurnaceBottom){
+         
+}else if (state.getBlock() instance SmeltingFurnaceMid ){
+
+}else if(state.getBlock() instance SmeltingFurnaceTop) {
+}
         return false;
     }
 }
