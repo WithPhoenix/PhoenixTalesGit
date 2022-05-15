@@ -49,9 +49,9 @@ public abstract class SmeltingFurnace extends Block {
     public static boolean isBuild(BlockState state, BlockPos pod, World world) {
        if(state.getBlock() instanceof SmeltingFurnaceBottom){
          
-}else if (state.getBlock() instance SmeltingFurnaceMid ){
+}else if (state.getBlock() instanceof SmeltingFurnaceMid ){
 
-}else if(state.getBlock() instance SmeltingFurnaceTop) {
+}else if(state.getBlock() instanceof SmeltingFurnaceTop) {
 }
         return false;
     }
