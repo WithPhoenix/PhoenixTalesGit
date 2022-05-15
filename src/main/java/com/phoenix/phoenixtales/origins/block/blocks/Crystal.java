@@ -28,7 +28,6 @@ public class Crystal extends Block {
 
     public Crystal() {
         super(AbstractBlock.Properties.create(Material.GLASS).hardnessAndResistance(0.6F).sound(SoundType.NETHER_ORE).notSolid());
-
         this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH));
     }
 
