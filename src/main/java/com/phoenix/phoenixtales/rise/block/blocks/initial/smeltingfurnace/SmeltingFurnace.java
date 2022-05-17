@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 public abstract class SmeltingFurnace extends Block {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
+
     public SmeltingFurnace() {
         super(Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().hardnessAndResistance(1.25F, 4.2F));
         this.setDefaultState(this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(false)));
@@ -46,15 +47,14 @@ public abstract class SmeltingFurnace extends Block {
         builder.add(LIT);
     }
 
-    public static boolean isBuild(BlockState state, BlockPos pod, World world) {
-       if(state.getBlock() instanceof SmeltingFurnaceBottom){
-         BlockState mid = world.getBlockState(pos.up());
-         BlockState top = world.getBlockState(pos.up(2));
-return mid.getBlock() instanceof SmeltingFurnaceMid || top.getBlock() istanceof SmeltingFurnaceTop;
-}else if (state.getBlock() instanceof SmeltingFurnaceMid ){
-
-}else if(state.getBlock() instanceof SmeltingFurnaceTop) {
-}
+    public static boolean isBuild(BlockState state, BlockPos pos, World world) {
+        if (state.getBlock() instanceof SmeltingFurnaceBottom) {
+            BlockState top = world.getBlockState(pos.up());
+            return top.getBlock() instanceof SmeltingFurnaceTop;
+        } else if (state.getBlock() instanceof SmeltingFurnaceTop) {
+            BlockState bot = world.getBlockState(pos.down());
+            return bot.getBlock() instanceof SmeltingFurnaceBottom;
+        }
         return false;
     }
 }

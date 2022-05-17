@@ -31,7 +31,6 @@ public class RiseItems {
     public static final Item ENGINEERS_ANVIL = createItem("engineers_anvil", new RiseBlockItem(RiseBlocks.ENGINEERS_ANVIL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 
     public static final Item SMELTING_FURNACE_UP = createItem("smelting_furnace_upper", new RiseBlockItem(RiseBlocks.SMELTING_FURNACE_TOP, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
-    public static final Item SMELTING_FURNACE_MIF = createItem("smelting_furnace_mid", new RiseBlockItem(RiseBlocks.SMELTING_FURNACE_MID, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item SMELTING_FURNACE_DOWN = createItem("smelting_furnace_lower", new RiseBlockItem(RiseBlocks.SMELTING_FURNACE_BOTTOM, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 
     public static final Item VANADIUM_CHASSIS = createItem("vanadium_chassis", new RiseBlockItem(RiseBlocks.VANADIUM_CHASSIS, new Item.Properties().group(BlockTab.BLOCK_GROUP)));

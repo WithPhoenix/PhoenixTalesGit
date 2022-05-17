@@ -30,8 +30,12 @@ public class SmeltingFurnaceBottom extends SmeltingFurnace {
     @SuppressWarnings("deprecation")
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        ItemStack item = player.getHeldItem(handIn);
-        if (item.getItem() instanceof FlintAndSteelItem) {
+        if (SmeltingFurnace.isBuild(state, pos, worldIn)) {
+            ItemStack item = player.getHeldItem(handIn);
+            if (item.getItem() instanceof FlintAndSteelItem) {
+                worldIn.setBlockState(pos, state.with(SmeltingFurnace.LIT, Boolean.valueOf(true)));
+                item.damageItem(2, player, p -> p.sendBreakAnimation(handIn));
+            }
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
     }
@@ -41,7 +45,7 @@ public class SmeltingFurnaceBottom extends SmeltingFurnace {
         if (newState.getBlock() == state.getBlock()) {
             return;
         }
-        if (worldIn.getBlockState(pos.up()).matchesBlock(RiseBlocks.SMELTING_FURNACE_MID)) {
+        if (worldIn.getBlockState(pos.up()).matchesBlock(RiseBlocks.SMELTING_FURNACE_TOP)) {
             worldIn.destroyBlock(pos.up(), true);
         }
         super.onReplaced(state, worldIn, pos, newState, isMoving);

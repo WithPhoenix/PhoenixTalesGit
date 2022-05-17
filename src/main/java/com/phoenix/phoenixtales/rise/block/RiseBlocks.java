@@ -7,7 +7,6 @@ import com.phoenix.phoenixtales.rise.block.blocks.cable.*;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStore;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil.EngineersAnvil;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceBottom;
-import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceMid;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceTop;
 import com.phoenix.phoenixtales.rise.block.blocks.press.PressFactory;
 import com.phoenix.phoenixtales.rise.block.blocks.tank.TankBlock;
@@ -49,9 +48,7 @@ public class RiseBlocks {
 
     //these blocks are for start up
     public static final Block ENGINEERS_ANVIL = createBlock("engineers_anvil", new EngineersAnvil());
-
     public static final Block SMELTING_FURNACE_TOP = createBlock("smelting_furnace_upper", new SmeltingFurnaceTop());
-    public static final Block SMELTING_FURNACE_MID = createBlock("smelting_furnace_mid", new SmeltingFurnaceMid());
     public static final Block SMELTING_FURNACE_BOTTOM = createBlock("smelting_furnace_lower", new SmeltingFurnaceBottom());
 
     //machines and tech related blocks
