@@ -27,13 +27,16 @@ public class SmeltingFurnaceBottom extends SmeltingFurnace {
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, Boolean.valueOf(false)));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (SmeltingFurnace.isBuild(state, pos, worldIn)) {
+            //TODO there have to be items in the furnace to light
+
+
             ItemStack item = player.getHeldItem(handIn);
             if (item.getItem() instanceof FlintAndSteelItem) {
                 worldIn.setBlockState(pos, state.with(SmeltingFurnace.LIT, Boolean.valueOf(true)));
+                worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(SmeltingFurnace.LIT, Boolean.valueOf(true)));
                 item.damageItem(2, player, p -> p.sendBreakAnimation(handIn));
             }
         }

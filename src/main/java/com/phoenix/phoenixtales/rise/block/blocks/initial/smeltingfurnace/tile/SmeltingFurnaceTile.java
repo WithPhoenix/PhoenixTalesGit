@@ -1,4 +1,4 @@
-package com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace;
+package com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile;
 
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
