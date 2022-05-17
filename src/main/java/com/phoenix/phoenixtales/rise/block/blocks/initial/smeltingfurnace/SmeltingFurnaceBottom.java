@@ -49,7 +49,7 @@ public class SmeltingFurnaceBottom extends SmeltingFurnace {
             return;
         }
         if (worldIn.getBlockState(pos.up()).matchesBlock(RiseBlocks.SMELTING_FURNACE_TOP)) {
-            worldIn.destroyBlock(pos.up(), true);
+            worldIn.destroyBlock(pos.up(), false);
         }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
