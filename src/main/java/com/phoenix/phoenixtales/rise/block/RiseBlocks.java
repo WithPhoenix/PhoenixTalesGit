@@ -3,7 +3,7 @@ package com.phoenix.phoenixtales.rise.block;
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.alloyfactory.AlloyFactory;
 import com.phoenix.phoenixtales.rise.block.blocks.assembler.Assembler;
-import com.phoenix.phoenixtales.rise.block.blocks.cable.*;
+import com.phoenix.phoenixtales.rise.block.blocks.cable.TestBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStore;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil.EngineersAnvil;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceBottom;
@@ -31,6 +31,7 @@ public class RiseBlocks {
     public static final Block ORE_NICKEL = createBlock("nickel_ore", new Block(AbstractBlock.Properties.create((Material.ROCK), MaterialColor.GRAY).hardnessAndResistance(5f, 6f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
     public static final Block ORE_KERNITE = createBlock("kernite_ore", new Block(AbstractBlock.Properties.create((Material.ROCK), MaterialColor.LIGHT_GRAY).hardnessAndResistance(3f, 3f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
     public static final Block ORE_APATITE = createBlock("apatite_ore", new Block(AbstractBlock.Properties.create((Material.ROCK), MaterialColor.LIGHT_GRAY).hardnessAndResistance(3f, 3f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
+    public static final Block ORE_TIN = createBlock("tin_ore", new Block(AbstractBlock.Properties.create((Material.ROCK), MaterialColor.LIGHT_GRAY).hardnessAndResistance(3f, 3f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
 
     //metal blocks
     public static final Block BLOCK_VANADIUM = createBlock("vanadium_block", new Block(AbstractBlock.Properties.create((Material.IRON), MaterialColor.GRAY).hardnessAndResistance(10f, 10f).harvestTool(ToolType.PICKAXE).harvestLevel(3).sound(SoundType.METAL).setRequiresTool()));
@@ -48,8 +49,9 @@ public class RiseBlocks {
 
     //these blocks are for start up
     public static final Block ENGINEERS_ANVIL = createBlock("engineers_anvil", new EngineersAnvil());
-    public static final Block SMELTING_FURNACE_TOP = createBlock("smelting_furnace_upper", new SmeltingFurnaceTop());
     public static final Block SMELTING_FURNACE_BOTTOM = createBlock("smelting_furnace_lower", new SmeltingFurnaceBottom());
+    public static final Block SMELTING_FURNACE_TOP = createBlock("smelting_furnace_upper", new SmeltingFurnaceTop());
+//    public static final Block SOLDERING_TABLE = createBlock("soldering_table", new SolderingTable());
 
     //machines and tech related blocks
 //    public static final Block SIMPLE_CABLE = createBlock("simple_cable", new SimpleCable());

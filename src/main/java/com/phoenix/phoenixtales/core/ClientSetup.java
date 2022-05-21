@@ -61,7 +61,6 @@ public class ClientSetup {
 
         RenderTypeLookup.setRenderLayer(OriginsBlocks.SEARING_GRASS, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.SEARING_FERN, RenderType.getCutout());
-
         RenderTypeLookup.setRenderLayer(OriginsBlocks.TALL_SEARING_GRASS, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.LARGE_SEARING_FERN, RenderType.getCutout());
 

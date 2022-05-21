@@ -30,8 +30,8 @@ public class RiseItems {
     public static final Item BLOCK_INVAR = createItem("invar_block", new RiseBlockItem(RiseBlocks.BLOCK_INVAR, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ENGINEERS_ANVIL = createItem("engineers_anvil", new RiseBlockItem(RiseBlocks.ENGINEERS_ANVIL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 
-    public static final Item SMELTING_FURNACE_UP = createItem("smelting_furnace_upper", new RiseBlockItem(RiseBlocks.SMELTING_FURNACE_TOP, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item SMELTING_FURNACE_DOWN = createItem("smelting_furnace_lower", new RiseBlockItem(RiseBlocks.SMELTING_FURNACE_BOTTOM, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item SMELTING_FURNACE_UP = createItem("smelting_furnace_upper", new RiseBlockItem(RiseBlocks.SMELTING_FURNACE_TOP, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 
     public static final Item VANADIUM_CHASSIS = createItem("vanadium_chassis", new RiseBlockItem(RiseBlocks.VANADIUM_CHASSIS, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item CERAMIC_BLOCK = createItem("ceramic_block", new RiseBlockItem(RiseBlocks.CERAMIC_BLOCK, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
@@ -50,6 +50,8 @@ public class RiseItems {
     public static final Item P_DOPED_SILICON = createItem("p_doped_silicon", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item N_DOPED_SILICON = createItem("n_doped_silicon", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
+    //steel based
+
     //vanadium based
     public static final Item INGOT_VANADIUM = createItem("vanadium_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NUGGET_VANADIUM = createItem("vanadium_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
@@ -65,6 +67,8 @@ public class RiseItems {
     public static final Item NUGGET_INVAR = createItem("invar_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item INVAR_PLATE = createItem("invar_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item INVAR_MACHINE_PART = createItem("invar_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+
+    public static final Item TIN_SOLDER = createItem("tin_solder", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     public static final Item METAL_SAW = createItem("metal_saw", new MetalSaw());
     public static final Item HAMMER = createItem("hammer", new Hammer());

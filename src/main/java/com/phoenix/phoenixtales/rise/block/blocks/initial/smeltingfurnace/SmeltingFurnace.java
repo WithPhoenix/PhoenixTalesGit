@@ -1,13 +1,16 @@
 package com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace;
 
+import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile.SmeltingFurnaceTile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -19,7 +22,7 @@ public abstract class SmeltingFurnace extends Block {
 
 
     public SmeltingFurnace() {
-        super(Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().hardnessAndResistance(1.25F, 4.2F));
+        super(Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().notSolid().hardnessAndResistance(1.25F, 4.2F));
         this.setDefaultState(this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(false)));
     }
 
@@ -28,11 +31,10 @@ public abstract class SmeltingFurnace extends Block {
         if (newState.getBlock() == state.getBlock()) {
             return;
         }
-//        TileEntity tileentity = worldIn.getTileEntity(pos);
-//        if (tileentity instanceof SmeltingFurnaceTile) {
-//
-//        }
-
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        if (tileentity instanceof SmeltingFurnaceTile) {
+            InventoryHelper.dropItems(worldIn, pos, ((SmeltingFurnaceTile) tileentity).getItems());
+        }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 
