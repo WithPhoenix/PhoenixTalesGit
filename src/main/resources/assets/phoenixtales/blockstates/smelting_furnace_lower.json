@@ -1,32 +1,122 @@
 {
   "variants": {
-    "facing=east,lit=false": {
+    "facing=east,lit=false,build=1": {
       "model": "phoenixtales:block/smelting_furnace_lower",
       "y": 90
     },
-    "facing=east,lit=true": {
+    "facing=east,lit=true,build=1": {
       "model": "phoenixtales:block/smelting_furnace_lower_on",
       "y": 90
     },
-    "facing=north,lit=false": {
+    "facing=north,lit=false,build=1": {
       "model": "phoenixtales:block/smelting_furnace_lower"
     },
-    "facing=north,lit=true": {
+    "facing=north,lit=true,build=1": {
       "model": "phoenixtales:block/smelting_furnace_lower_on"
     },
-    "facing=south,lit=false": {
+    "facing=south,lit=false,build=1": {
       "model": "phoenixtales:block/smelting_furnace_lower",
       "y": 180
     },
-    "facing=south,lit=true": {
+    "facing=south,lit=true,build=1": {
       "model": "phoenixtales:block/smelting_furnace_lower_on",
       "y": 180
     },
-    "facing=west,lit=false": {
+    "facing=west,lit=false,build=1": {
       "model": "phoenixtales:block/smelting_furnace_lower",
       "y": 270
     },
-    "facing=west,lit=true": {
+    "facing=west,lit=true,build=1": {
+      "model": "phoenixtales:block/smelting_furnace_lower_on",
+      "y": 270
+    },
+    "facing=east,lit=false,build=2": {
+      "model": "phoenixtales:block/smelting_furnace_lower",
+      "y": 90
+    },
+    "facing=east,lit=true,build=2": {
+      "model": "phoenixtales:block/smelting_furnace_lower_on",
+      "y": 90
+    },
+    "facing=north,lit=false,build=2": {
+      "model": "phoenixtales:block/smelting_furnace_lower"
+    },
+    "facing=north,lit=true,build=2": {
+      "model": "phoenixtales:block/smelting_furnace_lower_on"
+    },
+    "facing=south,lit=false,build=2": {
+      "model": "phoenixtales:block/smelting_furnace_lower",
+      "y": 180
+    },
+    "facing=south,lit=true,build=2": {
+      "model": "phoenixtales:block/smelting_furnace_lower_on",
+      "y": 180
+    },
+    "facing=west,lit=false,build=2": {
+      "model": "phoenixtales:block/smelting_furnace_lower",
+      "y": 270
+    },
+    "facing=west,lit=true,build=2": {
+      "model": "phoenixtales:block/smelting_furnace_lower_on",
+      "y": 270
+    },
+    "facing=east,lit=false,build=3": {
+      "model": "phoenixtales:block/smelting_furnace_lower",
+      "y": 90
+    },
+    "facing=east,lit=true,build=3": {
+      "model": "phoenixtales:block/smelting_furnace_lower_on",
+      "y": 90
+    },
+    "facing=north,lit=false,build=3": {
+      "model": "phoenixtales:block/smelting_furnace_lower"
+    },
+    "facing=north,lit=true,build=3": {
+      "model": "phoenixtales:block/smelting_furnace_lower_on"
+    },
+    "facing=south,lit=false,build=3": {
+      "model": "phoenixtales:block/smelting_furnace_lower",
+      "y": 180
+    },
+    "facing=south,lit=true,build=3": {
+      "model": "phoenixtales:block/smelting_furnace_lower_on",
+      "y": 180
+    },
+    "facing=west,lit=false,build=3": {
+      "model": "phoenixtales:block/smelting_furnace_lower",
+      "y": 270
+    },
+    "facing=west,lit=true,build=3": {
+      "model": "phoenixtales:block/smelting_furnace_lower_on",
+      "y": 270
+    },
+    "facing=east,lit=false,build=4": {
+      "model": "phoenixtales:block/smelting_furnace_lower",
+      "y": 90
+    },
+    "facing=east,lit=true,build=4": {
+      "model": "phoenixtales:block/smelting_furnace_lower_on",
+      "y": 90
+    },
+    "facing=north,lit=false,build=4": {
+      "model": "phoenixtales:block/smelting_furnace_lower"
+    },
+    "facing=north,lit=true,build=4": {
+      "model": "phoenixtales:block/smelting_furnace_lower_on"
+    },
+    "facing=south,lit=false,build=4": {
+      "model": "phoenixtales:block/smelting_furnace_lower",
+      "y": 180
+    },
+    "facing=south,lit=true,build=4": {
+      "model": "phoenixtales:block/smelting_furnace_lower_on",
+      "y": 180
+    },
+    "facing=west,lit=false,build=4": {
+      "model": "phoenixtales:block/smelting_furnace_lower",
+      "y": 270
+    },
+    "facing=west,lit=true,build=4": {
       "model": "phoenixtales:block/smelting_furnace_lower_on",
       "y": 270
     }

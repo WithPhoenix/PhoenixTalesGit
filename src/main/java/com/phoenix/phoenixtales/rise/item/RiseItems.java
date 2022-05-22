@@ -4,6 +4,7 @@ import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.core.creativetab.BlockTab;
 import com.phoenix.phoenixtales.core.creativetab.ItemTab;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
+import com.phoenix.phoenixtales.rise.item.items.ClayAndGravelItem;
 import com.phoenix.phoenixtales.rise.item.items.Hammer;
 import com.phoenix.phoenixtales.rise.item.items.MetalSaw;
 import com.phoenix.phoenixtales.rise.item.items.Phosphorus;
@@ -40,6 +41,7 @@ public class RiseItems {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // items
+    public static final Item CLAY_AND_GAVEL = createItem("clay_and_gravel", new ClayAndGravelItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //elements and minerals
     public static final Item APATITE = createItem("apatite", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));

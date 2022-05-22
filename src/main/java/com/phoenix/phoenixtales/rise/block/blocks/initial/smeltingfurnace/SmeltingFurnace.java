@@ -24,7 +24,6 @@ public abstract class SmeltingFurnace extends Block {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final IntegerProperty BUILD = RiseBlockStateProps.BUILD_1_4;
 
-
     public SmeltingFurnace() {
         super(Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().notSolid().hardnessAndResistance(1.25F, 4.2F));
         this.setDefaultState(this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(false)).with(BUILD, Integer.valueOf(1)));
