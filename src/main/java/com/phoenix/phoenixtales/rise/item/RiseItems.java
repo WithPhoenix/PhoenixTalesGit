@@ -51,6 +51,7 @@ public class RiseItems {
     public static final Item N_DOPED_SILICON = createItem("n_doped_silicon", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //steel based
+    public static final Item INGOT_STEEL = createItem("ingot_steel", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //vanadium based
     public static final Item INGOT_VANADIUM = createItem("vanadium_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));

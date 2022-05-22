@@ -12,6 +12,8 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -29,6 +31,7 @@ public abstract class SmeltingFurnace extends Block {
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (newState.getBlock() == state.getBlock()) {
+            newState.with(LIT, isBuild(state, pos, worldIn));
             return;
         }
         TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -38,10 +41,21 @@ public abstract class SmeltingFurnace extends Block {
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return this.getDefaultState().with(LIT, Boolean.valueOf(false));
+    }
+
+    @Override
+    public boolean canDropFromExplosion(Explosion explosionIn) {
+        return false;
     }
 
     @Override

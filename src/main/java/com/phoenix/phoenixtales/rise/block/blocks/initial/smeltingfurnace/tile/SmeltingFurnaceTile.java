@@ -8,8 +8,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.NonNullList;
 
+import java.util.Random;
+
 public abstract class SmeltingFurnaceTile extends TileEntity {
     protected NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
+    protected final Random RANDOM = new Random();
 
     public SmeltingFurnaceTile(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);

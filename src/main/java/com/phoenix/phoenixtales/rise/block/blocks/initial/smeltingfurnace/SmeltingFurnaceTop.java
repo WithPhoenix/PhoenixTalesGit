@@ -4,6 +4,7 @@ import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile.S
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -34,7 +35,25 @@ public class SmeltingFurnaceTop extends SmeltingFurnace {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (SmeltingFurnace.isBuild(state, pos, worldIn)) {
-            ItemStack item = player.getHeldItem(handIn);
+            if (worldIn.getTileEntity(pos) instanceof SmeltingTileUpper) {
+                SmeltingTileUpper tile = (SmeltingTileUpper) worldIn.getTileEntity(pos);
+                if (tile == null) return ActionResultType.FAIL;
+                ItemStack item = player.getHeldItem(handIn);
+                if (item.getItem() == Items.CHARCOAL) {
+                    tile.addCoal(1);
+                    if (!player.abilities.isCreativeMode) {
+                        item.shrink(1);
+                    }
+                } else {
+                    if (item.getItem() == Items.IRON_INGOT) {
+                        tile.addIron(1);
+                        if (!player.abilities.isCreativeMode) {
+                            item.shrink(1);
+                        }
+                    }
+                }
+                return ActionResultType.SUCCESS;
+            }
             //TODO insert items here, charcoal, iron, charcoal, iron ...
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
