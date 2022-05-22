@@ -35,6 +35,10 @@ public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableT
     }
 
     public void addIron(int n) {
+        if (this.items.get(1).getItem() != Items.IRON_INGOT) {
+            this.items.set(1, new ItemStack(Items.IRON_INGOT, n));
+            return;
+        }
         this.items.get(1).grow(n);
     }
 
