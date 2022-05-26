@@ -1,5 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace;
 
+import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile.SmeltingTileUpper;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -57,6 +58,17 @@ public class SmeltingFurnaceTop extends SmeltingFurnace {
             //TODO insert items here, charcoal, iron, charcoal, iron ...
         }
         return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+    }
+
+    @Override
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (newState.getBlock() == state.getBlock()) {
+            return;
+        }
+        if (worldIn.getBlockState(pos.down()).matchesBlock(RiseBlocks.SMELTING_FURNACE_BOTTOM)) {
+            worldIn.destroyBlock(pos.down(), false);
+        }
+        super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 
     @Override

@@ -7,5 +7,5 @@ public class RiseBlockStateProps {
     public static final IntegerProperty NETWORK = IntegerProperty.create("network", 0, Integer.MAX_VALUE);
     public static final BooleanProperty CONNECTED = BooleanProperty.create("connected");
     public static final BooleanProperty HAS_STACK = BooleanProperty.create("stack");
-    public static final IntegerProperty BUILD_1_4 = IntegerProperty.create("build", 1, 4);
+    public static final IntegerProperty BUILD_1_3 = IntegerProperty.create("build", 1, 3);
 }

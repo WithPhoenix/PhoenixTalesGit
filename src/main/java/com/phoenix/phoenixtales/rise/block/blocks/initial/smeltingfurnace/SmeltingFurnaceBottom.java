@@ -28,7 +28,7 @@ public class SmeltingFurnaceBottom extends SmeltingFurnace {
 
     public SmeltingFurnaceBottom() {
         super();
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, Boolean.valueOf(false)).with(BUILD, Integer.valueOf(1)));
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, Boolean.valueOf(false)).with(BUILD, Boolean.valueOf(false)));
     }
 
     @Nullable

@@ -1,27 +1,15 @@
 {
   "variants": {
-    "lit=false,build=1": {
+    "lit=false,enabled=false": {
       "model": "phoenixtales:block/smelting_furnace_upper"
     },
-    "lit=true,build=1": {
+    "lit=true,enabled=false": {
       "model": "phoenixtales:block/smelting_furnace_upper_on"
     },
-    "lit=false,build=2": {
+    "lit=false,enabled=true": {
       "model": "phoenixtales:block/smelting_furnace_upper"
     },
-    "lit=true,build=2": {
-      "model": "phoenixtales:block/smelting_furnace_upper_on"
-    },
-    "lit=false,build=3": {
-      "model": "phoenixtales:block/smelting_furnace_upper"
-    },
-    "lit=true,build=3": {
-      "model": "phoenixtales:block/smelting_furnace_upper_on"
-    },
-    "lit=false,build=4": {
-      "model": "phoenixtales:block/smelting_furnace_upper"
-    },
-    "lit=true,build=4": {
+    "lit=true,enabled=true": {
       "model": "phoenixtales:block/smelting_furnace_upper_on"
     }
   }
