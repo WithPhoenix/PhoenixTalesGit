@@ -6,14 +6,9 @@ import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.Smelti
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceTop;
 import com.phoenix.phoenixtales.rise.item.RiseBlockItem;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public class ClayAndGravelItem extends RiseBlockItem {
@@ -24,12 +19,7 @@ public class ClayAndGravelItem extends RiseBlockItem {
 
     @Override
     public String getTranslationKey() {
-        return this.getTranslationKey();
-    }
-
-    @Override
-    protected String getDefaultTranslationKey() {
-
+        return this.getDefaultTranslationKey();
     }
 
     @Override
