@@ -26,6 +26,7 @@ public class RiseItems {
     public static final Item ORE_NICKEL = createItem("nickel_ore", new RiseBlockItem(RiseBlocks.ORE_NICKEL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ORE_APATITE = createItem("apatite_ore", new RiseBlockItem(RiseBlocks.ORE_APATITE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ORE_KERNITE = createItem("kernite_ore", new RiseBlockItem(RiseBlocks.ORE_KERNITE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item BLOCK_STEEL = createItem("steel_block", new RiseBlockItem(RiseBlocks.BLOCK_STEEL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BLOCK_VANADIUM = createItem("vanadium_block", new RiseBlockItem(RiseBlocks.BLOCK_VANADIUM, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BLOCK_NICKEL = createItem("nickel_block", new RiseBlockItem(RiseBlocks.BLOCK_NICKEL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BLOCK_INVAR = createItem("invar_block", new RiseBlockItem(RiseBlocks.BLOCK_INVAR, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
@@ -50,7 +51,8 @@ public class RiseItems {
     public static final Item N_DOPED_SILICON = createItem("n_doped_silicon", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //steel based
-    public static final Item INGOT_STEEL = createItem("ingot_steel", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item INGOT_STEEL = createItem("steel_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item PLATE_STEEL = createItem("steel_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //vanadium based
     public static final Item INGOT_VANADIUM = createItem("vanadium_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));

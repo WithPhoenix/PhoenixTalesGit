@@ -3,6 +3,7 @@
   "values": [
     "#forge:ingots/invar",
     "#forge:ingots/nickel",
-    "#forge:ingots/vanadium"
+    "#forge:ingots/vanadium",
+    "#forge:ingots/steel"
   ]
 }

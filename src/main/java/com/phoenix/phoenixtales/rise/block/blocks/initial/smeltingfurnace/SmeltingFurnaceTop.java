@@ -25,6 +25,7 @@ import java.util.Random;
 public class SmeltingFurnaceTop extends SmeltingFurnace {
     public SmeltingFurnaceTop() {
         super();
+        this.setDefaultState(this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(false)).with(BUILD, Boolean.valueOf(false)));
     }
 
     @Nullable

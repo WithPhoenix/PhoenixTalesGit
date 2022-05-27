@@ -16,17 +16,16 @@ public class ClayAndGravelItem extends RiseBlockItem {
         super(RiseBlocks.SMELTING_FURNACE_BOTTOM, properties);
     }
 
-
-    @Override
-    public String getTranslationKey() {
-        return this.getDefaultTranslationKey();
-    }
-
     @Override
     public ActionResultType onItemUse(ItemUseContext context) {
         World world = context.getWorld();
         BlockPos pos = context.getPos();
         BlockState state = world.getBlockState(pos);
+        if (state.getBlock() instanceof SmeltingFurnaceTop) {
+            if (!state.get(SmeltingFurnace.BUILD)) {
+                world.setBlockState(pos, state.with(SmeltingFurnace.BUILD, true));
+            }
+        }
         if (state.getBlock() instanceof SmeltingFurnaceBottom) {
             if (!state.get(SmeltingFurnace.BUILD)) {
                 world.setBlockState(pos, state.with(SmeltingFurnace.BUILD, true));
@@ -36,13 +35,13 @@ public class ClayAndGravelItem extends RiseBlockItem {
                 }
             }
             return ActionResultType.SUCCESS;
-        } else if (state.getBlock() instanceof SmeltingFurnaceTop) {
-            if (!state.get(SmeltingFurnace.BUILD)) {
-                world.setBlockState(pos, state.with(SmeltingFurnace.BUILD, true));
-            }
-            return ActionResultType.SUCCESS;
         } else {
             return super.onItemUse(context);
         }
+    }
+
+    @Override
+    public String getTranslationKey() {
+        return this.getDefaultTranslationKey();
     }
 }
