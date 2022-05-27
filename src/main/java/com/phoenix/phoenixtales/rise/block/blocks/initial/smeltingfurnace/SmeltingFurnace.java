@@ -20,11 +20,10 @@ import javax.annotation.Nullable;
 @SuppressWarnings("deprecation")
 public abstract class SmeltingFurnace extends Block {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
-    public static final BooleanProperty BUILD = BlockStateProperties.ENABLED;
 
     public SmeltingFurnace() {
         super(Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().notSolid().hardnessAndResistance(1.25F, 4.2F));
-        this.setDefaultState(this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(false)).with(BUILD, Boolean.valueOf(false)));
+        this.setDefaultState(this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(false)));
     }
 
     @Override
@@ -39,7 +38,6 @@ public abstract class SmeltingFurnace extends Block {
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 
-
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
@@ -48,7 +46,7 @@ public abstract class SmeltingFurnace extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(LIT, Boolean.valueOf(false)).with(BUILD, Boolean.valueOf(false));
+        return this.getDefaultState().with(LIT, Boolean.valueOf(false));
     }
 
     @Override
@@ -58,7 +56,7 @@ public abstract class SmeltingFurnace extends Block {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(LIT, BUILD);
+        builder.add(LIT);
     }
 
     public static boolean isBuild(BlockState state, BlockPos pos, World world) {

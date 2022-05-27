@@ -1,15 +1,9 @@
 {
   "variants": {
-    "lit=false,enabled=false": {
+    "lit=false": {
       "model": "phoenixtales:block/smelting_furnace_upper"
     },
-    "lit=true,enabled=false": {
-      "model": "phoenixtales:block/smelting_furnace_upper_on"
-    },
-    "lit=false,enabled=true": {
-      "model": "phoenixtales:block/smelting_furnace_upper"
-    },
-    "lit=true,enabled=true": {
+    "lit=true": {
       "model": "phoenixtales:block/smelting_furnace_upper_on"
     }
   }

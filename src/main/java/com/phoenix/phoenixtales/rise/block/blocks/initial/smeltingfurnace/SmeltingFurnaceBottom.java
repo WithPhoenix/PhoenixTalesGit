@@ -10,8 +10,10 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.FlintAndSteelItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -25,6 +27,7 @@ import java.util.Random;
 @SuppressWarnings("deprecation")
 public class SmeltingFurnaceBottom extends SmeltingFurnace {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    public static final BooleanProperty BUILD = BlockStateProperties.ENABLED;
 
     public SmeltingFurnaceBottom() {
         super();
@@ -40,8 +43,6 @@ public class SmeltingFurnaceBottom extends SmeltingFurnace {
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (SmeltingFurnace.isBuild(state, pos, worldIn)) {
-            //TODO there have to be items in the furnace to light
-
             ItemStack item = player.getHeldItem(handIn);
             if (item.getItem() instanceof FlintAndSteelItem) {
                 worldIn.setBlockState(pos, state.with(SmeltingFurnace.LIT, Boolean.valueOf(true)));
@@ -97,12 +98,12 @@ public class SmeltingFurnaceBottom extends SmeltingFurnace {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(BUILD, Boolean.valueOf(false));
     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
-        builder.add(FACING);
+        builder.add(FACING, BUILD);
     }
 }

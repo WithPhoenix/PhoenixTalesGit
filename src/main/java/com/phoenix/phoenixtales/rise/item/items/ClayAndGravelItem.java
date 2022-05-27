@@ -1,7 +1,6 @@
 package com.phoenix.phoenixtales.rise.item.items;
 
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
-import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnace;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceBottom;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceTop;
 import com.phoenix.phoenixtales.rise.item.RiseBlockItem;
@@ -21,17 +20,14 @@ public class ClayAndGravelItem extends RiseBlockItem {
         World world = context.getWorld();
         BlockPos pos = context.getPos();
         BlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof SmeltingFurnaceTop) {
-            if (!state.get(SmeltingFurnace.BUILD)) {
-                world.setBlockState(pos, state.with(SmeltingFurnace.BUILD, true));
-            }
-        }
         if (state.getBlock() instanceof SmeltingFurnaceBottom) {
-            if (!state.get(SmeltingFurnace.BUILD)) {
-                world.setBlockState(pos, state.with(SmeltingFurnace.BUILD, true));
+            if (!state.get(SmeltingFurnaceBottom.BUILD)) {
+                world.setBlockState(pos, state.with(SmeltingFurnaceBottom.BUILD, true));
+                context.getPlayer().getHeldItem(context.getHand()).shrink(1);
             } else {
                 if (!(world.getBlockState(pos.up()).getBlock() instanceof SmeltingFurnaceTop)) {
                     world.setBlockState(pos.up(), RiseBlocks.SMELTING_FURNACE_TOP.getDefaultState());
+                    context.getPlayer().getHeldItem(context.getHand()).shrink(1);
                 }
             }
             return ActionResultType.SUCCESS;
