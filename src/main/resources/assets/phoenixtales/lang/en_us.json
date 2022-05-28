@@ -26,7 +26,7 @@
   "item.phoenixtales.apatite": "Apatite",
   "item.phoenixtales.kernite": "Kernite",
   "item.phoenixtales.transistor": "Transistor",
-  "item.phoenixtales.clay_and_gravel": "Clay and Gravel",
+  "item.phoenixtales.clay_and_sand": "Clay and Sand",
   "item.phoenixtales.enhanced_redstone": "Enhanced Redstone",
   "item.phoenixtales.simple_controller": "Simple Controller",
   "item.phoenixtales.advanced_controller": "Advanced Controller",
@@ -37,6 +37,7 @@
   "item.phoenixtales.slag": "Slag",
   "item.phoenixtales.glass_shard": "Glass Shard",
   "item.phoenixtales.rotten_heart": "Rotten Heart",
+  "item.phoenixtales.tin_solder": "Tin Solder",
 
   "block.phoenixtales.vanadium_ore": "Vanadium Ore",
   "block.phoenixtales.sulfur_ore": "Sulfur Ore",

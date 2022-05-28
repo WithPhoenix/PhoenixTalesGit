@@ -21,7 +21,6 @@ public class RiseItems {
 
 
     //block items
-
     public static final Item ORE_VANADIUM = createItem("vanadium_ore", new RiseBlockItem(RiseBlocks.ORE_VANADIUM, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ORE_NICKEL = createItem("nickel_ore", new RiseBlockItem(RiseBlocks.ORE_NICKEL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ORE_APATITE = createItem("apatite_ore", new RiseBlockItem(RiseBlocks.ORE_APATITE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
@@ -39,7 +38,7 @@ public class RiseItems {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // items
-    public static final Item CLAY_AND_GAVEL = createItem("clay_and_gravel", new ClayAndGravelItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item CLAY_AND_SAND = createItem("clay_and_sand", new ClayAndGravelItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //elements and minerals
     public static final Item APATITE = createItem("apatite", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
