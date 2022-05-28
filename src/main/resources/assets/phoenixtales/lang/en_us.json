@@ -38,6 +38,7 @@
   "item.phoenixtales.glass_shard": "Glass Shard",
   "item.phoenixtales.rotten_heart": "Rotten Heart",
   "item.phoenixtales.tin_solder": "Tin Solder",
+  "item.phoenixtales.mechanical_arm": "Mechanical Arm",
 
   "block.phoenixtales.vanadium_ore": "Vanadium Ore",
   "block.phoenixtales.sulfur_ore": "Sulfur Ore",
@@ -48,6 +49,7 @@
   "block.phoenixtales.vanadium_chassis": "Vanadium Chassis",
   "block.phoenixtales.nickel_ore": "Nickel Ore",
   "block.phoenixtales.nickel_block": "Nickel Block",
+  "block.phoenixtales.steel_block": "Steel Block",
   "block.phoenixtales.invar_block": "Invar Block",
   "block.phoenixtales.searing_stone": "Searing Stone",
   "block.phoenixtales.searing_cobblestone": "Searing Cobblestone",
@@ -85,6 +87,7 @@
   "block.phoenixtales.hui_door": "Hui Door",
   "block.phoenixtales.hui_trapdoor": "Hui Trapdoor",
   "block.phoenixtales.charred_debris": "Charred Debris",
+  "block.phoenixtales.charred_log": "Charred Log",
   "block.phoenixtales.ceramic_block": "Ceramic Block",
   "block.phoenixtales.burnt_ceramic_block": "Burnt Ceramic Block",
   "block.phoenixtales.simple_cable": "Simple Cable",

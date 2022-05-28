@@ -55,7 +55,7 @@ public class SmeltingFurnaceTop extends SmeltingFurnace {
                             item.shrink(1);
                         }
                     }
-                } else if (item.getItem() == Items.IRON_INGOT) {
+                } else if (item.getItem() == Items.IRON_ORE) {
                     if (tile.canInsert(false)) {
                         tile.addIron(1);
                         if (!player.abilities.isCreativeMode) {

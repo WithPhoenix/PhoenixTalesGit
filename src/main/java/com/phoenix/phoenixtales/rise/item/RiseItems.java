@@ -52,6 +52,7 @@ public class RiseItems {
     //steel based
     public static final Item INGOT_STEEL = createItem("steel_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item PLATE_STEEL = createItem("steel_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item STEEL_ROD = createItem("steel_rod", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //vanadium based
     public static final Item INGOT_VANADIUM = createItem("vanadium_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
@@ -67,7 +68,7 @@ public class RiseItems {
     public static final Item INGOT_INVAR = createItem("invar_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NUGGET_INVAR = createItem("invar_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item INVAR_PLATE = createItem("invar_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
-    public static final Item INVAR_MACHINE_PART = createItem("invar_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item INVAR_ROD = createItem("invar_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     public static final Item TIN_SOLDER = createItem("tin_solder", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
@@ -97,8 +98,6 @@ public class RiseItems {
     public static final Item PRESS_FACTORY = createItem("press_factory", new RiseBlockItem(RiseBlocks.PRESS_FACTORY, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ALLOY_FACTORY = createItem("alloy_factory", new RiseBlockItem(RiseBlocks.ALLOY_FACTORY, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ASSEMBLER = createItem("assembler", new RiseBlockItem(RiseBlocks.ASSEMBLER, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
-
-    public static final Item TEST = createItem("test", new RiseBlockItem(RiseBlocks.TEST, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 
     public static final Item TANK = createItem("tank", new RiseBlockItem(RiseBlocks.TANK, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 //    public static final Item HUO_BOAT = createItem("huo_boat", new HuoBoatItem(new Item.Properties().group(ItemTab.ITEM_GROUP), "huo"));

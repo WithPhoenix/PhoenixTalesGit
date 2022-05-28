@@ -3,7 +3,6 @@ package com.phoenix.phoenixtales.rise.block;
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.alloyfactory.AlloyTile;
 import com.phoenix.phoenixtales.rise.block.blocks.assembler.AssemblerTile;
-import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.TestCableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil.EngineersAnvilTile;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile.SmeltingTileUpper;
@@ -46,9 +45,6 @@ public class RiseTileEntities {
     @ObjectHolder(PhoenixTales.MOD_ID + ":tank_tile")
     public static TileEntityType<TankTile> TANK_TILE;
 
-    @ObjectHolder(PhoenixTales.MOD_ID + ":test")
-    public static TileEntityType<TestCableTile> TEST;
-
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class Registry {
 
@@ -67,8 +63,6 @@ public class RiseTileEntities {
             r.register(TileEntityType.Builder.create(SmeltingTileUpper::new, RiseBlocks.SMELTING_FURNACE_TOP).build(null).setRegistryName("smelting_tile_upper"));
             r.register(TileEntityType.Builder.create(SmeltingTileUpper::new, RiseBlocks.SMELTING_FURNACE_BOTTOM).build(null).setRegistryName("smelting_tile_lower"));
             r.register(TileEntityType.Builder.create(TankTile::new, RiseBlocks.TANK).build(null).setRegistryName("tank_tile"));
-
-            r.register(TileEntityType.Builder.create(TestCableTile::new, RiseBlocks.TEST).build(null).setRegistryName("test"));
         }
 
 //    @SuppressWarnings("deprecation")

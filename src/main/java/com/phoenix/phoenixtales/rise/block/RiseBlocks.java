@@ -3,7 +3,6 @@ package com.phoenix.phoenixtales.rise.block;
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.alloyfactory.AlloyFactory;
 import com.phoenix.phoenixtales.rise.block.blocks.assembler.Assembler;
-import com.phoenix.phoenixtales.rise.block.blocks.cable.TestBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStore;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil.EngineersAnvil;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceBottom;
@@ -64,8 +63,6 @@ public class RiseBlocks {
     public static final Block PRESS_FACTORY = createBlock("press_factory", new PressFactory());
     public static final Block ALLOY_FACTORY = createBlock("alloy_factory", new AlloyFactory());
     public static final Block TANK = createBlock("tank", new TankBlock());
-
-    public static final Block TEST = createBlock("test", new TestBlock());
 
 
 //    public static final Block CHANGE_BLOCK = createBlock("change_block", new ChangeBlock());

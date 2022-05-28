@@ -14,7 +14,7 @@ public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableT
     public SmeltingTileUpper() {
         super(RiseTileEntities.SMELTING_TILE_UPPER);
         this.items.set(0, new ItemStack(Items.CHARCOAL, 0));
-        this.items.set(1, new ItemStack(Items.IRON_INGOT, 0));
+        this.items.set(1, new ItemStack(Items.IRON_ORE, 0));
     }
 
     @Override
@@ -52,10 +52,10 @@ public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableT
             if (this.getBlockState().get(SmeltingFurnaceTop.LIT)) {
                 if (items.get(0).getCount() > 2 && items.get(1).getCount() > 0) {
                     if (this.time == 360) {
-                        this.items.get(0).shrink(RANDOM.nextInt(2) + 2);
-                        this.items.get(1).shrink(RANDOM.nextInt(2) + 1);
-                        this.time = 0;
                         if (world.getTileEntity(pos.down()) instanceof SmeltingTileLower) {
+                            this.items.get(0).shrink(RANDOM.nextInt(2) + 1);
+                            this.items.get(1).shrink(1);
+                            this.time = 0;
                             SmeltingTileLower tile = (SmeltingTileLower) world.getTileEntity(pos.down());
                             if (tile != null) {
                                 tile.receiveProgressDone();
