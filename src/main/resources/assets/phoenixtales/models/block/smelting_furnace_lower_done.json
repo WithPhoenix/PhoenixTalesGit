@@ -3,8 +3,8 @@
 	"ambientocclusion": false,
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "block/smelting_furnace_lower_done",
-		"particle": "block/smelting_furnace_lower_done"
+		"0": "phoenixtales:block/smelting_furnace_lower_done",
+		"particle": "phoenixtales:block/smelting_furnace_lower_done"
 	},
 	"elements": [
 		{
