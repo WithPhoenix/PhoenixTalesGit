@@ -38,7 +38,6 @@
   "item.phoenixtales.glass_shard": "Glass Shard",
   "item.phoenixtales.rotten_heart": "Rotten Heart",
 
-
   "block.phoenixtales.vanadium_ore": "Vanadium Ore",
   "block.phoenixtales.sulfur_ore": "Sulfur Ore",
   "block.phoenixtales.apatite_ore": "Apatite Ore",
@@ -98,6 +97,8 @@
   "block.phoenixtales.enhancing_factory": "Enhancing Factory",
   "block.phoenixtales.simple_ht_factory": "Simple HT-Factory",
   "block.phoenixtales.engineers_anvil": "Engineer's Anvil",
+  "block.phoenixtales.smelting_furnace_lower": "Smelting Furnace",
+  "block.phoenixtales.smelting_furnace_upper": "Smelting Furnace",
 
   "screen.phoenixtales.energy_store": "Energy Store",
   "screen.phoenixtales.assembler": "Assembler",
@@ -118,5 +119,4 @@
   "itemGroup.origins_block_group": "PhoenixTales: Blocks",
 
   "jei.phoenixtales.press": "Pressing"
-  
 }

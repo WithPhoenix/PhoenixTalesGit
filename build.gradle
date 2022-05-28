@@ -17,7 +17,7 @@ apply plugin: 'maven-publish'
 
 
 archivesBaseName = 'phoenixtales'
-version = "${mc_version}-${mod_version}"+"-SNAPSHOT"
+version = "${mc_version}-${mod_version}" + "-SNAPSHOT"
 group = 'com.phoenix.phoenixtales'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
@@ -130,8 +130,6 @@ repositories {
     maven {
         url "https://modmaven.k-4u.nl"
     }
-
-
 }
 
 
@@ -167,7 +165,7 @@ dependencies {
 }
 
 //mixin {
-    // MixinGradle Settings
+// MixinGradle Settings
 //    add sourceSets.main, 'phoenixtech.mixins.refmap.json'
 //    config 'phoenixtech.mixins.json'
 //}

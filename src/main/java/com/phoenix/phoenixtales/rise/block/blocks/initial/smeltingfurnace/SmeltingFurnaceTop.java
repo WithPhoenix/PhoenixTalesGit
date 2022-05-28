@@ -2,11 +2,16 @@ package com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace;
 
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile.SmeltingTileUpper;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -23,6 +28,8 @@ import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class SmeltingFurnaceTop extends SmeltingFurnace {
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
+
     public SmeltingFurnaceTop() {
         super();
         this.setDefaultState(this.stateContainer.getBaseState().with(LIT, Boolean.valueOf(false)));
@@ -42,12 +49,14 @@ public class SmeltingFurnaceTop extends SmeltingFurnace {
                 if (tile == null) return ActionResultType.FAIL;
                 ItemStack item = player.getHeldItem(handIn);
                 if (item.getItem() == Items.CHARCOAL) {
-                    tile.addCoal(1);
-                    if (!player.abilities.isCreativeMode) {
-                        item.shrink(1);
+                    if (tile.canInsert(true)) {
+                        tile.addCoal(1);
+                        if (!player.abilities.isCreativeMode) {
+                            item.shrink(1);
+                        }
                     }
-                } else {
-                    if (item.getItem() == Items.IRON_INGOT) {
+                } else if (item.getItem() == Items.IRON_INGOT) {
+                    if (tile.canInsert(false)) {
                         tile.addIron(1);
                         if (!player.abilities.isCreativeMode) {
                             item.shrink(1);
@@ -56,9 +65,8 @@ public class SmeltingFurnaceTop extends SmeltingFurnace {
                 }
                 return ActionResultType.SUCCESS;
             }
-            //TODO insert items here, charcoal, iron, charcoal, iron ...
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        return ActionResultType.PASS;
     }
 
     @Override
@@ -87,4 +95,14 @@ public class SmeltingFurnaceTop extends SmeltingFurnace {
         }
     }
 
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        return this.getDefaultState().with(LIT, Boolean.valueOf(false));
+    }
+
+    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(LIT);
+    }
 }

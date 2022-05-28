@@ -1,7 +1,7 @@
 package com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
-import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnace;
+import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceTop;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -30,22 +30,26 @@ public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableT
         return compound;
     }
 
+    public boolean canInsert(boolean coal) {
+        if (coal) {
+            return this.items.get(0).getCount() < 48;
+        } else {
+            return this.items.get(1).getCount() < 32;
+        }
+    }
+
     public void addCoal(int n) {
         this.items.get(0).grow(n);
     }
 
     public void addIron(int n) {
-        if (this.items.get(1).getItem() != Items.IRON_INGOT) {
-            this.items.set(1, new ItemStack(Items.IRON_INGOT, n));
-            return;
-        }
         this.items.get(1).grow(n);
     }
 
     @Override
     public void tick() {
         if (!world.isRemote) {
-            if (this.getBlockState().get(SmeltingFurnace.LIT)) {
+            if (this.getBlockState().get(SmeltingFurnaceTop.LIT)) {
                 if (items.get(0).getCount() > 2 && items.get(1).getCount() > 0) {
                     if (this.time == 360) {
                         this.items.get(0).shrink(RANDOM.nextInt(2) + 2);
