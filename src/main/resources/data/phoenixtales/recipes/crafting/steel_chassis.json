@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "###",
+    "PPP"
+  ],
+  "key": {
+    "#": {
+      "item": "phoenixtales:steel_rod"
+    },
+    "P": {
+      "item": "phoenixtales:steel_plate"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:steel_chassis",
+    "count": 1
+  }
+}

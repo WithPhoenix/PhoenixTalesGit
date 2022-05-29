@@ -74,6 +74,7 @@ public class ClientSetup {
         RenderTypeLookup.setRenderLayer(OriginsBlocks.TALL_ASHEN_GRASS, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(OriginsBlocks.LARGE_ASHEN_FERN, RenderType.getCutout());
 
+        RenderTypeLookup.setRenderLayer(RiseBlocks.STEEL_CHASSIS, RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(RiseBlocks.VANADIUM_CHASSIS, RenderType.getCutout());
     }
 

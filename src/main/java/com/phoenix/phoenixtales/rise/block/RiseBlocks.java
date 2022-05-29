@@ -38,6 +38,7 @@ public class RiseBlocks {
     public static final Block BLOCK_NICKEL = createBlock("nickel_block", new Block(AbstractBlock.Properties.create((Material.IRON), MaterialColor.GRAY).hardnessAndResistance(5f, 6f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.METAL).setRequiresTool()));
     public static final Block BLOCK_INVAR = createBlock("invar_block", new Block(AbstractBlock.Properties.create((Material.IRON), MaterialColor.GRAY).hardnessAndResistance(5f, 6f).harvestTool(ToolType.PICKAXE).harvestLevel(3).sound(SoundType.METAL).setRequiresTool()));
 
+    public static final Block STEEL_CHASSIS = createBlock("steel_chassis", new Block(AbstractBlock.Properties.create((Material.IRON), MaterialColor.LIGHT_GRAY).hardnessAndResistance(6f, 10f).harvestTool(ToolType.PICKAXE).harvestLevel(1).notSolid().sound(SoundType.METAL).setRequiresTool().notSolid()));
     public static final Block VANADIUM_CHASSIS = createBlock("vanadium_chassis", new Block(AbstractBlock.Properties.create((Material.IRON), MaterialColor.LIGHT_GRAY).hardnessAndResistance(6f, 10f).harvestTool(ToolType.PICKAXE).harvestLevel(1).notSolid().sound(SoundType.METAL).setRequiresTool().notSolid()));
 
     //other

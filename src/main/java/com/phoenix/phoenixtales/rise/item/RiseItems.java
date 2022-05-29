@@ -10,6 +10,7 @@ import com.phoenix.phoenixtales.rise.item.items.MetalSaw;
 import com.phoenix.phoenixtales.rise.item.items.Phosphorus;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ObjectHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class RiseItems {
     public static final Item BLOCK_INVAR = createItem("invar_block", new RiseBlockItem(RiseBlocks.BLOCK_INVAR, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ENGINEERS_ANVIL = createItem("engineers_anvil", new RiseBlockItem(RiseBlocks.ENGINEERS_ANVIL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 
+    public static final Item STEEL_CHASSIS = createItem("steel_chassis", new RiseBlockItem(RiseBlocks.STEEL_CHASSIS, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item VANADIUM_CHASSIS = createItem("vanadium_chassis", new RiseBlockItem(RiseBlocks.VANADIUM_CHASSIS, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item CERAMIC_BLOCK = createItem("ceramic_block", new RiseBlockItem(RiseBlocks.CERAMIC_BLOCK, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BURNT_CERAMIC_BLOCK = createItem("burnt_ceramic_block", new RiseBlockItem(RiseBlocks.BURNT_CERAMIC_BLOCK, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
@@ -68,7 +70,7 @@ public class RiseItems {
     public static final Item INGOT_INVAR = createItem("invar_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NUGGET_INVAR = createItem("invar_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item INVAR_PLATE = createItem("invar_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
-    public static final Item INVAR_ROD = createItem("invar_part", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item INVAR_ROD = createItem("invar_rod", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     public static final Item TIN_SOLDER = createItem("tin_solder", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
@@ -79,10 +81,16 @@ public class RiseItems {
     //tech related
     public static final Item TRANSISTOR = createItem("transistor", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item ENHANCED_REDSTONE = createItem("enhanced_redstone", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    //this one is made with enhanced redstone at the soldering table
+    public static final Item REDSTONE_CONTROLLER = createItem("redstone_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    //these are made with silicon
     public static final Item SIMPLE_CONTROLLER = createItem("simple_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item ADVANCED_CONTROLLER = createItem("advanced_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item OVERLOADED_CONTROLLER = createItem("overloaded_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     public static final Item MECHANICAL_ARM = createItem("mechanical_arm", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    //mechanical arm with two steel plates?
+    public static final Item REINFORCED_MECHANICAL_ARM = createItem("steel_reinforced_mechanical_arm", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     public static final Item CERAMIC_BLEND = createItem("ceramic_blend", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item CERAMIC = createItem("ceramic", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
