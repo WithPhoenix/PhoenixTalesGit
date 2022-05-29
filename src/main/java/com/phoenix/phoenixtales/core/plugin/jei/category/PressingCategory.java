@@ -99,7 +99,7 @@ public class PressingCategory implements IRecipeCategory<PressingRecipe> {
     @Override
     public void setIngredients(PressingRecipe recipe, IIngredients ingredients) {
         ingredients.setInputIngredients(recipe.getIngredients());
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutputForJei());
     }
 
     @Override

@@ -61,6 +61,10 @@ public class AssemblingRecipe implements IAssembling {
         return output.copy();
     }
 
+    public ItemStack getOutputForJei() {
+        return new ItemStack(output.getItem(), this.count);
+    }
+
     public int getProcessingTime() {
         return this.processTime;
     }

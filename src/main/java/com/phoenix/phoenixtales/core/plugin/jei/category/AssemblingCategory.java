@@ -7,7 +7,6 @@ import com.phoenix.phoenixtales.rise.block.blocks.assembler.AssemblingRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
@@ -42,7 +41,7 @@ public class AssemblingCategory implements IRecipeCategory<AssemblingRecipe> {
 
     @Override
     public String getTitle() {
-        return new TranslationTextComponent("category."+PhoenixTales.MOD_ID+".assemble").getString();
+        return new TranslationTextComponent("category." + PhoenixTales.MOD_ID + ".assemble").getString();
     }
 
     @Override
@@ -58,7 +57,7 @@ public class AssemblingCategory implements IRecipeCategory<AssemblingRecipe> {
     @Override
     public void setIngredients(AssemblingRecipe recipe, IIngredients ingredients) {
         ingredients.setInputIngredients(recipe.getIngredients());
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutputForJei());
     }
 
     @Override

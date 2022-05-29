@@ -1,8 +1,8 @@
 package com.phoenix.phoenixtales.rise.block.blocks.press;
 
 import com.google.gson.JsonObject;
-import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -64,6 +64,10 @@ public class PressingRecipe implements IPressing {
     @Override
     public ItemStack getRecipeOutput() {
         return output.copy();
+    }
+
+    public ItemStack getOutputForJei() {
+        return new ItemStack(output.getItem(), this.count);
     }
 
     public int getProcessingTime() {

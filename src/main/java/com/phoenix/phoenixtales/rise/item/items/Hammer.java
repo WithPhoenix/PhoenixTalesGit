@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 
 public class Hammer extends RiseItem {
     public Hammer() {
-        super(new Properties().group(ItemTab.ITEM_GROUP).maxDamage(150));
+        super(new Properties().group(ItemTab.ITEM_GROUP).maxDamage(300));
     }
 
     @Override

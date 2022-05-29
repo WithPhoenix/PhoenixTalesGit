@@ -2,7 +2,7 @@
   "type": "phoenixtales:assembling",
   "ingredients": [
     {
-      "item": "phoenixtales:silicon"
+      "item": "phoenixtales:wafer"
     },
     {
       "item": "phoenixtales:enhanced_redstone"
@@ -18,7 +18,7 @@
     }
   ],
   "output": {
-    "item": "phoenixtales:simple_controller"
+    "item": "phoenixtales:redstone_controller"
   },
   "processTime": 100,
   "count": 1,

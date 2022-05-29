@@ -10,7 +10,6 @@ import com.phoenix.phoenixtales.rise.item.items.MetalSaw;
 import com.phoenix.phoenixtales.rise.item.items.Phosphorus;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.registries.ObjectHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,10 +80,11 @@ public class RiseItems {
     public static final Item CONFIGURATOR = createItem("configurator", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //tech related
-    public static final Item TRANSISTOR = createItem("transistor", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item WAFER = createItem("wafer", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item ENHANCED_REDSTONE = createItem("enhanced_redstone", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     //this one is made with enhanced redstone at the soldering table
     public static final Item REDSTONE_CONTROLLER = createItem("redstone_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item TRANSISTOR = createItem("transistor", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     //these are made with silicon
     public static final Item SIMPLE_CONTROLLER = createItem("simple_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item ADVANCED_CONTROLLER = createItem("advanced_controller", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
