@@ -126,5 +126,7 @@
   "itemGroup.origins_item_group": "PhoenixTales: Items",
   "itemGroup.origins_block_group": "PhoenixTales: Blocks",
 
-  "jei.phoenixtales.press": "Pressing"
+  "category.phoenixtales.forge": "Forging",
+  "category.phoenixtales.assemble": "Assembling",
+  "category.phoenixtales.press": "Pressing"
 }

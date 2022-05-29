@@ -2,13 +2,16 @@ package com.phoenix.phoenixtales.core.plugin.jei;
 
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.core.plugin.jei.category.AssemblingCategory;
+import com.phoenix.phoenixtales.core.plugin.jei.category.ForgingCategory;
 import com.phoenix.phoenixtales.core.plugin.jei.category.PressingCategory;
-import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.blocks.assembler.AssemblingRecipe;
+import com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil.ForgingRecipe;
 import com.phoenix.phoenixtales.rise.block.blocks.press.PressingRecipe;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -37,13 +40,16 @@ public class JEIPlugin implements IModPlugin {
         RecipeManager manager = Objects.requireNonNull(Minecraft.getInstance().world).getRecipeManager();
         registration.addRecipes(manager.getRecipesForType(RiseRecipeTypes.PRESS_RECIPE).stream().filter(r -> r instanceof PressingRecipe).collect(Collectors.toList()), PressingCategory.UID);
         registration.addRecipes(manager.getRecipesForType(RiseRecipeTypes.ASSEMBLING_RECIPE).stream().filter(r -> r instanceof AssemblingRecipe).collect(Collectors.toList()), AssemblingCategory.UID);
+        registration.addRecipes(manager.getRecipesForType(RiseRecipeTypes.FORGING_RECIPE).stream().filter(r -> r instanceof ForgingRecipe).collect(Collectors.toList()), ForgingCategory.UID);
     }
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
+        IGuiHelper helper = registration.getJeiHelpers().getGuiHelper();
         registration.addRecipeCategories(
-                new AssemblingCategory(registration.getJeiHelpers().getGuiHelper()),
-                new PressingCategory(registration.getJeiHelpers().getGuiHelper())
+                new AssemblingCategory(helper),
+                new PressingCategory(helper),
+                new ForgingCategory(helper)
         );
     }
 
@@ -51,6 +57,7 @@ public class JEIPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(RiseBlocks.ASSEMBLER), AssemblingCategory.UID);
         registration.addRecipeCatalyst(new ItemStack(RiseBlocks.PRESS_FACTORY), PressingCategory.UID);
+        registration.addRecipeCatalyst(new ItemStack(RiseBlocks.ENGINEERS_ANVIL), ForgingCategory.UID);
     }
 
     @Override

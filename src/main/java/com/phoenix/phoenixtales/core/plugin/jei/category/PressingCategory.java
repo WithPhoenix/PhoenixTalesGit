@@ -15,12 +15,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class PressingCategory implements IRecipeCategory<PressingRecipe> {
     private static final int inputSlot = 0;
     private static final int outputSlot = 1;
 
-    public static final ResourceLocation UID = new ResourceLocation(PhoenixTales.MOD_ID, "press");
+    public static final ResourceLocation UID = new ResourceLocation(PhoenixTales.MOD_ID, ".press");
     public static final ResourceLocation TEXTURE = new ResourceLocation(PhoenixTales.MOD_ID, "textures/jei/press.png");
     private IDrawable background;
     private IDrawable icon;
@@ -43,7 +44,7 @@ public class PressingCategory implements IRecipeCategory<PressingRecipe> {
 
     @Override
     public String getTitle() {
-        return "Pressing";
+        return new TranslationTextComponent("category."+PhoenixTales.MOD_ID+".press").getString();
     }
 
     @Override

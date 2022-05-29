@@ -15,9 +15,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class AssemblingCategory implements IRecipeCategory<AssemblingRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(PhoenixTales.MOD_ID, "assemble");
+    public static final ResourceLocation UID = new ResourceLocation(PhoenixTales.MOD_ID, ".assemble");
     public static final ResourceLocation TEXTURE = new ResourceLocation(PhoenixTales.MOD_ID, "textures/jei/assembler.png");
     private IDrawable background;
     private IDrawable icon;
@@ -41,7 +42,7 @@ public class AssemblingCategory implements IRecipeCategory<AssemblingRecipe> {
 
     @Override
     public String getTitle() {
-        return "Assembling";
+        return new TranslationTextComponent("category."+PhoenixTales.MOD_ID+".assemble").getString();
     }
 
     @Override

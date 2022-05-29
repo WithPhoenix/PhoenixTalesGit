@@ -1,6 +1,7 @@
 package com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil;
 
 import com.google.gson.JsonObject;
+import com.phoenix.phoenixtales.rise.item.RiseItems;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -52,6 +53,15 @@ public class ForgingRecipe implements IForging {
         ingredients.add(getInput());
         return ingredients;
     }
+
+    public NonNullList<Ingredient> getIngredientsForJei() {
+        NonNullList<Ingredient> ingredients = NonNullList.create();
+        ingredients.add(getInput());
+        ingredients.add(Ingredient.fromStacks(RiseItems.ENGINEERS_ANVIL.getDefaultInstance()));
+        ingredients.add(Ingredient.fromStacks(RiseItems.HAMMER.getDefaultInstance()));
+        return ingredients;
+    }
+
 
     @Override
     public ResourceLocation getId() {
