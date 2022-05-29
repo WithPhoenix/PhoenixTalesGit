@@ -16,27 +16,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RiseItems {
-
     //add Objects to list and register afterwards
     public static List<Item> items = new ArrayList<>();
 
-
-    //block items
+    // block items
     public static final Item ORE_VANADIUM = createItem("vanadium_ore", new RiseBlockItem(RiseBlocks.ORE_VANADIUM, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ORE_NICKEL = createItem("nickel_ore", new RiseBlockItem(RiseBlocks.ORE_NICKEL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item ORE_TIN = createItem("tin_ore", new RiseBlockItem(RiseBlocks.ORE_TIN, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item ORE_COPPER = createItem("copper_ore", new RiseBlockItem(RiseBlocks.ORE_COPPER, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ORE_APATITE = createItem("apatite_ore", new RiseBlockItem(RiseBlocks.ORE_APATITE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ORE_KERNITE = createItem("kernite_ore", new RiseBlockItem(RiseBlocks.ORE_KERNITE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+
     public static final Item BLOCK_STEEL = createItem("steel_block", new RiseBlockItem(RiseBlocks.BLOCK_STEEL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BLOCK_VANADIUM = createItem("vanadium_block", new RiseBlockItem(RiseBlocks.BLOCK_VANADIUM, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BLOCK_NICKEL = createItem("nickel_block", new RiseBlockItem(RiseBlocks.BLOCK_NICKEL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BLOCK_INVAR = createItem("invar_block", new RiseBlockItem(RiseBlocks.BLOCK_INVAR, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+
     public static final Item ENGINEERS_ANVIL = createItem("engineers_anvil", new RiseBlockItem(RiseBlocks.ENGINEERS_ANVIL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 
     public static final Item STEEL_CHASSIS = createItem("steel_chassis", new RiseBlockItem(RiseBlocks.STEEL_CHASSIS, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item VANADIUM_CHASSIS = createItem("vanadium_chassis", new RiseBlockItem(RiseBlocks.VANADIUM_CHASSIS, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+
     public static final Item CERAMIC_BLOCK = createItem("ceramic_block", new RiseBlockItem(RiseBlocks.CERAMIC_BLOCK, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BURNT_CERAMIC_BLOCK = createItem("burnt_ceramic_block", new RiseBlockItem(RiseBlocks.BURNT_CERAMIC_BLOCK, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
-//    public static final Item PORTAL_PART_0 = createItem("portal_part_0", new RiseBlockItem(RiseBlocks.PORTAL_PART_0, new Item.Properties().group(BlockTab.ITEM_GROUP)));
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // items
@@ -71,7 +73,7 @@ public class RiseItems {
     public static final Item NUGGET_INVAR = createItem("invar_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item INVAR_PLATE = createItem("invar_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item INVAR_ROD = createItem("invar_rod", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
-
+    //tin based
     public static final Item TIN_SOLDER = createItem("tin_solder", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     public static final Item METAL_SAW = createItem("metal_saw", new MetalSaw());
