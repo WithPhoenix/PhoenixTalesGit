@@ -1,7 +1,7 @@
 {
   "type": "phoenixtales:forging",
   "input": {
-    "item": "phoenixtales:nickel_ingot"
+    "tag": "forge:ingots/nickel"
   },
   "output": {
     "item": "phoenixtales:nickel_plate"

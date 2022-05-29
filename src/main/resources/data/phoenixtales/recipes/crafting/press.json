@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#C#",
+    "IRI",
+    "CSC"
+  ],
+  "key": {
+    "#": {
+      "item": "phoenixtales:redstone_controller"
+    },
+    "C": {
+      "item": "phoenixtales:steel_chassis"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "R": {
+      "item": "phoenixtales:steel_reinforced_mechanical_arm"
+    },
+    "S": {
+      "tag": "forge:storage_blocks/steel"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:press",
+    "count": 1
+  }
+}

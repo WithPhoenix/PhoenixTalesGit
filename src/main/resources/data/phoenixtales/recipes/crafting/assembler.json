@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#M#",
+    "MMM",
+    "CCC"
+  ],
+  "key": {
+    "#": {
+      "item": "phoenixtales:redstone_controller"
+    },
+    "M": {
+      "item": "phoenixtales:mechanical_arm"
+    },
+    "C": {
+      "item": "phoenixtales:steel_chassis"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:assembler",
+    "count": 1
+  }
+}

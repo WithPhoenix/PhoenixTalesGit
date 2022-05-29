@@ -92,7 +92,7 @@ public class RiseItems {
 
     public static final Item MECHANICAL_ARM = createItem("mechanical_arm", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     //mechanical arm with two steel plates?
-    public static final Item REINFORCED_MECHANICAL_ARM = createItem("steel_reinforced_mechanical_arm", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item STEEL_REINFORCED_MECHANICAL_ARM = createItem("steel_reinforced_mechanical_arm", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     public static final Item CERAMIC_BLEND = createItem("ceramic_blend", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item CERAMIC = createItem("ceramic", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
