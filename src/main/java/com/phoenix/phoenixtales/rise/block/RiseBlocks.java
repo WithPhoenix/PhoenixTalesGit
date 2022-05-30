@@ -7,6 +7,7 @@ import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStore;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil.EngineersAnvil;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceBottom;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceTop;
+import com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable.SolderingTableBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.press.PressFactory;
 import com.phoenix.phoenixtales.rise.block.blocks.tank.TankBlock;
 import net.minecraft.block.AbstractBlock;
@@ -54,7 +55,7 @@ public class RiseBlocks {
     public static final Block ENGINEERS_ANVIL = createBlock("engineers_anvil", new EngineersAnvil());
     public static final Block SMELTING_FURNACE_BOTTOM = createBlock("smelting_furnace_lower", new SmeltingFurnaceBottom());
     public static final Block SMELTING_FURNACE_TOP = createBlock("smelting_furnace_upper", new SmeltingFurnaceTop());
-//    public static final Block SOLDERING_TABLE = createBlock("soldering_table", new SolderingTable());
+    public static final Block SOLDERING_TABLE = createBlock("soldering_table", new SolderingTableBlock());
 
     //machines and tech related blocks
 //    public static final Block SIMPLE_CABLE = createBlock("simple_cable", new SimpleCable());

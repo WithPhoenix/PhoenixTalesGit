@@ -78,6 +78,7 @@ public class RiseItems {
     public static final Item METAL_SAW = createItem("metal_saw", new MetalSaw());
     public static final Item HAMMER = createItem("hammer", new Hammer());
     public static final Item CONFIGURATOR = createItem("configurator", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item SOLDERING_IRON = createItem("soldering_iron", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     //tech related
     public static final Item WAFER = createItem("wafer", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
