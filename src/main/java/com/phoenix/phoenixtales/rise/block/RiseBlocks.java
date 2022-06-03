@@ -34,7 +34,6 @@ public class RiseBlocks {
     public static final Block ORE_TIN = createBlock("tin_ore", new Block(AbstractBlock.Properties.create((Material.ROCK), MaterialColor.LIGHT_GRAY).hardnessAndResistance(3f, 3f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
     public static final Block ORE_COPPER = createBlock("copper_ore", new Block(AbstractBlock.Properties.create((Material.ROCK), MaterialColor.LIGHT_GRAY).hardnessAndResistance(3f, 3f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
 
-
     //metal blocks
     public static final Block BLOCK_STEEL = createBlock("steel_block", new Block(AbstractBlock.Properties.create((Material.IRON), MaterialColor.GRAY).hardnessAndResistance(7f, 9f).harvestTool(ToolType.PICKAXE).harvestLevel(3).sound(SoundType.METAL).setRequiresTool()));
     public static final Block BLOCK_VANADIUM = createBlock("vanadium_block", new Block(AbstractBlock.Properties.create((Material.IRON), MaterialColor.GRAY).hardnessAndResistance(10f, 10f).harvestTool(ToolType.PICKAXE).harvestLevel(3).sound(SoundType.METAL).setRequiresTool()));
