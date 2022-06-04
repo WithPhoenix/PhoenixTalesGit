@@ -2,6 +2,7 @@ package com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace;
 
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile.SmeltingTileLower;
+import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile.SmeltingTileUpper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
@@ -46,10 +47,17 @@ public class SmeltingFurnaceBottom extends SmeltingFurnace {
         if (SmeltingFurnace.isBuild(state, pos, worldIn)) {
             ItemStack item = player.getHeldItem(handIn);
             if (item.getItem() instanceof FlintAndSteelItem) {
-                worldIn.setBlockState(pos, state.with(LIT, Boolean.valueOf(true)));
-                worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(LIT, Boolean.valueOf(true)));
-                item.damageItem(2, player, p -> p.sendBreakAnimation(handIn));
-                return ActionResultType.SUCCESS;
+                if (worldIn.getTileEntity(pos.up()) instanceof SmeltingTileUpper) {
+                    SmeltingTileUpper tile = (SmeltingTileUpper) worldIn.getTileEntity(pos.up());
+                    if (tile.hasCoal()) {
+                        Random random = new Random();
+                        worldIn.setBlockState(pos, state.with(LIT, Boolean.valueOf(true)));
+                        worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(LIT, Boolean.valueOf(true)));
+                        item.damageItem(2, player, p -> p.sendBreakAnimation(handIn));
+                        worldIn.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
+                        return ActionResultType.SUCCESS;
+                    }
+                }
             }
         }
         return ActionResultType.PASS;

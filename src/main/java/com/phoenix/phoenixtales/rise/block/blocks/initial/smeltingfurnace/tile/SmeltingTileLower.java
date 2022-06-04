@@ -14,6 +14,10 @@ public class SmeltingTileLower extends SmeltingFurnaceTile {
 
     public void receiveProgressDone() {
         this.items.get(0).grow(RANDOM.nextInt(2) + 1);
-        this.items.get(1).grow(RANDOM.nextInt(2));
+        if (RANDOM.nextFloat() <= 0.6f) {
+            this.items.get(1).grow(2);
+        } else {
+            this.items.get(1).grow(1);
+        }
     }
 }

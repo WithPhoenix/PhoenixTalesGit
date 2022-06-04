@@ -1,6 +1,7 @@
 package com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
+import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceBottom;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceTop;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -10,6 +11,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 
 public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableTileEntity {
     private int time;
+    private int ctime;
 
     public SmeltingTileUpper() {
         super(RiseTileEntities.SMELTING_TILE_UPPER);
@@ -21,12 +23,14 @@ public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableT
     public void read(BlockState state, CompoundNBT nbt) {
         super.read(state, nbt);
         this.time = nbt.getInt("time");
+        this.ctime = nbt.getInt("ctime");
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
         compound.putInt("time", this.time);
+        compound.putInt("ctime", this.ctime);
         return compound;
     }
 
@@ -36,6 +40,10 @@ public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableT
         } else {
             return this.items.get(1).getCount() < 32;
         }
+    }
+
+    public boolean hasCoal() {
+        return !this.items.get(0).isEmpty();
     }
 
     public void addCoal(int n) {
@@ -49,11 +57,29 @@ public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableT
     @Override
     public void tick() {
         if (!world.isRemote) {
+            //coal
+            if (ctime == 200) {
+                if (this.items.get(0).getCount() == 1) {
+                    this.items.get(0).shrink(1);
+                } else {
+                    this.items.get(0).shrink(2);
+                }
+            }
+            if (this.hasCoal()) {
+                ++this.ctime;
+            } else {
+                if (this.getBlockState().get(SmeltingFurnaceTop.LIT)) {
+                    world.setBlockState(pos.down(), world.getBlockState(pos.down()).with(SmeltingFurnaceBottom.LIT, Boolean.valueOf(false)));
+                    world.setBlockState(pos, world.getBlockState(pos).with(SmeltingFurnaceTop.LIT, Boolean.valueOf(false)));
+                    this.ctime = 0;
+                }
+            }
+
+            //now iron
             if (this.getBlockState().get(SmeltingFurnaceTop.LIT)) {
-                if (items.get(0).getCount() > 2 && items.get(1).getCount() > 0) {
+                if (!this.items.get(1).isEmpty()) {
                     if (this.time == 360) {
                         if (world.getTileEntity(pos.down()) instanceof SmeltingTileLower) {
-                            this.items.get(0).shrink(RANDOM.nextInt(2) + 1);
                             this.items.get(1).shrink(1);
                             this.time = 0;
                             SmeltingTileLower tile = (SmeltingTileLower) world.getTileEntity(pos.down());
@@ -64,6 +90,8 @@ public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableT
                     }
                     this.time++;
                 }
+            } else {
+                this.time = 0;
             }
         }
     }
