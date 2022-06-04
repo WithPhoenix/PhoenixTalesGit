@@ -59,11 +59,8 @@ public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableT
         if (!world.isRemote) {
             //coal
             if (ctime == 200) {
-                if (this.items.get(0).getCount() == 1) {
-                    this.items.get(0).shrink(1);
-                } else {
-                    this.items.get(0).shrink(2);
-                }
+                this.items.get(0).shrink(1);
+                this.ctime = 0;
             }
             if (this.hasCoal()) {
                 ++this.ctime;
@@ -71,8 +68,8 @@ public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableT
                 if (this.getBlockState().get(SmeltingFurnaceTop.LIT)) {
                     world.setBlockState(pos.down(), world.getBlockState(pos.down()).with(SmeltingFurnaceBottom.LIT, Boolean.valueOf(false)));
                     world.setBlockState(pos, world.getBlockState(pos).with(SmeltingFurnaceTop.LIT, Boolean.valueOf(false)));
-                    this.ctime = 0;
                 }
+                this.ctime = 0;
             }
 
             //now iron
