@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "#forge:ores/nickel",
-    "#forge:ores/vanadium"
+    "#forge:ores/vanadium",
+    "#forge:ores/tin",
+    "#forge:ores/copper"
   ]
 }
