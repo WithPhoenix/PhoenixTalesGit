@@ -6,6 +6,7 @@ import com.phoenix.phoenixtales.rise.block.blocks.assembler.AssemblerTile;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil.EngineersAnvilTile;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile.SmeltingTileUpper;
+import com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable.SolderingTableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.press.PressTile;
 import com.phoenix.phoenixtales.rise.block.blocks.tank.TankTile;
 import net.minecraft.tileentity.TileEntityType;
@@ -42,6 +43,8 @@ public class RiseTileEntities {
     public static TileEntityType<SmeltingTileUpper> SMELTING_TILE_UPPER;
     @ObjectHolder(PhoenixTales.MOD_ID + ":smelting_tile_lower")
     public static TileEntityType<SmeltingTileUpper> SMELTING_TILE_LOWER;
+    @ObjectHolder(PhoenixTales.MOD_ID + ":soldering_tile")
+    public static TileEntityType<SmeltingTileUpper> SOLDERING_TILE;
     @ObjectHolder(PhoenixTales.MOD_ID + ":tank_tile")
     public static TileEntityType<TankTile> TANK_TILE;
 
@@ -62,6 +65,7 @@ public class RiseTileEntities {
             r.register(TileEntityType.Builder.create(EngineersAnvilTile::new, RiseBlocks.ENGINEERS_ANVIL).build(null).setRegistryName("engineers_anvil"));
             r.register(TileEntityType.Builder.create(SmeltingTileUpper::new, RiseBlocks.SMELTING_FURNACE_TOP).build(null).setRegistryName("smelting_tile_upper"));
             r.register(TileEntityType.Builder.create(SmeltingTileUpper::new, RiseBlocks.SMELTING_FURNACE_BOTTOM).build(null).setRegistryName("smelting_tile_lower"));
+            r.register(TileEntityType.Builder.create(SolderingTableTile::new, RiseBlocks.SOLDERING_TABLE).build(null).setRegistryName("soldering_tile"));
             r.register(TileEntityType.Builder.create(TankTile::new, RiseBlocks.TANK).build(null).setRegistryName("tank_tile"));
         }
 

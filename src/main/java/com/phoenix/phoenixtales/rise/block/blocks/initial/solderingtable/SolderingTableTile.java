@@ -1,11 +1,11 @@
 package com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable;
 
+import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
 
 public class SolderingTableTile extends TileEntity {
 
-    public SolderingTableTile(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
+    public SolderingTableTile() {
+        super(RiseTileEntities.SOLDERING_TILE);
     }
 }
