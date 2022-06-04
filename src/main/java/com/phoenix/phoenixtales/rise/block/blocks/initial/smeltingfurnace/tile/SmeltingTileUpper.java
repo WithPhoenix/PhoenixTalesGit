@@ -36,7 +36,7 @@ public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableT
 
     public boolean canInsert(boolean coal) {
         if (coal) {
-            return this.items.get(0).getCount() < 48;
+            return this.items.get(0).getCount() < 64;
         } else {
             return this.items.get(1).getCount() < 32;
         }
