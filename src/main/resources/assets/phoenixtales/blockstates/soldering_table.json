@@ -1,19 +1,34 @@
 {
   "variants": {
-    "facing=north": {
+    "facing=north,tin_solder=false": {
       "model": "phoenixtales:block/soldering_table",
       "y": 270
     },
-    "facing=south": {
+    "facing=south,tin_solder=false": {
       "model": "phoenixtales:block/soldering_table",
       "y": 90
     },
-    "facing=west": {
+    "facing=west,tin_solder=false": {
       "model": "phoenixtales:block/soldering_table",
       "y": 180
     },
-    "facing=east": {
+    "facing=east,tin_solder=false": {
       "model": "phoenixtales:block/soldering_table"
+    },
+    "facing=north,tin_solder=true": {
+      "model": "phoenixtales:block/soldering_table_tin",
+      "y": 270
+    },
+    "facing=south,tin_solder=true": {
+      "model": "phoenixtales:block/soldering_table_tin",
+      "y": 90
+    },
+    "facing=west,tin_solder=true": {
+      "model": "phoenixtales:block/soldering_table_tin",
+      "y": 180
+    },
+    "facing=east,tin_solder=true": {
+      "model": "phoenixtales:block/soldering_table_tin"
     }
   }
 }

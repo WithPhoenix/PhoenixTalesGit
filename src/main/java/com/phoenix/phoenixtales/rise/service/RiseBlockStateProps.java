@@ -4,8 +4,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 
 public class RiseBlockStateProps {
-    public static final IntegerProperty NETWORK = IntegerProperty.create("network", 0, Integer.MAX_VALUE);
     public static final BooleanProperty CONNECTED = BooleanProperty.create("connected");
-    public static final BooleanProperty HAS_STACK = BooleanProperty.create("stack");
-    public static final IntegerProperty BUILD_1_3 = IntegerProperty.create("build", 1, 3);
+    public static final BooleanProperty TIN_SOLDER = BooleanProperty.create("tin_solder");
+    public static final BooleanProperty SOLDERING_IRON = BooleanProperty.create("soldering_iron");
 }

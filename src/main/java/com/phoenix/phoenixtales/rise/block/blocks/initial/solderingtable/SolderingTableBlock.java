@@ -1,5 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable;
 
+import com.phoenix.phoenixtales.rise.service.RiseBlockStateProps;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -7,6 +8,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -14,6 +16,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -21,10 +25,13 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("deprecation")
 public class SolderingTableBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty TIN_SOLDER = RiseBlockStateProps.TIN_SOLDER;
+    public static final BooleanProperty SOLDERING_IRON = RiseBlockStateProps.SOLDERING_IRON;
+    private final VoxelShape SHAPE = Block.makeCuboidShape(1, 0, 1, 15, 11, 15);
 
     public SolderingTableBlock() {
         super(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).notSolid().sound(SoundType.WOOD));
-        this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH));
+        this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(TIN_SOLDER, Boolean.valueOf(false)));
     }
 
     @Override
@@ -66,6 +73,11 @@ public class SolderingTableBlock extends Block {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, TIN_SOLDER);
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return SHAPE;
     }
 }
