@@ -82,6 +82,8 @@ public class SolderingTableBlock extends Block {
         if (worldIn.getTileEntity(pos) instanceof SolderingTableTile) {
             SolderingTableTile tile = (SolderingTableTile) worldIn.getTileEntity(pos);
             if (player.isCrouching()) {
+                InventoryHelper.dropItems(worldIn, pos, tile.removeAll());
+            } else {
                 InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tile.removeStack());
             }
         }

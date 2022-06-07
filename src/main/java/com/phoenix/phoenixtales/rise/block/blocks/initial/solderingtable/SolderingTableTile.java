@@ -29,7 +29,6 @@ public class SolderingTableTile extends TileEntity {
         if (nbt.contains("iron")) {
             this.setIron(ItemStack.read(nbt.getCompound("iron")));
         }
-        this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(nbt, this.items);
         super.read(state, nbt);
     }
@@ -94,6 +93,22 @@ public class SolderingTableTile extends TileEntity {
         return this.soldering_iron;
     }
 
+
+    public NonNullList<ItemStack> removeAll() {
+        NonNullList<ItemStack> list = NonNullList.withSize(6, ItemStack.EMPTY);
+        for (int i = 3; i >= 0; i--) {
+            if (!this.items.get(i).isEmpty()) {
+                list.set(i, this.items.get(i));
+                this.items.set(i, ItemStack.EMPTY);
+            }
+        }
+        list.set(4, this.soldering_iron);
+        this.soldering_iron = new ItemStack(RiseItems.SOLDERING_IRON, 0);
+        list.set(5, this.tin_solder);
+        this.tin_solder = new ItemStack(RiseItems.TIN_SOLDER, 0);
+        return list;
+    }
+
     public ItemStack removeStack() {
         ItemStack stack = ItemStack.EMPTY;
         for (int i = 3; i >= 0; i--) {
@@ -127,9 +142,5 @@ public class SolderingTableTile extends TileEntity {
 
     public NonNullList<ItemStack> getItems() {
         return this.items;
-    }
-
-    public int getSizeInventory() {
-        return this.items.size();
     }
 }

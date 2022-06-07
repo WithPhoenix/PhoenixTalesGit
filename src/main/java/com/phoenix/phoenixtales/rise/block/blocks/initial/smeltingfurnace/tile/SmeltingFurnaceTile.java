@@ -21,7 +21,6 @@ public abstract class SmeltingFurnaceTile extends TileEntity {
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
         super.read(state, nbt);
-        this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
         ItemStackHelper.loadAllItems(nbt, this.items);
     }
 
@@ -34,9 +33,5 @@ public abstract class SmeltingFurnaceTile extends TileEntity {
 
     public NonNullList<ItemStack> getItems() {
         return this.items;
-    }
-
-    public int getSizeInventory() {
-        return this.items.size();
     }
 }
