@@ -21,9 +21,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class AlloyingRecipe implements IAlloying {
-
-    //TODO custom count für die verschiedenen inputs, da legierungen verschiedene anteile haben
-
     private final ResourceLocation id;
     private final NonNullList<Ingredient> inputs;
     private final ItemStack output;
