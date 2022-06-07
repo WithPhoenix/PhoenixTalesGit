@@ -42,11 +42,16 @@ public class EngineersAnvil extends Block {
             EngineersAnvilTile tile = (EngineersAnvilTile) tileEntity;
             ItemStack item = player.getHeldItem(handIn);
             if (item.getItem() instanceof Hammer) {
-                if (tile.craft()) {
+                if (tile.hasRecipe()) {
                     if (!player.abilities.isCreativeMode) {
-                        item.damageItem(5, player, onBroken -> {
+                        item.damageItem(RANDOM.nextFloat() <= 0.5f ? 2 : 3, player, onBroken -> {
                             player.sendBreakAnimation(handIn);
                         });
+                    }
+                    if (RANDOM.nextFloat() <= 0.3f) {
+                        if (tile.craft()) {
+                            worldIn.playSound(player, pos, SoundEvents.BLOCK_ANVIL_USE, SoundCategory.BLOCKS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
+                        }
                     }
                 }
                 return ActionResultType.SUCCESS;

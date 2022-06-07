@@ -65,6 +65,11 @@ public class EngineersAnvilTile extends TileEntity implements IClearable {
         return false;
     }
 
+    public boolean hasRecipe() {
+        ForgingRecipe recipe = world != null ? world.getRecipeManager().getRecipe(RiseRecipeTypes.FORGING_RECIPE, new Inventory(this.getStack()), world).orElse(null) : null;
+        return recipe != null;
+    }
+
     @Override
     public void clear() {
         this.setStack(ItemStack.EMPTY);

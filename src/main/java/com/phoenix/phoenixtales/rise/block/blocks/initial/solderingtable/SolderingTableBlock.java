@@ -1,5 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable;
 
+import com.phoenix.phoenixtales.rise.item.RiseItems;
 import com.phoenix.phoenixtales.rise.service.RiseBlockStateProps;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -7,7 +8,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -31,12 +34,57 @@ public class SolderingTableBlock extends Block {
 
     public SolderingTableBlock() {
         super(AbstractBlock.Properties.create(Material.WOOD).hardnessAndResistance(2.5F).notSolid().sound(SoundType.WOOD));
-        this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(TIN_SOLDER, Boolean.valueOf(false)));
+        this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH).with(TIN_SOLDER, Boolean.valueOf(false)).with(SOLDERING_IRON, Boolean.valueOf(false)));
     }
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        if (worldIn.getTileEntity(pos) instanceof SolderingTableTile) {
+            SolderingTableTile tile = (SolderingTableTile) worldIn.getTileEntity(pos);
+            if (tile == null) return ActionResultType.FAIL;
+            if (!tile.hasRecipe()) {
+                ItemStack item = player.getHeldItem(handIn);
+                if (item.getItem() == RiseItems.TIN_SOLDER) {
+                    tile.getTin().grow(1);
+                    worldIn.setBlockState(pos, state.with(TIN_SOLDER, Boolean.valueOf(true)));
+                    if (!player.abilities.isCreativeMode) {
+                        item.shrink(1);
+                    }
+                    return ActionResultType.SUCCESS;
+                } else if (item.getItem() == RiseItems.SOLDERING_IRON) {
+                    tile.getIron().grow(1);
+                    worldIn.setBlockState(pos, state.with(SOLDERING_IRON, Boolean.valueOf(true)));
+                    if (!player.abilities.isCreativeMode) {
+                        item.shrink(1);
+                    }
+                    return ActionResultType.SUCCESS;
+                } else {
+                    if (tile.addStack(new ItemStack(item.getItem(), 1))) {
+                        if (!player.abilities.isCreativeMode) {
+                            item.shrink(1);
+                        }
+                        return ActionResultType.SUCCESS;
+                    }
+                }
+            } else {
+                tile.increaseProgress();
+                if (tile.progress() == 200) {
+                    //craft here
+                    tile.clearProgress();
+                }
+            }
+        }
+        return ActionResultType.PASS;
+    }
+
+    @Override
+    public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+        if (worldIn.getTileEntity(pos) instanceof SolderingTableTile) {
+            SolderingTableTile tile = (SolderingTableTile) worldIn.getTileEntity(pos);
+            if (player.isCrouching()) {
+                InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tile.removeStack());
+            }
+        }
     }
 
     @Override
@@ -73,7 +121,7 @@ public class SolderingTableBlock extends Block {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING, TIN_SOLDER);
+        builder.add(FACING, TIN_SOLDER, SOLDERING_IRON);
     }
 
     @Override
