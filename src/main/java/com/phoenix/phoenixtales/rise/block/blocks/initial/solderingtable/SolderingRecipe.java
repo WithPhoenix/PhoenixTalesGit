@@ -36,9 +36,19 @@ public class SolderingRecipe implements ISoldering {
 
     @Override
     public boolean matches(IInventory inv, World worldIn) {
+        boolean[] booleans = new boolean[ingredients.size()];
         for (int i = 0; i < 4; i++) {
-            if (!(this.ingredients.get(i).test(inv.getStackInSlot(i)))) return false;
+            for (int n = 0; n < 4; n++) {
+                if (ingredients.get(i).test(inv.getStackInSlot(n))) {
+                    booleans[i] = true;
+                    break;
+                }
+            }
         }
+        for (int i = 0; i < booleans.length; i++) {
+            if (!booleans[i]) return false;
+        }
+        return true;
 //        boolean[] b = {false, false, false, false};
 //        for (int i = 0; i < 4; i++) {
 //            for (int j = 0; i < 4; i++) {
@@ -50,7 +60,6 @@ public class SolderingRecipe implements ISoldering {
 //        for (boolean b1 : b) {
 //            if (!b1) return false;
 //        }
-        return true;
     }
 
     @Override
