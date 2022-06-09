@@ -4,15 +4,15 @@ import com.phoenix.phoenixtales.core.creativetab.ItemTab;
 import com.phoenix.phoenixtales.rise.item.RiseItem;
 import net.minecraft.item.ItemStack;
 
-public class Hammer extends RiseItem {
-    public Hammer() {
+public class SolderingIronItem extends RiseItem {
+    public SolderingIronItem() {
         super(new Properties().group(ItemTab.ITEM_GROUP).maxDamage(300));
     }
 
     @Override
     public ItemStack getContainerItem(ItemStack itemStack) {
         ItemStack stack = itemStack.copy();
-        if (stack.attemptDamageItem(2, random, null)) {
+        if (stack.attemptDamageItem(1, random, null)) {
             return ItemStack.EMPTY;
         } else {
             return stack;

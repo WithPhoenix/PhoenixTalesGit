@@ -78,7 +78,7 @@ public class TalesRegistry {
         for (IRecipeSerializer<?> serializer : RiseRecipeTypes.serializers) {
             event.getRegistry().register(serializer);
         }
-        RiseRecipeTypes.createPressRecipeTypes();
+        RiseRecipeTypes.createRecipeTypes();
         doneMsg("recipe types");
     }
 

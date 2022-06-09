@@ -1,0 +1,22 @@
+{
+  "type": "phoenixtales:soldering",
+  "ingredients": [
+    {
+      "item": "phoenixtales:steel_ingot"
+    },
+    {
+      "item": "phoenixtales:redstone_controller"
+    },
+    {
+      "item": "phoenixtales:advanced_controller"
+    },
+    {
+      "item": "phoenixtales:simple_controller"
+    }
+  ],
+  "output": {
+    "item": "phoenixtales:slag"
+  },
+  "time": 200,
+  "chanceToFail": 0.2
+}

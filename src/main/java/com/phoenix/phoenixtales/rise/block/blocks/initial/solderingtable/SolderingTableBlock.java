@@ -42,7 +42,8 @@ public class SolderingTableBlock extends Block {
         if (worldIn.getTileEntity(pos) instanceof SolderingTableTile) {
             SolderingTableTile tile = (SolderingTableTile) worldIn.getTileEntity(pos);
             if (tile == null) return ActionResultType.FAIL;
-            if (!tile.hasRecipe()) {
+            //check if there is enough tin and a soldering iron
+            if (!(tile.hasRecipe() && tile.hasTinAndIron())) {
                 ItemStack item = player.getHeldItem(handIn);
                 if (item.getItem() == RiseItems.TIN_SOLDER) {
                     tile.getTin().grow(1);
@@ -68,10 +69,11 @@ public class SolderingTableBlock extends Block {
                 }
             } else {
                 tile.increaseProgress();
-                if (tile.progress() == 200) {
-                    //craft here
+                if (tile.progress() == tile.getTime()) {
+                    tile.craft(worldIn, player);
                     tile.clearProgress();
                 }
+                return ActionResultType.PASS;
             }
         }
         return ActionResultType.PASS;

@@ -4,10 +4,7 @@ import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.core.creativetab.BlockTab;
 import com.phoenix.phoenixtales.core.creativetab.ItemTab;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
-import com.phoenix.phoenixtales.rise.item.items.ClayAndGravelItem;
-import com.phoenix.phoenixtales.rise.item.items.Hammer;
-import com.phoenix.phoenixtales.rise.item.items.MetalSaw;
-import com.phoenix.phoenixtales.rise.item.items.Phosphorus;
+import com.phoenix.phoenixtales.rise.item.items.*;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
@@ -80,7 +77,7 @@ public class RiseItems {
     public static final Item METAL_SAW = createItem("metal_saw", new MetalSaw());
     public static final Item HAMMER = createItem("hammer", new Hammer());
     public static final Item CONFIGURATOR = createItem("configurator", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
-    public static final Item SOLDERING_IRON = createItem("soldering_iron", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item SOLDERING_IRON = createItem("soldering_iron", new SolderingIronItem());
 
     //tech related
     public static final Item WAFER = createItem("wafer", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));

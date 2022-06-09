@@ -2,12 +2,20 @@ package com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import com.phoenix.phoenixtales.rise.item.RiseItems;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 //todo the table needs energy
 public class SolderingTableTile extends TileEntity {
@@ -15,6 +23,7 @@ public class SolderingTableTile extends TileEntity {
     private ItemStack tin_solder = new ItemStack(RiseItems.TIN_SOLDER, 0);
     private ItemStack soldering_iron = new ItemStack(RiseItems.SOLDERING_IRON, 0);
     private int progress;
+    private final Random RANDOM = new Random();
 
     public SolderingTableTile() {
         super(RiseTileEntities.SOLDERING_TILE);
@@ -57,10 +66,45 @@ public class SolderingTableTile extends TileEntity {
         return this.writeStacks(new CompoundNBT());
     }
 
+    public boolean hasTinAndIron() {
+        return this.tin_solder.getCount() >= 3 && this.soldering_iron.getCount() > 0;
+    }
 
-    //TODO check
     public boolean hasRecipe() {
-        return false;
+        SolderingRecipe recipe = world != null ? world.getRecipeManager().getRecipe(RiseRecipeTypes.SOLDERING_RECIPE, new Inventory(this.itemsToArray()), world).orElse(null) : null;
+        return recipe != null;
+    }
+
+    public int getTime() {
+        SolderingRecipe recipe = world != null ? world.getRecipeManager().getRecipe(RiseRecipeTypes.SOLDERING_RECIPE, new Inventory(this.itemsToArray()), world).orElse(null) : null;
+        return recipe != null ? recipe.getTime() : 0;
+    }
+
+    public void craft(World world, PlayerEntity player) {
+        SolderingRecipe recipe = world != null ? world.getRecipeManager().getRecipe(RiseRecipeTypes.SOLDERING_RECIPE, new Inventory(this.itemsToArray()), world).orElse(null) : null;
+        if (recipe == null) return;
+        this.tin_solder.shrink(RANDOM.nextInt(3) + 1);
+        if (tin_solder.getCount() == 0) {
+            world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.TIN_SOLDER, Boolean.valueOf(false)));
+        }
+        for (int i = 0; i < 4; i++) {
+            this.items.set(i, ItemStack.EMPTY);
+        }
+        if (RANDOM.nextFloat() > recipe.getChanceToFail()) {
+            this.items.set(0, recipe.getRecipeOutput());
+        }
+        this.soldering_iron.damageItem(RANDOM.nextInt(3) + 3, player, t -> {
+            world.playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
+            world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.SOLDERING_IRON, Boolean.valueOf(false)));
+        });
+    }
+
+    private ItemStack[] itemsToArray() {
+        ItemStack[] stacks = new ItemStack[4];
+        for (int i = 0; i < 4; i++) {
+            stacks[i] = this.items.get(i);
+        }
+        return stacks;
     }
 
     public int progress() {
@@ -104,8 +148,10 @@ public class SolderingTableTile extends TileEntity {
         }
         list.set(4, this.soldering_iron);
         this.soldering_iron = new ItemStack(RiseItems.SOLDERING_IRON, 0);
+        world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.SOLDERING_IRON, Boolean.valueOf(false)));
         list.set(5, this.tin_solder);
         this.tin_solder = new ItemStack(RiseItems.TIN_SOLDER, 0);
+        world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.TIN_SOLDER, Boolean.valueOf(false)));
         return list;
     }
 
@@ -122,10 +168,12 @@ public class SolderingTableTile extends TileEntity {
             if (!this.soldering_iron.isEmpty()) {
                 stack = this.soldering_iron;
                 this.soldering_iron = new ItemStack(RiseItems.SOLDERING_IRON, 0);
+                world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.SOLDERING_IRON, Boolean.valueOf(false)));
             }
         } else {
             stack = this.tin_solder;
             this.tin_solder = new ItemStack(RiseItems.TIN_SOLDER, 0);
+            world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.TIN_SOLDER, Boolean.valueOf(false)));
         }
         return stack.copy();
     }

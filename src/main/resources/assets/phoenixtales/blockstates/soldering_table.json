@@ -46,19 +46,19 @@
       "model": "phoenixtales:block/soldering_table_iron"
     },
     "facing=north,tin_solder=true,soldering_iron=true": {
-      "model": "phoenixtales:block/soldering_table",
+      "model": "phoenixtales:block/soldering_table_full",
       "y": 270
     },
     "facing=south,tin_solder=true,soldering_iron=true": {
-      "model": "phoenixtales:block/soldering_table",
+      "model": "phoenixtales:block/soldering_table_full",
       "y": 90
     },
     "facing=west,tin_solder=true,soldering_iron=true": {
-      "model": "phoenixtales:block/soldering_table",
+      "model": "phoenixtales:block/soldering_table_full",
       "y": 180
     },
     "facing=east,tin_solder=true,soldering_iron=true": {
-      "model": "phoenixtales:block/soldering_table"
+      "model": "phoenixtales:block/soldering_table_full"
     }
   }
 }

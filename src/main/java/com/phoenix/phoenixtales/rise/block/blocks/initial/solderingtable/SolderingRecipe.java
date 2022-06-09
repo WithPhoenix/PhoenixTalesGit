@@ -2,6 +2,8 @@ package com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.phoenix.phoenixtales.rise.block.RiseBlocks;
+import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -16,11 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
-
-
-//TODO wie schreibt man nen float in ner json datei 0.4 0.4f
-
-
 
 public class SolderingRecipe implements ISoldering {
     private final ResourceLocation id;
@@ -39,7 +36,21 @@ public class SolderingRecipe implements ISoldering {
 
     @Override
     public boolean matches(IInventory inv, World worldIn) {
-        return false;
+        for (int i = 0; i < 4; i++) {
+            if (!(this.ingredients.get(i).test(inv.getStackInSlot(i)))) return false;
+        }
+//        boolean[] b = {false, false, false, false};
+//        for (int i = 0; i < 4; i++) {
+//            for (int j = 0; i < 4; i++) {
+//                if (this.ingredients.get(i).test(inv.getStackInSlot(j))) {
+//                    b[i] = true;
+//                }
+//            }
+//        }
+//        for (boolean b1 : b) {
+//            if (!b1) return false;
+//        }
+        return true;
     }
 
     @Override
@@ -57,6 +68,19 @@ public class SolderingRecipe implements ISoldering {
         return output.copy();
     }
 
+    public int getTime() {
+        return time;
+    }
+
+    public float getChanceToFail() {
+        return chanceToFail;
+    }
+
+    @Override
+    public ItemStack getIcon() {
+        return new ItemStack(RiseBlocks.SOLDERING_TABLE);
+    }
+
     @Override
     public ResourceLocation getId() {
         return id;
@@ -64,7 +88,7 @@ public class SolderingRecipe implements ISoldering {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return null;
+        return RiseRecipeTypes.SOLDERING_SERIALIZER;
     }
 
     public static class SolderingRecipeType implements IRecipeType<SolderingRecipe> {
@@ -82,7 +106,7 @@ public class SolderingRecipe implements ISoldering {
             JsonArray ingredients = JSONUtils.getJsonArray(json, "ingredients");
             NonNullList<Ingredient> inputs = NonNullList.withSize(4, Ingredient.EMPTY);
             int time = JSONUtils.getInt(json, "time", 200);
-            float chanceToFail = JSONUtils.getFloat(json, "chanceToFail", 0.2f);
+            float chanceToFail = JSONUtils.getFloat(json, "chanceToFail", 0.15f);
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.deserialize(ingredients.get(i)));
