@@ -5,6 +5,7 @@ import com.phoenix.phoenixtales.rise.item.RiseItems;
 import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.IClearable;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
@@ -18,7 +19,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 //todo the table needs energy
-public class SolderingTableTile extends TileEntity {
+public class SolderingTableTile extends TileEntity implements IClearable {
     private NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
     private ItemStack tin_solder = new ItemStack(RiseItems.TIN_SOLDER, 0);
     private ItemStack soldering_iron = new ItemStack(RiseItems.SOLDERING_IRON, 0);
@@ -147,7 +148,7 @@ public class SolderingTableTile extends TileEntity {
                 this.items.set(i, ItemStack.EMPTY);
             }
         }
-        list.set(4, this.soldering_iron);
+        list.set(4, this.soldering_iron.copy());
         this.soldering_iron = new ItemStack(RiseItems.SOLDERING_IRON, 0);
         world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.SOLDERING_IRON, Boolean.valueOf(false)));
         list.set(5, this.tin_solder);
@@ -155,6 +156,7 @@ public class SolderingTableTile extends TileEntity {
         world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.TIN_SOLDER, Boolean.valueOf(false)));
         return list;
     }
+
 
     public ItemStack removeStack() {
         ItemStack stack = ItemStack.EMPTY;
@@ -191,5 +193,14 @@ public class SolderingTableTile extends TileEntity {
 
     public NonNullList<ItemStack> getItems() {
         return this.items;
+    }
+
+    @Override
+    public void clear() {
+        for (int i = 0; i < 4; i++) {
+            this.items.set(i, ItemStack.EMPTY);
+        }
+        this.tin_solder = new ItemStack(RiseItems.TIN_SOLDER, 0);
+        this.soldering_iron = new ItemStack(RiseItems.SOLDERING_IRON, 0);
     }
 }

@@ -12,7 +12,7 @@ import com.phoenix.phoenixtales.rise.block.RiseBlocks;
 import com.phoenix.phoenixtales.rise.block.RiseContainers;
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import com.phoenix.phoenixtales.rise.client.render.EngineersAnvilRenderer;
-import com.phoenix.phoenixtales.rise.client.render.GenericCableRender;
+import com.phoenix.phoenixtales.rise.client.render.SolderingTableRenderer;
 import com.phoenix.phoenixtales.rise.client.screen.AlloyScreen;
 import com.phoenix.phoenixtales.rise.client.screen.AssemblerScreen;
 import com.phoenix.phoenixtales.rise.client.screen.PressScreen;
@@ -90,6 +90,7 @@ public class ClientSetup {
         ClientRegistry.bindTileEntityRenderer(OriginsTileEntities.DECO_PORTAL_TILE, DecoPortalTileRenderer::new);
 
         ClientRegistry.bindTileEntityRenderer(RiseTileEntities.ENGINEERS_ANVIL, EngineersAnvilRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(RiseTileEntities.SOLDERING_TILE, SolderingTableRenderer::new);
     }
 
     private static void bindEntityRenderers() {

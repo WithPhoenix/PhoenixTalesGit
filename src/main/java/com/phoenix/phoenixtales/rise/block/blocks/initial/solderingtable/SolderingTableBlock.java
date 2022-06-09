@@ -53,7 +53,7 @@ public class SolderingTableBlock extends Block {
                     }
                     return ActionResultType.SUCCESS;
                 } else if (item.getItem() == RiseItems.SOLDERING_IRON) {
-                    tile.getIron().grow(1);
+                    tile.setIron(item);
                     worldIn.setBlockState(pos, state.with(SOLDERING_IRON, Boolean.valueOf(true)));
                     if (!player.abilities.isCreativeMode) {
                         item.shrink(1);

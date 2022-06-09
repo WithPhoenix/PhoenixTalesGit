@@ -44,7 +44,7 @@ public class RiseTileEntities {
     @ObjectHolder(PhoenixTales.MOD_ID + ":smelting_tile_lower")
     public static TileEntityType<SmeltingTileUpper> SMELTING_TILE_LOWER;
     @ObjectHolder(PhoenixTales.MOD_ID + ":soldering_tile")
-    public static TileEntityType<SmeltingTileUpper> SOLDERING_TILE;
+    public static TileEntityType<SolderingTableTile> SOLDERING_TILE;
     @ObjectHolder(PhoenixTales.MOD_ID + ":tank_tile")
     public static TileEntityType<TankTile> TANK_TILE;
 
