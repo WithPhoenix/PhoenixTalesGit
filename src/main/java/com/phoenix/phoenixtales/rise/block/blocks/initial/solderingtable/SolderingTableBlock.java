@@ -53,7 +53,7 @@ public class SolderingTableBlock extends Block {
                     }
                     return ActionResultType.SUCCESS;
                 } else if (item.getItem() == RiseItems.SOLDERING_IRON) {
-                    tile.setIron(item);
+                    tile.setIron(item.copy());
                     worldIn.setBlockState(pos, state.with(SOLDERING_IRON, Boolean.valueOf(true)));
                     if (!player.abilities.isCreativeMode) {
                         item.shrink(1);
@@ -93,6 +93,13 @@ public class SolderingTableBlock extends Block {
 
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (newState.getBlock() == state.getBlock()) {
+            return;
+        }
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        if (tileentity instanceof SolderingTableTile) {
+            InventoryHelper.dropItems(worldIn, pos, ((SolderingTableTile) tileentity).removeAll());
+        }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 

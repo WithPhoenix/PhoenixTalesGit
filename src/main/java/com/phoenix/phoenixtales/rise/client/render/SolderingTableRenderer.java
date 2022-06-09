@@ -31,8 +31,8 @@ public class SolderingTableRenderer extends TileEntityRenderer<SolderingTableTil
                 Direction direction1 = Direction.byHorizontalIndex((i + direction.getHorizontalIndex()) % 4);
                 float f = -direction1.getHorizontalAngle();
                 matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
-                matrixStackIn.rotate(Vector3f.XP.rotationDegrees(40.0F));//90 before
-                matrixStackIn.translate(-0.3125D, -0.3125D, 0.0D);
+                matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
+                matrixStackIn.translate(-0.3125D, -0.3125D, -0.3125D);
                 matrixStackIn.scale(0.2F, 0.2F, 0.2F);
                 Minecraft.getInstance().getItemRenderer().renderItem(itemstack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
                 matrixStackIn.pop();

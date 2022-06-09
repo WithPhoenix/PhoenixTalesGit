@@ -22,7 +22,7 @@ import java.util.Random;
 public class SolderingTableTile extends TileEntity implements IClearable {
     private NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
     private ItemStack tin_solder = new ItemStack(RiseItems.TIN_SOLDER, 0);
-    private ItemStack soldering_iron = new ItemStack(RiseItems.SOLDERING_IRON, 0);
+    private ItemStack soldering_iron = ItemStack.EMPTY;
     private int progress;
     private final Random RANDOM = new Random();
 
@@ -139,7 +139,6 @@ public class SolderingTableTile extends TileEntity implements IClearable {
         return this.soldering_iron;
     }
 
-
     public NonNullList<ItemStack> removeAll() {
         NonNullList<ItemStack> list = NonNullList.withSize(6, ItemStack.EMPTY);
         for (int i = 3; i >= 0; i--) {
@@ -149,7 +148,7 @@ public class SolderingTableTile extends TileEntity implements IClearable {
             }
         }
         list.set(4, this.soldering_iron.copy());
-        this.soldering_iron = new ItemStack(RiseItems.SOLDERING_IRON, 0);
+        this.soldering_iron = ItemStack.EMPTY;
         world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.SOLDERING_IRON, Boolean.valueOf(false)));
         list.set(5, this.tin_solder);
         this.tin_solder = new ItemStack(RiseItems.TIN_SOLDER, 0);
@@ -170,7 +169,7 @@ public class SolderingTableTile extends TileEntity implements IClearable {
         if (this.tin_solder.isEmpty()) {
             if (!this.soldering_iron.isEmpty()) {
                 stack = this.soldering_iron;
-                this.soldering_iron = new ItemStack(RiseItems.SOLDERING_IRON, 0);
+                this.soldering_iron = ItemStack.EMPTY;
                 world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.SOLDERING_IRON, Boolean.valueOf(false)));
             }
         } else {
@@ -201,6 +200,6 @@ public class SolderingTableTile extends TileEntity implements IClearable {
             this.items.set(i, ItemStack.EMPTY);
         }
         this.tin_solder = new ItemStack(RiseItems.TIN_SOLDER, 0);
-        this.soldering_iron = new ItemStack(RiseItems.SOLDERING_IRON, 0);
+        this.soldering_iron = ItemStack.EMPTY;
     }
 }

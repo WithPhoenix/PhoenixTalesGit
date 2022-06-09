@@ -49,17 +49,6 @@ public class SolderingRecipe implements ISoldering {
             if (!booleans[i]) return false;
         }
         return true;
-//        boolean[] b = {false, false, false, false};
-//        for (int i = 0; i < 4; i++) {
-//            for (int j = 0; i < 4; i++) {
-//                if (this.ingredients.get(i).test(inv.getStackInSlot(j))) {
-//                    b[i] = true;
-//                }
-//            }
-//        }
-//        for (boolean b1 : b) {
-//            if (!b1) return false;
-//        }
     }
 
     @Override
