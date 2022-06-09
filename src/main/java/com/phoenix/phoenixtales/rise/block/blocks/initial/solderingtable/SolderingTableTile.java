@@ -92,6 +92,7 @@ public class SolderingTableTile extends TileEntity {
         }
         if (RANDOM.nextFloat() > recipe.getChanceToFail()) {
             this.items.set(0, recipe.getRecipeOutput());
+            world.playSound(player, pos, SoundEvents.BLOCK_SMITHING_TABLE_USE, SoundCategory.BLOCKS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
         }
         this.soldering_iron.damageItem(RANDOM.nextInt(3) + 3, player, t -> {
             world.playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
