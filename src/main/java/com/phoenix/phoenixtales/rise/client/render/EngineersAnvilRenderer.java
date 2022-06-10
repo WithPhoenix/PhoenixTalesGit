@@ -30,7 +30,7 @@ public class EngineersAnvilRenderer extends TileEntityRenderer<EngineersAnvilTil
             matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
             matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
             matrixStackIn.scale(0.5F, 0.5F, 0.5F);
-            Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn,combinedOverlayIn,matrixStackIn, bufferIn);
+            Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
             matrixStackIn.pop();
         }
 
