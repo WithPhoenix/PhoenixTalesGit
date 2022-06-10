@@ -1,5 +1,6 @@
 package com.phoenix.phoenixtales.rise.client.render;
 
+import com.google.common.collect.Maps;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable.SolderingTableBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable.SolderingTableTile;
@@ -11,9 +12,37 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.vector.Vector3f;
 
+import java.util.HashMap;
+
 public class SolderingTableRenderer extends TileEntityRenderer<SolderingTableTile> {
+    private final HashMap<Integer, Double[]> NORTH_VALUES = Util.make(Maps.newHashMap(), (p) -> {
+        p.put(0, new Double[]{0.5d, 0.7d, 0.5d});
+        p.put(1, new Double[]{0.47d, 0.7d, 0.34d});
+        p.put(2, new Double[]{0.6d, 0.7d, 0.655d});
+        p.put(3, new Double[]{0.23d, 0.7d, 0.49d});
+    });
+    private final HashMap<Integer, Double[]> SOUTH_VALUES = Util.make(Maps.newHashMap(), (p) -> {
+        p.put(0, new Double[]{0.5d, 0.7d, 0.5d});
+        p.put(1, new Double[]{0.47d, 0.7d, 0.34d});
+        p.put(2, new Double[]{0.6d, 0.7d, 0.655d});
+        p.put(3, new Double[]{0.23d, 0.7d, 0.49d});
+    });
+    private final HashMap<Integer, Double[]> EAST_VALUES = Util.make(Maps.newHashMap(), (p) -> {
+        p.put(0, new Double[]{0.5d, 0.7d, 0.5d});
+        p.put(1, new Double[]{0.47d, 0.7d, 0.34d});
+        p.put(2, new Double[]{0.6d, 0.7d, 0.655d});
+        p.put(3, new Double[]{0.23d, 0.7d, 0.49d});
+    });
+    private final HashMap<Integer, Double[]> WEST_VALUES = Util.make(Maps.newHashMap(), (p) -> {
+        p.put(0, new Double[]{0.5d, 0.7d, 0.5d});
+        p.put(1, new Double[]{0.47d, 0.7d, 0.34d});
+        p.put(2, new Double[]{0.6d, 0.7d, 0.655d});
+        p.put(3, new Double[]{0.23d, 0.7d, 0.49d});
+    });
+
     public SolderingTableRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
@@ -22,56 +51,37 @@ public class SolderingTableRenderer extends TileEntityRenderer<SolderingTableTil
     public void render(SolderingTableTile tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         Direction direction = tileEntityIn.getBlockState().get(SolderingTableBlock.FACING);
         NonNullList<ItemStack> nonnulllist = tileEntityIn.getItems();
-        ItemStack stack = nonnulllist.get(0);
-        if (stack != ItemStack.EMPTY) {
-            matrixStackIn.push();
-            matrixStackIn.translate(0.5d, 0.7d, 0.5d);
-            Direction direction1 = Direction.byHorizontalIndex((direction.getHorizontalIndex()) % 4);
-            float f = -direction1.getHorizontalAngle();
-            matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
-            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
-            matrixStackIn.scale(0.2F, 0.2F, 0.2F);
-            Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
-            matrixStackIn.pop();
+        HashMap<Integer, Double[]> map;
+        switch (direction) {
+            case NORTH:
+                map = NORTH_VALUES;
+                break;
+            case SOUTH:
+                map = SOUTH_VALUES;
+                break;
+            case EAST:
+                map = EAST_VALUES;
+                break;
+            case WEST:
+                map = WEST_VALUES;
+                break;
+            default:
+                return;
         }
 
-        ItemStack stack1 = nonnulllist.get(1);
-        if (stack1 != ItemStack.EMPTY) {
-            matrixStackIn.push();
-            matrixStackIn.translate(0.25d, 0.7d, 0.25d);
-            Direction direction1 = Direction.byHorizontalIndex((direction.getHorizontalIndex()) % 4);
-            float f = -direction1.getHorizontalAngle();
-            matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
-            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
-            matrixStackIn.scale(0.2F, 0.2F, 0.2F);
-            Minecraft.getInstance().getItemRenderer().renderItem(stack1, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
-            matrixStackIn.pop();
-        }
-
-        ItemStack stack2 = nonnulllist.get(2);
-        if (stack2 != ItemStack.EMPTY) {
-            matrixStackIn.push();
-            matrixStackIn.translate(0.75d, 0.7d, 0.25d);
-            Direction direction1 = Direction.byHorizontalIndex((direction.getHorizontalIndex()) % 4);
-            float f = -direction1.getHorizontalAngle();
-            matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
-            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
-            matrixStackIn.scale(0.2F, 0.2F, 0.2F);
-            Minecraft.getInstance().getItemRenderer().renderItem(stack2, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
-            matrixStackIn.pop();
-        }
-
-        ItemStack stack3 = nonnulllist.get(3);
-        if (stack3 != ItemStack.EMPTY) {
-            matrixStackIn.push();
-            matrixStackIn.translate(0.5d, 0.7d, 0.75d);
-            Direction direction1 = Direction.byHorizontalIndex((direction.getHorizontalIndex()) % 4);
-            float f = -direction1.getHorizontalAngle();
-            matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
-            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
-            matrixStackIn.scale(0.2F, 0.2F, 0.2F);
-            Minecraft.getInstance().getItemRenderer().renderItem(stack3, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
-            matrixStackIn.pop();
+        for (int i = 0; i < 4; i++) {
+            ItemStack stack = nonnulllist.get(i);
+            if (stack != ItemStack.EMPTY) {
+                matrixStackIn.push();
+                matrixStackIn.translate(map.get(i)[0], map.get(i)[1], map.get(i)[2]);
+                Direction direction1 = Direction.byHorizontalIndex((direction.getHorizontalIndex()) % 4);
+                float f = -direction1.getHorizontalAngle();
+                matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
+                matrixStackIn.rotate(Vector3f.XP.rotationDegrees(90.0F));
+                matrixStackIn.scale(0.2F, 0.2F, 0.2F);
+                Minecraft.getInstance().getItemRenderer().renderItem(stack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, combinedOverlayIn, matrixStackIn, bufferIn);
+                matrixStackIn.pop();
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
 {
-
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "_",
@@ -14,5 +13,4 @@
     "item": "minecraft:spruce_planks",
     "count": 1
   }
-
 }

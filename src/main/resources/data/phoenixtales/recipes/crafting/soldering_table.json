@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "O O",
+    "O/O"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:dark_oak_log"
+    },
+    "O": {
+      "tag": "minecraft:planks"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:soldering_table",
+    "count": 1
+  }
+}

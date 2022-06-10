@@ -98,7 +98,9 @@ public class SolderingTableBlock extends Block {
         }
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if (tileentity instanceof SolderingTableTile) {
-            InventoryHelper.dropItems(worldIn, pos, ((SolderingTableTile) tileentity).removeAll());
+            InventoryHelper.dropItems(worldIn, pos, ((SolderingTableTile) tileentity).getItems());
+            InventoryHelper.spawnItemStack(worldIn,pos.getX(), pos.getY(), pos.getZ(),((SolderingTableTile) tileentity).getTin());
+            InventoryHelper.spawnItemStack(worldIn,pos.getX(), pos.getY(), pos.getZ(),((SolderingTableTile) tileentity).getIron());
         }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
