@@ -43,6 +43,7 @@
   "item.phoenixtales.rotten_heart": "Rotten Heart",
   "item.phoenixtales.tin_solder": "Tin Solder",
   "item.phoenixtales.mechanical_arm": "Mechanical Arm",
+  "item.phoenixtales.soldering_iron": "Soldering-Iron",
 
   "block.phoenixtales.vanadium_ore": "Vanadium Ore",
   "block.phoenixtales.tin_ore": "Tin Ore",
@@ -111,6 +112,7 @@
   "block.phoenixtales.soldering_table": "Soldering Table",
   "block.phoenixtales.smelting_furnace_lower": "Smelting Furnace",
   "block.phoenixtales.smelting_furnace_upper": "Smelting Furnace",
+  "block.phoenixtales.heat_generator": "Heat Generator",
 
   "screen.phoenixtales.energy_store": "Energy Store",
   "screen.phoenixtales.assembler": "Assembler",

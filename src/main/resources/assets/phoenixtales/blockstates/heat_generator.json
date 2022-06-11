@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lava=false": {
+      "model": "phoenixtales:block/heat_generator"
+    },
+    "lava=true": {
+      "model": "phoenixtales:block/heat_generator_on"
+    }
+  }
+}
