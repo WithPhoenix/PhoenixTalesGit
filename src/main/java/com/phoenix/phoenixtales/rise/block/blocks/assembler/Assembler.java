@@ -33,14 +33,6 @@ public class Assembler extends Block {
 
     //TODO: type parameter um zwischen den verschiedenen versionen unterscheiden. durch verschiedene blockItems sollte dies möglich sein, wenn die nicht funktioniert diese class abstract machen und für die typen zuschneiden (BESSER!!!!)
 //TODO: mit enum die verschiedenen tiers/ typen machen
-
-
-    //TODO animate item when crafting and on the end, move the top part down and up to finish the item
-    public Assembler() {
-        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(5.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).setRequiresTool().sound(SoundType.METAL));
-    }
-
-    //TODO some cubes are missing
     private static final VoxelShape SHAPE = Stream.of(
             Block.makeCuboidShape(1, 11, 15, 15, 13.5, 15.5),
             Block.makeCuboidShape(15, 11, 1, 15.5, 13.5, 15),
@@ -64,6 +56,12 @@ public class Assembler extends Block {
             Block.makeCuboidShape(7, 5.5, 1, 9, 6.5, 7),
             Block.makeCuboidShape(1, 7, 1, 15, 11, 15)
     ).reduce((v1, v2) -> VoxelShapes.combineAndSimplify(v1, v2, IBooleanFunction.OR)).get();
+
+
+    //TODO animate item when crafting and on the end, move the top part down and up to finish the item
+    public Assembler() {
+        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(5.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).setRequiresTool().sound(SoundType.METAL));
+    }
 
 
     @Override

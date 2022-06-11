@@ -4,6 +4,7 @@ import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.alloyfactory.AlloyFactory;
 import com.phoenix.phoenixtales.rise.block.blocks.assembler.Assembler;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStore;
+import com.phoenix.phoenixtales.rise.block.blocks.heatgenerator.HeatGeneratorBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil.EngineersAnvil;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceBottom;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.SmeltingFurnaceTop;
@@ -62,6 +63,7 @@ public class RiseBlocks {
 //    public static final Block ADVANCED_CABLE = createBlock("advanced_cable", new AdvancedCable());
 //    public static final Block OVERLOADED_CABLE = createBlock("overloaded_cable", new OverloadedCable());
     public static final Block ENERGY_STORE = createBlock("energy_store", new EnergyStore());
+    public static final Block HEAT_GENERATOR = createBlock("heat_generator", new HeatGeneratorBlock());
     public static final Block ASSEMBLER = createBlock("assembler", new Assembler());
     public static final Block PRESS_FACTORY = createBlock("press_factory", new PressFactory());
     public static final Block ALLOY_FACTORY = createBlock("alloy_factory", new AlloyFactory());

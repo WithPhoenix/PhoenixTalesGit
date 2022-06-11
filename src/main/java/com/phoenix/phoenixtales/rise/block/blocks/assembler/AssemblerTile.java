@@ -33,7 +33,7 @@ public class AssemblerTile extends TileEntity implements ITickableTileEntity, IN
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handlerOpt = LazyOptional.of(() -> itemHandler);
-    private final RiseEnergyStorage storage = new RiseEnergyStorage(200000, 2500, 2500, 0);
+    private final RiseEnergyStorage storage = new RiseEnergyStorage(200000, 500, 500, 0);
     private final LazyOptional<IEnergyStorage> storageOpt = LazyOptional.of(() -> storage);
     private int progress;
     private int totalTime;
