@@ -20,27 +20,27 @@ import java.util.HashMap;
 public class SolderingTableRenderer extends TileEntityRenderer<SolderingTableTile> {
     private final HashMap<Integer, Double[]> NORTH_VALUES = Util.make(Maps.newHashMap(), (p) -> {
         p.put(0, new Double[]{0.5d, 0.7d, 0.5d});
-        p.put(1, new Double[]{0.47d, 0.7d, 0.34d});
-        p.put(2, new Double[]{0.6d, 0.7d, 0.655d});
-        p.put(3, new Double[]{0.23d, 0.7d, 0.49d});
+        p.put(1, new Double[]{0.7d, 0.7d, 0.7d});
+        p.put(2, new Double[]{0.3d, 0.7d, 0.7d});
+        p.put(3, new Double[]{0.5d, 0.7d, 0.8d});
     });
     private final HashMap<Integer, Double[]> SOUTH_VALUES = Util.make(Maps.newHashMap(), (p) -> {
         p.put(0, new Double[]{0.5d, 0.7d, 0.5d});
-        p.put(1, new Double[]{0.47d, 0.7d, 0.34d});
-        p.put(2, new Double[]{0.6d, 0.7d, 0.655d});
-        p.put(3, new Double[]{0.23d, 0.7d, 0.49d});
+        p.put(1, new Double[]{0.7d, 0.7d, 0.3d});
+        p.put(2, new Double[]{0.3d, 0.7d, 0.3d});
+        p.put(3, new Double[]{0.5d, 0.7d, 0.2d});
     });
-    private final HashMap<Integer, Double[]> EAST_VALUES = Util.make(Maps.newHashMap(), (p) -> {
+    private final HashMap<Integer, Double[]> EAST_VALUES = Util.make(Maps.newHashMap(), (p) -> { //done
         p.put(0, new Double[]{0.5d, 0.7d, 0.5d});
-        p.put(1, new Double[]{0.47d, 0.7d, 0.34d});
-        p.put(2, new Double[]{0.6d, 0.7d, 0.655d});
-        p.put(3, new Double[]{0.23d, 0.7d, 0.49d});
+        p.put(1, new Double[]{0.3d, 0.7d, 0.7d});
+        p.put(2, new Double[]{0.3d, 0.7d, 0.3d});
+        p.put(3, new Double[]{0.2d, 0.7d, 0.5d});
     });
-    private final HashMap<Integer, Double[]> WEST_VALUES = Util.make(Maps.newHashMap(), (p) -> {
+    private final HashMap<Integer, Double[]> WEST_VALUES = Util.make(Maps.newHashMap(), (p) -> { //done
         p.put(0, new Double[]{0.5d, 0.7d, 0.5d});
-        p.put(1, new Double[]{0.47d, 0.7d, 0.34d});
-        p.put(2, new Double[]{0.6d, 0.7d, 0.655d});
-        p.put(3, new Double[]{0.23d, 0.7d, 0.49d});
+        p.put(1, new Double[]{0.7d, 0.7d, 0.7d});
+        p.put(2, new Double[]{0.7d, 0.7d, 0.3d});
+        p.put(3, new Double[]{0.8d, 0.7d, 0.5d});
     });
 
     public SolderingTableRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
@@ -49,7 +49,7 @@ public class SolderingTableRenderer extends TileEntityRenderer<SolderingTableTil
 
     @Override
     public void render(SolderingTableTile tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-        Direction direction = tileEntityIn.getBlockState().get(SolderingTableBlock.FACING);
+        Direction direction = tileEntityIn.getBlockState().get(SolderingTableBlock.FACING).getOpposite();
         NonNullList<ItemStack> nonnulllist = tileEntityIn.getItems();
         HashMap<Integer, Double[]> map;
         switch (direction) {
