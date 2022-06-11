@@ -8,18 +8,13 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class HeatGeneratorTile extends TileEntity implements ITickableTileEntity {
     private final Direction[] directions = {Direction.NORTH, Direction.SOUTH, Direction.UP, Direction.WEST, Direction.EAST};
-    private final RiseEnergyStorage storage = new RiseEnergyStorage(500, 500, 500, 0);
+    private final RiseEnergyStorage storage = new RiseEnergyStorage(500, 100, 100, 0);
     private final LazyOptional<IEnergyStorage> storageOpt = LazyOptional.of(() -> storage);
 
     public HeatGeneratorTile() {
@@ -38,22 +33,6 @@ public class HeatGeneratorTile extends TileEntity implements ITickableTileEntity
         return super.write(compound);
     }
 
-    @NotNull
-    @Override
-    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
-        return this.getCapability(cap, null);
-    }
-
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityEnergy.ENERGY) {
-            if (side == Direction.DOWN) return super.getCapability(cap, side);
-            return this.storageOpt.cast();
-        }
-        return super.getCapability(cap, side);
-    }
-
     @Override
     public void tick() {
         if (!world.isRemote) {
@@ -68,11 +47,7 @@ public class HeatGeneratorTile extends TileEntity implements ITickableTileEntity
                     TileEntity neighbor = world != null ? world.getTileEntity(this.pos.offset(d)) : null;
                     if (neighbor != null) {
                         neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).ifPresent(cap -> {
-                            int push = this.storage.extractEnergy(this.storage.getMaxExtract(), true);
-                            if (push > 0) {
-                                push = cap.receiveEnergy(push, false);
-                                this.storage.extractEnergy(push, false);
-                            }
+                            cap.receiveEnergy(100, false);
                         });
                     }
                 }

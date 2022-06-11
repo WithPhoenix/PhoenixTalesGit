@@ -3,6 +3,7 @@ package com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
+import com.phoenix.phoenixtales.rise.item.RiseItems;
 import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -54,6 +55,13 @@ public class SolderingRecipe implements ISoldering {
     @Override
     public NonNullList<Ingredient> getIngredients() {
         return ingredients;
+    }
+
+    public NonNullList<Ingredient> getIngredientsForJei() {
+        NonNullList<Ingredient> list = NonNullList.create();
+        list.addAll(this.ingredients);
+        list.add(Ingredient.fromStacks(RiseItems.SOLDERING_TABLE.getDefaultInstance()));
+        return list;
     }
 
     @Override
