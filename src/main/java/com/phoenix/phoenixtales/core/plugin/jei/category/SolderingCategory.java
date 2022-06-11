@@ -59,13 +59,13 @@ public class SolderingCategory implements IRecipeCategory<SolderingRecipe> {
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, SolderingRecipe recipe, IIngredients ingredients) {
         IGuiItemStackGroup group = recipeLayout.getItemStacks();
-        group.init(0, true, 3, 17);
+        group.init(0, true, 3, 12);
         group.init(1, true, 21, 3);
         group.init(2, true, 39, 3);
-        group.init(2, true, 57, 12);
+        group.init(3, true, 57, 12);
         group.init(4, true, 30, 21);
 
-        group.init(3, false, 90, 17);
+        group.init(5, false, 90, 17);
         group.set(ingredients);
     }
 }
