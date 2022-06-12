@@ -72,6 +72,11 @@ public class SolderingTableTile extends TileEntity implements IClearable {
     }
 
     public boolean hasRecipe() {
+        for (int i = 0; i < 4; i++) {
+            if (this.items.get(i).isEmpty()) {
+                return false;
+            }
+        }
         SolderingRecipe recipe = world != null ? world.getRecipeManager().getRecipe(RiseRecipeTypes.SOLDERING_RECIPE, new Inventory(this.itemsToArray()), world).orElse(null) : null;
         return recipe != null;
     }

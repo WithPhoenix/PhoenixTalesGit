@@ -75,18 +75,18 @@ public class SolderingCategory implements IRecipeCategory<SolderingRecipe> {
 
     @Override
     public void draw(SolderingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
-        float ctf = recipe.getChanceToFail();
+        float ctf = 1 - recipe.getChanceToFail();
         float ctfPercent = Math.round(ctf * 100);
         String string = String.valueOf(ctfPercent) + "%";
         Minecraft minecraft = Minecraft.getInstance();
         FontRenderer fontRenderer = minecraft.fontRenderer;
         int stringWidth = fontRenderer.getStringWidth(string);
-        fontRenderer.drawString(matrixStack, string, background.getWidth() - stringWidth, 1, 0xFF808080);
+        fontRenderer.drawString(matrixStack, string, background.getWidth() - stringWidth, 0, 0xFF808080);
 
         int clicks = recipe.getTime();
         int clicksSeconds = clicks / 20;
         String s = String.valueOf(clicksSeconds) + " sec";
         int width = fontRenderer.getStringWidth(s);
-        fontRenderer.drawString(matrixStack, s, background.getWidth() - stringWidth, 11, 0xFF808080);
+        fontRenderer.drawString(matrixStack, s, background.getWidth() - stringWidth, 10, 0xFF808080);
     }
 }

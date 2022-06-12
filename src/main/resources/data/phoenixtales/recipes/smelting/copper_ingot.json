@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "phoenixtales:copper_ore"
+  },
+  "result": "phoenixtales:copper_ingot",
+  "experience": 0.5,
+  "cookingtime": 140
+}

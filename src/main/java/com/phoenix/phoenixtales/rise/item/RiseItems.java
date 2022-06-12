@@ -26,11 +26,12 @@ public class RiseItems {
     public static final Item BLOCK_STEEL = createItem("steel_block", new RiseBlockItem(RiseBlocks.BLOCK_STEEL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BLOCK_VANADIUM = createItem("vanadium_block", new RiseBlockItem(RiseBlocks.BLOCK_VANADIUM, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BLOCK_NICKEL = createItem("nickel_block", new RiseBlockItem(RiseBlocks.BLOCK_NICKEL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item BLOCK_COPPER = createItem("copper_block", new RiseBlockItem(RiseBlocks.BLOCK_COPPER, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item BLOCK_TIN = createItem("tin_block", new RiseBlockItem(RiseBlocks.BLOCK_TIN, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item BLOCK_INVAR = createItem("invar_block", new RiseBlockItem(RiseBlocks.BLOCK_INVAR, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 
     public static final Item ENGINEERS_ANVIL = createItem("engineers_anvil", new RiseBlockItem(RiseBlocks.ENGINEERS_ANVIL, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item SOLDERING_TABLE = createItem("soldering_table", new RiseBlockItem(RiseBlocks.SOLDERING_TABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
-
 
     public static final Item STEEL_CHASSIS = createItem("steel_chassis", new RiseBlockItem(RiseBlocks.STEEL_CHASSIS, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item VANADIUM_CHASSIS = createItem("vanadium_chassis", new RiseBlockItem(RiseBlocks.VANADIUM_CHASSIS, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
@@ -71,8 +72,17 @@ public class RiseItems {
     public static final Item NUGGET_INVAR = createItem("invar_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item INVAR_PLATE = createItem("invar_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item INVAR_ROD = createItem("invar_rod", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    //copper based
+    public static final Item COPPER_INGOT = createItem("copper_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item COPPER_NUGGET = createItem("copper_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item COPPER_PLATE = createItem("copper_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item COPPER_WIRE = createItem("copper_wire", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+
     //tin based
+    public static final Item TIN_INGOT = createItem("tin_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item TIN_SOLDER = createItem("tin_solder", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+
+    public static final Item WATER_TANK = createItem("water_tank", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     public static final Item METAL_SAW = createItem("metal_saw", new MetalSaw());
     public static final Item HAMMER = createItem("hammer", new Hammer());
