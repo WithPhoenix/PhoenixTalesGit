@@ -77,7 +77,7 @@ public class SmeltingTileUpper extends SmeltingFurnaceTile implements ITickableT
             //now iron
             if (this.getBlockState().get(SmeltingFurnaceTop.LIT)) {
                 if (!this.items.get(1).isEmpty()) {
-                    if (this.time == 360) {
+                    if (this.time == 300) {
                         if (world.getTileEntity(pos.down()) instanceof SmeltingTileLower) {
                             this.items.get(1).shrink(1);
                             this.time = 0;
