@@ -54,6 +54,7 @@ public class RiseItems {
 
     //steel based
     public static final Item INGOT_STEEL = createItem("steel_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item NUGGET_STEEL = createItem("steel_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item PLATE_STEEL = createItem("steel_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item STEEL_ROD = createItem("steel_rod", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     //vanadium based
@@ -76,9 +77,9 @@ public class RiseItems {
     public static final Item COPPER_NUGGET = createItem("copper_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item COPPER_PLATE = createItem("copper_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item COPPER_WIRE = createItem("copper_wire", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
-
     //tin based
     public static final Item TIN_INGOT = createItem("tin_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item TIN_NUGGET = createItem("tin_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item TIN_SOLDER = createItem("tin_solder", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     public static final Item WATER_TANK = createItem("water_tank", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));

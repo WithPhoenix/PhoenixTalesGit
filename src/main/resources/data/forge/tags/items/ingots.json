@@ -4,6 +4,8 @@
     "#forge:ingots/invar",
     "#forge:ingots/nickel",
     "#forge:ingots/vanadium",
-    "#forge:ingots/steel"
+    "#forge:ingots/steel",
+    "#forge:ingots/tin",
+    "#forge:ingots/copper"
   ]
 }

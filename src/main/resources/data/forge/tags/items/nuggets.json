@@ -3,6 +3,9 @@
   "values": [
     "#forge:nuggets/invar",
     "#forge:nuggets/nickel",
-    "#forge:nuggets/vanadium"
+    "#forge:nuggets/vanadium",
+    "#forge:nuggets/steel",
+    "#forge:nuggets/tin",
+    "#forge:nuggets/copper"
   ]
 }
