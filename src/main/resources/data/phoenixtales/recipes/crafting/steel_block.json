@@ -1,0 +1,22 @@
+{
+
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#I#",
+    "###"
+  ],
+  "key": {
+    "I": {
+      "item": "phoenixtales:steel_ingot"
+    },
+    "#": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:steel_block",
+    "count": 1
+  }
+
+}

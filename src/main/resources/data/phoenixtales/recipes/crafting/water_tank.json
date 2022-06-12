@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " _ ",
+    "_W_",
+    "___"
+  ],
+  "key": {
+    "_": {
+      "item": "phoenixtales:steel_plate"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:water_tank",
+    "count": 1
+  }
+}

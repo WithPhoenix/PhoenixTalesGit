@@ -1,0 +1,22 @@
+{
+
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#I#",
+    "###"
+  ],
+  "key": {
+    "I": {
+      "item": "phoenixtales:tin_ingot"
+    },
+    "#": {
+      "tag": "forge:ingots/tin"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:tin_block",
+    "count": 1
+  }
+
+}

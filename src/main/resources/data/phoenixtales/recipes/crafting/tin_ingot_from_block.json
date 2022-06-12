@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "phoenixtales:tin_block"
+    }
+  ],
+  "result": {
+    "item": "phoenixtales:tin_ingot",
+    "count": 9
+  }
+}

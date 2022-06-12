@@ -56,7 +56,6 @@ public class RiseItems {
     public static final Item INGOT_STEEL = createItem("steel_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item PLATE_STEEL = createItem("steel_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item STEEL_ROD = createItem("steel_rod", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
-
     //vanadium based
     public static final Item INGOT_VANADIUM = createItem("vanadium_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item NUGGET_VANADIUM = createItem("vanadium_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));

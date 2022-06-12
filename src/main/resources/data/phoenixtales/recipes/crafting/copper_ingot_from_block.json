@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "phoenixtales:copper_block"
+    }
+  ],
+  "result": {
+    "item": "phoenixtales:copper_ingot",
+    "count": 9
+  }
+}
