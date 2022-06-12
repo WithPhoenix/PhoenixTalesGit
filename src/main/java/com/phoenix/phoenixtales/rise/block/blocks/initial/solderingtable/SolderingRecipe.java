@@ -59,7 +59,7 @@ public class SolderingRecipe implements ISoldering {
 
     public NonNullList<Ingredient> getIngredientsForJei() {
         NonNullList<Ingredient> list = NonNullList.create();
-        list.addAll(this.ingredients);
+        list.addAll(ingredients);
         list.add(Ingredient.fromStacks(RiseItems.SOLDERING_TABLE.getDefaultInstance()));
         return list;
     }

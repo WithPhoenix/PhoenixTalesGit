@@ -14,7 +14,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 
 public class HeatGeneratorTile extends TileEntity implements ITickableTileEntity {
     private final Direction[] directions = {Direction.NORTH, Direction.SOUTH, Direction.UP, Direction.WEST, Direction.EAST};
-    private final RiseEnergyStorage storage = new RiseEnergyStorage(500, 100, 100, 0);
+    private final RiseEnergyStorage storage = new RiseEnergyStorage(10000, 50, 50, 0);
     private final LazyOptional<IEnergyStorage> storageOpt = LazyOptional.of(() -> storage);
 
     public HeatGeneratorTile() {
@@ -43,11 +43,16 @@ public class HeatGeneratorTile extends TileEntity implements ITickableTileEntity
                 world.setBlockState(pos, this.getBlockState().with(HeatGeneratorBlock.LAVA, Boolean.valueOf(false)));
             }
             if (this.getBlockState().get(HeatGeneratorBlock.LAVA)) {
+                this.storage.receiveEnergy(this.storage.getMaxReceive(), false);
                 for (Direction d : this.directions) {
                     TileEntity neighbor = world != null ? world.getTileEntity(this.pos.offset(d)) : null;
                     if (neighbor != null) {
                         neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).ifPresent(cap -> {
-                            cap.receiveEnergy(100, false);
+                            int i = this.storage.extractEnergy(this.storage.getMaxExtract(), true) / 5;
+                            if (i > 0) {
+                                i = cap.receiveEnergy(i, false);
+                                this.storage.extractEnergy(i, false);
+                            }
                         });
                     }
                 }
