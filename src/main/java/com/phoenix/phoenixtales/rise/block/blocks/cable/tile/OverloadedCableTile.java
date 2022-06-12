@@ -3,10 +3,9 @@ package com.phoenix.phoenixtales.rise.block.blocks.cable.tile;
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
 
-public class OverloadedCableTile {
-//    extends GenericCableTile
-//    public OverloadedCableTile() {
-//        super(RiseTileEntities.OVERLOADED_CABLE, TechnologyType.OVERLOADED);
-//    }
+public class OverloadedCableTile extends GenericCableTile {
+    public OverloadedCableTile() {
+        super(RiseTileEntities.OVERLOADED_CABLE, TechnologyType.OVERLOADED);
+    }
 }
 

@@ -13,19 +13,17 @@ import net.minecraft.world.IBlockReader;
 
 @SuppressWarnings("deprecation")
 public class GenericCable extends ConduitBlock {
-
     private final TechnologyType type;
 
     public GenericCable(TechnologyType type) {
-        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f, 2.0f).sound(SoundType.METAL));
+        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f).sound(SoundType.METAL));
         this.type = type;
     }
 
-
-    public TechnologyType getTechnologyType() {
-        return this.type;
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
     }
-
 
     @Override
     protected boolean shouldConnect(IBlockReader reader, BlockPos pos) {
@@ -88,10 +86,5 @@ public class GenericCable extends ConduitBlock {
 //        super.neighborChanged(state, world, pos, block, pos2, b);
 //    }
 
-
-//    @Override
-//    public boolean hasTileEntity(BlockState state) {
-//        return true;
-//    }
 
 }

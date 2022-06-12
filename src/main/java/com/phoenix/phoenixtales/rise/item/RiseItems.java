@@ -114,6 +114,10 @@ public class RiseItems {
 //    public static final Item CABLE = createItem("cable", new RiseBlockItem(RiseBlocks.CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 //    public static final Item ADVANCED_CABLE = createItem("advanced_cable", new RiseBlockItem(RiseBlocks.ADVANCED_CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 //    public static final Item OVERLOADED_CABLE = createItem("overloaded_cable", new RiseBlockItem(RiseBlocks.OVERLOADED_CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item SIMPLE_CABLE = createItem("simple_cable", new RiseBlockItem(RiseBlocks.SIMPLE_CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item CABLE = createItem("cable", new RiseBlockItem(RiseBlocks.CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item ADVANCED_CABLE = createItem("cable", new RiseBlockItem(RiseBlocks.ADVANCED_CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
+    public static final Item OVERLOADED_CABLE = createItem("overloaded_cable", new RiseBlockItem(RiseBlocks.OVERLOADED_CABLE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item ENERGY_STORE = createItem("energy_store", new RiseBlockItem(RiseBlocks.ENERGY_STORE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item HEAT_GENERATOR = createItem("heat_generator", new RiseBlockItem(RiseBlocks.HEAT_GENERATOR, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
     public static final Item PRESS_FACTORY = createItem("press_factory", new RiseBlockItem(RiseBlocks.PRESS_FACTORY, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
