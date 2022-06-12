@@ -22,7 +22,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-//TODO if this is under water, make the performance worse
 @SuppressWarnings("deprecation")
 public abstract class ConduitBlock extends Block implements IWaterLoggable {
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.5, 5.5, 5.5, 10.5, 10.5, 10.5);
@@ -84,8 +83,7 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld
-            worldIn, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
         if (stateIn.get(WATERLOGGED)) {
             worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
         }

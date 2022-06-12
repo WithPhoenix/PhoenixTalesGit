@@ -10,7 +10,6 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraftforge.common.ToolType;
 
 @SuppressWarnings("deprecation")
 public class GenericCable extends ConduitBlock {
@@ -18,7 +17,7 @@ public class GenericCable extends ConduitBlock {
     private final TechnologyType type;
 
     public GenericCable(TechnologyType type) {
-        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f, 2.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.METAL));
+        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f, 2.0f).sound(SoundType.METAL));
         this.type = type;
     }
 
@@ -27,6 +26,23 @@ public class GenericCable extends ConduitBlock {
         return this.type;
     }
 
+
+    @Override
+    protected boolean shouldConnect(IBlockReader reader, BlockPos pos) {
+        boolean flag = false;
+        BlockPos.Mutable blockpos$mutable = pos.toMutable();
+
+        for (Direction direction : Direction.values()) {
+            BlockState blockstate = reader.getBlockState(blockpos$mutable);
+            blockpos$mutable.setAndMove(pos, direction);
+            blockstate = reader.getBlockState(blockpos$mutable);
+            if (blockstate.getBlock() instanceof GenericCable || blockstate.getBlock() instanceof EnergyBaseBlock) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
 //    @Override
 //    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 ////        TileEntity tileEntity = worldIn.getTileEntity(pos);
@@ -73,25 +89,9 @@ public class GenericCable extends ConduitBlock {
 //    }
 
 
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
+//    @Override
+//    public boolean hasTileEntity(BlockState state) {
+//        return true;
+//    }
 
-    @Override
-    protected boolean shouldConnect(IBlockReader reader, BlockPos pos) {
-        boolean flag = false;
-        BlockPos.Mutable blockpos$mutable = pos.toMutable();
-
-        for (Direction direction : Direction.values()) {
-            BlockState blockstate = reader.getBlockState(blockpos$mutable);
-            blockpos$mutable.setAndMove(pos, direction);
-            blockstate = reader.getBlockState(blockpos$mutable);
-            if (blockstate.getBlock() instanceof GenericCable || blockstate.getBlock() instanceof EnergyBaseBlock) {
-                flag = true;
-                break;
-            }
-        }
-        return flag;
-    }
 }
