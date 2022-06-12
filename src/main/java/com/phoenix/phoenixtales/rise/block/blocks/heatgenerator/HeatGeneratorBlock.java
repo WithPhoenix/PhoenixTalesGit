@@ -10,6 +10,7 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -20,12 +21,13 @@ import net.minecraftforge.common.ToolType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
+import java.util.function.ToIntFunction;
 
 public class HeatGeneratorBlock extends Block {
     public static final BooleanProperty LAVA = RiseBlockStateProps.HAS_LAVA;
 
     public HeatGeneratorBlock() {
-        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(5.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).setRequiresTool().sound(SoundType.METAL));
+        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(5.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).setRequiresTool().sound(SoundType.METAL).setLightLevel(getLightValueLit(5)));
         this.setDefaultState(this.stateContainer.getBaseState().with(LAVA, Boolean.valueOf(false)));
     }
 
@@ -65,5 +67,11 @@ public class HeatGeneratorBlock extends Block {
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(LAVA);
+    }
+
+    private static ToIntFunction<BlockState> getLightValueLit(int lightValue) {
+        return (state) -> {
+            return state.get(RiseBlockStateProps.HAS_LAVA) ? lightValue : 0;
+        };
     }
 }
