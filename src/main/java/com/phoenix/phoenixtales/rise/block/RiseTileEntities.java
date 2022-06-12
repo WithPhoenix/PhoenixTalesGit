@@ -23,17 +23,7 @@ import net.minecraftforge.registries.ObjectHolder;
 
 
 public class RiseTileEntities {
-//    public static List<TileEntityType<?>> tiles = new ArrayList<>();
 
-
-    //    @ObjectHolder(PhoenixTales.MOD_ID + ":simple_cable")
-//    public static TileEntityType<SimpleCableTile> SIMPLE_CABLE;
-//    @ObjectHolder(PhoenixTales.MOD_ID + ":cable_tile")
-//    public static TileEntityType<CableTile> CABLE;
-//    @ObjectHolder(PhoenixTales.MOD_ID + ":advanced_cable")
-//    public static TileEntityType<AdvancedCableTile> ADVANCED_CABLE;
-//    @ObjectHolder(PhoenixTales.MOD_ID + ":overloaded_cable")
-//    public static TileEntityType<OverloadedCableTile> OVERLOADED_CABLE;
     @ObjectHolder(PhoenixTales.MOD_ID + ":simple_cable")
     public static TileEntityType<SimpleCableTile> SIMPLE_CABLE;
     @ObjectHolder(PhoenixTales.MOD_ID + ":cable")
@@ -69,14 +59,10 @@ public class RiseTileEntities {
         @SubscribeEvent
         public static void register(RegistryEvent.Register<TileEntityType<?>> event) {
             IForgeRegistry<TileEntityType<?>> r = event.getRegistry();
-//            r.register(TileEntityType.Builder.create(SimpleCableTile::new, RiseBlocks.SIMPLE_CABLE).build(null).setRegistryName("simple_cable"));
-//            r.register(TileEntityType.Builder.create(CableTile::new, RiseBlocks.CABLE).build(null).setRegistryName("cable_tile"));
-//            r.register(TileEntityType.Builder.create(AdvancedCableTile::new, RiseBlocks.ADVANCED_CABLE).build(null).setRegistryName("advanced_cable"));
-//            r.register(TileEntityType.Builder.create(OverloadedCableTile::new, RiseBlocks.OVERLOADED_CABLE).build(null).setRegistryName("overloaded_cable"));
             r.register(TileEntityType.Builder.create(SimpleCableTile::new, RiseBlocks.SIMPLE_CABLE).build(null).setRegistryName("simple_cable"));
             r.register(TileEntityType.Builder.create(CableTile::new, RiseBlocks.CABLE).build(null).setRegistryName("cable"));
             r.register(TileEntityType.Builder.create(AdvancedCableTile::new, RiseBlocks.ADVANCED_CABLE).build(null).setRegistryName("advanced_cable"));
-           r.register(TileEntityType.Builder.create(OverloadedCableTile::new, RiseBlocks.OVERLOADED_CABLE).build(null).setRegistryName("overloaded_cable"));
+            r.register(TileEntityType.Builder.create(OverloadedCableTile::new, RiseBlocks.OVERLOADED_CABLE).build(null).setRegistryName("overloaded_cable"));
             r.register(TileEntityType.Builder.create(PressTile::new, RiseBlocks.PRESS_FACTORY).build(null).setRegistryName("press_tile"));
             r.register(TileEntityType.Builder.create(AlloyTile::new, RiseBlocks.ALLOY_FACTORY).build(null).setRegistryName("alloy_tile"));
             r.register(TileEntityType.Builder.create(AssemblerTile::new, RiseBlocks.ASSEMBLER).build(null).setRegistryName("assembler_tile"));
@@ -88,7 +74,8 @@ public class RiseTileEntities {
             r.register(TileEntityType.Builder.create(HeatGeneratorTile::new, RiseBlocks.HEAT_GENERATOR).build(null).setRegistryName("heat_generator_tile"));
             r.register(TileEntityType.Builder.create(TankTile::new, RiseBlocks.TANK).build(null).setRegistryName("tank_tile"));
         }
-
+    }
+}
 //    @SuppressWarnings("deprecation")
 //    private static <T extends TileEntity> TileEntityType<T> createTile(String id, TileEntityType<T> tile) {
 //        ResourceLocation location = new ResourceLocation(PhoenixTales.MOD_ID, id);
@@ -99,5 +86,3 @@ public class RiseTileEntities {
 //        tiles.add(tile);
 //        return tile;
 //    }
-    }
-}

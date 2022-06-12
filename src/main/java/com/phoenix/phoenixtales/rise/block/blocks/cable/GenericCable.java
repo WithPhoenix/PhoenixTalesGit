@@ -3,15 +3,22 @@ package com.phoenix.phoenixtales.rise.block.blocks.cable;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.EnergyBaseBlock;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorldReader;
+import net.minecraft.world.World;
+import net.minecraftforge.energy.CapabilityEnergy;
+import org.jetbrains.annotations.Nullable;
 
-@SuppressWarnings("deprecation")
 public class GenericCable extends ConduitBlock {
     private final TechnologyType type;
 
@@ -25,23 +32,36 @@ public class GenericCable extends ConduitBlock {
         return true;
     }
 
-    @Override
-    protected boolean shouldConnect(IBlockReader reader, BlockPos pos) {
-        boolean flag = false;
-        BlockPos.Mutable blockpos$mutable = pos.toMutable();
 
-        for (Direction direction : Direction.values()) {
-            BlockState blockstate = reader.getBlockState(blockpos$mutable);
-            blockpos$mutable.setAndMove(pos, direction);
-            blockstate = reader.getBlockState(blockpos$mutable);
-            if (blockstate.getBlock() instanceof GenericCable || blockstate.getBlock() instanceof EnergyBaseBlock) {
-                flag = true;
-                break;
-            }
-        }
-        return flag;
+    @Override
+    protected boolean canConnectTo(IWorldReader world, BlockPos pos, Direction facing) {
+        TileEntity tile = world.getTileEntity(pos.offset(facing));
+        return tile != null && tile.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).isPresent();
     }
-//    @Override
+
+    @Override
+    protected boolean isConduit(IWorldReader world, BlockPos pos, Direction facing) {
+        Block block = world.getBlockState(pos.offset(facing)).getBlock();
+        return block instanceof GenericCable;
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+    }
+
+    @Override
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        super.onReplaced(state, worldIn, pos, newState, isMoving);
+    }
+
+    @Override
+    public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
+        super.onNeighborChange(state, world, pos, neighbor);
+    }
+
+    //    @Override
 //    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 ////        TileEntity tileEntity = worldIn.getTileEntity(pos);
 ////        if (tileEntity instanceof AbstractCableTile) {

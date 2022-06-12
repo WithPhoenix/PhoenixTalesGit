@@ -1,9 +1,9 @@
 package com.phoenix.phoenixtales.rise.block.blocks;
 
-import com.phoenix.phoenixtales.rise.service.RiseBlockStateProps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
+import net.minecraft.block.material.PushReaction;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -19,6 +19,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,43 +27,60 @@ import org.jetbrains.annotations.Nullable;
 public abstract class ConduitBlock extends Block implements IWaterLoggable {
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.5, 5.5, 5.5, 10.5, 10.5, 10.5);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final BooleanProperty CONNECTED = RiseBlockStateProps.CONNECTED;
-    private final BlockState optionalState;
+    public static final BooleanProperty DOWN = BooleanProperty.create("down");
+    public static final BooleanProperty UP = BooleanProperty.create("up");
+    public static final BooleanProperty NORTH = BooleanProperty.create("north");
+    public static final BooleanProperty SOUTH = BooleanProperty.create("south");
+    public static final BooleanProperty WEST = BooleanProperty.create("west");
+    public static final BooleanProperty EAST = BooleanProperty.create("east");
 
     public ConduitBlock(Properties p_i48355_2_) {
         super(p_i48355_2_);
-        this.setDefaultState(this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(false)).with(CONNECTED, Boolean.valueOf(false)));
-        this.optionalState = this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(false)).with(CONNECTED, Boolean.valueOf(true));
+        this.setDefaultState(this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(false)).with(DOWN, Boolean.valueOf(false)).with(UP, Boolean.valueOf(false)).with(NORTH, Boolean.valueOf(false)).with(SOUTH, Boolean.valueOf(false)).with(WEST, Boolean.valueOf(false)).with(EAST, Boolean.valueOf(false)));
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        IBlockReader iblockreader = context.getWorld();
-        BlockPos blockpos = context.getPos();
-        FluidState fluidstate = context.getWorld().getFluidState(blockpos);
-        BlockState blockstate = this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(fluidstate.getFluid() == Fluids.WATER)).with(CONNECTED, Boolean.valueOf(shouldConnect(iblockreader, blockpos)));
-        return blockstate;
+        return getState(context.getWorld(), context.getPos(), null);
     }
 
-    protected boolean shouldConnect(IBlockReader reader, BlockPos pos) {
-        return false;
+    private BlockState getState(World world, BlockPos pos, BlockState current) {
+        FluidState fluidState = world.getFluidState(pos);
+
+        return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER)
+                .with(NORTH, isConnected(world, pos, Direction.NORTH))
+                .with(SOUTH, isConnected(world, pos, Direction.SOUTH))
+                .with(WEST, isConnected(world, pos, Direction.WEST))
+                .with(EAST, isConnected(world, pos, Direction.EAST))
+                .with(DOWN, isConnected(world, pos, Direction.DOWN))
+                .with(UP, isConnected(world, pos, Direction.UP));
     }
 
-    //TODO update connected
+    public boolean isConnected(IWorldReader world, BlockPos pos, Direction facing) {
+        return isConduit(world, pos, facing) || canConnectTo(world, pos, facing);
+    }
+
+    protected abstract boolean canConnectTo(IWorldReader world, BlockPos pos, Direction facing);
+
+    protected abstract boolean isConduit(IWorldReader world, BlockPos pos, Direction facing);
+
     @Override
     public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos pos2, boolean b) {
         super.neighborChanged(state, world, pos, block, pos2, b);
+        BlockState stateNew = getState(world, pos, state);
+        if (!state.getProperties().stream().allMatch(property -> state.get(property).equals(stateNew.get(property)))) {
+            world.setBlockState(pos, stateNew);
+        }
     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_) {
-        p_206840_1_.add(WATERLOGGED, CONNECTED);
+        p_206840_1_.add(WATERLOGGED, NORTH, SOUTH, WEST, EAST, DOWN, UP);
     }
 
     @Override
-    public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos
-            p_220053_3_, ISelectionContext p_220053_4_) {
+    public VoxelShape getShape(BlockState stateIn, IBlockReader reader, BlockPos posIn, ISelectionContext context) {
         return SHAPE;
     }
 
@@ -72,8 +90,7 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public boolean canContainFluid(IBlockReader p_204510_1_, BlockPos p_204510_2_, BlockState p_204510_3_, Fluid
-            p_204510_4_) {
+    public boolean canContainFluid(IBlockReader p_204510_1_, BlockPos p_204510_2_, BlockState p_204510_3_, Fluid p_204510_4_) {
         return IWaterLoggable.super.canContainFluid(p_204510_1_, p_204510_2_, p_204510_3_, p_204510_4_);
     }
 
@@ -83,11 +100,22 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
     }
 
     @Override
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        super.onReplaced(state, worldIn, pos, newState, isMoving);
+    }
+
+    @Override
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
         if (stateIn.get(WATERLOGGED)) {
             worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
         }
-        return shouldConnect(worldIn, currentPos) ? this.optionalState : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+    }
+
+
+    @Override
+    public PushReaction getPushReaction(BlockState state) {
+        return PushReaction.BLOCK;
     }
 
     @Override

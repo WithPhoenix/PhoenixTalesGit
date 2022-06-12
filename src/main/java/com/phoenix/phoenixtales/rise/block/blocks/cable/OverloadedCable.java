@@ -1,6 +1,5 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable;
 
-import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.CableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.OverloadedCableTile;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
 import net.minecraft.block.BlockState;
@@ -19,5 +18,4 @@ public class OverloadedCable extends GenericCable {
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new OverloadedCableTile();
     }
-
 }

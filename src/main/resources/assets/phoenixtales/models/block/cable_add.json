@@ -1,0 +1,21 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "phoenixtales:block/cable_add",
+		"particle": "phoenixtales:block/cable_add"
+	},
+	"elements": [
+		{
+			"from": [6.5, 6.5, -0.5],
+			"to": [9.5, 9.5, 5.5],
+			"faces": {
+				"north": {"uv": [3, 6, 6, 9], "texture": "#0"},
+				"east": {"uv": [0, 0, 6, 3], "texture": "#0"},
+				"south": {"uv": [6, 6, 9, 9], "texture": "#0"},
+				"west": {"uv": [0, 3, 6, 6], "texture": "#0"},
+				"up": {"uv": [3, 12, 0, 6], "texture": "#0"},
+				"down": {"uv": [9, 0, 6, 6], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,11 +1,68 @@
 {
-  "variants": {
-    "connected=false": {
-      "model": "phoenixtales:block/overloaded_cable"
+  "multipart": [
+    {
+      "apply": {
+        "model": "phoenixtales:block/overloaded_cable"
+      }
     },
-    "connected=true": {
-      "model": "phoenixtales:block/overloaded_cable"
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "phoenixtales:block/cable_add",
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "phoenixtales:block/cable_add",
+        "y": 90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "phoenixtales:block/cable_add",
+        "y": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "phoenixtales:block/cable_add",
+        "y": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": {
+        "model": "phoenixtales:block/cable_add",
+        "x": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "down": "true"
+      },
+      "apply": {
+        "model": "phoenixtales:block/cable_add",
+        "x": 90,
+        "uvlock": false
+      }
     }
-  }
+  ]
 }
-
