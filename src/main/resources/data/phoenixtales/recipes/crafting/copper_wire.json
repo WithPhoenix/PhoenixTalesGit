@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "forge:ingots/copper"
+      "item": "phoenixtales:copper_plate"
     },
     {
       "item": "phoenixtales:metal_saw"

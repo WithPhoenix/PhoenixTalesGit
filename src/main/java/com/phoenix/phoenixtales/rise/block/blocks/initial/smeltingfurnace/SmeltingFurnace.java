@@ -6,16 +6,19 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+import java.util.function.ToIntFunction;
+
 @SuppressWarnings("deprecation")
 public abstract class SmeltingFurnace extends Block {
 
     public SmeltingFurnace() {
-        super(Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().notSolid().hardnessAndResistance(1.25F, 4.2F));
+        super(Properties.create(Material.ROCK, MaterialColor.ADOBE).setRequiresTool().notSolid().hardnessAndResistance(1.25F, 4.2F).setLightLevel(getLightValueLit(13)));
     }
 
     @Override
@@ -49,5 +52,11 @@ public abstract class SmeltingFurnace extends Block {
             return bot.getBlock() instanceof SmeltingFurnaceBottom;
         }
         return false;
+    }
+
+    private static ToIntFunction<BlockState> getLightValueLit(int lightValue) {
+        return (state) -> {
+            return state.get(BlockStateProperties.LIT) ? lightValue : 0;
+        };
     }
 }
