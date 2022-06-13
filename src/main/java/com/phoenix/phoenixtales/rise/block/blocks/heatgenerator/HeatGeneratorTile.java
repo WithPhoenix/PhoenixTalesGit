@@ -8,13 +8,16 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class HeatGeneratorTile extends TileEntity implements ITickableTileEntity {
     private final Direction[] directions = {Direction.NORTH, Direction.SOUTH, Direction.UP, Direction.WEST, Direction.EAST};
-    private final RiseEnergyStorage storage = new RiseEnergyStorage(10000, 10, 50, 0);
+    private final RiseEnergyStorage storage = new RiseEnergyStorage(10000, 0, 50, 0);
     private final LazyOptional<IEnergyStorage> storageOpt = LazyOptional.of(() -> storage);
 
     public HeatGeneratorTile() {
@@ -33,6 +36,15 @@ public class HeatGeneratorTile extends TileEntity implements ITickableTileEntity
         return super.write(compound);
     }
 
+    @NotNull
+    @Override
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if (cap == CapabilityEnergy.ENERGY) {
+            return this.storageOpt.cast();
+        }
+        return super.getCapability(cap, side);
+    }
+
     @Override
     public void tick() {
         if (!world.isRemote) {
@@ -43,7 +55,7 @@ public class HeatGeneratorTile extends TileEntity implements ITickableTileEntity
                 world.setBlockState(pos, this.getBlockState().with(HeatGeneratorBlock.LAVA, Boolean.valueOf(false)));
             }
             if (this.getBlockState().get(HeatGeneratorBlock.LAVA)) {
-                this.storage.receiveEnergy(this.storage.getMaxReceive(), false);
+                this.storage.receiveEnergy(10, false);
                 for (Direction d : this.directions) {
                     TileEntity neighbor = world != null ? world.getTileEntity(this.pos.offset(d)) : null;
                     if (neighbor != null) {

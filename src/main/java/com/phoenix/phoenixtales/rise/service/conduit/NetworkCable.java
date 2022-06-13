@@ -26,7 +26,6 @@ public class NetworkCable implements INetwork, IEnergyStorage {
 
     }
 
-
     //todo smth with the technology tier
     @Override
     public void add(BlockPos pos) {

@@ -1,5 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks;
 
+import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
@@ -14,14 +15,19 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 @SuppressWarnings("deprecation")
 public abstract class ConduitBlock extends Block implements IWaterLoggable {
@@ -33,6 +39,24 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
     public static final BooleanProperty SOUTH = BooleanProperty.create("south");
     public static final BooleanProperty WEST = BooleanProperty.create("west");
     public static final BooleanProperty EAST = BooleanProperty.create("east");
+
+    public static final Map<Direction, VoxelShape> FACING_TO_SHAPE_MAP = Util.make(Maps.newEnumMap(Direction.class), (p) -> {
+        p.put(Direction.NORTH, Block.makeCuboidShape(6.5, 6.5, 0, 9.5, 9.5, 5.5));
+        p.put(Direction.SOUTH,Block.makeCuboidShape(6.5, 6.5, 10.5, 9.5, 9.5, 16.0));
+        p.put(Direction.WEST, Block.makeCuboidShape(0, 6.5, 6.5, 5.5, 9.5, 9.5));
+        p.put(Direction.EAST, Block.makeCuboidShape(10.5, 6.5, 6.5, 16.0, 9.5, 9.5));
+        p.put(Direction.DOWN, Block.makeCuboidShape(6.5, 0, 6.5, 9.5, 5.5, 9.5));
+        p.put(Direction.UP, Block.makeCuboidShape(6.5, 10.5, 6.5, 9.5, 16.0, 9.5));
+    });
+
+    public static final Map<Direction, BooleanProperty> FACING_TO_PROPERTY_MAP = Util.make(Maps.newEnumMap(Direction.class), (p) -> {
+        p.put(Direction.NORTH, NORTH);
+        p.put(Direction.SOUTH, SOUTH);
+        p.put(Direction.WEST, WEST);
+        p.put(Direction.EAST, EAST);
+        p.put(Direction.DOWN, DOWN);
+        p.put(Direction.UP, UP);
+    });
 
     public ConduitBlock(Properties p_i48355_2_) {
         super(p_i48355_2_);
@@ -81,7 +105,13 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
 
     @Override
     public VoxelShape getShape(BlockState stateIn, IBlockReader reader, BlockPos posIn, ISelectionContext context) {
-        return SHAPE;
+        VoxelShape shape = SHAPE;
+        for (Direction direction : Direction.values()) {
+            if (stateIn.get(FACING_TO_PROPERTY_MAP.get(direction))) {
+                shape = VoxelShapes.combineAndSimplify(FACING_TO_SHAPE_MAP.get(direction), shape, IBooleanFunction.OR);
+            }
+        }
+        return shape;
     }
 
     @Override
