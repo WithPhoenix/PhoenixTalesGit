@@ -1,148 +1,90 @@
 package com.phoenix.phoenixtales.rise.service.conduit;
 
-import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
-import com.phoenix.phoenixtales.rise.service.TechnologyType;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.energy.IEnergyStorage;
 
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-
-public class CableNetwork {
-    private List<BlockPos> cables = new ArrayList<>();
+public class CableNetwork implements ICableNetwork, IEnergyStorage {
     private int id;
     private World world;
 
     private int capacity;
+    private int maxReceive;
+    private int maxExtract;
     private int stored;
 
-    public CableNetwork(World world, int id) {
-        this.world = world;
+    public CableNetwork(int id, World world, int capacity) {
+        this(id, world, capacity, 0);
+    }
+
+    public CableNetwork(int id, World world, int capacity, int stored) {
+        this(id, world, capacity, stored, capacity, capacity);
+    }
+
+    public CableNetwork(int id, World world, int capacity, int stored, int maxReceive, int maxExtract) {
         this.id = id;
+        this.world = world;
+        this.capacity = capacity;
+        this.stored = stored;
+        this.maxReceive = maxReceive;
+        this.maxExtract = maxExtract;
     }
 
-    public void add(BlockPos pos) {
-        TileEntity tile = world.getTileEntity(pos);
-        if (tile instanceof GenericCableTile) {
-            this.cables.add(pos);
-            this.increaseCapacity(((GenericCableTile) tile).getTechnologyType());
-        }
-    }
-
-
-    public static CableNetwork merge(List<CableNetwork> networks, World world) {
-        CableNetwork temp = new CableNetwork(networks.get(0).getWorld(), networks.get(0).getId());
-        for (CableNetwork n : networks) {
-            for (BlockPos pos : n.cables()) {
-                TileEntity tile = world.getTileEntity(pos);
-                if (tile instanceof GenericCableTile) {
-//                    ((AbstractCableTile) tile).changeNetwork(temp);
-                }
-            }
-            temp.cables().addAll(n.cables());
-            temp.setCapacity(n.getCapacity());
-        }
-        return temp;
-    }
-
-    private void increaseCapacity(TechnologyType tier) {
-        switch (tier) {
-            case SIMPLE:
-                this.capacity += 500;
-                break;
-            case NORMAL:
-                this.capacity += 1000;
-                break;
-            case ADVANCED:
-                this.capacity += 2500;
-                break;
-            case OVERLOADED:
-                this.capacity += 5000;
-                break;
-        }
-    }
-
-    @Nullable
-    private GenericCableTile getTile(BlockPos pos) {
-        TileEntity tile = world.getTileEntity(pos);
-        return tile instanceof GenericCableTile ? (GenericCableTile) tile : null;
-    }
-
-    private void updateNetwork(BlockPos pos) {
+    @Override
+    public void update() {
 
     }
 
-    public int getId() {
-        return this.id;
+    @Override
+    public ICableNetwork merge(ICableNetwork... networks) {
+
+        return networks[0];
     }
 
-    public World getWorld() {
-        return this.world;
+    @Override
+    public CompoundNBT serializeNBT() {
+        CompoundNBT nbt = new CompoundNBT();
+        nbt.putInt("rate", this.maxExtract);
+        nbt.putInt("current", this.stored);
+        return nbt;
     }
 
-    public List<BlockPos> cables() {
-        return this.cables;
+    @Override
+    public void deserializeNBT(CompoundNBT nbt) {
+        this.stored = nbt.contains("current") ? nbt.getInt("current") : 0;
+        int t = nbt.contains("rate") ? nbt.getInt("rate") : 0;
+        this.maxExtract = t;
+        this.maxReceive = t;
+        this.capacity = t;
     }
 
-    public int setCapacity(int n) {
-        return this.capacity += n;
-    }
-
+    @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
         return 0;
     }
 
+    @Override
     public int extractEnergy(int maxExtract, boolean simulate) {
         return 0;
     }
 
-    public int getStored() {
+    @Override
+    public int getEnergyStored() {
         return this.stored;
     }
 
-    public int getCapacity() {
+    @Override
+    public int getMaxEnergyStored() {
         return this.capacity;
     }
 
-    public CompoundNBT serializeNBT() {
-        CompoundNBT values = new CompoundNBT();
-        //network
-        CompoundNBT cableNBT = new CompoundNBT();
-        for (int i = 0; i < this.cables.size(); i++) {
-            cableNBT.putLong("c" + i, this.cables.get(0).toLong());
-        }
-        cableNBT.putInt("size", this.cables.size());
-        values.put("cables", cableNBT);
-        //energy
-        CompoundNBT energyNBT = new CompoundNBT();
-        energyNBT.putInt("capacity", this.capacity);
-        energyNBT.putInt("stored", this.stored);
-        values.put("storage", energyNBT);
-        //other stuff
-        values.putInt("id", this.id);
-        return values;
+    @Override
+    public boolean canExtract() {
+        return this.maxExtract > 0;
     }
 
-    public void deserializeNBT(CompoundNBT nbt) {
-        this.id = nbt.contains("id") ? nbt.getInt("id") : 0;
-        List<BlockPos> cablesn = new ArrayList<>();
-        if (nbt.contains("cables")) {
-            CompoundNBT cableNBT = nbt.getCompound("cables");
-            int size = cableNBT.contains("size") ? cableNBT.getInt("size") : 0;
-            for (int i = 0; i < size; i++) {
-                if (cableNBT.contains("c" + i)) {
-                    cablesn.add(BlockPos.fromLong(cableNBT.getLong("c" + i)));
-                }
-            }
-        }
-        this.cables = cablesn;
-        if (nbt.contains("storage")) {
-            CompoundNBT eNBT = nbt.getCompound("storage");
-            this.capacity = eNBT.contains("capacity") ? eNBT.getInt("capacity") : 0;
-            this.stored = eNBT.contains("stored") ? eNBT.getInt("stored") : 0;
-        }
+    @Override
+    public boolean canReceive() {
+        return this.maxReceive > 0;
     }
 }

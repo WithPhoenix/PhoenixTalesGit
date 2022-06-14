@@ -1,8 +1,10 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable;
 
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
-import com.phoenix.phoenixtales.rise.block.blocks.EnergyBaseBlock;
+import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
+import com.phoenix.phoenixtales.rise.service.conduit.CableNetwork;
+import com.phoenix.phoenixtales.rise.service.conduit.ICableNetwork;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -13,11 +15,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.CapabilityEnergy;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GenericCable extends ConduitBlock {
     private final TechnologyType type;
@@ -47,12 +51,50 @@ public class GenericCable extends ConduitBlock {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        TileEntity tile1 = worldIn.getTileEntity(pos);
+        if (tile1 == null) return;
+        if (tile1 instanceof GenericCableTile) {
+            GenericCableTile tile = (GenericCableTile) tile1;
+            boolean networkExists = false;
+            List<ICableNetwork> networks = new ArrayList<>();
+            for (Direction d : Direction.values()) {
+                TileEntity tileEntity = worldIn.getTileEntity(pos.offset(d));
+                if (tileEntity instanceof GenericCableTile) {
+                    networkExists = true;
+                    ICableNetwork network = ((GenericCableTile) tileEntity).getNetwork();
+                    networks.add(network);
+                }
+            }
 
+            if (!networkExists) {
+                switch (tile.getTechnologyType()) {
+                    case SIMPLE:
+                        tile.init(new CableNetwork(0, worldIn, 200));
+                        break;
+                    case NORMAL:
+                        tile.init(new CableNetwork(0, worldIn, 750));
+                        break;
+                    case ADVANCED:
+                        tile.init(new CableNetwork(0, worldIn, 2000));
+                        break;
+                    case OVERLOADED:
+                        tile.init(new CableNetwork(0, worldIn, 5000));
+                        break;
+                }
+            }
+        }
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
 
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (newState.getBlock() == state.getBlock()) {
+            return;
+        }
+        TileEntity tile = worldIn.getTileEntity(pos);
+        if (tile instanceof GenericCableTile) {
+            ((GenericCableTile) tile).getNetwork().update();
+        }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 

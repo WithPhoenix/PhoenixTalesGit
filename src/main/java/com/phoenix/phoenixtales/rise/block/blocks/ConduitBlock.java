@@ -84,8 +84,6 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
         return isConduit(world, pos, facing) || connectsTo(world, pos, facing);
     }
 
-
-
     @Override
     public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos pos2, boolean b) {
         super.neighborChanged(state, world, pos, block, pos2, b);
