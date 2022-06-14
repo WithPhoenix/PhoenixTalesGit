@@ -66,13 +66,6 @@ public class EnergyStore extends EnergyBaseBlock {
         return ActionResultType.SUCCESS;
     }
 
-//    @Nullable
-//    @Override
-//    public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
-//       TileEntity tile = worldIn.getTileEntity(pos);
-//       return tile instanceof INamedContainerProvider ? (INamedContainerProvider) tile : null;
-//    }
-
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (newState.getBlock() == state.getBlock()) {

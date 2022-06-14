@@ -34,7 +34,7 @@ public class GenericCable extends ConduitBlock {
 
 
     @Override
-    protected boolean canConnectTo(IWorldReader world, BlockPos pos, Direction facing) {
+    protected boolean connectsTo(IWorldReader world, BlockPos pos, Direction facing) {
         TileEntity tile = world.getTileEntity(pos.offset(facing));
         return tile != null && tile.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).isPresent();
     }

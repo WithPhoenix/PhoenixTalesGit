@@ -15,7 +15,7 @@ public class Pipe extends ConduitBlock {
     }
 
     @Override
-    protected boolean canConnectTo(IWorldReader world, BlockPos pos, Direction facing) {
+    protected boolean connectsTo(IWorldReader world, BlockPos pos, Direction facing) {
         return false;
     }
 

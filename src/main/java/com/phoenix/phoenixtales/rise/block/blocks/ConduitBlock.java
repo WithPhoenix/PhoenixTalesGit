@@ -71,7 +71,6 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
 
     private BlockState getState(World world, BlockPos pos, BlockState current) {
         FluidState fluidState = world.getFluidState(pos);
-
         return this.getDefaultState().with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER)
                 .with(NORTH, isConnected(world, pos, Direction.NORTH))
                 .with(SOUTH, isConnected(world, pos, Direction.SOUTH))
@@ -82,12 +81,10 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
     }
 
     public boolean isConnected(IWorldReader world, BlockPos pos, Direction facing) {
-        return isConduit(world, pos, facing) || canConnectTo(world, pos, facing);
+        return isConduit(world, pos, facing) || connectsTo(world, pos, facing);
     }
 
-    protected abstract boolean canConnectTo(IWorldReader world, BlockPos pos, Direction facing);
 
-    protected abstract boolean isConduit(IWorldReader world, BlockPos pos, Direction facing);
 
     @Override
     public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos pos2, boolean b) {
@@ -102,6 +99,10 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_) {
         p_206840_1_.add(WATERLOGGED, NORTH, SOUTH, WEST, EAST, DOWN, UP);
     }
+
+    protected abstract boolean isConduit(IWorldReader world, BlockPos pos, Direction facing);
+
+    protected abstract boolean connectsTo(IWorldReader world, BlockPos pos, Direction facing);
 
     @Override
     public VoxelShape getShape(BlockState stateIn, IBlockReader reader, BlockPos posIn, ISelectionContext context) {
