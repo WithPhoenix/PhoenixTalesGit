@@ -69,16 +69,16 @@ public class GenericCable extends ConduitBlock {
             if (!networkExists) {
                 switch (tile.getTechnologyType()) {
                     case SIMPLE:
-                        tile.init(new CableNetwork(0, worldIn, 200));
+                        tile.init(new CableNetwork(0, worldIn, pos, 200));
                         break;
                     case NORMAL:
-                        tile.init(new CableNetwork(0, worldIn, 750));
+                        tile.init(new CableNetwork(0, worldIn, pos, 500));
                         break;
                     case ADVANCED:
-                        tile.init(new CableNetwork(0, worldIn, 2000));
+                        tile.init(new CableNetwork(0, worldIn, pos, 1200));
                         break;
                     case OVERLOADED:
-                        tile.init(new CableNetwork(0, worldIn, 5000));
+                        tile.init(new CableNetwork(0, worldIn, pos, 5000));
                         break;
                 }
             }
