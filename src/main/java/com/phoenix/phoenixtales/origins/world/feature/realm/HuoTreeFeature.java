@@ -177,13 +177,9 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
                 i2 = 5;
                 break;
         }
-        int start_height;
-        start_height = random.nextInt(2) - 1;
-        l0 = l0.add(0, start_height, 0);
-        start_height = random.nextInt(2) - 1;
-        l1 = l1.add(0, start_height, 0);
-        start_height = random.nextInt(2) - 1;
-        l2 = l2.add(0, start_height, 0);
+        l0 = l0.add(0, random.nextInt(3) - 1, 0);
+        l1 = l1.add(0, random.nextInt(3) - 1, 0);
+        l2 = l2.add(0, random.nextInt(3) - 1, 0);
 
         temp.put(l0, i0);
         temp.put(l1, i1);
