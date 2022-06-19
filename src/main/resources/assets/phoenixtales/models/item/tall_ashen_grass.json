@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "phoenixtales:item/tall_ashen_grass"
+    "layer0": "phoenixtales:block/tall_ashen_grass_top"
   }
 }

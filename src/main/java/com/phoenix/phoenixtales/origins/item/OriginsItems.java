@@ -20,8 +20,6 @@ public class OriginsItems {
 //    public static final Item CreativeTabBlock = createItem("ctblock", new Item(new Item.Properties()));
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
     public static final Item REALMSTONE = createItem("realmstone", new OriginsBlockItem(OriginsBlocks.REALMSTONE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 
     public static final Item SEARING_STONE = createItem("searing_stone", new OriginsBlockItem(OriginsBlocks.SEARING_STONE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));

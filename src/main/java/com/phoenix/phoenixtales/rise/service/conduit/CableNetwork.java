@@ -8,7 +8,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 public class CableNetwork implements ICableNetwork, IEnergyStorage {
     private int id;
     private World world;
-    //von heir aus kann man tiefen und breitensuchen machen
+    //von hier aus kann man tiefen und breitensuchen machen
     private BlockPos root;
 
     private int capacity;
