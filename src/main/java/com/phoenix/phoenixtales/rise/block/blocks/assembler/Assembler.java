@@ -78,7 +78,7 @@ public class Assembler extends Block {
                 if (!player.isCrouching()) {
                     NetworkHooks.openGui(((ServerPlayerEntity) player), tileEntity, tileEntity.getPos());
                 } else {
-
+                    throw new IllegalStateException("Container provider is missing");
                 }
             }
         }

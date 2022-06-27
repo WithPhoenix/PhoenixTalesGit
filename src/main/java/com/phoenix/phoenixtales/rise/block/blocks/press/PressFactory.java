@@ -1,8 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.press;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
-import com.phoenix.phoenixtales.rise.item.RiseItems;
-import com.phoenix.phoenixtales.rise.item.items.EnergyHolder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
@@ -47,16 +45,7 @@ public class PressFactory extends HorizontalBlock {
                 } else {
                     throw new IllegalStateException("Container provider is missing");
                 }
-            } else {
-
-                if (tileEntity instanceof PressTile) {
-                    ((PressTile) tileEntity).addEnergy(500);
-                        //remove only for testing
-//                    ((PressTile) tileEntity).receiveEnergy(1000, false);
-                }
             }
-//        }
-
         }
         return ActionResultType.SUCCESS;
     }

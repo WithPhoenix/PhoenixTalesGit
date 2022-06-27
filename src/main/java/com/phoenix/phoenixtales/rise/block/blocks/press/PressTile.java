@@ -1,6 +1,7 @@
 package com.phoenix.phoenixtales.rise.block.blocks.press;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
+import com.phoenix.phoenixtales.rise.service.RiseEnergyStorage;
 import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,10 +19,13 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,40 +34,36 @@ public class PressTile extends TileEntity implements ITickableTileEntity, ISided
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
+    private final RiseEnergyStorage storage = new RiseEnergyStorage(20000, 50, 50, 0);
+    private final LazyOptional<IEnergyStorage> storageOpt = LazyOptional.of(() -> storage);
     private static final int[] slots_up = new int[]{0};
     private static final int[] slots_down = new int[]{1};
     private int progress;
     private int totalTime;
     private int progressPercent;
-    private int energy;
-    private int maxEnergy; //this is a fixed value, with upgrades this will get higher
     private int energyPercent;
 
     public PressTile() {
         super(RiseTileEntities.PRESS_TILE);
         this.progress = 0;
         this.totalTime = 1;
-        this.energy = 0;
-        this.maxEnergy = 10000;
     }
 
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
         itemHandler.deserializeNBT(nbt.getCompound("inv"));
-        this.progress = nbt.getInt("processTime");
+        this.storage.deserializeNBT(nbt.getCompound("storage"));
+        this.progress = nbt.getInt("progress");
         this.totalTime = nbt.getInt("totalTime");
-        this.energy = nbt.getInt("energy");
-        this.maxEnergy = nbt.getInt("mE");
         super.read(state, nbt);
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         compound.put("inv", itemHandler.serializeNBT());
-        compound.putInt("processTime", this.progress);
+        compound.put("storage", storage.serializeNBT());
+        compound.putInt("progress", this.progress);
         compound.putInt("totalTime", this.totalTime);
-        compound.putInt("energy", this.energy);
-        compound.putInt("mE", this.maxEnergy);
         return super.write(compound);
     }
 
@@ -101,18 +101,27 @@ public class PressTile extends TileEntity implements ITickableTileEntity, ISided
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return handler.cast();
+        } else if (cap == CapabilityEnergy.ENERGY) {
+            return this.storageOpt.cast();
         }
 
         return super.getCapability(cap, side);
     }
 
+    @NotNull
+    @Override
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
+        return this.getCapability(cap, null);
+    }
+
+
     public ItemStack getItemOn(int slot) {
         return itemHandler.getStackInSlot(slot);
     }
 
-    int energyUsagePerTick;
 
     private void craft() {
+        int energyUsagePerTick;
         Inventory inv = new Inventory(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inv.setInventorySlotContents(i, itemHandler.getStackInSlot(i));
@@ -124,7 +133,7 @@ public class PressTile extends TileEntity implements ITickableTileEntity, ISided
             this.totalTime = recipe.getProcessingTime();
             if (ItemHandlerHelper.canItemStacksStack(recipe.getRecipeOutput(), itemHandler.getStackInSlot(1)) || itemHandler.getStackInSlot(1).equals(ItemStack.EMPTY)) {
                 if (itemHandler.getStackInSlot(1).getCount() < 64) {
-                    if (this.energy >= recipe.neededEnergy()) {
+                    if (this.storage.getEnergyStored() >= recipe.neededEnergy()) {
                         //calculate how much energy needs to be used per tick
                         energyUsagePerTick = recipe.neededEnergy() / recipe.getProcessingTime();
                         removeEnergy(energyUsagePerTick);
@@ -149,13 +158,9 @@ public class PressTile extends TileEntity implements ITickableTileEntity, ISided
             }
         }
 
-        if (this.energy > this.maxEnergy) {
-            this.energy = this.maxEnergy;
-        }
-
         //Bretzelfresser#1927
         this.progressPercent = (int) ((double) (progress) * 100d / (double) (totalTime));
-        this.energyPercent = (int) ((double) (energy) * 100d / (double) (maxEnergy));
+        this.energyPercent = (int) ((double) (this.storage.getEnergyStored()) * 100d / (double) (this.storage.getMaxEnergyStored()));
     }
 
     private void press(ItemStack output, int count) {
@@ -171,14 +176,6 @@ public class PressTile extends TileEntity implements ITickableTileEntity, ISided
         if (!world.isRemote()) {
             craft();
         }
-    }
-
-    public int getProgressPercent() {
-        return this.progressPercent;
-    }
-
-    public void setProcessPercent(int percent) {
-        this.progressPercent = percent;
     }
 
     @Override
@@ -247,24 +244,25 @@ public class PressTile extends TileEntity implements ITickableTileEntity, ISided
         return new PressContainer(p_createMenu_1_, this.world, this.pos, p_createMenu_2_, p_createMenu_3_);
     }
 
+
+    public void removeEnergy(int energy) {
+        this.storage.extractEnergy(energy, false);
+    }
+
     public int getEnergyPercent() {
-        return energyPercent;
+        return this.energyPercent;
     }
 
     public void setEnergyPercent(int n) {
         this.energyPercent = n;
     }
 
-    public void setEnergy(int energy) {
-        this.energy = energy;
+    public int getProgressPercent() {
+        return this.progressPercent;
     }
 
-    public void addEnergy(int energy) {
-        this.energy = this.energy + energy;
-    }
-
-    public void removeEnergy(int energy) {
-        this.energy = this.energy - energy;
+    public void setProcessPercent(int percent) {
+        this.progressPercent = percent;
     }
 
 

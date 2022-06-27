@@ -175,7 +175,7 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : "phoenixtales",
-                "Specification-Vendor"    : "phoenix_Qi",
+                "Specification-Vendor"    : "phoenix qi",
                 "Specification-Version"   : "1.0.0",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : "${version}",

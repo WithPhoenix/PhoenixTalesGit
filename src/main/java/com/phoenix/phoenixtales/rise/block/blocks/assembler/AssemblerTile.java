@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class AssemblerTile extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
 
