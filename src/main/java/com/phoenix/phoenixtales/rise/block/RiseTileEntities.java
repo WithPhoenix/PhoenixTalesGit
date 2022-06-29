@@ -9,6 +9,7 @@ import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.OverloadedCableTile
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.SimpleCableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
 import com.phoenix.phoenixtales.rise.block.blocks.heatgenerator.HeatGeneratorTile;
+import com.phoenix.phoenixtales.rise.block.blocks.htfactory.HTTile;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil.EngineersAnvilTile;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile.SmeltingTileUpper;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable.SolderingTableTile;
@@ -50,6 +51,8 @@ public class RiseTileEntities {
     public static TileEntityType<SolderingTableTile> SOLDERING_TILE;
     @ObjectHolder(PhoenixTales.MOD_ID + ":heat_generator_tile")
     public static TileEntityType<SolderingTableTile> HEAT_GENERATOR;
+    @ObjectHolder(PhoenixTales.MOD_ID + ":ht_tile")
+    public static TileEntityType<HTTile> HT_TILE;
     @ObjectHolder(PhoenixTales.MOD_ID + ":tank_tile")
     public static TileEntityType<TankTile> TANK_TILE;
 
@@ -72,6 +75,7 @@ public class RiseTileEntities {
             r.register(TileEntityType.Builder.create(SmeltingTileUpper::new, RiseBlocks.SMELTING_FURNACE_BOTTOM).build(null).setRegistryName("smelting_tile_lower"));
             r.register(TileEntityType.Builder.create(SolderingTableTile::new, RiseBlocks.SOLDERING_TABLE).build(null).setRegistryName("soldering_tile"));
             r.register(TileEntityType.Builder.create(HeatGeneratorTile::new, RiseBlocks.HEAT_GENERATOR).build(null).setRegistryName("heat_generator_tile"));
+            r.register(TileEntityType.Builder.create(HTTile::new, RiseBlocks.HT_FACTORY).build(null).setRegistryName("ht_tile"));
             r.register(TileEntityType.Builder.create(TankTile::new, RiseBlocks.TANK).build(null).setRegistryName("tank_tile"));
         }
     }

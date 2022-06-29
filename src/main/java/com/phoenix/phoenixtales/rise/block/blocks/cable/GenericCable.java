@@ -3,8 +3,6 @@ package com.phoenix.phoenixtales.rise.block.blocks.cable;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
-import com.phoenix.phoenixtales.rise.service.conduit.CableNetwork;
-import com.phoenix.phoenixtales.rise.service.conduit.ICableNetwork;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -19,9 +17,6 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.CapabilityEnergy;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GenericCable extends ConduitBlock {
     private final TechnologyType type;
@@ -91,10 +86,10 @@ public class GenericCable extends ConduitBlock {
         if (newState.getBlock() == state.getBlock()) {
             return;
         }
-        TileEntity tile = worldIn.getTileEntity(pos);
-        if (tile instanceof GenericCableTile) {
-            ((GenericCableTile) tile).getNetwork().update();
-        }
+//        TileEntity tile = worldIn.getTileEntity(pos);
+//        if (tile instanceof GenericCableTile) {
+//            ((GenericCableTile) tile).getNetwork().update();
+//        }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 
