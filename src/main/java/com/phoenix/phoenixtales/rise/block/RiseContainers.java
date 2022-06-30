@@ -4,6 +4,7 @@ import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.alloyfactory.AlloyContainer;
 import com.phoenix.phoenixtales.rise.block.blocks.assembler.AssemblerContainer;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreContainer;
+import com.phoenix.phoenixtales.rise.block.blocks.htfactory.HTFactoryContainer;
 import com.phoenix.phoenixtales.rise.block.blocks.press.PressContainer;
 import com.phoenix.phoenixtales.rise.gui.ConfigGui;
 import net.minecraft.inventory.container.Container;
@@ -45,6 +46,13 @@ public class RiseContainers {
                 BlockPos pos = data.readBlockPos();
                 World world = inv.player.getEntityWorld();
                 return new AssemblerContainer(windowId, world, pos, inv, inv.player);
+            }))));
+
+    public static ContainerType<HTFactoryContainer> HT_FACTORY = createContainer("ht_factory_container",
+            IForgeContainerType.create((((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                World world = inv.player.getEntityWorld();
+                return new HTFactoryContainer(windowId, world, pos, inv, inv.player);
             }))));
 
 

@@ -76,7 +76,6 @@ public class PressFactory extends HorizontalBlock {
         }
 
         super.onReplaced(state, worldIn, pos, newState, isMoving);
-
     }
 
     @Nullable

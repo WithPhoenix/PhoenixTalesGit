@@ -15,6 +15,7 @@ import com.phoenix.phoenixtales.rise.client.render.EngineersAnvilRenderer;
 import com.phoenix.phoenixtales.rise.client.render.SolderingTableRenderer;
 import com.phoenix.phoenixtales.rise.client.screen.AlloyScreen;
 import com.phoenix.phoenixtales.rise.client.screen.AssemblerScreen;
+import com.phoenix.phoenixtales.rise.client.screen.HTFactoryScreen;
 import com.phoenix.phoenixtales.rise.client.screen.PressScreen;
 import com.phoenix.phoenixtales.rise.client.screen.energystore.EnergyStoreScreen;
 import net.minecraft.client.gui.ScreenManager;
@@ -83,6 +84,7 @@ public class ClientSetup {
         ScreenManager.registerFactory(RiseContainers.ASSEMBLER_CONTAINER, AssemblerScreen::new);
         ScreenManager.registerFactory(RiseContainers.PRESS_CONTAINER, PressScreen::new);
         ScreenManager.registerFactory(RiseContainers.ALLOY_CONTAINER, AlloyScreen::new);
+        ScreenManager.registerFactory(RiseContainers.HT_FACTORY, HTFactoryScreen::new);
     }
 
     private static void bindTileRenderers() {

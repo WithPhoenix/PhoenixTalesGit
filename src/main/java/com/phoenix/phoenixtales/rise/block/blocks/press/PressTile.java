@@ -119,7 +119,6 @@ public class PressTile extends TileEntity implements ITickableTileEntity, ISided
         return itemHandler.getStackInSlot(slot);
     }
 
-
     private void craft() {
         int energyUsagePerTick;
         Inventory inv = new Inventory(itemHandler.getSlots());

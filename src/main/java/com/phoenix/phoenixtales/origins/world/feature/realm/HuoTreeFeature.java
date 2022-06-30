@@ -178,8 +178,8 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
                 break;
         }
         l0 = l0.add(0, random.nextInt(3) - 1, 0);
-        l1 = l1.add(0, random.nextInt(3) - 1, 0);
-        l2 = l2.add(0, random.nextInt(3) - 1, 0);
+        l1 = l1.add(0, random.nextInt(3) - 2, 0);
+        l2 = l2.add(0, random.nextInt(3) - 2, 0);
 
         temp.put(l0, i0);
         temp.put(l1, i1);
@@ -190,9 +190,9 @@ public class HuoTreeFeature extends Feature<NoFeatureConfig> {
     private void endBranch(ISeedReader reader, BlockPos posIn, Random random) {
         int height;
         float rand = random.nextFloat();
-        if (rand <= 0.1f) {
+        if (rand <= 0.2f) {
             height = 4;
-        } else if (rand <= 0.6f) {
+        } else if (rand <= 0.3f) {
             height = 2;
         } else {
             height = 3;
