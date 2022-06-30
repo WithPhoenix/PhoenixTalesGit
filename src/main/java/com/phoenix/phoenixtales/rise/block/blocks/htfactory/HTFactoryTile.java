@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public class HTFactoryTile extends TileEntity implements ISidedInventory, ITickableTileEntity, INamedContainerProvider {
-    private final int[] SLOTS_DOWN = new int[]{1};
+    private final int[] SLOTS_DOWN = new int[]{1, 2};
     private final int[] SLOTS = new int[]{0};
     private NonNullList<ItemStack> items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
     private final RiseEnergyStorage energy = new RiseEnergyStorage(20000, 100, 100, 0);
@@ -94,7 +94,8 @@ public class HTFactoryTile extends TileEntity implements ISidedInventory, ITicka
     }
 
     private void craft() {
-
+        this.progressPercent = (int) ((double) (progress) * 100d / (double) (totalTime));
+        this.energyPercent = (int) ((double) (this.energy.getEnergyStored()) * 100d / (double) (this.energy.getMaxEnergyStored()));
     }
 
     private void smelt(ItemStack output, int count) {
@@ -138,7 +139,7 @@ public class HTFactoryTile extends TileEntity implements ISidedInventory, ITicka
 
     @Override
     public int getSizeInventory() {
-        return 2;
+        return 3;
     }
 
     @Override
@@ -210,6 +211,6 @@ public class HTFactoryTile extends TileEntity implements ISidedInventory, ITicka
 
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
-        return index != 1;
+        return index == 0;
     }
 }

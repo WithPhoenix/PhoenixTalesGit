@@ -61,11 +61,11 @@ public class HTFactoryScreen extends ContainerScreen<HTFactoryContainer> {
         //Bretzelfresser#1927
         //progress
         double percent = (double) (this.tile.getProgressPercent()) / 100d;
-        this.blit(matrixStack, i + 84, j + 33, 192, 0, 8, (int) (percent * 23d));
+        this.blit(matrixStack, i + 84, j + 48, 191, 0, 10, (int) (percent * 13d));
 
         //energy
         double energyP = (double) (this.tile.getEnergyPercent()) / 100d;
-        this.blit(matrixStack, i + 167, j + 5, 202, 1, 3, 75 - ((int) (energyP * 75d)));
+        this.blit(matrixStack, i + 167, j + 5, 218, 1, 3, 75 - ((int) (energyP * 75d)));
 
     }
 }
