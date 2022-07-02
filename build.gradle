@@ -134,6 +134,7 @@ repositories {
 
 
 dependencies {
+    implementation("com.google.guava:guava:31.1-jre")
     implementation 'org.jetbrains:annotations:23.0.0'
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.28'
 

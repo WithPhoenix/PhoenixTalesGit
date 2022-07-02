@@ -1,33 +1,38 @@
-package com.phoenix.phoenixtales.rise.service.conduit;
+package com.phoenix.phoenixtales.rise.service.conduit.network;
 
+import com.phoenix.phoenixtales.rise.service.conduit.ICableNetwork;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.IEnergyStorage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CableNetwork implements ICableNetwork, IEnergyStorage {
     private int id;
     private World world;
-    //von hier aus kann man tiefen und breitensuchen machen
-    private BlockPos root;
+    //von hier aus kann man tiefen und breitensuchen machen ?
+    private List<BlockPos> blocks = new ArrayList<>();
+    private List<Node> nodes = new ArrayList<>();
 
     private int capacity;
     private int maxReceive;
     private int maxExtract;
     private int stored;
 
-    public CableNetwork(int id, World world, BlockPos root, int capacity) {
-        this(id, world, root, capacity, 0);
+    public CableNetwork(int id, World world, int capacity) {
+        this(id, world, capacity, 0);
     }
 
-    public CableNetwork(int id, World world, BlockPos root, int capacity, int stored) {
-        this(id, world, root, capacity, stored, capacity, capacity);
+    public CableNetwork(int id, World world, int capacity, int stored) {
+        this(id, world, capacity, stored, capacity, capacity);
     }
 
-    public CableNetwork(int id, World world, BlockPos root, int capacity, int stored, int maxReceive, int maxExtract) {
+    public CableNetwork(int id, World world, int capacity, int stored, int maxReceive, int maxExtract) {
         this.id = id;
         this.world = world;
-        this.root = root;
         this.stored = stored;
         this.maxReceive = maxReceive;
         this.maxExtract = maxExtract;
@@ -35,7 +40,13 @@ public class CableNetwork implements ICableNetwork, IEnergyStorage {
 
     @Override
     public void update() {
-
+        for (BlockPos pos : this.blocks) {
+            for (Direction d : Direction.values()) {
+                if (this.blocks.contains(pos.offset(d))) {
+                    this.nodes.add(new Node());
+                }
+            }
+        }
     }
 
     @Override

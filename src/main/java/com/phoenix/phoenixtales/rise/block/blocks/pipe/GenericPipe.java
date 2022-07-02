@@ -6,9 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 public class GenericPipe extends ConduitBlock {
     private final TechnologyType type;
@@ -21,9 +23,8 @@ public class GenericPipe extends ConduitBlock {
 
     @Override
     protected boolean connectsTo(IWorldReader world, BlockPos pos, Direction facing) {
-//        TileEntity tile = world.getTileEntity(pos.offset(facing));
-//        return tile != null && tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing.getOpposite()).isPresent();
-        return false;
+        TileEntity tile = world.getTileEntity(pos.offset(facing));
+        return tile != null && tile.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing.getOpposite()).isPresent();
     }
 
     @Override

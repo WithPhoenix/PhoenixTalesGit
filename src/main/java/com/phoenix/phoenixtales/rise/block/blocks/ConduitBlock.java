@@ -5,15 +5,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.material.PushReaction;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
@@ -91,6 +94,22 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
         if (!state.getProperties().stream().allMatch(property -> state.get(property).equals(stateNew.get(property)))) {
             world.setBlockState(pos, stateNew);
         }
+        TileEntity tileEntity = world.getTileEntity(pos);
+        if (tileEntity == null) return;
+        if (tileEntity instanceof ConduitTile) {
+            ConduitTile tile = (ConduitTile) tileEntity;
+            tile.neighborChanged();
+        }
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+        if (tileEntity == null) return;
+        if (tileEntity instanceof ConduitTile) {
+            ConduitTile tile = (ConduitTile) tileEntity;
+            tile.neighborChanged();
+        }
     }
 
     @Override
@@ -111,11 +130,6 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
             }
         }
         return shape;
-    }
-
-    @Override
-    public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
-        super.onNeighborChange(state, world, pos, neighbor);
     }
 
     @Override
