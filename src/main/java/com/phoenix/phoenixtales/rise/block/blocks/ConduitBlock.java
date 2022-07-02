@@ -31,7 +31,7 @@ import java.util.Map;
 
 @SuppressWarnings("deprecation")
 public abstract class ConduitBlock extends Block implements IWaterLoggable {
-    protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.5, 5.5, 5.5, 10.5, 10.5, 10.5);
+    protected static VoxelShape SHAPE = Block.makeCuboidShape(6, 6, 6, 10, 10, 10);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty DOWN = BooleanProperty.create("down");
     public static final BooleanProperty UP = BooleanProperty.create("up");
@@ -42,7 +42,7 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
 
     public static final Map<Direction, VoxelShape> FACING_TO_SHAPE_MAP = Util.make(Maps.newEnumMap(Direction.class), (p) -> {
         p.put(Direction.NORTH, Block.makeCuboidShape(6.5, 6.5, 0, 9.5, 9.5, 5.5));
-        p.put(Direction.SOUTH,Block.makeCuboidShape(6.5, 6.5, 10.5, 9.5, 9.5, 16.0));
+        p.put(Direction.SOUTH, Block.makeCuboidShape(6.5, 6.5, 10.5, 9.5, 9.5, 16.0));
         p.put(Direction.WEST, Block.makeCuboidShape(0, 6.5, 6.5, 5.5, 9.5, 9.5));
         p.put(Direction.EAST, Block.makeCuboidShape(10.5, 6.5, 6.5, 16.0, 9.5, 9.5));
         p.put(Direction.DOWN, Block.makeCuboidShape(6.5, 0, 6.5, 9.5, 5.5, 9.5));

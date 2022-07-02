@@ -1,0 +1,33 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "phoenixtales:block/pipe_add",
+		"particle": "phoenixtales:block/pipe_add"
+	},
+	"elements": [
+		{
+			"from": [6.2, 6.2, 0],
+			"to": [9.8, 9.8, 0.3],
+			"faces": {
+				"north": {"uv": [3, 6, 6.5, 9.5], "texture": "#0"},
+				"east": {"uv": [3, 10, 3.5, 13.5], "texture": "#0"},
+				"south": {"uv": [7, 6, 10.5, 9.5], "texture": "#0"},
+				"west": {"uv": [4, 10, 4.5, 13.5], "texture": "#0"},
+				"up": {"uv": [8.5, 10.5, 5, 10], "texture": "#0"},
+				"down": {"uv": [12.5, 10, 9, 10.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6.5, 6.5, 0.3],
+			"to": [9.5, 9.5, 6.3],
+			"faces": {
+				"north": {"uv": [9, 0, 12, 3], "texture": "#0"},
+				"east": {"uv": [0, 0, 6, 3], "texture": "#0"},
+				"south": {"uv": [9, 3, 12, 6], "texture": "#0"},
+				"west": {"uv": [0, 3, 6, 6], "texture": "#0"},
+				"up": {"uv": [3, 12, 0, 6], "texture": "#0"},
+				"down": {"uv": [9, 0, 6, 6], "texture": "#0"}
+			}
+		}
+	]
+}

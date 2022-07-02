@@ -11,7 +11,7 @@ import net.minecraftforge.common.ToolType;
 
 public class ItemTransferer extends ConduitBlock {
     public ItemTransferer(Properties p_i48355_2_) {
-        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f, 2.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.METAL));
+        super( Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f, 2.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.METAL));
     }
 
     @Override

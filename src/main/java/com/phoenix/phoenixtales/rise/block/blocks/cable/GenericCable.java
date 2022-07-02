@@ -1,7 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable;
 
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
-import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -22,7 +21,7 @@ public class GenericCable extends ConduitBlock {
     private final TechnologyType type;
 
     public GenericCable(TechnologyType type) {
-        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f).sound(SoundType.METAL));
+        super( Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f).sound(SoundType.METAL));
         this.type = type;
     }
 

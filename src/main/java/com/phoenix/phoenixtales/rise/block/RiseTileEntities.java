@@ -13,6 +13,7 @@ import com.phoenix.phoenixtales.rise.block.blocks.htfactory.HTFactoryTile;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.engineersanvil.EngineersAnvilTile;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.smeltingfurnace.tile.SmeltingTileUpper;
 import com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable.SolderingTableTile;
+import com.phoenix.phoenixtales.rise.block.blocks.pipe.tile.PipeTile;
 import com.phoenix.phoenixtales.rise.block.blocks.press.PressTile;
 import com.phoenix.phoenixtales.rise.block.blocks.tank.TankTile;
 import net.minecraft.tileentity.TileEntityType;
@@ -55,6 +56,8 @@ public class RiseTileEntities {
     public static TileEntityType<HTFactoryTile> HT_TILE;
     @ObjectHolder(PhoenixTales.MOD_ID + ":tank_tile")
     public static TileEntityType<TankTile> TANK_TILE;
+    @ObjectHolder(PhoenixTales.MOD_ID + ":pipe")
+    public static TileEntityType<PipeTile> PIPE_TILE;
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class Registry {
@@ -77,6 +80,7 @@ public class RiseTileEntities {
             r.register(TileEntityType.Builder.create(HeatGeneratorTile::new, RiseBlocks.HEAT_GENERATOR).build(null).setRegistryName("heat_generator_tile"));
             r.register(TileEntityType.Builder.create(HTFactoryTile::new, RiseBlocks.HT_FACTORY).build(null).setRegistryName("ht_tile"));
             r.register(TileEntityType.Builder.create(TankTile::new, RiseBlocks.TANK).build(null).setRegistryName("tank_tile"));
+//            r.register(TileEntityType.Builder.create(PipeTile::new,RiseBlocks.PIPE).build(null).setRegistryName("pipe_tile"));
         }
     }
 }
