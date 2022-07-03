@@ -44,12 +44,12 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
     public static final BooleanProperty EAST = BooleanProperty.create("east");
 
     public static final Map<Direction, VoxelShape> FACING_TO_SHAPE_MAP = Util.make(Maps.newEnumMap(Direction.class), (p) -> {
-        p.put(Direction.NORTH, Block.makeCuboidShape(6.5, 6.5, 0, 9.5, 9.5, 5.5));
-        p.put(Direction.SOUTH, Block.makeCuboidShape(6.5, 6.5, 10.5, 9.5, 9.5, 16.0));
-        p.put(Direction.WEST, Block.makeCuboidShape(0, 6.5, 6.5, 5.5, 9.5, 9.5));
-        p.put(Direction.EAST, Block.makeCuboidShape(10.5, 6.5, 6.5, 16.0, 9.5, 9.5));
-        p.put(Direction.DOWN, Block.makeCuboidShape(6.5, 0, 6.5, 9.5, 5.5, 9.5));
-        p.put(Direction.UP, Block.makeCuboidShape(6.5, 10.5, 6.5, 9.5, 16.0, 9.5));
+        p.put(Direction.NORTH, Block.makeCuboidShape(6.5, 6.5, 0, 9.5, 9.5, 6));
+        p.put(Direction.SOUTH, Block.makeCuboidShape(6.5, 6.5, 10, 9.5, 9.5, 16));
+        p.put(Direction.WEST, Block.makeCuboidShape(0, 6.5, 6.5, 6, 9.5, 9.5));
+        p.put(Direction.EAST, Block.makeCuboidShape(10, 6.5, 6.5, 16, 9.5, 9.5));
+        p.put(Direction.DOWN,Block.makeCuboidShape(6.5, 0, 6.5, 9.5, 6, 9.5));
+        p.put(Direction.UP, Block.makeCuboidShape(6.5, 10, 6.5, 9.5, 16, 9.5));
     });
 
     public static final Map<Direction, BooleanProperty> FACING_TO_PROPERTY_MAP = Util.make(Maps.newEnumMap(Direction.class), (p) -> {

@@ -5,6 +5,6 @@ import com.phoenix.phoenixtales.rise.service.TechnologyType;
 
 public class AdvancedCableTile extends GenericCableTile {
     public AdvancedCableTile() {
-        super(RiseTileEntities.ADVANCED_CABLE, TechnologyType.ADVANCED);
+        super(RiseTileEntities.ADVANCED_CABLE, TechnologyType.IMPROVED);
     }
 }

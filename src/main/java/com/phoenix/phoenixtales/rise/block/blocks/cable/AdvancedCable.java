@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 
 public class AdvancedCable extends GenericCable {
     public AdvancedCable() {
-        super(TechnologyType.ADVANCED);
+        super(TechnologyType.IMPROVED);
     }
 
     @Nullable

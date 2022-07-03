@@ -56,7 +56,7 @@ public class AchievedCableNetwork {
             case NORMAL:
                 this.capacity += 1000;
                 break;
-            case ADVANCED:
+            case IMPROVED:
                 this.capacity += 2500;
                 break;
             case OVERLOADED:

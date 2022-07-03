@@ -1,5 +1,7 @@
 package com.phoenix.phoenixtales.rise.service.conduit.network;
 
+import com.google.common.graph.GraphBuilder;
+import com.google.common.graph.MutableGraph;
 import com.phoenix.phoenixtales.rise.service.conduit.ICableNetwork;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
@@ -13,9 +15,10 @@ import java.util.List;
 public class CableNetwork implements ICableNetwork, IEnergyStorage {
     private int id;
     private World world;
-    //von hier aus kann man tiefen und breitensuchen machen ?
+    //would a pos we save make sense to init the search
     private List<BlockPos> blocks = new ArrayList<>();
     private List<Node> nodes = new ArrayList<>();
+    private MutableGraph<BlockPos> graph = GraphBuilder.undirected().build();
 
     private int capacity;
     private int maxReceive;
@@ -38,10 +41,12 @@ public class CableNetwork implements ICableNetwork, IEnergyStorage {
         this.maxExtract = maxExtract;
     }
 
+    //todo die blockstates sagen schon aus ob was verbunden ist oder nicht, damit arbeiten
     @Override
     public void update() {
         for (BlockPos pos : this.blocks) {
             for (Direction d : Direction.values()) {
+                int count = 0;
                 if (this.blocks.contains(pos.offset(d))) {
                     this.nodes.add(new Node());
                 }
