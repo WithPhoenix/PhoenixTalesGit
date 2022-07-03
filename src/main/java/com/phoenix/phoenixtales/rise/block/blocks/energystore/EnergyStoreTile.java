@@ -89,6 +89,14 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
         return super.getCapability(cap, side);
     }
 
+    public <T> LazyOptional<T> getCapForCable(Direction side) {
+        if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.RECEIVE
+                || this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.EXTRACT) {
+            return storageOpt.cast();
+        }
+        return LazyOptional.empty();
+    }
+
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {

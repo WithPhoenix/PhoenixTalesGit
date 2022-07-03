@@ -2,6 +2,7 @@ package com.phoenix.phoenixtales.rise.service.conduit.network;
 
 import com.google.common.graph.GraphBuilder;
 import com.google.common.graph.MutableGraph;
+import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.service.conduit.ICableNetwork;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
@@ -47,8 +48,8 @@ public class CableNetwork implements ICableNetwork, IEnergyStorage {
         for (BlockPos pos : this.blocks) {
             for (Direction d : Direction.values()) {
                 int count = 0;
-                if (this.blocks.contains(pos.offset(d))) {
-                    this.nodes.add(new Node());
+                if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
+                    ++count;
                 }
             }
         }
@@ -63,6 +64,7 @@ public class CableNetwork implements ICableNetwork, IEnergyStorage {
     @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
+        nbt.putLong("root", this.blocks.get(0).toLong());
         nbt.putInt("rate", this.maxExtract);
         nbt.putInt("current", this.stored);
         return nbt;
@@ -70,6 +72,9 @@ public class CableNetwork implements ICableNetwork, IEnergyStorage {
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
+        if (nbt.contains("root")) {
+            this.blocks.set(0, BlockPos.fromLong(nbt.getLong("root")));
+        }
         this.stored = nbt.contains("current") ? nbt.getInt("current") : 0;
         int t = nbt.contains("rate") ? nbt.getInt("rate") : 0;
         this.maxExtract = t;

@@ -1,6 +1,7 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable;
 
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
+import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -21,7 +22,7 @@ public class GenericCable extends ConduitBlock {
     private final TechnologyType type;
 
     public GenericCable(TechnologyType type) {
-        super( Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f).sound(SoundType.METAL));
+        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f).sound(SoundType.METAL));
         this.type = type;
     }
 
@@ -34,6 +35,9 @@ public class GenericCable extends ConduitBlock {
     @Override
     protected boolean connectsTo(IWorldReader world, BlockPos pos, Direction facing) {
         TileEntity tile = world.getTileEntity(pos.offset(facing));
+        if (tile instanceof EnergyStoreTile) {
+            return ((EnergyStoreTile) tile).getCapForCable(facing).isPresent();
+        }
         return tile != null && tile.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).isPresent();
     }
 
