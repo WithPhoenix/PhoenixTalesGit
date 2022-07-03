@@ -30,6 +30,7 @@ public class SolderingTableBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty TIN_SOLDER = RiseBlockStateProps.TIN_SOLDER;
     public static final BooleanProperty SOLDERING_IRON = RiseBlockStateProps.SOLDERING_IRON;
+    public static final BooleanProperty CONNECTED = BooleanProperty.create("connected");
     private final VoxelShape SHAPE = Block.makeCuboidShape(1, 0, 1, 15, 11, 15);
 
     public SolderingTableBlock() {
@@ -99,8 +100,8 @@ public class SolderingTableBlock extends Block {
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if (tileentity instanceof SolderingTableTile) {
             InventoryHelper.dropItems(worldIn, pos, ((SolderingTableTile) tileentity).getItems());
-            InventoryHelper.spawnItemStack(worldIn,pos.getX(), pos.getY(), pos.getZ(),((SolderingTableTile) tileentity).getTin());
-            InventoryHelper.spawnItemStack(worldIn,pos.getX(), pos.getY(), pos.getZ(),((SolderingTableTile) tileentity).getIron());
+            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((SolderingTableTile) tileentity).getTin());
+            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), ((SolderingTableTile) tileentity).getIron());
         }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
@@ -130,6 +131,11 @@ public class SolderingTableBlock extends Block {
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+    }
+
+    @Override
+    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+        super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
     }
 
     @Override

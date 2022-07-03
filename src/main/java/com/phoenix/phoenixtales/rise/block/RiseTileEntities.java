@@ -3,7 +3,7 @@ package com.phoenix.phoenixtales.rise.block;
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.alloyfactory.AlloyTile;
 import com.phoenix.phoenixtales.rise.block.blocks.assembler.AssemblerTile;
-import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.AdvancedCableTile;
+import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.ImprovedCableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.CableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.OverloadedCableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.SimpleCableTile;
@@ -31,7 +31,7 @@ public class RiseTileEntities {
     @ObjectHolder(PhoenixTales.MOD_ID + ":cable")
     public static TileEntityType<CableTile> CABLE;
     @ObjectHolder(PhoenixTales.MOD_ID + ":advanced_cable")
-    public static TileEntityType<AdvancedCableTile> ADVANCED_CABLE;
+    public static TileEntityType<ImprovedCableTile> ADVANCED_CABLE;
     @ObjectHolder(PhoenixTales.MOD_ID + ":overloaded_cable")
     public static TileEntityType<OverloadedCableTile> OVERLOADED_CABLE;
     @ObjectHolder(PhoenixTales.MOD_ID + ":press_tile")
@@ -67,7 +67,7 @@ public class RiseTileEntities {
             IForgeRegistry<TileEntityType<?>> r = event.getRegistry();
             r.register(TileEntityType.Builder.create(SimpleCableTile::new, RiseBlocks.SIMPLE_CABLE).build(null).setRegistryName("simple_cable"));
             r.register(TileEntityType.Builder.create(CableTile::new, RiseBlocks.CABLE).build(null).setRegistryName("cable"));
-            r.register(TileEntityType.Builder.create(AdvancedCableTile::new, RiseBlocks.ADVANCED_CABLE).build(null).setRegistryName("advanced_cable"));
+            r.register(TileEntityType.Builder.create(ImprovedCableTile::new, RiseBlocks.ADVANCED_CABLE).build(null).setRegistryName("advanced_cable"));
             r.register(TileEntityType.Builder.create(OverloadedCableTile::new, RiseBlocks.OVERLOADED_CABLE).build(null).setRegistryName("overloaded_cable"));
             r.register(TileEntityType.Builder.create(PressTile::new, RiseBlocks.PRESS_FACTORY).build(null).setRegistryName("press_tile"));
             r.register(TileEntityType.Builder.create(AlloyTile::new, RiseBlocks.ALLOY_FACTORY).build(null).setRegistryName("alloy_tile"));

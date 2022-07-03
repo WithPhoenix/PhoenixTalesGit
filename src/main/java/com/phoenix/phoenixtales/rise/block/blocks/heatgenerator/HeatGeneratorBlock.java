@@ -3,6 +3,7 @@ package com.phoenix.phoenixtales.rise.block.blocks.heatgenerator;
 import com.phoenix.phoenixtales.rise.service.RiseBlockStateProps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -10,7 +11,6 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -61,7 +61,17 @@ public class HeatGeneratorBlock extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(LAVA, Boolean.valueOf(false));
+        BlockState under = context.getWorld().getBlockState(context.getPos().down());
+        return this.getDefaultState().with(LAVA, under.getBlock() == Blocks.LAVA);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+        super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
+        if (worldIn.getBlockState(pos.down()).getBlock() == Blocks.LAVA)
+            worldIn.setBlockState(pos, state.with(LAVA, true));
+        else worldIn.setBlockState(pos, state.with(LAVA, false));
     }
 
     @Override

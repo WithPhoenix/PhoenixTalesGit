@@ -48,12 +48,12 @@ public class HeatGeneratorTile extends TileEntity implements ITickableTileEntity
     @Override
     public void tick() {
         if (!world.isRemote) {
-            if (this.world.getBlockState(pos.down()).getBlock() == Blocks.LAVA) {
-                world.setBlockState(pos, this.getBlockState().with(HeatGeneratorBlock.LAVA, Boolean.valueOf(true)));
-            }
-            if (this.world.getBlockState(pos.down()).getBlock() != Blocks.LAVA) {
-                world.setBlockState(pos, this.getBlockState().with(HeatGeneratorBlock.LAVA, Boolean.valueOf(false)));
-            }
+//            if (this.world.getBlockState(pos.down()).getBlock() == Blocks.LAVA) {
+//                world.setBlockState(pos, this.getBlockState().with(HeatGeneratorBlock.LAVA, Boolean.valueOf(true)));
+//            }
+//            if (this.world.getBlockState(pos.down()).getBlock() != Blocks.LAVA) {
+//                world.setBlockState(pos, this.getBlockState().with(HeatGeneratorBlock.LAVA, Boolean.valueOf(false)));
+//            }
             if (this.getBlockState().get(HeatGeneratorBlock.LAVA)) {
                 this.storage.receiveEnergy(10, false);
                 for (Direction d : this.directions) {

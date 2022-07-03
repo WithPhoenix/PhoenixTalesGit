@@ -2,6 +2,7 @@ package com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
 import com.phoenix.phoenixtales.rise.item.RiseItems;
+import com.phoenix.phoenixtales.rise.service.RiseEnergyStorage;
 import com.phoenix.phoenixtales.rise.service.RiseRecipeTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,16 +12,25 @@ import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
 //todo the table needs energy
 public class SolderingTableTile extends TileEntity implements IClearable {
     private NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
+    private RiseEnergyStorage energy = new RiseEnergyStorage(10000, 10, 0, 0);
+    private final LazyOptional<IEnergyStorage> storageLazyOptional = LazyOptional.of(() -> energy);
     private ItemStack tin_solder = new ItemStack(RiseItems.TIN_SOLDER, 0);
     private ItemStack soldering_iron = ItemStack.EMPTY;
     private int progress;
@@ -207,4 +217,17 @@ public class SolderingTableTile extends TileEntity implements IClearable {
         this.tin_solder = new ItemStack(RiseItems.TIN_SOLDER, 0);
         this.soldering_iron = ItemStack.EMPTY;
     }
+
+    @NotNull
+    @Override
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if (cap == CapabilityEnergy.ENERGY) {
+            if (this.getBlockState().get(SolderingTableBlock.FACING) == side) {
+                return this.storageLazyOptional.cast();
+            }
+        }
+        return super.getCapability(cap, side);
+    }
+
+
 }
