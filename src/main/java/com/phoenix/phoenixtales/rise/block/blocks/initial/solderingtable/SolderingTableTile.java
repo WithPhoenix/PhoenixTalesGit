@@ -43,6 +43,7 @@ public class SolderingTableTile extends TileEntity implements IClearable {
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
         this.progress = nbt.contains("progress") ? nbt.getInt("progress") : 0;
+        this.energy.deserializeNBT(nbt.getCompound("energy"));
         if (nbt.contains("tin")) {
             this.setTin(ItemStack.read(nbt.getCompound("tin")));
         }
@@ -56,6 +57,7 @@ public class SolderingTableTile extends TileEntity implements IClearable {
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         compound.putInt("progress", this.progress);
+        compound.put("energy", energy.serializeNBT());
         this.writeStacks(compound);
         return compound;
     }

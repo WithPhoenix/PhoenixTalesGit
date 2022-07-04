@@ -19,6 +19,12 @@ public class SolderingIronItem extends RiseItem {
         }
     }
 
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return false;
+    }
+
     @Override
     public boolean hasContainerItem(ItemStack stack) {
         return true;

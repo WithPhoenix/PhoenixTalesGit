@@ -28,7 +28,7 @@ public class PressingCategory implements IRecipeCategory<PressingRecipe> {
 
 
     public PressingCategory(IGuiHelper helper) {
-        this.background = helper.createDrawable(TEXTURE, 0, 0, 69, 67);
+        this.background = helper.createDrawable(TEXTURE, 0, 0, 69, 55);
         this.icon = helper.createDrawableIngredient(new ItemStack(RiseBlocks.PRESS_FACTORY));
     }
 
@@ -68,7 +68,7 @@ public class PressingCategory implements IRecipeCategory<PressingRecipe> {
     @Override
     public void draw(PressingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         drawTime(recipe, matrixStack, 5);
-        drawEnergy(recipe, matrixStack, 55, "approx.");
+        drawEnergy(recipe, matrixStack, 40, "approx.");
     }
 
     protected void drawTime(PressingRecipe recipe, MatrixStack matrixStack, int y) {
@@ -108,7 +108,7 @@ public class PressingCategory implements IRecipeCategory<PressingRecipe> {
         //input
         recipeLayout.getItemStacks().init(inputSlot, true, 5, 5);
         //output
-        recipeLayout.getItemStacks().init(outputSlot, false, 5, 45);
+        recipeLayout.getItemStacks().init(outputSlot, false, 5, 33);
         recipeLayout.getItemStacks().set(ingredients);
     }
 }
