@@ -26,10 +26,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-//todo the table needs energy
 public class SolderingTableTile extends TileEntity implements IClearable {
     private NonNullList<ItemStack> items = NonNullList.withSize(4, ItemStack.EMPTY);
-    private RiseEnergyStorage energy = new RiseEnergyStorage(10000, 10, 0, 0);
+    private RiseEnergyStorage energy = new RiseEnergyStorage(10000, 20, 100, 0);
     private final LazyOptional<IEnergyStorage> storageLazyOptional = LazyOptional.of(() -> energy);
     private ItemStack tin_solder = new ItemStack(RiseItems.TIN_SOLDER, 0);
     private ItemStack soldering_iron = ItemStack.EMPTY;
@@ -99,23 +98,25 @@ public class SolderingTableTile extends TileEntity implements IClearable {
     }
 
     public void craft(World world, PlayerEntity player) {
-        SolderingRecipe recipe = world != null ? world.getRecipeManager().getRecipe(RiseRecipeTypes.SOLDERING_RECIPE, new Inventory(this.itemsToArray()), world).orElse(null) : null;
-        if (recipe == null) return;
-        this.tin_solder.shrink(RANDOM.nextInt(3) + 1);
-        if (tin_solder.getCount() == 0) {
-            world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.TIN_SOLDER, Boolean.valueOf(false)));
+        if (this.energy.extractEnergy(45,false) > 0) {
+            SolderingRecipe recipe = world != null ? world.getRecipeManager().getRecipe(RiseRecipeTypes.SOLDERING_RECIPE, new Inventory(this.itemsToArray()), world).orElse(null) : null;
+            if (recipe == null) return;
+            this.tin_solder.shrink(RANDOM.nextInt(3) + 1);
+            if (tin_solder.getCount() == 0) {
+                world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.TIN_SOLDER, Boolean.valueOf(false)));
+            }
+            for (int i = 0; i < 4; i++) {
+                this.items.set(i, ItemStack.EMPTY);
+            }
+            if (RANDOM.nextFloat() > recipe.getChanceToFail()) {
+                this.items.set(0, recipe.getRecipeOutput());
+                world.playSound(player, pos, SoundEvents.BLOCK_SMITHING_TABLE_USE, SoundCategory.BLOCKS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
+            }
+            this.soldering_iron.damageItem(RANDOM.nextInt(3) + 3, player, t -> {
+                world.playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
+                world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.SOLDERING_IRON, Boolean.valueOf(false)));
+            });
         }
-        for (int i = 0; i < 4; i++) {
-            this.items.set(i, ItemStack.EMPTY);
-        }
-        if (RANDOM.nextFloat() > recipe.getChanceToFail()) {
-            this.items.set(0, recipe.getRecipeOutput());
-            world.playSound(player, pos, SoundEvents.BLOCK_SMITHING_TABLE_USE, SoundCategory.BLOCKS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
-        }
-        this.soldering_iron.damageItem(RANDOM.nextInt(3) + 3, player, t -> {
-            world.playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.PLAYERS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
-            world.setBlockState(pos, world.getBlockState(pos).with(SolderingTableBlock.SOLDERING_IRON, Boolean.valueOf(false)));
-        });
     }
 
     private ItemStack[] itemsToArray() {
