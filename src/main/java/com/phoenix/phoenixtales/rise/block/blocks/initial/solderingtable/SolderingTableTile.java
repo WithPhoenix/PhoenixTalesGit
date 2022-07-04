@@ -222,7 +222,7 @@ public class SolderingTableTile extends TileEntity implements IClearable {
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == CapabilityEnergy.ENERGY) {
-            if (this.getBlockState().get(SolderingTableBlock.FACING) == side) {
+            if (this.getBlockState().get(SolderingTableBlock.FACING).getOpposite() == side) {
                 return this.storageLazyOptional.cast();
             }
         }

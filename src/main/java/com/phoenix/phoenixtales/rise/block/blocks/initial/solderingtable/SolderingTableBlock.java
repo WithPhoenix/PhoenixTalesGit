@@ -1,5 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.initial.solderingtable;
 
+import com.phoenix.phoenixtales.rise.block.blocks.cable.GenericCable;
 import com.phoenix.phoenixtales.rise.item.RiseItems;
 import com.phoenix.phoenixtales.rise.service.RiseBlockStateProps;
 import net.minecraft.block.AbstractBlock;
@@ -130,17 +131,21 @@ public class SolderingTableBlock extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+        Block behind = context.getWorld().getBlockState(context.getPos().offset(context.getPlacementHorizontalFacing())).getBlock();
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(CONNECTED, behind instanceof GenericCable);
     }
 
     @Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+        if (worldIn.getBlockState(pos.offset(state.get(FACING).getOpposite())).getBlock() instanceof GenericCable)
+            worldIn.setBlockState(pos, state.with(CONNECTED, Boolean.valueOf(true)));
+        else worldIn.setBlockState(pos, state.with(CONNECTED, Boolean.valueOf(false)));
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING, TIN_SOLDER, SOLDERING_IRON);
+        builder.add(FACING, TIN_SOLDER, SOLDERING_IRON, CONNECTED);
     }
 
     @Override
