@@ -21,8 +21,8 @@ import org.jetbrains.annotations.Nullable;
 public class GenericCable extends ConduitBlock {
     private final TechnologyType type;
 
-    public GenericCable(TechnologyType type) {
-        super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(2.0f).sound(SoundType.METAL));
+    public GenericCable(Properties p, TechnologyType type) {
+        super(p);
         this.type = type;
     }
 

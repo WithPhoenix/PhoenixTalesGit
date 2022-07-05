@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "phoenixtales:copper_plate"
+      "item": "phoenixtales:tin_plate"
     },
     {
       "item": "minecraft:shears"
     }
   ],
   "result": {
-    "item": "phoenixtales:copper_wire",
+    "item": "phoenixtales:tin_wire",
     "count": 3
   }
 }

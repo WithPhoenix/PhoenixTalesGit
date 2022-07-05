@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "cc",
+    "cc"
+  ],
+  "key": {
+    "c": {
+      "item": "phoenixtales:tin_wire"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:tin_solder",
+    "count": 1
+  }
+}

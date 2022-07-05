@@ -1,0 +1,9 @@
+{
+  "type": "phoenixtales:forging",
+  "input": {
+    "tag": "forge:ingots/tin"
+  },
+  "output": {
+    "item": "phoenixtales:tin_plate"
+  }
+}

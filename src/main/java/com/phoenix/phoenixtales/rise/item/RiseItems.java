@@ -80,6 +80,8 @@ public class RiseItems {
     //tin based
     public static final Item TIN_INGOT = createItem("tin_ingot", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item TIN_NUGGET = createItem("tin_nugget", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item TIN_PLATE = createItem("tin_plate", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
+    public static final Item TIN_WIRE = createItem("tin_wire", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
     public static final Item TIN_SOLDER = createItem("tin_solder", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));
 
     public static final Item WATER_TANK = createItem("water_tank", new RiseItem(new Item.Properties().group(ItemTab.ITEM_GROUP)));

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "ccc",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:wool"
+    },
+    "c": {
+      "item": "phoenixtales:copper_wire"
+    }
+  },
+  "result": {
+    "item": "phoenixtales:simple_cable",
+    "count": 3
+  }
+}

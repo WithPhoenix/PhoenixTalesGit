@@ -80,7 +80,7 @@ public class TalesBiomeMaker {
     public static Biome makeSearingWoods() {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
 
-        BiomeGenerationSettings.Builder biomegenerationsettings$builder = (new BiomeGenerationSettings.Builder()).withSurfaceBuilder(ConfiguredSurfaceBuilders.GRASS);
+        BiomeGenerationSettings.Builder biomegenerationsettings$builder = (new BiomeGenerationSettings.Builder()).withSurfaceBuilder(TalesCSB.SEARING_SURFACE);
 
         biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.TOP_LAYER_MODIFICATION, TalesConfiguredFeatures.STONY_SURFACE);
         biomegenerationsettings$builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, TalesConfiguredFeatures.TREES_SEARING_WOODS);
