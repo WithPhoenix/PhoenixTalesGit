@@ -1,0 +1,22 @@
+{
+  "type": "phoenixtales:soldering",
+  "ingredients": [
+    {
+      "item": "phoenixtales:wafer"
+    },
+    {
+      "item": "phoenixtales:enhanced_redstone"
+    },
+    {
+      "item": "phoenixtales:enhanced_redstone"
+    },
+    {
+      "item": "phoenixtales:enhanced_redstone"
+    }
+  ],
+  "output": {
+    "item": "phoenixtales:redstone_controller"
+  },
+  "time": 60,
+  "chanceToFail": 0.25
+}
