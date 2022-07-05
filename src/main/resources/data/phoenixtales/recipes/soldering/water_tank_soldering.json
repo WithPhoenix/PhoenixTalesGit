@@ -1,0 +1,22 @@
+{
+  "type": "phoenixtales:soldering",
+  "ingredients": [
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "phoenixtales:steel_plate"
+    },
+    {
+      "item": "phoenixtales:steel_plate"
+    },
+    {
+      "item": "phoenixtales:steel_plate"
+    }
+  ],
+  "output": {
+    "item": "phoenixtales:water_tank"
+  },
+  "time": 35,
+  "chanceToFail": 0.1
+}
