@@ -57,8 +57,8 @@ public class EngineersAnvil extends Block {
                 return ActionResultType.SUCCESS;
             } else {
                 InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tile.getStackCopied());
-                Item item1 = item.getItem();
                 tile.clear();
+                Item item1 = item.getItem();
                 tile.setStack(item1.getDefaultInstance());
                 if (!player.abilities.isCreativeMode) {
                     item.shrink(1);
