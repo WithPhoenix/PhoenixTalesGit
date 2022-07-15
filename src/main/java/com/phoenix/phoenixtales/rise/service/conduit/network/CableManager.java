@@ -45,26 +45,13 @@ public class CableManager implements ICableNetwork, IEnergyStorage {
     //todo die blockstates sagen schon aus ob was verbunden ist oder nicht, damit arbeiten
     @Override
     public void update() {
-        for (BlockPos pos : this.blocks) {
-            for (Direction d : Direction.values()) {
-                int count = 0;
-                if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
-                    ++count;
-                }
-            }
-        }
-    }
 
-    @Override
-    public ICableNetwork merge(ICableNetwork... networks) {
-
-        return networks[0];
+                //if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
     }
 
     @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
-        nbt.putLong("root", this.blocks.get(0).toLong());
         nbt.putInt("rate", this.maxExtract);
         nbt.putInt("current", this.stored);
         return nbt;
@@ -72,9 +59,6 @@ public class CableManager implements ICableNetwork, IEnergyStorage {
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        if (nbt.contains("root")) {
-            this.blocks.set(0, BlockPos.fromLong(nbt.getLong("root")));
-        }
         this.stored = nbt.contains("current") ? nbt.getInt("current") : 0;
         int t = nbt.contains("rate") ? nbt.getInt("rate") : 0;
         this.maxExtract = t;

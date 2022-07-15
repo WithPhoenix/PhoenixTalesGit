@@ -6,8 +6,6 @@ public interface ICableNetwork {
 
     void update();
 
-    ICableNetwork merge(ICableNetwork... networks);
-
     CompoundNBT serializeNBT();
 
     void deserializeNBT(CompoundNBT nbt);
