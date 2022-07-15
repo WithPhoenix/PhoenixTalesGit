@@ -1,7 +1,5 @@
 package com.phoenix.phoenixtales.rise.service.conduit.network;
 
-import com.google.common.graph.GraphBuilder;
-import com.google.common.graph.MutableGraph;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.service.conduit.ICableNetwork;
 import net.minecraft.nbt.CompoundNBT;
@@ -13,34 +11,36 @@ import net.minecraftforge.energy.IEnergyStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CableNetwork implements ICableNetwork, IEnergyStorage {
+public class CableManager implements ICableNetwork, IEnergyStorage {
     private int id;
     private World world;
-    //would a pos we save make sense to init the search
     private List<BlockPos> blocks = new ArrayList<>();
     private List<Node> nodes = new ArrayList<>();
-    private MutableGraph<BlockPos> graph = GraphBuilder.undirected().build();
 
     private int capacity;
     private int maxReceive;
     private int maxExtract;
     private int stored;
 
-    public CableNetwork(int id, World world, int capacity) {
+    public CableManager(int id, World world, int capacity) {
         this(id, world, capacity, 0);
     }
 
-    public CableNetwork(int id, World world, int capacity, int stored) {
+    public CableManager(int id, World world, int capacity, int stored) {
         this(id, world, capacity, stored, capacity, capacity);
     }
 
-    public CableNetwork(int id, World world, int capacity, int stored, int maxReceive, int maxExtract) {
+    public CableManager(int id, World world, int capacity, int stored, int maxReceive, int maxExtract) {
         this.id = id;
         this.world = world;
         this.stored = stored;
         this.maxReceive = maxReceive;
         this.maxExtract = maxExtract;
     }
+
+    //Todo es sollte möglich sein pro tick die connections abzufragen, wenn die suche gut ist
+    //also wenn energy gepushed wird, dann aus dem einen alles raus, und neu verteilen
+    //wenn energy received wird, dann gleich verteilen
 
     //todo die blockstates sagen schon aus ob was verbunden ist oder nicht, damit arbeiten
     @Override
@@ -82,14 +82,39 @@ public class CableNetwork implements ICableNetwork, IEnergyStorage {
         this.capacity = t;
     }
 
+    //this is called when a neighbor tile pushes energy
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
         return 0;
     }
 
+    //this is used in @receiveEnergy to actually insert the energy
+    public int actualReceive(int maxReceive) {
+        if (this.canReceive()) {
+            int receiving = Math.min(this.capacity - this.stored, Math.min(this.maxReceive, maxReceive));
+            this.stored += receiving;
+            return receiving;
+        }
+        return 0;
+    }
+
+    //called to
     @Override
     public int extractEnergy(int maxExtract, boolean simulate) {
+        if (this.canExtract()) {
+            int extracted = Math.min(stored, Math.min(this.maxExtract, maxExtract));
+            if (!simulate) {
+                this.stored -= extracted;
+                this.evenEnergy();
+            }
+            return extracted;
+        }
         return 0;
+    }
+
+    //called after removing energy to reallocate the whole energy
+    public void evenEnergy() {
+
     }
 
     @Override

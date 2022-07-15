@@ -18,6 +18,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.energy.CapabilityEnergy;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GenericCable extends ConduitBlock {
     private final TechnologyType type;
 
@@ -30,7 +33,6 @@ public class GenericCable extends ConduitBlock {
     public boolean hasTileEntity(BlockState state) {
         return true;
     }
-
 
     @Override
     protected boolean connectsTo(IWorldReader world, BlockPos pos, Direction facing) {
@@ -100,6 +102,8 @@ public class GenericCable extends ConduitBlock {
     public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
         super.onNeighborChange(state, world, pos, neighbor);
     }
+
+
 
     //    @Override
 //    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {

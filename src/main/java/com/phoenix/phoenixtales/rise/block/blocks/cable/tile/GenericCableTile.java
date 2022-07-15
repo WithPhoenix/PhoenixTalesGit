@@ -2,31 +2,45 @@ package com.phoenix.phoenixtales.rise.block.blocks.cable.tile;
 
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitTile;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
-import com.phoenix.phoenixtales.rise.service.conduit.network.CableNetwork;
-import com.phoenix.phoenixtales.rise.service.conduit.EnergyManager;
+import com.phoenix.phoenixtales.rise.service.conduit.network.CableManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GenericCableTile extends ConduitTile implements ITickableTileEntity {
-    private TechnologyType type;
-    private CableNetwork network;
-    private EnergyManager manager;
+    private final TechnologyType type;
+    private List<Link> links;
+
+    private CableManager network;
 
     protected GenericCableTile(TileEntityType<?> tileEntityTypeIn, TechnologyType type) {
         super(tileEntityTypeIn);
         this.type = type;
     }
 
-    public CableNetwork getNetwork() {
+    public CableManager getNetwork() {
         return network;
     }
 
-    public void init(CableNetwork network) {
+    public List<Link> getLinks() {
+        if (this.world == null) return new ArrayList<>();
+        this.network.update();
+        if (this.links == null) return new ArrayList<>();
+        return links;
+    }
 
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
+
+    public void init(CableManager network) {
         this.network = network;
-
     }
 
     @Override
@@ -46,5 +60,23 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
     @Override
     public void tick() {
 
+    }
+
+    public class Link {
+        private BlockPos pos;
+        private Direction direction;
+
+        public Link(BlockPos pos, Direction direction) {
+            this.pos = pos;
+            this.direction = direction;
+        }
+
+        public BlockPos getPos() {
+            return pos;
+        }
+
+        public Direction getDirection() {
+            return direction;
+        }
     }
 }
