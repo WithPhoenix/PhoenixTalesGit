@@ -1,9 +1,7 @@
 package com.phoenix.phoenixtales.rise.service.conduit.network;
 
-import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
-import com.phoenix.phoenixtales.rise.service.conduit.ICableNetwork;
+import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -11,11 +9,9 @@ import net.minecraftforge.energy.IEnergyStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CableManager implements ICableNetwork, IEnergyStorage {
+public class CableManager implements IEnergyStorage {
     private int id;
     private World world;
-    private List<BlockPos> blocks = new ArrayList<>();
-    private List<Node> nodes = new ArrayList<>();
 
     private int capacity;
     private int maxReceive;
@@ -43,13 +39,15 @@ public class CableManager implements ICableNetwork, IEnergyStorage {
     //wenn energy received wird, dann gleich verteilen
 
     //todo die blockstates sagen schon aus ob was verbunden ist oder nicht, damit arbeiten
-    @Override
-    public void update() {
+    public void update(BlockPos pos) {
+        List<GenericCableTile.Link> queued = new ArrayList<>();
 
-                //if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
+        while (queued.size() > 1) {
+
+        }
+        //if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
     }
 
-    @Override
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt("rate", this.maxExtract);
@@ -57,7 +55,6 @@ public class CableManager implements ICableNetwork, IEnergyStorage {
         return nbt;
     }
 
-    @Override
     public void deserializeNBT(CompoundNBT nbt) {
         this.stored = nbt.contains("current") ? nbt.getInt("current") : 0;
         int t = nbt.contains("rate") ? nbt.getInt("rate") : 0;

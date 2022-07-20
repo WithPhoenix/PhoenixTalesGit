@@ -36,6 +36,7 @@ import java.util.Map;
 public abstract class ConduitBlock extends Block implements IWaterLoggable {
     protected static VoxelShape SHAPE = Block.makeCuboidShape(6, 6, 6, 10, 10, 10);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty LN = BooleanProperty.create("ln");
     public static final BooleanProperty DOWN = BooleanProperty.create("down");
     public static final BooleanProperty UP = BooleanProperty.create("up");
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
@@ -48,7 +49,7 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
         p.put(Direction.SOUTH, Block.makeCuboidShape(6.5, 6.5, 10, 9.5, 9.5, 16));
         p.put(Direction.WEST, Block.makeCuboidShape(0, 6.5, 6.5, 6, 9.5, 9.5));
         p.put(Direction.EAST, Block.makeCuboidShape(10, 6.5, 6.5, 16, 9.5, 9.5));
-        p.put(Direction.DOWN,Block.makeCuboidShape(6.5, 0, 6.5, 9.5, 6, 9.5));
+        p.put(Direction.DOWN, Block.makeCuboidShape(6.5, 0, 6.5, 9.5, 6, 9.5));
         p.put(Direction.UP, Block.makeCuboidShape(6.5, 10, 6.5, 9.5, 16, 9.5));
     });
 
@@ -63,7 +64,7 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
 
     public ConduitBlock(Properties p_i48355_2_) {
         super(p_i48355_2_);
-        this.setDefaultState(this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(false)).with(DOWN, Boolean.valueOf(false)).with(UP, Boolean.valueOf(false)).with(NORTH, Boolean.valueOf(false)).with(SOUTH, Boolean.valueOf(false)).with(WEST, Boolean.valueOf(false)).with(EAST, Boolean.valueOf(false)));
+        this.setDefaultState(this.getDefaultState().with(LN, Boolean.valueOf(false)).with(WATERLOGGED, Boolean.valueOf(false)).with(DOWN, Boolean.valueOf(false)).with(UP, Boolean.valueOf(false)).with(NORTH, Boolean.valueOf(false)).with(SOUTH, Boolean.valueOf(false)).with(WEST, Boolean.valueOf(false)).with(EAST, Boolean.valueOf(false)));
     }
 
     @Nullable
@@ -114,7 +115,7 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_) {
-        p_206840_1_.add(WATERLOGGED, NORTH, SOUTH, WEST, EAST, DOWN, UP);
+        p_206840_1_.add(WATERLOGGED,LN, NORTH, SOUTH, WEST, EAST, DOWN, UP);
     }
 
     protected abstract boolean isConduit(IWorldReader world, BlockPos pos, Direction facing);

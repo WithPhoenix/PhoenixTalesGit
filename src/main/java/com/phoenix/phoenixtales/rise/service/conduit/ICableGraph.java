@@ -2,7 +2,7 @@ package com.phoenix.phoenixtales.rise.service.conduit;
 
 import net.minecraft.nbt.CompoundNBT;
 
-public interface ICableNetwork {
+public interface ICableGraph {
 
     void update();
 

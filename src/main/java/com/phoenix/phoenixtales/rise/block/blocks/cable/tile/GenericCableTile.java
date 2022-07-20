@@ -30,7 +30,7 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
 
     public List<Link> getLinks() {
         if (this.world == null) return new ArrayList<>();
-        this.network.update();
+        this.network.update(pos);
         if (this.links == null) return new ArrayList<>();
         return links;
     }
@@ -57,9 +57,10 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
         return type;
     }
 
+    //when extractiong or smth else loop over all chached cables and update
+    //and maybe when the blockstates change then update the connections
     @Override
     public void tick() {
-
     }
 
     public class Link {
