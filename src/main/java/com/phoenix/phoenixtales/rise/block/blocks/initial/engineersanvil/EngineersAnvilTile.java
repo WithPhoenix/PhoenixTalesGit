@@ -70,6 +70,10 @@ public class EngineersAnvilTile extends TileEntity implements IClearable {
         return recipe != null;
     }
 
+    public boolean hasItem() {
+        return !this.stack.isEmpty();
+    }
+
     @Override
     public void clear() {
         this.setStack(ItemStack.EMPTY);

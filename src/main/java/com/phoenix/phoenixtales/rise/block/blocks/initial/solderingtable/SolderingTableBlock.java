@@ -133,7 +133,7 @@ public class SolderingTableBlock extends Block {
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         TileEntity behind = context.getWorld().getTileEntity(context.getPos().offset(context.getPlacementHorizontalFacing()));
-        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(CONNECTED, behind.getCapability(CapabilityEnergy.ENERGY, context.getPlacementHorizontalFacing()).isPresent());
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(CONNECTED, behind != null && behind.getCapability(CapabilityEnergy.ENERGY, context.getPlacementHorizontalFacing()).isPresent());
     }
 
     @Override

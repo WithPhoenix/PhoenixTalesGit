@@ -1,13 +1,12 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable;
 
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
+import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
+import com.phoenix.phoenixtales.rise.service.conduit.network.CableManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -17,9 +16,6 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.CapabilityEnergy;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GenericCable extends ConduitBlock {
     private final TechnologyType type;
@@ -51,7 +47,12 @@ public class GenericCable extends ConduitBlock {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-//        TileEntity tile1 = worldIn.getTileEntity(pos);
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+        if (tileEntity == null) return;
+        if (tileEntity instanceof GenericCableTile) {
+            ((GenericCableTile) tileEntity).init();
+        }
+        //        TileEntity tile1 = worldIn.getTileEntity(pos);
 //        if (tile1 == null) return;
 //        if (tile1 instanceof GenericCableTile) {
 //            GenericCableTile tile = (GenericCableTile) tile1;
@@ -102,7 +103,6 @@ public class GenericCable extends ConduitBlock {
     public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
         super.onNeighborChange(state, world, pos, neighbor);
     }
-
 
 
     //    @Override

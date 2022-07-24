@@ -56,12 +56,15 @@ public class EngineersAnvil extends Block {
                 }
                 return ActionResultType.SUCCESS;
             } else {
-                InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tile.getStackCopied());
-                tile.clear();
-                Item item1 = item.getItem();
-                tile.setStack(item1.getDefaultInstance());
-                if (!player.abilities.isCreativeMode) {
-                    item.shrink(1);
+                if (tile.hasItem()) {
+                    InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tile.getStackCopied());
+                    tile.clear();
+                } else {
+                    Item item1 = item.getItem();
+                    tile.setStack(item1.getDefaultInstance());
+                    if (!player.abilities.isCreativeMode) {
+                        item.shrink(1);
+                    }
                 }
             }
         }
