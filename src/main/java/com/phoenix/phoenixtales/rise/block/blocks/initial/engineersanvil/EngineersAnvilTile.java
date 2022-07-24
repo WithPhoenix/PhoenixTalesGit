@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.inventory.IClearable;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 
@@ -71,7 +72,7 @@ public class EngineersAnvilTile extends TileEntity implements IClearable {
     }
 
     public boolean hasItem() {
-        return !this.stack.isEmpty();
+        return (!this.stack.isEmpty()) || this.stack.getItem() != Items.AIR;
     }
 
     @Override
