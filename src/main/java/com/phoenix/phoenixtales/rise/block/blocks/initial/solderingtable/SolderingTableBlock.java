@@ -132,12 +132,16 @@ public class SolderingTableBlock extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
+//        Block behind = context.getWorld().getBlockState(context.getPos().offset(context.getPlacementHorizontalFacing())).getBlock();
+//        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(CONNECTED, behind instanceof GenericCable);
+
         TileEntity behind = context.getWorld().getTileEntity(context.getPos().offset(context.getPlacementHorizontalFacing()));
         return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(CONNECTED, behind != null && behind.getCapability(CapabilityEnergy.ENERGY, context.getPlacementHorizontalFacing()).isPresent());
     }
 
     @Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+//        if (worldIn.getBlockState(pos.offset(state.get(FACING).getOpposite())).getBlock() instanceof GenericCable)
         if (worldIn.getTileEntity(pos.offset(state.get(FACING).getOpposite())).getCapability(CapabilityEnergy.ENERGY, state.get(FACING)).isPresent())
             worldIn.setBlockState(pos, state.with(CONNECTED, Boolean.valueOf(true)));
         else worldIn.setBlockState(pos, state.with(CONNECTED, Boolean.valueOf(false)));

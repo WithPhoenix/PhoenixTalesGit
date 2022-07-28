@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "tag": "forge:silicon"
+      "item": "phoenixtales:silicon"
     },
     {
       "item": "phoenixtales:metal_saw"
