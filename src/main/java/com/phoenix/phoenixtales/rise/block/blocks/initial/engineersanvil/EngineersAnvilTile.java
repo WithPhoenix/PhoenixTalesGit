@@ -71,8 +71,8 @@ public class EngineersAnvilTile extends TileEntity implements IClearable {
         return recipe != null;
     }
 
-    public boolean hasItem() {
-        return (!this.stack.isEmpty()) || this.stack.getItem() != Items.AIR;
+    public boolean hasNoItem() {
+        return this.stack.isEmpty() || this.stack.getItem() == Items.AIR;
     }
 
     @Override

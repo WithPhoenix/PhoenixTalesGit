@@ -10,7 +10,6 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -56,15 +55,16 @@ public class EngineersAnvil extends Block {
                 }
                 return ActionResultType.SUCCESS;
             } else {
-                if (tile.hasItem()) {
-                    InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tile.getStackCopied());
-                    tile.clear();
-                } else {
-                    Item item1 = item.getItem();
-                    tile.setStack(item1.getDefaultInstance());
+                if (tile.hasNoItem()) {
+                    tile.setStack(item.getItem().getDefaultInstance());
                     if (!player.abilities.isCreativeMode) {
                         item.shrink(1);
                     }
+                    return ActionResultType.SUCCESS;
+                } else {
+                    ItemStack stack = tile.getStackCopied();
+                    tile.clear();
+                    InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
                 }
             }
         }
