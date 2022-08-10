@@ -30,6 +30,7 @@ public class OriginsBlocks {
     //block in dimension
 
     public static final Block REALMSTONE = createBlock("realmstone", new Block(AbstractBlock.Properties.create((Material.ROCK), MaterialColor.ORANGE_TERRACOTTA).hardnessAndResistance(12f, 12f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
+    public static final Block ORE_X = createBlock("x_ore", new Block(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.RED).hardnessAndResistance(14f).harvestTool(ToolType.PICKAXE).harvestLevel(3).sound(SoundType.STONE).setRequiresTool()));
 
     public static final Block SEARING_STONE = createBlock("searing_stone", new Block(AbstractBlock.Properties.create((Material.ROCK), MaterialColor.ORANGE_TERRACOTTA).hardnessAndResistance(7f, 10f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
     public static final Block SEARING_COBBLESTONE = createBlock("searing_cobblestone", new Block(AbstractBlock.Properties.create((Material.ROCK), MaterialColor.ORANGE_TERRACOTTA).hardnessAndResistance(8f, 10f).harvestTool(ToolType.PICKAXE).harvestLevel(2).sound(SoundType.STONE).setRequiresTool()));
