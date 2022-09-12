@@ -4,7 +4,6 @@ import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
-import com.phoenix.phoenixtales.rise.service.conduit.network.CableManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -47,11 +46,6 @@ public class GenericCable extends ConduitBlock {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
-        if (tileEntity == null) return;
-        if (tileEntity instanceof GenericCableTile) {
-            ((GenericCableTile) tileEntity).init();
-        }
         //        TileEntity tile1 = worldIn.getTileEntity(pos);
 //        if (tile1 == null) return;
 //        if (tile1 instanceof GenericCableTile) {

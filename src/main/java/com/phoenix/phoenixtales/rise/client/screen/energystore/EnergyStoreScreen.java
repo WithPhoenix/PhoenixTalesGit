@@ -9,7 +9,9 @@ import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
 import com.phoenix.phoenixtales.rise.network.LeftClickPacket;
 import com.phoenix.phoenixtales.rise.network.PacketHandler;
 import com.phoenix.phoenixtales.rise.service.EnergyHandlingType;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerInventory;
@@ -19,9 +21,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 
 
 public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
+
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(PhoenixTales.MOD_ID, "textures/gui/energy_store/main_gui.png");
     private static final ResourceLocation CONFIG_BUTTON = new ResourceLocation(PhoenixTales.MOD_ID, "textures/gui/config_button.png");
@@ -29,6 +33,11 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
     private static final ResourceLocation SIDE_CONFIG_BUTTON = new ResourceLocation(PhoenixTales.MOD_ID, "textures/gui/side_config_button.png");
     private EnergyStoreTile tile = null;
     private int page;
+
+    //todo button der mit der himmelsrichtung beziffert ist und beim hovern den status anzeigt
+    //todo die buttons neu placen
+
+    //todo widget das als energyanzeige fungiert, für alles verwendbar, zeigt alle möglchen stats an
     SideConfigButton[] sideConfigButtons = new SideConfigButton[6];
     private ImageButton nextPage = new ImageButton(this.guiLeft + 177, this.guiTop + 70, 15, 15, 0, 0, 16, NEXT_PAGE_BUTTON_TEXTURE, (button) -> {
         if (this.page != 2) {
@@ -109,9 +118,9 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
         super.drawGuiContainerForegroundLayer(matrixStack, x, y);
         if (page == 0) {
-            this.font.drawString(matrixStack, "Stored: " + this.tile.getStored()  + " kJ", 12, 19, MathHelper.rgb(142, 143, 144));
+            this.font.drawString(matrixStack, "Stored: " + this.tile.getStored() + " kJ", 12, 19, MathHelper.rgb(142, 143, 144));
             this.font.drawString(matrixStack, "Capacity: " + ((double) (this.tile.getCapacity() / 1000)) + " kJ", 12, 31, MathHelper.rgb(142, 143, 144));
-            this.font.drawString(matrixStack, "max Receive: " + this.tile.getR()  + " J", 12, 46, MathHelper.rgb(142, 143, 144));
+            this.font.drawString(matrixStack, "max Receive: " + this.tile.getR() + " J", 12, 46, MathHelper.rgb(142, 143, 144));
             this.font.drawString(matrixStack, "max Extract: " + this.tile.getE() + " J", 12, 57, MathHelper.rgb(142, 143, 144));
         } else if (page == 1) {
             this.font.drawString(matrixStack, "north", 12, 22, MathHelper.rgb(142, 143, 144));
@@ -127,33 +136,34 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
 //        this.font.drawText(matrixStack, ITextComponent.getTextComponentOrEmpty(new TranslationTextComponent("screen.phoenixtales.energystore.energy").toString()), i + 20, i + 20, y, 4210752);
     }
 
+    //todo make the button use translation text component
     private void initializeSCButtons() {
-        this.sideConfigButtons[0] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.NORTH), this.guiLeft + 45, this.guiTop + 18, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+        this.sideConfigButtons[0] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.NORTH), "north", this.guiLeft + 45, this.guiTop + 18, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
             this.handleClick((SideConfigButton) button, Direction.NORTH);
             ((SideConfigButton) button).setPosition(this.guiLeft + 45, this.guiTop + 18);
         });
         this.sideConfigButtons[0].setPosition(this.guiLeft + 45, this.guiTop + 18);
-        this.sideConfigButtons[1] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.SOUTH), this.guiLeft + 108, this.guiTop + 18, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+        this.sideConfigButtons[1] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.SOUTH), "south", this.guiLeft + 108, this.guiTop + 18, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
             this.handleClick((SideConfigButton) button, Direction.SOUTH);
             ((SideConfigButton) button).setPosition(this.guiLeft + 108, this.guiTop + 18);
         });
         this.sideConfigButtons[1].setPosition(this.guiLeft + 108, this.guiTop + 18);
-        this.sideConfigButtons[2] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.WEST), this.guiLeft + 45, this.guiTop + 34, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+        this.sideConfigButtons[2] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.WEST), "west", this.guiLeft + 45, this.guiTop + 34, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
             this.handleClick((SideConfigButton) button, Direction.WEST);
             ((SideConfigButton) button).setPosition(this.guiLeft + 45, this.guiTop + 34);
         });
         this.sideConfigButtons[2].setPosition(this.guiLeft + 45, this.guiTop + 34);
-        this.sideConfigButtons[3] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.EAST), this.guiLeft + 108, this.guiTop + 34, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+        this.sideConfigButtons[3] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.EAST), "east", this.guiLeft + 108, this.guiTop + 34, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
             this.handleClick((SideConfigButton) button, Direction.EAST);
             ((SideConfigButton) button).setPosition(this.guiLeft + 108, this.guiTop + 34);
         });
         this.sideConfigButtons[3].setPosition(this.guiLeft + 108, this.guiTop + 34);
-        this.sideConfigButtons[4] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.DOWN), this.guiLeft + 45, this.guiTop + 50, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+        this.sideConfigButtons[4] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.DOWN), "down", this.guiLeft + 45, this.guiTop + 50, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
             this.handleClick((SideConfigButton) button, Direction.DOWN);
             ((SideConfigButton) button).setPosition(this.guiLeft + 45, this.guiTop + 50);
         });
         this.sideConfigButtons[4].setPosition(this.guiLeft + 45, this.guiTop + 50);
-        this.sideConfigButtons[5] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.UP), this.guiLeft + 108, this.guiTop + 50, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+        this.sideConfigButtons[5] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.UP), "up", this.guiLeft + 108, this.guiTop + 50, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
             this.handleClick((SideConfigButton) button, Direction.UP);
             ((SideConfigButton) button).setPosition(this.guiLeft + 108, this.guiTop + 50);
         });
@@ -187,4 +197,96 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
 
         return null;
     }
+
+    //render the actual state
+    private class SideConfigButton extends Button {
+
+        protected final ResourceLocation resourceLocation;
+        protected final int xTexStart;
+        protected final int yTexStart;
+        protected final int yDiffText;
+        protected final int xDiffText;
+        protected final int textureWidth;
+        protected final int textureHeight;
+        protected EnergyHandlingType state;
+        protected String name;
+
+        public SideConfigButton(EnergyHandlingType state, String label, int xIn, int yIn, int widthIn, int heightIn, int xTexStartIn, int yTexStartIn, int yDiffTextIn, int xDiffTextIn, ResourceLocation resourceLocationIn, Button.IPressable onPressIn) {
+            this(state, label, xIn, yIn, widthIn, heightIn, xTexStartIn, yTexStartIn, yDiffTextIn, xDiffTextIn, resourceLocationIn, 256, 256, onPressIn);
+        }
+
+        public SideConfigButton(EnergyHandlingType state, String label, int xIn, int yIn, int widthIn, int heightIn, int xTexStartIn, int yTexStartIn, int yDiffTextIn, int xDiffTextIn, ResourceLocation resourceLocationIn, int textureWidth, int textureHeight, Button.IPressable onPressIn) {
+            this(state, label, xIn, yIn, widthIn, heightIn, xTexStartIn, yTexStartIn, yDiffTextIn, xDiffTextIn, resourceLocationIn, textureWidth, textureHeight, onPressIn, StringTextComponent.EMPTY);
+        }
+
+        public SideConfigButton(EnergyHandlingType state, String label, int x, int y, int width, int height, int xTexStart, int yTexStart, int yDiffText, int xDiffText, ResourceLocation resourceLocation, int textureWidth, int textureHeight, Button.IPressable onPress, ITextComponent title) {
+            this(state, label, x, y, width, height, xTexStart, yTexStart, yDiffText, xDiffText, resourceLocation, textureWidth, textureHeight, onPress, EMPTY_TOOLTIP, title);
+        }
+
+        public SideConfigButton(EnergyHandlingType state, String label, int x, int y, int width, int height, int xTexStart, int yTexStart, int yDiffText, int xDiffText, ResourceLocation resourceLocation, int textureWidth, int textureHeight, Button.IPressable onPress, Button.ITooltip onHover, ITextComponent title) {
+            super(x, y, width, height, title, onPress, onHover);
+            this.textureWidth = textureWidth;
+            this.textureHeight = textureHeight;
+            this.xTexStart = xTexStart;
+            this.yTexStart = yTexStart;
+            this.yDiffText = yDiffText;
+            this.xDiffText = xDiffText;
+            this.resourceLocation = resourceLocation;
+            this.state = state;
+            this.name = label;
+        }
+
+        public void setPosition(int xIn, int yIn) {
+            this.x = xIn;
+            this.y = yIn;
+        }
+
+        @Override
+        public void renderWidget(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+            Minecraft minecraft = Minecraft.getInstance();
+            minecraft.getTextureManager().bindTexture(this.resourceLocation);
+            int i = this.yTexStart;
+            if (this.isHovered()) {
+                i += this.yDiffText;
+            }
+            int j = this.xTexStart;
+            switch (this.state) {
+                case RECEIVE:
+                    j += this.xDiffText;
+                    break;
+                case EXTRACT:
+                    j += (this.xDiffText + this.xDiffText);
+                    break;
+            }
+
+            RenderSystem.enableDepthTest();
+            blit(matrixStack, this.x, this.y, (float) j, (float) i, this.width, this.height, this.textureWidth, this.textureHeight);
+            if (this.isHovered()) {
+                this.renderToolTip(matrixStack, mouseX, mouseY);
+            }
+        }
+
+        @Override
+        public void renderToolTip(MatrixStack matrixStack, int mouseX, int mouseY) {
+            String text = "none";
+            switch (this.state) {
+                case RECEIVE:
+                    text = "receive";
+                    break;
+                case EXTRACT:
+                    text = "extract";
+                    break;
+            }
+            EnergyStoreScreen.this.renderTooltip(matrixStack, new StringTextComponent(this.name + " | " + text), mouseX, mouseY);
+        }
+
+        public void setState(EnergyHandlingType stateIn) {
+            this.state = stateIn;
+        }
+
+        public EnergyHandlingType getState() {
+            return this.state;
+        }
+    }
+
 }

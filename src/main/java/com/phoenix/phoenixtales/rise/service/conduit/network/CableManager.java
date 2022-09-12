@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -20,7 +21,7 @@ public class CableManager implements IEnergyStorage {
     private int id;
     private World world;
 
-    private Set<BlockPos> cables = new HashSet<>();
+    public Set<BlockPos> cables = new HashSet<>();
 
     private int capacity;
     private int maxReceive;
@@ -60,6 +61,7 @@ public class CableManager implements IEnergyStorage {
             if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
                 if (cables.contains(pos.offset(d))) return;
                 update(pos.offset(d));
+                world.getPlayers().forEach(player -> player.sendMessage(new StringTextComponent("check"), player.getUniqueID()));
             }
             this.cables.add(pos);
             return;
@@ -80,7 +82,7 @@ public class CableManager implements IEnergyStorage {
         this.maxExtract = t;
         this.maxReceive = t;
         this.capacity = t;
-        if (nbt.contains("block")){
+        if (nbt.contains("block")) {
 
         }
     }

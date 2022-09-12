@@ -2,12 +2,11 @@ package com.phoenix.phoenixtales.rise.block.blocks.cable.tile;
 
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitTile;
-import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStore;
-import com.phoenix.phoenixtales.rise.service.EnergyHandlingType;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
 import com.phoenix.phoenixtales.rise.service.conduit.network.CableManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
@@ -28,6 +27,7 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
 
     private CableManager manager;
     private LazyOptional<IEnergyStorage> lazyOptManager;
+    private boolean data;
 
     protected GenericCableTile(TileEntityType<?> tileEntityTypeIn, TechnologyType type) {
         super(tileEntityTypeIn);
@@ -40,32 +40,51 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
 
     public List<Link> getLinks() {
         if (this.world == null) return new ArrayList<>();
-        this.manager.update(pos);
+        this.update(pos);
         if (this.links == null) return new ArrayList<>();
         return links;
     }
 
-    //can i put this method in CableManager?
+    public void update(@Nullable BlockPos pos) {
+        if (pos == null) {
+            pos = this.pos;
+        }
+        world.addParticle(ParticleTypes.BARRIER, 1D, 0D, 1D, 0.5D, 0.3D, 0.0D);
+        for (Direction d : Direction.values()) {
+            if (!(world.getTileEntity(pos) instanceof GenericCableTile)) return;
+            if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
+                if (manager.cables.contains(pos.offset(d))) return;
+                this.update(pos.offset(d));
+            }
+            this.manager.cables.add(pos);
+            this.data = true;
+            return;
+        }
+    }
 
+    //can i put this method in CableManager?
     public void setLinks(List<Link> links) {
         this.links = links;
     }
 
-    public void init() {
-        this.manager = new CableManager(0, this.world, type.getCableValue());
-        this.manager.init(pos);
-        this.manager.update(pos);
-        this.lazyOptManager = LazyOptional.of(() -> manager);
+
+    private boolean hasMnrg() {
+        return this.manager != null;
     }
+
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
         manager.deserializeNBT(nbt.getCompound("mngr"));
+        data = nbt.contains("test") && nbt.getBoolean("test");
         super.read(state, nbt);
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
-        compound.put("mngr", manager.serializeNBT());
+        if (hasMnrg()) {
+            compound.put("mngr", manager.serializeNBT());
+        }
+        compound.putBoolean("test", this.data);
         return super.write(compound);
     }
 
@@ -88,6 +107,13 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
     //and maybe when the blockstates change then update the connections
     @Override
     public void tick() {
+        if (hasMnrg()) {
+            this.data = false;
+            this.manager = new CableManager(0, this.world, type.getCableValue());
+            this.manager.init(pos);
+            this.update(pos);
+            this.lazyOptManager = LazyOptional.of(() -> manager);
+        }
     }
 
     public class Link {

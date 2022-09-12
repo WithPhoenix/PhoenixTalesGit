@@ -96,6 +96,10 @@ public class PressTile extends TileEntity implements ITickableTileEntity, ISided
         };
     }
 
+    public IEnergyStorage getEnergyStorage() {
+        return this.storage;
+    }
+
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {

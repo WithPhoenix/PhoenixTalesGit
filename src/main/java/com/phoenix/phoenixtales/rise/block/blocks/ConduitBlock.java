@@ -104,12 +104,6 @@ public abstract class ConduitBlock extends Block implements IWaterLoggable {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
-        if (tileEntity == null) return;
-        if (tileEntity instanceof ConduitTile) {
-            ConduitTile tile = (ConduitTile) tileEntity;
-            tile.neighborChanged();
-        }
     }
 
     @Override
