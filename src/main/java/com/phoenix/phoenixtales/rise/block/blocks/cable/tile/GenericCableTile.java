@@ -6,12 +6,15 @@ import com.phoenix.phoenixtales.rise.block.blocks.ConduitTile;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
 import com.phoenix.phoenixtales.rise.service.conduit.network.CableManager;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -35,9 +38,12 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
         super(tileEntityTypeIn);
         this.type = type;
         this.data = false;
-        this.manager = new CableManager(0, this.world, type.getCableValue());
-        this.manager.init(pos);
+    }
+
+    public void initManger(World world) {
+        this.manager = new CableManager(0, world, type.getCableValue());
         this.lazyOptManager = LazyOptional.of(() -> manager);
+        this.manager.init(pos);
     }
 
     public CableManager getNetwork() {

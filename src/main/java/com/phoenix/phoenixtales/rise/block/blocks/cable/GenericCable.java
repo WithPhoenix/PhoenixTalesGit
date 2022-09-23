@@ -46,10 +46,13 @@ public class GenericCable extends ConduitBlock {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        //        TileEntity tile1 = worldIn.getTileEntity(pos);
-//        if (tile1 == null) return;
-//        if (tile1 instanceof GenericCableTile) {
-//            GenericCableTile tile = (GenericCableTile) tile1;
+        TileEntity tile1 = worldIn.getTileEntity(pos);
+        if (tile1 == null) return;
+        if (tile1 instanceof GenericCableTile) {
+            GenericCableTile tile = (GenericCableTile) tile1;
+            tile.initManger(worldIn);
+        }
+//
 //            boolean networkExists = false;
 //            List<ICableNetwork> networks = new ArrayList<>();
 //            for (Direction d : Direction.values()) {
