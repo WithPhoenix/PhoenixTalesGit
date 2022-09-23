@@ -1,5 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable.tile;
 
+import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitTile;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
@@ -17,6 +18,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,6 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
         this.data = false;
         this.manager = new CableManager(0, this.world, type.getCableValue());
         this.manager.init(pos);
-        this.update(pos);
         this.lazyOptManager = LazyOptional.of(() -> manager);
     }
 
@@ -54,7 +55,7 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
         if (pos == null) {
             pos = this.pos;
         }
-        world.addParticle(ParticleTypes.BARRIER, 1D, 0D, 1D, 0.5D, 0.3D, 0.0D);
+        PhoenixTales.log.debug(hasWorld());
         for (Direction d : Direction.values()) {
             if (!(world.getTileEntity(pos) instanceof GenericCableTile)) return;
             if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
