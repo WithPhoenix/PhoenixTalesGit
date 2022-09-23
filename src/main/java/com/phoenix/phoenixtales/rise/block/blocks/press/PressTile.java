@@ -256,6 +256,14 @@ public class PressTile extends TileEntity implements ITickableTileEntity, ISided
         return this.energyPercent;
     }
 
+    public int getEnergy() {
+        return this.storage.getEnergyStored();
+    }
+
+    public int getMax() {
+        return this.storage.getMaxEnergyStored();
+    }
+
     public void setEnergyPercent(int n) {
         this.energyPercent = n;
     }

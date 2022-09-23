@@ -68,6 +68,24 @@ public class PressContainer extends Container {
                 tileEntity.setEnergyPercent(value);
             }
         });
+
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tileEntity.getEnergy();
+            }
+
+            @Override
+            public void set(int value) {
+            }
+        });
+
+        trackInt(new ModifiedIntReferenceHolder() {
+            @Override
+            public int get() {
+                return tileEntity.getMax();
+            }
+        });
     }
 
     @Override
