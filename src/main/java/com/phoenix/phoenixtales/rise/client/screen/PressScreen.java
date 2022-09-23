@@ -44,7 +44,6 @@ public class PressScreen extends ContainerScreen<PressContainer> {
         }
     }
 
-
     @SuppressWarnings("deprecation")
     @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {

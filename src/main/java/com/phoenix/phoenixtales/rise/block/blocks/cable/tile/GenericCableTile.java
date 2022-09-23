@@ -32,6 +32,11 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
     protected GenericCableTile(TileEntityType<?> tileEntityTypeIn, TechnologyType type) {
         super(tileEntityTypeIn);
         this.type = type;
+        this.data = false;
+        this.manager = new CableManager(0, this.world, type.getCableValue());
+        this.manager.init(pos);
+        this.update(pos);
+        this.lazyOptManager = LazyOptional.of(() -> manager);
     }
 
     public CableManager getNetwork() {
@@ -107,13 +112,7 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
     //and maybe when the blockstates change then update the connections
     @Override
     public void tick() {
-        if (hasMnrg()) {
-            this.data = false;
-            this.manager = new CableManager(0, this.world, type.getCableValue());
-            this.manager.init(pos);
-            this.update(pos);
-            this.lazyOptManager = LazyOptional.of(() -> manager);
-        }
+
     }
 
     public class Link {
