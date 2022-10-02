@@ -69,6 +69,7 @@ public class CableManager implements IEnergyStorage {
             world.getPlayers().forEach(player -> player.sendMessage(new StringTextComponent("check"), player.getUniqueID()));
 //            }
             ((GenericCableTile) tile).getManager().cables = this.cables;
+
         }
     }
 
