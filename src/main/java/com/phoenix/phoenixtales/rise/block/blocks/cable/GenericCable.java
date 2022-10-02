@@ -1,5 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable;
 
+import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
@@ -46,6 +47,7 @@ public class GenericCable extends ConduitBlock {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+
         TileEntity tile1 = worldIn.getTileEntity(pos);
         if (tile1 == null) return;
         if (tile1 instanceof GenericCableTile) {

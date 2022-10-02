@@ -48,6 +48,7 @@ public class CableManager implements IEnergyStorage {
 
     public void init(BlockPos pos) {
         this.cables.add(pos);
+        this.update(pos);
     }
 
     //Todo es sollte möglich sein pro tick die connections abzufragen, wenn die suche gut ist
@@ -57,18 +58,22 @@ public class CableManager implements IEnergyStorage {
     //todo die blockstates sagen schon aus ob was verbunden ist oder nicht, damit arbeiten
     //die blöcke sollten bei so nem durchlauf benachrichtigt werden
     public void update(BlockPos pos) {
-        world.addParticle(ParticleTypes.BARRIER, 0D, 0D, 0D, 0.0D, 0.0D, 0.0D);
-        PhoenixTales.log.debug("call");
+        PhoenixTales.log.info("call");
         for (Direction d : new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST, Direction.DOWN, Direction.UP}) {
-            TileEntity tile = world.getTileEntity(pos);
+            PhoenixTales.log.debug(d+":");
+            TileEntity tile = world.getTileEntity(pos.offset(d));
             if (!(tile instanceof GenericCableTile)) continue;
 //            if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
             if (cables.contains(pos.offset(d))) continue;
-            this.cables.add(pos);
+            this.cables.add(pos.offset(d));
+            ((GenericCableTile) tile).getManager().cables = this.cables;
+            PhoenixTales.log.debug("true");
+            PhoenixTales.log.debug("");
             update(pos.offset(d));
             world.getPlayers().forEach(player -> player.sendMessage(new StringTextComponent("check"), player.getUniqueID()));
-//            }
             ((GenericCableTile) tile).getManager().cables = this.cables;
+            PhoenixTales.log.debug("finished");
+
 
         }
     }
