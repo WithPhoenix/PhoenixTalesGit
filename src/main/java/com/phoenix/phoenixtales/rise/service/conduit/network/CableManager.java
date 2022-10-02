@@ -59,17 +59,16 @@ public class CableManager implements IEnergyStorage {
     public void update(BlockPos pos) {
         world.addParticle(ParticleTypes.BARRIER, 0D, 0D, 0D, 0.0D, 0.0D, 0.0D);
         PhoenixTales.log.debug("call");
-        for (Direction d : Direction.values()) {
+        for (Direction d : new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST, Direction.DOWN, Direction.UP}) {
             TileEntity tile = world.getTileEntity(pos);
-            if (!(tile instanceof GenericCableTile)) return;
+            if (!(tile instanceof GenericCableTile)) continue;
 //            if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
-            if (cables.contains(pos.offset(d))) return;
+            if (cables.contains(pos.offset(d))) continue;
+            this.cables.add(pos);
             update(pos.offset(d));
             world.getPlayers().forEach(player -> player.sendMessage(new StringTextComponent("check"), player.getUniqueID()));
 //            }
-            this.cables.add(pos);
             ((GenericCableTile) tile).getManager().cables = this.cables;
-            return;
         }
     }
 
