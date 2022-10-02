@@ -1,13 +1,11 @@
 package com.phoenix.phoenixtales.rise.service.conduit.network;
 
-import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -58,23 +56,16 @@ public class CableManager implements IEnergyStorage {
     //todo die blockstates sagen schon aus ob was verbunden ist oder nicht, damit arbeiten
     //die blöcke sollten bei so nem durchlauf benachrichtigt werden
     public void update(BlockPos pos) {
-        PhoenixTales.log.info("call");
         for (Direction d : new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST, Direction.DOWN, Direction.UP}) {
-            PhoenixTales.log.debug(d+":");
             TileEntity tile = world.getTileEntity(pos.offset(d));
             if (!(tile instanceof GenericCableTile)) continue;
-//            if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
             if (cables.contains(pos.offset(d))) continue;
             this.cables.add(pos.offset(d));
             ((GenericCableTile) tile).getManager().cables = this.cables;
-            PhoenixTales.log.debug("true");
-            PhoenixTales.log.debug("");
+            this.cables.add(pos.offset(d));
             update(pos.offset(d));
-            world.getPlayers().forEach(player -> player.sendMessage(new StringTextComponent("check"), player.getUniqueID()));
+//            world.getPlayers().forEach(player -> player.sendMessage(new StringTextComponent("check"), player.getUniqueID()));
             ((GenericCableTile) tile).getManager().cables = this.cables;
-            PhoenixTales.log.debug("finished");
-
-
         }
     }
 
@@ -101,8 +92,7 @@ public class CableManager implements IEnergyStorage {
     //this is called when a neighbor tile pushes energy
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
-        world.addParticle(ParticleTypes.HEART, 0, 0 + 1.1D, 0, 0.0D, 0.0D, 0.0D);
-        this.update(cables.iterator().next());
+//        this.update(cables.iterator().next());
         Stream<IEnergyStorage> storageStream = cables.stream().map(pos -> world.getTileEntity(pos))
                 .filter(Objects::nonNull)
                 .map(tile -> tile.getCapability(CapabilityEnergy.ENERGY))
@@ -111,17 +101,19 @@ public class CableManager implements IEnergyStorage {
         int receive = maxReceive / storageStream.collect(Collectors.toSet()).size();
         int received = 0;
         for (IEnergyStorage manager : storageStream.collect(Collectors.toSet())) {
-            if (manager instanceof CableManager) received += ((CableManager) manager).actualReceive(receive);
+            if (manager instanceof CableManager) received += ((CableManager) manager).actualReceive(receive, simulate);
         }
         return received;
     }
 
     //this is used in @receiveEnergy to actually insert the energy
-    public int actualReceive(int maxReceive) {
+    public int actualReceive(int maxReceive, boolean simulate) {
         world.addParticle(ParticleTypes.FLASH, 0, 0 + 1.1D, 0, 0.0D, 0.0D, 0.0D);
         if (this.canReceive()) {
             int receiving = Math.min(this.capacity - this.stored, Math.min(this.maxReceive, maxReceive));
-            this.stored += receiving;
+            if (!simulate) {
+                this.stored += receiving;
+            }
             return receiving;
         }
         return 0;
@@ -148,12 +140,12 @@ public class CableManager implements IEnergyStorage {
                 .map(tile -> tile.getCapability(CapabilityEnergy.ENERGY))
                 .map(lazy -> lazy.orElse(new FallBackStorage()))
                 .filter(ie -> !(ie instanceof FallBackStorage));
-        int energy = storageStream
+        long energy = storageStream
                 .mapToInt(IEnergyStorage::getEnergyStored)
                 .sum();
-        int energyPerIES = energy / storageStream
-                .collect(Collectors.toSet())
-                .size();
+        int energyPerIES = (int) (energy / storageStream
+                                .collect(Collectors.toSet())
+                                .size());
         for (IEnergyStorage storage : storageStream.collect(Collectors.toSet())) {
             storage.extractEnergy(storage.getMaxEnergyStored(), false);
             storage.receiveEnergy(energyPerIES, false);
@@ -187,27 +179,22 @@ public class CableManager implements IEnergyStorage {
         public int receiveEnergy(int maxReceive, boolean simulate) {
             return 0;
         }
-
         @Override
         public int extractEnergy(int maxExtract, boolean simulate) {
             return 0;
         }
-
         @Override
         public int getEnergyStored() {
             return 0;
         }
-
         @Override
         public int getMaxEnergyStored() {
             return 0;
         }
-
         @Override
         public boolean canExtract() {
             return false;
         }
-
         @Override
         public boolean canReceive() {
             return false;

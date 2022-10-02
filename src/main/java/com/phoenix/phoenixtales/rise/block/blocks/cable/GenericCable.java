@@ -34,7 +34,7 @@ public class GenericCable extends ConduitBlock {
     protected boolean connectsTo(IWorldReader world, BlockPos pos, Direction facing) {
         TileEntity tile = world.getTileEntity(pos.offset(facing));
         if (tile instanceof EnergyStoreTile) {
-            return ((EnergyStoreTile) tile).getCapForCable(facing).isPresent();
+            return ((EnergyStoreTile) tile).getCapForCable(facing.getOpposite()).isPresent();
         }
         return tile != null && tile.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).isPresent();
     }
@@ -47,7 +47,6 @@ public class GenericCable extends ConduitBlock {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-
         TileEntity tile1 = worldIn.getTileEntity(pos);
         if (tile1 == null) return;
         if (tile1 instanceof GenericCableTile) {
@@ -96,6 +95,18 @@ public class GenericCable extends ConduitBlock {
 //            ((GenericCableTile) tile).getNetwork().update();
 //        }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
+    }
+
+
+    @Override
+    public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos pos2, boolean b) {
+        super.neighborChanged(state, world, pos, block, pos2, b);
+        TileEntity tile1 = world.getTileEntity(pos);
+        if (tile1 == null) return;
+        if (tile1 instanceof GenericCableTile) {
+            GenericCableTile tile = (GenericCableTile) tile1;
+            tile.updateManager();
+        }
     }
 
     @Override
