@@ -42,8 +42,8 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
 
     public void initManger(World world) {
         this.manager = new CableManager(0, world, type.getCableValue());
-        this.lazyOptManager = LazyOptional.of(() -> manager);
         this.manager.init(pos);
+        this.lazyOptManager = LazyOptional.of(() -> manager);
     }
 
     public CableManager getNetwork() {

@@ -40,8 +40,9 @@ public class CableManager implements IEnergyStorage {
         this.id = id;
         this.world = world;
         this.stored = stored;
-        this.maxReceive = maxReceive;
-        this.maxExtract = maxExtract;
+        this.maxReceive = capacity;
+        this.maxExtract = capacity;
+        this.capacity = capacity;
     }
 
     public void init(BlockPos pos) {
