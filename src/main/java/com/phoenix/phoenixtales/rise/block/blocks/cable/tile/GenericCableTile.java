@@ -42,8 +42,9 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
 
     public void initManger(World world) {
         this.manager = new CableManager(0, world, type.getCableValue());
-        this.manager.init(pos);
+        this.manager.init(this.pos);
         this.lazyOptManager = LazyOptional.of(() -> manager);
+        this.manager.update(this.pos);
     }
 
     public CableManager getNetwork() {
@@ -57,11 +58,16 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
         return links;
     }
 
+
+    public CableManager getManager() {
+        return manager;
+    }
+
     public void update(@Nullable BlockPos pos) {
         if (pos == null) {
             pos = this.pos;
         }
-        PhoenixTales.log.debug(hasWorld());
+        PhoenixTales.log.debug("world not null" + hasWorld());
         for (Direction d : Direction.values()) {
             if (!(world.getTileEntity(pos) instanceof GenericCableTile)) return;
             if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
@@ -69,7 +75,6 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
                 this.update(pos.offset(d));
             }
             this.manager.cables.add(pos);
-            this.data = true;
             return;
         }
     }

@@ -1,9 +1,10 @@
 package com.phoenix.phoenixtales.rise.service.conduit.network;
 
-import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
+import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
@@ -57,17 +58,21 @@ public class CableManager implements IEnergyStorage {
     //die blöcke sollten bei so nem durchlauf benachrichtigt werden
     public void update(BlockPos pos) {
         world.addParticle(ParticleTypes.BARRIER, 0D, 0D, 0D, 0.0D, 0.0D, 0.0D);
+        PhoenixTales.log.debug("call");
         for (Direction d : Direction.values()) {
-            if (!(world.getTileEntity(pos) instanceof GenericCableTile)) return;
-            if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
-                if (cables.contains(pos.offset(d))) return;
-                update(pos.offset(d));
-                world.getPlayers().forEach(player -> player.sendMessage(new StringTextComponent("check"), player.getUniqueID()));
-            }
+            TileEntity tile = world.getTileEntity(pos);
+            if (!(tile instanceof GenericCableTile)) return;
+//            if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
+            if (cables.contains(pos.offset(d))) return;
+            update(pos.offset(d));
+            world.getPlayers().forEach(player -> player.sendMessage(new StringTextComponent("check"), player.getUniqueID()));
+//            }
             this.cables.add(pos);
+            ((GenericCableTile) tile).getManager().cables = this.cables;
             return;
         }
     }
+
 
     public CompoundNBT serializeNBT() {
         CompoundNBT nbt = new CompoundNBT();
