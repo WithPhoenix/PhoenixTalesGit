@@ -6,10 +6,7 @@ import com.phoenix.phoenixtales.rise.block.blocks.ConduitTile;
 import com.phoenix.phoenixtales.rise.service.TechnologyType;
 import com.phoenix.phoenixtales.rise.service.conduit.network.CableManager;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
@@ -21,7 +18,6 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,8 +108,11 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == CapabilityEnergy.ENERGY) {
+            if (side == null) return super.getCapability(cap, null);
             if (this.getBlockState().get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(side))) {
-                return lazyOptManager.cast();
+                LazyOptional<IEnergyStorage> optional = LazyOptional.of(() -> this.manager);
+                return optional.cast();
+//                return this.lazyOptManager.cast();
             }
         }
         return super.getCapability(cap, side);

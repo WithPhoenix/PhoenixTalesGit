@@ -123,12 +123,13 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
             this.font.drawString(matrixStack, "max Receive: " + this.tile.getR() + " J", 12, 46, MathHelper.rgb(142, 143, 144));
             this.font.drawString(matrixStack, "max Extract: " + this.tile.getE() + " J", 12, 57, MathHelper.rgb(142, 143, 144));
         } else if (page == 1) {
-            this.font.drawString(matrixStack, "north", 12, 22, MathHelper.rgb(142, 143, 144));
-            this.font.drawString(matrixStack, "west", 12, 38, MathHelper.rgb(142, 143, 144));
-            this.font.drawString(matrixStack, "down", 12, 54, MathHelper.rgb(142, 143, 144));
-            this.font.drawString(matrixStack, "south", 75, 22, MathHelper.rgb(142, 143, 144));
-            this.font.drawString(matrixStack, "east", 75, 38, MathHelper.rgb(142, 143, 144));
-            this.font.drawString(matrixStack, "up", 75, 54, MathHelper.rgb(142, 143, 144));
+            this.font.drawString(matrixStack, "Side-Configuration", 12, 22, MathHelper.rgb(175, 34, 34));
+//            this.font.drawString(matrixStack, "north", 12, 22, MathHelper.rgb(142, 143, 144));
+//            this.font.drawString(matrixStack, "west", 12, 38, MathHelper.rgb(142, 143, 144));
+//            this.font.drawString(matrixStack, "down", 12, 54, MathHelper.rgb(142, 143, 144));
+//            this.font.drawString(matrixStack, "south", 75, 22, MathHelper.rgb(142, 143, 144));
+//            this.font.drawString(matrixStack, "east", 75, 38, MathHelper.rgb(142, 143, 144));
+//            this.font.drawString(matrixStack, "up", 75, 54, MathHelper.rgb(142, 143, 144));
         } else if (page == 2) {
             this.font.drawString(matrixStack, "add upgrades here", 12, 19, MathHelper.rgb(142, 143, 144));
             this.font.drawString(matrixStack, "capacity speed", 12, 31, MathHelper.rgb(142, 143, 144));

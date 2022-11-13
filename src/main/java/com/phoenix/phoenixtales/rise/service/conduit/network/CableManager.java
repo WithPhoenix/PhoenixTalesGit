@@ -93,15 +93,16 @@ public class CableManager implements IEnergyStorage {
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
 //        this.update(cables.iterator().next());
-        Stream<IEnergyStorage> storageStream = cables.stream().map(pos -> world.getTileEntity(pos))
+        Set<IEnergyStorage> storageStream = cables.stream().map(pos -> world.getTileEntity(pos))
                 .filter(Objects::nonNull)
                 .map(tile -> tile.getCapability(CapabilityEnergy.ENERGY))
                 .map(lazy -> lazy.orElse(new FallBackStorage()))
-                .filter(ie -> ie instanceof CableManager);
-        int receive = maxReceive / storageStream.collect(Collectors.toSet()).size();
+                .filter(ie -> ie instanceof CableManager)
+                .collect(Collectors.toSet());
+        int receive = storageStream.size() == 0 ? maxReceive : maxReceive / storageStream.size();
         int received = 0;
-        for (IEnergyStorage manager : storageStream.collect(Collectors.toSet())) {
-            if (manager instanceof CableManager) received += ((CableManager) manager).actualReceive(receive, simulate);
+        for (IEnergyStorage manager : storageStream) {
+            received += ((CableManager) manager).actualReceive(receive, simulate);
         }
         return received;
     }
@@ -144,8 +145,8 @@ public class CableManager implements IEnergyStorage {
                 .mapToInt(IEnergyStorage::getEnergyStored)
                 .sum();
         int energyPerIES = (int) (energy / storageStream
-                                .collect(Collectors.toSet())
-                                .size());
+                .collect(Collectors.toSet())
+                .size());
         for (IEnergyStorage storage : storageStream.collect(Collectors.toSet())) {
             storage.extractEnergy(storage.getMaxEnergyStored(), false);
             storage.receiveEnergy(energyPerIES, false);
@@ -179,22 +180,27 @@ public class CableManager implements IEnergyStorage {
         public int receiveEnergy(int maxReceive, boolean simulate) {
             return 0;
         }
+
         @Override
         public int extractEnergy(int maxExtract, boolean simulate) {
             return 0;
         }
+
         @Override
         public int getEnergyStored() {
             return 0;
         }
+
         @Override
         public int getMaxEnergyStored() {
             return 0;
         }
+
         @Override
         public boolean canExtract() {
             return false;
         }
+
         @Override
         public boolean canReceive() {
             return false;
