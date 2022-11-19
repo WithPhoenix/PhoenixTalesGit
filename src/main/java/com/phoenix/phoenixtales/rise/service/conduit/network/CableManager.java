@@ -96,10 +96,9 @@ public class CableManager implements IEnergyStorage {
     @Override
     public int extractEnergy(int maxExtract, boolean simulate) {
         if (this.canExtract()) {
-            int extracted = Math.min(this.rate, maxExtract);
+            int extracted = (int) Math.min(this.capacity, this.rate);
             if (!simulate) {
                 this.stored -= extracted;
-//                this.evenEnergy();
             }
             return extracted;
         }

@@ -73,11 +73,12 @@ public class EnergyStore extends EnergyBaseBlock {
         }
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if (tileentity instanceof EnergyStoreTile) {
-            NonNullList<ItemStack> items = NonNullList.withSize(6, ItemStack.EMPTY);
+            NonNullList<ItemStack> items = NonNullList.withSize(2, ItemStack.EMPTY);
             for (int i = 0; i < items.size(); i++) {
                 items.set(i, ((EnergyStoreTile) tileentity).getItemOn(i));
             }
             InventoryHelper.dropItems(worldIn, pos, items);
+            worldIn.removeTileEntity(pos);
         }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
