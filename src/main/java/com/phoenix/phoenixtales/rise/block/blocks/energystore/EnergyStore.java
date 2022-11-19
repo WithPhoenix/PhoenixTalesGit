@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
@@ -36,6 +37,12 @@ public class EnergyStore extends EnergyBaseBlock {
     public static final EnumProperty<EnergyHandlingType> DOWN = EnumProperty.create("down", EnergyHandlingType.class);
     public static final EnumProperty<EnergyHandlingType> UP = EnumProperty.create("up", EnergyHandlingType.class);
 
+    public static Direction RIGHT;
+    public static Direction LEFT;
+    public static Direction BACK;
+    public static Direction FRONT;
+
+
     public static final Map<Direction, EnumProperty<EnergyHandlingType>> FACING_TO_PROPERTY_MAP = Util.make(Maps.newEnumMap(Direction.class), (p) -> {
         p.put(Direction.NORTH, NORTH);
         p.put(Direction.SOUTH, SOUTH);
@@ -43,6 +50,13 @@ public class EnergyStore extends EnergyBaseBlock {
         p.put(Direction.EAST, EAST);
         p.put(Direction.DOWN, DOWN);
         p.put(Direction.UP, UP);
+    });
+
+    public static final Map<Integer, Direction> DIRECTION_TO_FACING_MAP = Util.make(Maps.newHashMap(), (p) -> {
+        p.put(0, FRONT);
+        p.put(1, BACK);
+        p.put(2, LEFT);
+        p.put(3, RIGHT);
     });
 
     public EnergyStore() {
@@ -64,6 +78,12 @@ public class EnergyStore extends EnergyBaseBlock {
             }
         }
         return ActionResultType.SUCCESS;
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
 
     @Override
