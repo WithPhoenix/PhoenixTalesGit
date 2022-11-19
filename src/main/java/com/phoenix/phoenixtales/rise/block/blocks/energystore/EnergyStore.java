@@ -37,10 +37,10 @@ public class EnergyStore extends EnergyBaseBlock {
     public static final EnumProperty<EnergyHandlingType> DOWN = EnumProperty.create("down", EnergyHandlingType.class);
     public static final EnumProperty<EnergyHandlingType> UP = EnumProperty.create("up", EnergyHandlingType.class);
 
-    public static Direction RIGHT;
-    public static Direction LEFT;
-    public static Direction BACK;
-    public static Direction FRONT;
+    public static final EnumProperty<Direction> FRONT = EnumProperty.create("front", Direction.class);
+    public static final EnumProperty<Direction> BACK = EnumProperty.create("back", Direction.class);
+    public static final EnumProperty<Direction> LEFT = EnumProperty.create("left", Direction.class);
+    public static final EnumProperty<Direction> RIGHT = EnumProperty.create("right", Direction.class);
 
 
     public static final Map<Direction, EnumProperty<EnergyHandlingType>> FACING_TO_PROPERTY_MAP = Util.make(Maps.newEnumMap(Direction.class), (p) -> {
@@ -52,7 +52,7 @@ public class EnergyStore extends EnergyBaseBlock {
         p.put(Direction.UP, UP);
     });
 
-    public static final Map<Integer, Direction> DIRECTION_TO_FACING_MAP = Util.make(Maps.newHashMap(), (p) -> {
+    public static final Map<Integer, EnumProperty<Direction>> DIRECTION_TO_FACING_MAP = Util.make(Maps.newHashMap(), (p) -> {
         p.put(0, FRONT);
         p.put(1, BACK);
         p.put(2, LEFT);
@@ -61,7 +61,7 @@ public class EnergyStore extends EnergyBaseBlock {
 
     public EnergyStore() {
         super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(5.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).setRequiresTool().sound(SoundType.METAL));
-        this.setDefaultState(this.getStateContainer().getBaseState().with(NORTH, EnergyHandlingType.NONE).with(SOUTH, EnergyHandlingType.NONE).with(WEST, EnergyHandlingType.NONE).with(EAST, EnergyHandlingType.NONE).with(DOWN, EnergyHandlingType.NONE).with(UP, EnergyHandlingType.NONE));
+        this.setDefaultState(this.getStateContainer().getBaseState().with(NORTH, EnergyHandlingType.NONE).with(SOUTH, EnergyHandlingType.NONE).with(WEST, EnergyHandlingType.NONE).with(EAST, EnergyHandlingType.NONE).with(DOWN, EnergyHandlingType.NONE).with(UP, EnergyHandlingType.NONE).with(FRONT, Direction.NORTH).with(BACK, Direction.SOUTH).with(LEFT,Direction.WEST).with(RIGHT, Direction.EAST));
     }
 
     @Override
@@ -82,7 +82,7 @@ public class EnergyStore extends EnergyBaseBlock {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-
+        //init left,right,back,front or load nbt
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
 
@@ -116,6 +116,6 @@ public class EnergyStore extends EnergyBaseBlock {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_) {
-        p_206840_1_.add(NORTH, SOUTH, WEST, EAST, DOWN, UP);
+        p_206840_1_.add(NORTH, SOUTH, WEST, EAST, DOWN, UP, FRONT, BACK, LEFT, RIGHT);
     }
 }
