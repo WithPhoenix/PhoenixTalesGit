@@ -2,6 +2,8 @@ package com.phoenix.phoenixtales.rise.block.blocks.energystore;
 
 import com.google.common.collect.Maps;
 import com.phoenix.phoenixtales.rise.block.blocks.EnergyBaseBlock;
+import com.phoenix.phoenixtales.rise.item.RiseItems;
+import com.phoenix.phoenixtales.rise.service.DirectionOrNone;
 import com.phoenix.phoenixtales.rise.service.EnergyHandlingType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -13,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -37,10 +40,12 @@ public class EnergyStore extends EnergyBaseBlock {
     public static final EnumProperty<EnergyHandlingType> DOWN = EnumProperty.create("down", EnergyHandlingType.class);
     public static final EnumProperty<EnergyHandlingType> UP = EnumProperty.create("up", EnergyHandlingType.class);
 
-    public static final EnumProperty<Direction> FRONT = EnumProperty.create("front", Direction.class);
-    public static final EnumProperty<Direction> BACK = EnumProperty.create("back", Direction.class);
-    public static final EnumProperty<Direction> LEFT = EnumProperty.create("left", Direction.class);
-    public static final EnumProperty<Direction> RIGHT = EnumProperty.create("right", Direction.class);
+    public static final EnumProperty<DirectionOrNone> FRONT = EnumProperty.create("front", DirectionOrNone.class);
+    public static final EnumProperty<DirectionOrNone> BACK = EnumProperty.create("back", DirectionOrNone.class);
+    public static final EnumProperty<DirectionOrNone> LEFT = EnumProperty.create("left", DirectionOrNone.class);
+    public static final EnumProperty<DirectionOrNone> RIGHT = EnumProperty.create("right", DirectionOrNone.class);
+    public static final EnumProperty<DirectionOrNone> UP2 = EnumProperty.create("up2", DirectionOrNone.class);
+    public static final EnumProperty<DirectionOrNone> DOWN2 = EnumProperty.create("down2", DirectionOrNone.class);
 
 
     public static final Map<Direction, EnumProperty<EnergyHandlingType>> FACING_TO_PROPERTY_MAP = Util.make(Maps.newEnumMap(Direction.class), (p) -> {
@@ -52,16 +57,18 @@ public class EnergyStore extends EnergyBaseBlock {
         p.put(Direction.UP, UP);
     });
 
-    public static final Map<Integer, EnumProperty<Direction>> DIRECTION_TO_FACING_MAP = Util.make(Maps.newHashMap(), (p) -> {
+    public static final Map<Integer, EnumProperty<DirectionOrNone>> DIRECTION_TO_FACING_MAP = Util.make(Maps.newHashMap(), (p) -> {
         p.put(0, FRONT);
         p.put(1, BACK);
         p.put(2, LEFT);
         p.put(3, RIGHT);
+        p.put(4, UP2);
+        p.put(5, DOWN2);
     });
 
     public EnergyStore() {
         super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(5.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).setRequiresTool().sound(SoundType.METAL));
-        this.setDefaultState(this.getStateContainer().getBaseState().with(NORTH, EnergyHandlingType.NONE).with(SOUTH, EnergyHandlingType.NONE).with(WEST, EnergyHandlingType.NONE).with(EAST, EnergyHandlingType.NONE).with(DOWN, EnergyHandlingType.NONE).with(UP, EnergyHandlingType.NONE).with(FRONT, Direction.NORTH).with(BACK, Direction.SOUTH).with(LEFT,Direction.WEST).with(RIGHT, Direction.EAST));
+        this.setDefaultState(this.getStateContainer().getBaseState().with(NORTH, EnergyHandlingType.NONE).with(SOUTH, EnergyHandlingType.NONE).with(WEST, EnergyHandlingType.NONE).with(EAST, EnergyHandlingType.NONE).with(DOWN, EnergyHandlingType.NONE).with(UP, EnergyHandlingType.NONE).with(FRONT, DirectionOrNone.NONE).with(BACK, DirectionOrNone.NONE).with(LEFT, DirectionOrNone.NONE).with(RIGHT, DirectionOrNone.NONE).with(UP2, DirectionOrNone.NONE).with(DOWN2, DirectionOrNone.NONE));
     }
 
     @Override
@@ -83,6 +90,23 @@ public class EnergyStore extends EnergyBaseBlock {
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         //init left,right,back,front or load nbt
+        CompoundNBT nbt = stack.getTag();
+        CompoundNBT val = nbt.contains("direction") ? nbt.getCompound("direction") : null;
+        if (val != null) {
+            for (int i = 0; i < 6; i++) {
+                state = state.with(EnergyStore.DIRECTION_TO_FACING_MAP.get(i), DirectionOrNone.valueOf(val.getString(String.valueOf(i))));
+            }
+        }
+        val = nbt.contains("handling") ? nbt.getCompound("handling") : null;
+        if (val != null) {
+            state = state.with(NORTH, EnergyHandlingType.valueOf(val.getString("0")));
+            state = state.with(SOUTH, EnergyHandlingType.valueOf(val.getString("1")));
+            state = state.with(WEST, EnergyHandlingType.valueOf(val.getString("2")));
+            state = state.with(EAST, EnergyHandlingType.valueOf(val.getString("3")));
+            state = state.with(DOWN, EnergyHandlingType.valueOf(val.getString("4")));
+            state = state.with(UP, EnergyHandlingType.valueOf(val.getString("5")));
+        }
+        worldIn.setBlockState(pos, state);
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
 
@@ -98,6 +122,27 @@ public class EnergyStore extends EnergyBaseBlock {
                 items.set(i, ((EnergyStoreTile) tileentity).getItemOn(i));
             }
             InventoryHelper.dropItems(worldIn, pos, items);
+
+            ItemStack block_drop = new ItemStack(RiseItems.ENERGY_STORE);
+            CompoundNBT nbt = new CompoundNBT();
+            CompoundNBT directions = new CompoundNBT();
+            directions.putString("0", state.get(FRONT).name());
+            directions.putString("1", state.get(BACK).name());
+            directions.putString("2", state.get(LEFT).name());
+            directions.putString("3", state.get(RIGHT).name());
+            directions.putString("4", state.get(UP2).name());
+            directions.putString("5", state.get(DOWN2).name());
+            nbt.put("direction", directions);
+            CompoundNBT handling = new CompoundNBT();
+            handling.putString("0", state.get(NORTH).name());
+            handling.putString("1", state.get(SOUTH).name());
+            handling.putString("2", state.get(WEST).name());
+            handling.putString("3", state.get(EAST).name());
+            handling.putString("4", state.get(DOWN).name());
+            handling.putString("5", state.get(UP).name());
+            nbt.put("handling", handling);
+            block_drop.setTag(nbt);
+            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), block_drop);
             worldIn.removeTileEntity(pos);
         }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
@@ -116,6 +161,6 @@ public class EnergyStore extends EnergyBaseBlock {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_) {
-        p_206840_1_.add(NORTH, SOUTH, WEST, EAST, DOWN, UP, FRONT, BACK, LEFT, RIGHT);
+        p_206840_1_.add(NORTH, SOUTH, WEST, EAST, DOWN, UP, FRONT, BACK, LEFT, RIGHT, DOWN2, UP2);
     }
 }
