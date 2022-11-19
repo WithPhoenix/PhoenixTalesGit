@@ -6,18 +6,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CableManager implements IEnergyStorage {
-    private int id;
-    private World world;
+    private final int id;
+    private final World world;
 
     public Set<BlockPos> cables = new HashSet<>();
 
@@ -45,12 +41,6 @@ public class CableManager implements IEnergyStorage {
         this.update(pos);
     }
 
-    //Todo es sollte möglich sein pro tick die connections abzufragen, wenn die suche gut ist
-    //also wenn energy gepushed wird, dann aus dem einen alles raus, und neu verteilen
-    //wenn energy received wird, dann gleich verteilen
-
-    //todo die blockstates sagen schon aus ob was verbunden ist oder nicht, damit arbeiten
-    //die blöcke sollten bei so nem durchlauf benachrichtigt werden
     public void update(BlockPos pos) {
         for (Direction d : new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST, Direction.DOWN, Direction.UP}) {
             TileEntity tile = world.getTileEntity(pos.offset(d));
@@ -61,17 +51,32 @@ public class CableManager implements IEnergyStorage {
             this.cables.add(pos.offset(d));
             update(pos.offset(d));
             ((GenericCableTile) tile).getManager().cables = this.cables;
-            this.recalculateCapacity();
-            this.recalculateRate();
+            this.recalculateCapacityAndRate();
         }
     }
-    //TODO wann genau rufe ich diese methoden auf?
-    private void recalculateCapacity() {
-        this.capacity = this.cables.stream().map(pos -> world.getTileEntity(pos)).filter(te -> te instanceof GenericCableTile).mapToLong(te -> ((GenericCableTile) te).getTechnologyType().transferRate()).sum();
+
+    private void recalculateCapacityAndRate() {
+        this.capacity = this.cables.stream().map(pos -> world.getTileEntity(pos))
+                .filter(te -> te instanceof GenericCableTile)
+                .mapToLong(te -> ((GenericCableTile) te).getTechnologyType().transferRate())
+                .sum();
+        this.rate = (int) (this.capacity / this.cables.size());
+        for (BlockPos pos : this.cables) {
+            if (this.world.getTileEntity(pos) instanceof GenericCableTile) {
+                GenericCableTile tile = (GenericCableTile) this.world.getTileEntity(pos);
+                if (tile == null) continue;
+                tile.getManager().setCapacity(this.capacity);
+                tile.getManager().setRate(this.rate);
+            }
+        }
     }
 
-    private void recalculateRate() {
-        this.rate = (int) (this.capacity / this.cables.size());
+    public void setCapacity(long val) {
+        this.capacity = val;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 
     //this is called when a neighbor tile pushes energy
