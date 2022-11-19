@@ -8,6 +8,7 @@ import com.phoenix.phoenixtales.rise.service.conduit.network.CableManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -27,7 +28,7 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
     private List<Link> links;
 
     private CableManager manager;
-    private LazyOptional<IEnergyStorage> lazyOptManager;
+    private LazyOptional<IEnergyStorage> lazyManager;
     private boolean data;
 
     protected GenericCableTile(TileEntityType<?> tileEntityTypeIn, TechnologyType type) {
@@ -37,9 +38,9 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
     }
 
     public void initManger(World world) {
-        this.manager = new CableManager(0, world, type.getCableValue());
+        this.manager = new CableManager(0, world, this.type.transferRate(), 0, type.transferRate());
         this.manager.init(this.pos);
-        this.lazyOptManager = LazyOptional.of(() -> manager);
+        this.lazyManager = LazyOptional.of(() -> manager);
     }
 
     public void updateManager() {
@@ -83,7 +84,6 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
         this.links = links;
     }
 
-
     private boolean hasMnrg() {
         return this.manager != null;
     }
@@ -112,7 +112,6 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
             if (this.getBlockState().get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(side))) {
                 LazyOptional<IEnergyStorage> optional = LazyOptional.of(() -> this.manager);
                 return optional.cast();
-//                return this.lazyOptManager.cast();
             }
         }
         return super.getCapability(cap, side);
@@ -122,11 +121,22 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
         return type;
     }
 
-    //when extractiong or smth else loop over all chached cables and update
-    //and maybe when the blockstates change then update the connections
+    //todo die pushrate muss eigentlich intern ermittelt werden, also ist es eigentlch egal welchen wert ich übergebe
     @Override
     public void tick() {
-
+        for (Direction d : Direction.values()) {
+            TileEntity neighbor = world != null ? world.getTileEntity(this.pos.offset(d)) : null;
+            if (neighbor != null) {
+                if (neighbor instanceof GenericCableTile) continue;
+                    neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).ifPresent(cap -> {
+                    int push = this.manager.extractEnergy(this.type.transferRate(), true);
+                    if (push > 0) {
+                        push = cap.receiveEnergy(push, false);
+                        this.manager.extractEnergy(push, false);
+                    }
+                });
+            }
+        }
     }
 
     public class Link {

@@ -3,17 +3,17 @@ package com.phoenix.phoenixtales.rise.service;
 public enum TechnologyType {
     SIMPLE, NORMAL, IMPROVED, OVERLOADED;
 
-    public int getCableValue() {
+    public int transferRate() {
         switch (this) {
             case NORMAL:
-                return 500;
+                return 6240;
             case IMPROVED:
-                return 2000;
+                return 40200;
             case OVERLOADED:
-                return 5000;
+                return 250000;
             case SIMPLE:
             default:
-                return 100;
+                return 1040;
         }
     }
 }

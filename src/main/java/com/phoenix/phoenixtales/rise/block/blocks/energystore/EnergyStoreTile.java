@@ -82,6 +82,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return handlerOpt.cast();
         } else if (cap == CapabilityEnergy.ENERGY) {
+            if (side == null) return super.getCapability(cap, null);
             if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.RECEIVE) {
                 return storageOpt.cast();
             }

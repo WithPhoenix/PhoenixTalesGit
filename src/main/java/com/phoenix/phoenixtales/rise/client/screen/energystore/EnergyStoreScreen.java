@@ -110,7 +110,6 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
         // r255 g37 b0
         double energyP = (double) (this.tile.getEnergyPercent()) / 100d;
         this.blit(matrixStack, i + 161, j + 5, 178, 0, 8, 75 - ((int) (energyP * 75d)));
-
     }
 
     //Draw all the important info
@@ -123,13 +122,7 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
             this.font.drawString(matrixStack, "max Receive: " + this.tile.getR() + " J", 12, 46, MathHelper.rgb(142, 143, 144));
             this.font.drawString(matrixStack, "max Extract: " + this.tile.getE() + " J", 12, 57, MathHelper.rgb(142, 143, 144));
         } else if (page == 1) {
-            this.font.drawString(matrixStack, "Side-Configuration", 12, 22, MathHelper.rgb(175, 34, 34));
-//            this.font.drawString(matrixStack, "north", 12, 22, MathHelper.rgb(142, 143, 144));
-//            this.font.drawString(matrixStack, "west", 12, 38, MathHelper.rgb(142, 143, 144));
-//            this.font.drawString(matrixStack, "down", 12, 54, MathHelper.rgb(142, 143, 144));
-//            this.font.drawString(matrixStack, "south", 75, 22, MathHelper.rgb(142, 143, 144));
-//            this.font.drawString(matrixStack, "east", 75, 38, MathHelper.rgb(142, 143, 144));
-//            this.font.drawString(matrixStack, "up", 75, 54, MathHelper.rgb(142, 143, 144));
+            this.font.drawString(matrixStack, "Side-Configuration", 8, 12, MathHelper.rgb(175, 34, 34));
         } else if (page == 2) {
             this.font.drawString(matrixStack, "add upgrades here", 12, 19, MathHelper.rgb(142, 143, 144));
             this.font.drawString(matrixStack, "capacity speed", 12, 31, MathHelper.rgb(142, 143, 144));
@@ -139,36 +132,36 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
 
     //todo make the button use translation text component
     private void initializeSCButtons() {
-        this.sideConfigButtons[0] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.NORTH), "north", this.guiLeft + 45, this.guiTop + 18, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+        this.sideConfigButtons[0] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.NORTH), "north", this.guiLeft + 35, this.guiTop + 36, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
             this.handleClick((SideConfigButton) button, Direction.NORTH);
-            ((SideConfigButton) button).setPosition(this.guiLeft + 45, this.guiTop + 18);
+            ((SideConfigButton) button).setPosition(this.guiLeft + 35, this.guiTop + 36);
         });
-        this.sideConfigButtons[0].setPosition(this.guiLeft + 45, this.guiTop + 18);
-        this.sideConfigButtons[1] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.SOUTH), "south", this.guiLeft + 108, this.guiTop + 18, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+        this.sideConfigButtons[0].setPosition(this.guiLeft + 35, this.guiTop + 36);
+        this.sideConfigButtons[1] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.SOUTH), "south", this.guiLeft + 80, this.guiTop + 36, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
             this.handleClick((SideConfigButton) button, Direction.SOUTH);
-            ((SideConfigButton) button).setPosition(this.guiLeft + 108, this.guiTop + 18);
+            ((SideConfigButton) button).setPosition(this.guiLeft + 80, this.guiTop + 36);
         });
-        this.sideConfigButtons[1].setPosition(this.guiLeft + 108, this.guiTop + 18);
-        this.sideConfigButtons[2] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.WEST), "west", this.guiLeft + 45, this.guiTop + 34, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+        this.sideConfigButtons[1].setPosition(this.guiLeft + 80, this.guiTop + 36);
+        this.sideConfigButtons[2] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.WEST), "west", this.guiLeft + 95, this.guiTop + 36, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
             this.handleClick((SideConfigButton) button, Direction.WEST);
-            ((SideConfigButton) button).setPosition(this.guiLeft + 45, this.guiTop + 34);
+            ((SideConfigButton) button).setPosition(this.guiLeft + 95, this.guiTop + 36);
         });
-        this.sideConfigButtons[2].setPosition(this.guiLeft + 45, this.guiTop + 34);
-        this.sideConfigButtons[3] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.EAST), "east", this.guiLeft + 108, this.guiTop + 34, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+        this.sideConfigButtons[2].setPosition(this.guiLeft + 95, this.guiTop + 36);
+        this.sideConfigButtons[3] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.EAST), "east", this.guiLeft + 50, this.guiTop + 36, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
             this.handleClick((SideConfigButton) button, Direction.EAST);
-            ((SideConfigButton) button).setPosition(this.guiLeft + 108, this.guiTop + 34);
+            ((SideConfigButton) button).setPosition(this.guiLeft + 50, this.guiTop + 36);
         });
-        this.sideConfigButtons[3].setPosition(this.guiLeft + 108, this.guiTop + 34);
-        this.sideConfigButtons[4] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.DOWN), "down", this.guiLeft + 45, this.guiTop + 50, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+        this.sideConfigButtons[3].setPosition(this.guiLeft + 50, this.guiTop + 36);
+        this.sideConfigButtons[4] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.DOWN), "down", this.guiLeft + 65, this.guiTop + 44, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
             this.handleClick((SideConfigButton) button, Direction.DOWN);
-            ((SideConfigButton) button).setPosition(this.guiLeft + 45, this.guiTop + 50);
+            ((SideConfigButton) button).setPosition(this.guiLeft + 65, this.guiTop + 44);
         });
-        this.sideConfigButtons[4].setPosition(this.guiLeft + 45, this.guiTop + 50);
-        this.sideConfigButtons[5] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.UP), "up", this.guiLeft + 108, this.guiTop + 50, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+        this.sideConfigButtons[4].setPosition(this.guiLeft + 65, this.guiTop + 44);
+        this.sideConfigButtons[5] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.UP), "up", this.guiLeft + 65, this.guiTop + 29, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
             this.handleClick((SideConfigButton) button, Direction.UP);
-            ((SideConfigButton) button).setPosition(this.guiLeft + 108, this.guiTop + 50);
+            ((SideConfigButton) button).setPosition(this.guiLeft + 65, this.guiTop + 29);
         });
-        this.sideConfigButtons[5].setPosition(this.guiLeft + 108, this.guiTop + 50);
+        this.sideConfigButtons[5].setPosition(this.guiLeft + 65, this.guiTop + 29);
     }
 
     private void handleClick(SideConfigButton button, Direction direction) {
