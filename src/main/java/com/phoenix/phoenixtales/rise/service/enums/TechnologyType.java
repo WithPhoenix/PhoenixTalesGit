@@ -1,4 +1,4 @@
-package com.phoenix.phoenixtales.rise.service;
+package com.phoenix.phoenixtales.rise.service.enums;
 
 public enum TechnologyType {
     SIMPLE, NORMAL, IMPROVED, OVERLOADED;

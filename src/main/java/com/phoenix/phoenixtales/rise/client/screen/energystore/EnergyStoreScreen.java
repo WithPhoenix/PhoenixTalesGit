@@ -8,7 +8,7 @@ import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreContain
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
 import com.phoenix.phoenixtales.rise.network.LeftClickPacket;
 import com.phoenix.phoenixtales.rise.network.PacketHandler;
-import com.phoenix.phoenixtales.rise.service.EnergyHandlingType;
+import com.phoenix.phoenixtales.rise.service.enums.EnergyHandlingType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;

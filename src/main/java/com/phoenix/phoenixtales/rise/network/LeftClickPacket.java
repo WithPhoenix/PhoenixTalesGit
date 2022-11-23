@@ -1,7 +1,7 @@
 package com.phoenix.phoenixtales.rise.network;
 
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStore;
-import com.phoenix.phoenixtales.rise.service.EnergyHandlingType;
+import com.phoenix.phoenixtales.rise.service.enums.EnergyHandlingType;
 import net.minecraft.block.BlockState;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Direction;

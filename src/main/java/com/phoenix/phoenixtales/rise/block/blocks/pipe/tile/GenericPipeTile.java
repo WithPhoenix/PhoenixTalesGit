@@ -1,6 +1,6 @@
 package com.phoenix.phoenixtales.rise.block.blocks.pipe.tile;
 
-import com.phoenix.phoenixtales.rise.service.TechnologyType;
+import com.phoenix.phoenixtales.rise.service.enums.TechnologyType;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;

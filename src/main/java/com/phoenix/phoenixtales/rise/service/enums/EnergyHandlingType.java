@@ -1,4 +1,4 @@
-package com.phoenix.phoenixtales.rise.service;
+package com.phoenix.phoenixtales.rise.service.enums;
 
 import net.minecraft.util.IStringSerializable;
 

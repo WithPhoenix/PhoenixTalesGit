@@ -1,8 +1,8 @@
 package com.phoenix.phoenixtales.rise.block.blocks.energystore;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
-import com.phoenix.phoenixtales.rise.service.EnergyHandlingType;
 import com.phoenix.phoenixtales.rise.service.RiseEnergyStorage;
+import com.phoenix.phoenixtales.rise.service.enums.EnergyHandlingType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -90,6 +90,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
         return super.getCapability(cap, side);
     }
 
+
     public <T> LazyOptional<T> getCapForCable(Direction side) {
         if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.RECEIVE
                 || this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.EXTRACT) {
@@ -101,7 +102,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
-        return this.getCapability(cap, null);
+        return LazyOptional.empty();
     }
 
     @Override

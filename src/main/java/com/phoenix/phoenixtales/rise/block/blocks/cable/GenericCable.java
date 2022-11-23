@@ -1,10 +1,9 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable;
 
-import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
 import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
-import com.phoenix.phoenixtales.rise.service.TechnologyType;
+import com.phoenix.phoenixtales.rise.service.enums.TechnologyType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -96,7 +95,6 @@ public class GenericCable extends ConduitBlock {
 //        }
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
-
 
     @Override
     public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos pos2, boolean b) {

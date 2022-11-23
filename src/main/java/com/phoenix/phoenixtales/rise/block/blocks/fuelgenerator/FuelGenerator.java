@@ -1,7 +1,7 @@
 package com.phoenix.phoenixtales.rise.block.blocks.fuelgenerator;
 
 import com.google.common.collect.Maps;
-import com.phoenix.phoenixtales.rise.service.EnergyHandlingType;
+import com.phoenix.phoenixtales.rise.service.enums.EnergyHandlingType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -29,6 +29,7 @@ public class FuelGenerator extends Block {
         p.put(Direction.DOWN, DOWN);
         p.put(Direction.UP, UP);
     });
+
     public FuelGenerator() {
         super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(5.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).setRequiresTool().sound(SoundType.METAL));
         this.setDefaultState(this.getStateContainer().getBaseState().with(NORTH, EnergyHandlingType.NONE).with(SOUTH, EnergyHandlingType.NONE).with(WEST, EnergyHandlingType.NONE).with(EAST, EnergyHandlingType.NONE).with(DOWN, EnergyHandlingType.NONE).with(UP, EnergyHandlingType.NONE));

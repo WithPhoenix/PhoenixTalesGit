@@ -3,7 +3,7 @@ package com.phoenix.phoenixtales.rise.block.blocks.cable.tile;
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitTile;
-import com.phoenix.phoenixtales.rise.service.TechnologyType;
+import com.phoenix.phoenixtales.rise.service.enums.TechnologyType;
 import com.phoenix.phoenixtales.rise.service.conduit.network.CableManager;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;

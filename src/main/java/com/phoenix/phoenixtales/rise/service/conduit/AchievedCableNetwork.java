@@ -1,7 +1,7 @@
 package com.phoenix.phoenixtales.rise.service.conduit;
 
 import com.phoenix.phoenixtales.rise.block.blocks.cable.tile.GenericCableTile;
-import com.phoenix.phoenixtales.rise.service.TechnologyType;
+import com.phoenix.phoenixtales.rise.service.enums.TechnologyType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
