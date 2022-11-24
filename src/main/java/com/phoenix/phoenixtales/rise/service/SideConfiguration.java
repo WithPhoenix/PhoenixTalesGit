@@ -56,10 +56,10 @@ public class SideConfiguration implements INBTSerializable<CompoundNBT> {
                 re = facing.getOpposite();
                 break;
             case LEFT:
-                re = facing.getClockWise();
+                re = this.getClockWise(facing);
                 break;
             case RIGHT:
-                re = facing.getCounterClockWise();
+                re = this.getCounterClockWise(facing);
                 break;
             case BOTTOM:
                 re = Direction.DOWN;
@@ -79,5 +79,13 @@ public class SideConfiguration implements INBTSerializable<CompoundNBT> {
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
 
+    }
+
+    private Direction getClockWise(Direction d) {
+        return null;
+    }
+
+    private Direction getCounterClockWise(Direction d) {
+        return null;
     }
 }
