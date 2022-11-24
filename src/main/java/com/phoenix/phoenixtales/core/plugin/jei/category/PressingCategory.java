@@ -3,6 +3,7 @@ package com.phoenix.phoenixtales.core.plugin.jei.category;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.RiseBlocks;
+import com.phoenix.phoenixtales.rise.block.blocks.press.PressContainer;
 import com.phoenix.phoenixtales.rise.block.blocks.press.PressingRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -11,13 +12,19 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class PressingCategory implements IRecipeCategory<PressingRecipe> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class PressingCategory implements IRecipeCategory<PressingRecipe>, IRecipeTransferInfo<PressContainer> {
     private static final int inputSlot = 0;
     private static final int outputSlot = 1;
 
@@ -110,5 +117,32 @@ public class PressingCategory implements IRecipeCategory<PressingRecipe> {
         //output
         recipeLayout.getItemStacks().init(outputSlot, false, 5, 33);
         recipeLayout.getItemStacks().set(ingredients);
+    }
+
+    @Override
+    public Class getContainerClass() {
+        return PressContainer.class;
+    }
+
+    @Override
+    public ResourceLocation getRecipeCategoryUid() {
+        return UID;
+    }
+
+    @Override
+    public boolean canHandle(PressContainer container) {
+        return false;
+    }
+
+    @Override
+    public List<Slot> getRecipeSlots(PressContainer container) {
+        return null;
+    }
+
+    @Override
+    public List<Slot> getInventorySlots(PressContainer container) {
+        List<Slot> list = new ArrayList<>();
+//        list.add();
+        return null;
     }
 }

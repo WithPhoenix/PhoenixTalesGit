@@ -167,11 +167,11 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
     private void handleClick(SideConfigButton button, Direction direction) {
         BlockPos pos = this.tile.getPos();
         if (button.getState() == EnergyHandlingType.NONE) {
-            PacketHandler.CHANNEL.sendToServer(new LeftClickPacket(EnergyHandlingType.RECEIVE, direction, pos));
-            button.setState(EnergyHandlingType.RECEIVE);
-        } else if (button.getState() == EnergyHandlingType.RECEIVE) {
-            PacketHandler.CHANNEL.sendToServer(new LeftClickPacket(EnergyHandlingType.EXTRACT, direction, pos));
-            button.setState(EnergyHandlingType.EXTRACT);
+            PacketHandler.CHANNEL.sendToServer(new LeftClickPacket(EnergyHandlingType.INPUT, direction, pos));
+            button.setState(EnergyHandlingType.INPUT);
+        } else if (button.getState() == EnergyHandlingType.INPUT) {
+            PacketHandler.CHANNEL.sendToServer(new LeftClickPacket(EnergyHandlingType.OUTPUT, direction, pos));
+            button.setState(EnergyHandlingType.OUTPUT);
         } else {
             PacketHandler.CHANNEL.sendToServer(new LeftClickPacket(EnergyHandlingType.NONE, direction, pos));
             button.setState(EnergyHandlingType.NONE);
@@ -245,10 +245,10 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
             }
             int j = this.xTexStart;
             switch (this.state) {
-                case RECEIVE:
+                case INPUT:
                     j += this.xDiffText;
                     break;
-                case EXTRACT:
+                case OUTPUT:
                     j += (this.xDiffText + this.xDiffText);
                     break;
             }
@@ -264,10 +264,10 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
         public void renderToolTip(MatrixStack matrixStack, int mouseX, int mouseY) {
             String text = "none";
             switch (this.state) {
-                case RECEIVE:
+                case INPUT:
                     text = "receive";
                     break;
-                case EXTRACT:
+                case OUTPUT:
                     text = "extract";
                     break;
             }

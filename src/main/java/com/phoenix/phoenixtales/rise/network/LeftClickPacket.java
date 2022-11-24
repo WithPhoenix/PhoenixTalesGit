@@ -44,11 +44,11 @@ public class LeftClickPacket {
                     case NONE:
                         world.setBlockState(msg.pos, state.with(EnergyStore.FACING_TO_PROPERTY_MAP.get(msg.direction), EnergyHandlingType.NONE));
                         break;
-                    case RECEIVE:
-                        world.setBlockState(msg.pos, state.with(EnergyStore.FACING_TO_PROPERTY_MAP.get(msg.direction), EnergyHandlingType.RECEIVE));
+                    case INPUT:
+                        world.setBlockState(msg.pos, state.with(EnergyStore.FACING_TO_PROPERTY_MAP.get(msg.direction), EnergyHandlingType.INPUT));
                         break;
-                    case EXTRACT:
-                        world.setBlockState(msg.pos, state.with(EnergyStore.FACING_TO_PROPERTY_MAP.get(msg.direction), EnergyHandlingType.EXTRACT));
+                    case OUTPUT:
+                        world.setBlockState(msg.pos, state.with(EnergyStore.FACING_TO_PROPERTY_MAP.get(msg.direction), EnergyHandlingType.OUTPUT));
                         break;
                 }
             });

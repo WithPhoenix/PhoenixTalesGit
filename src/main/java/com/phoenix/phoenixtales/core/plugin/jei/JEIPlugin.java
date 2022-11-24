@@ -67,6 +67,7 @@ public class JEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+        registration.addRecipeTransferHandler(new PressingCategory(registration.getJeiHelpers().getGuiHelper()));
 //        registration.addRecipeTransferHandler(AssemblerContainer.class, AssemblingCategory.UID, 0, 4, 5, 36);
 //        registration.addRecipeTransferHandler(PressContainer.class, PressingCategory.UID, 0, 1, 2, 36);
     }

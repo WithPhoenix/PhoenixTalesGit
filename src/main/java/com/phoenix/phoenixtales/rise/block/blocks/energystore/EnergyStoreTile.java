@@ -83,7 +83,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
             return handlerOpt.cast();
         } else if (cap == CapabilityEnergy.ENERGY) {
             if (side == null) return super.getCapability(cap, null);
-            if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.RECEIVE) {
+            if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.INPUT) {
                 return storageOpt.cast();
             }
         }
@@ -92,8 +92,8 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
 
 
     public <T> LazyOptional<T> getCapForCable(Direction side) {
-        if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.RECEIVE
-                || this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.EXTRACT) {
+        if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.INPUT
+                || this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.OUTPUT) {
             return storageOpt.cast();
         }
         return LazyOptional.empty();
@@ -119,7 +119,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     //extract energy
     private void handleWorld() {
         for (Direction d : Direction.values()) {
-            if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(d)) == EnergyHandlingType.EXTRACT) {
+            if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(d)) == EnergyHandlingType.OUTPUT) {
                 TileEntity neighbor = world != null ? world.getTileEntity(this.pos.offset(d)) : null;
                 if (neighbor != null) {
                     neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).ifPresent(cap -> {

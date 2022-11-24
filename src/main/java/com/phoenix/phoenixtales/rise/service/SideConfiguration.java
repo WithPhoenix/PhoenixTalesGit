@@ -1,24 +1,83 @@
 package com.phoenix.phoenixtales.rise.service;
 
+import com.phoenix.phoenixtales.rise.block.blocks.EnergyBaseBlock;
 import com.phoenix.phoenixtales.rise.service.enums.EnergyHandlingType;
-import net.minecraft.block.BlockState;
-import net.minecraft.world.World;
+import com.phoenix.phoenixtales.rise.service.enums.RelativeDirection;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
+import net.minecraftforge.common.util.INBTSerializable;
 
-public class SideConfiguration {
+import java.util.EnumMap;
 
-    private World worldIn;
-    private BlockState stateIn;
+public class SideConfiguration implements INBTSerializable<CompoundNBT> {
 
-    private EnergyHandlingType DOWN;
-    private EnergyHandlingType UP;
-    private EnergyHandlingType NORTH;
-    private EnergyHandlingType SOUTH;
-    private EnergyHandlingType WEST;
-    private EnergyHandlingType EAST;
+    private final TileEntity tileIn;
 
-    public SideConfiguration(World world, BlockState state) {
-        this.worldIn = world;
-        this.stateIn = state;
+    private final EnumMap<Direction, EnergyHandlingType> CONFIG = new EnumMap<>(Direction.class);
+
+    public SideConfiguration(TileEntity tile) {
+        this.tileIn = tile;
+        this.reset();
+    }
+
+
+    public void set(Direction direction, EnergyHandlingType type) {
+        CONFIG.put(direction, type);
+    }
+
+    public void set(RelativeDirection direction, EnergyHandlingType type) {
+        CONFIG.put(relativeToLocal(direction), type);
+    }
+
+    public EnergyHandlingType get(Direction direction) {
+        return CONFIG.get(direction);
+    }
+
+    public EnergyHandlingType get(RelativeDirection direction) {
+        return CONFIG.get(relativeToLocal(direction));
+    }
+
+    public boolean canOutput(Direction direction) {
+        return CONFIG.get(direction).isExtract();
+    }
+
+    public void reset() {
+        for (Direction d : Direction.values()) {
+            CONFIG.put(d, EnergyHandlingType.NONE);
+        }
+    }
+
+    private Direction relativeToLocal(RelativeDirection direction) {
+        Direction facing = tileIn.getBlockState().get(EnergyBaseBlock.FACING);
+        Direction re = facing;
+        switch (direction) {
+            case BACK:
+                re = facing.getOpposite();
+                break;
+            case LEFT:
+                re = facing.getClockWise();
+                break;
+            case RIGHT:
+                re = facing.getCounterClockWise();
+                break;
+            case BOTTOM:
+                re = Direction.DOWN;
+                break;
+            case TOP:
+                re = Direction.UP;
+                break;
+        }
+        return re;
+    }
+
+    @Override
+    public CompoundNBT serializeNBT() {
+        return null;
+    }
+
+    @Override
+    public void deserializeNBT(CompoundNBT nbt) {
 
     }
 }
