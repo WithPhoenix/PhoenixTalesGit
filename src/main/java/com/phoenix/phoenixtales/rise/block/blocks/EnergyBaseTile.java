@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
 public abstract class EnergyBaseTile extends TileEntity {
-        protected final SideConfiguration CONFIG;
+    public final SideConfiguration CONFIG;
 
     public EnergyBaseTile(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);

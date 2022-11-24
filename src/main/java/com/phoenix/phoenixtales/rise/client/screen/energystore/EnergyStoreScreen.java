@@ -9,6 +9,7 @@ import com.phoenix.phoenixtales.rise.block.blocks.energystore.EnergyStoreTile;
 import com.phoenix.phoenixtales.rise.network.LeftClickPacket;
 import com.phoenix.phoenixtales.rise.network.PacketHandler;
 import com.phoenix.phoenixtales.rise.service.enums.EnergyHandlingType;
+import com.phoenix.phoenixtales.rise.service.enums.RelativeDirection;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -132,39 +133,39 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
 
     //todo make the button use translation text component
     private void initializeSCButtons() {
-        this.sideConfigButtons[0] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.NORTH), "north", this.guiLeft + 35, this.guiTop + 36, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
-            this.handleClick((SideConfigButton) button, Direction.NORTH);
+        this.sideConfigButtons[0] = new SideConfigButton(this.tile.CONFIG.get(RelativeDirection.FRONT), "front", this.guiLeft + 35, this.guiTop + 36, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+            this.handleClick((SideConfigButton) button,RelativeDirection.FRONT);
             ((SideConfigButton) button).setPosition(this.guiLeft + 35, this.guiTop + 36);
         });
         this.sideConfigButtons[0].setPosition(this.guiLeft + 35, this.guiTop + 36);
-        this.sideConfigButtons[1] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.SOUTH), "south", this.guiLeft + 80, this.guiTop + 36, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
-            this.handleClick((SideConfigButton) button, Direction.SOUTH);
+        this.sideConfigButtons[1] = new SideConfigButton(this.tile.CONFIG.get(RelativeDirection.BACK), "back", this.guiLeft + 80, this.guiTop + 36, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+            this.handleClick((SideConfigButton) button, RelativeDirection.BACK);
             ((SideConfigButton) button).setPosition(this.guiLeft + 80, this.guiTop + 36);
         });
         this.sideConfigButtons[1].setPosition(this.guiLeft + 80, this.guiTop + 36);
-        this.sideConfigButtons[2] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.WEST), "west", this.guiLeft + 95, this.guiTop + 36, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
-            this.handleClick((SideConfigButton) button, Direction.WEST);
+        this.sideConfigButtons[2] = new SideConfigButton(this.tile.CONFIG.get(RelativeDirection.LEFT), "left", this.guiLeft + 95, this.guiTop + 36, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+            this.handleClick((SideConfigButton) button, RelativeDirection.LEFT);
             ((SideConfigButton) button).setPosition(this.guiLeft + 95, this.guiTop + 36);
         });
         this.sideConfigButtons[2].setPosition(this.guiLeft + 95, this.guiTop + 36);
-        this.sideConfigButtons[3] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.EAST), "east", this.guiLeft + 50, this.guiTop + 36, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
-            this.handleClick((SideConfigButton) button, Direction.EAST);
+        this.sideConfigButtons[3] = new SideConfigButton(this.tile.CONFIG.get(RelativeDirection.RIGHT), "right", this.guiLeft + 50, this.guiTop + 36, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+            this.handleClick((SideConfigButton) button, RelativeDirection.RIGHT);
             ((SideConfigButton) button).setPosition(this.guiLeft + 50, this.guiTop + 36);
         });
         this.sideConfigButtons[3].setPosition(this.guiLeft + 50, this.guiTop + 36);
-        this.sideConfigButtons[4] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.DOWN), "down", this.guiLeft + 65, this.guiTop + 44, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
-            this.handleClick((SideConfigButton) button, Direction.DOWN);
+        this.sideConfigButtons[4] = new SideConfigButton(this.tile.CONFIG.get(RelativeDirection.TOP), "up", this.guiLeft + 65, this.guiTop + 44, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+            this.handleClick((SideConfigButton) button, RelativeDirection.TOP);
             ((SideConfigButton) button).setPosition(this.guiLeft + 65, this.guiTop + 44);
         });
         this.sideConfigButtons[4].setPosition(this.guiLeft + 65, this.guiTop + 44);
-        this.sideConfigButtons[5] = new SideConfigButton(this.tile.getBlockState().get(EnergyStore.UP), "up", this.guiLeft + 65, this.guiTop + 29, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
-            this.handleClick((SideConfigButton) button, Direction.UP);
+        this.sideConfigButtons[5] = new SideConfigButton(this.tile.CONFIG.get(RelativeDirection.BOTTOM), "bottom", this.guiLeft + 65, this.guiTop + 29, 15, 15, 0, 0, 16, 16, SIDE_CONFIG_BUTTON, (button) -> {
+            this.handleClick((SideConfigButton) button, RelativeDirection.BOTTOM);
             ((SideConfigButton) button).setPosition(this.guiLeft + 65, this.guiTop + 29);
         });
         this.sideConfigButtons[5].setPosition(this.guiLeft + 65, this.guiTop + 29);
     }
 
-    private void handleClick(SideConfigButton button, Direction direction) {
+    private void handleClick(SideConfigButton button, RelativeDirection direction) {
         BlockPos pos = this.tile.getPos();
         if (button.getState() == EnergyHandlingType.NONE) {
             PacketHandler.CHANNEL.sendToServer(new LeftClickPacket(EnergyHandlingType.INPUT, direction, pos));
@@ -265,10 +266,10 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
             String text = "none";
             switch (this.state) {
                 case INPUT:
-                    text = "receive";
+                    text = "input";
                     break;
                 case OUTPUT:
-                    text = "extract";
+                    text = "output";
                     break;
             }
             EnergyStoreScreen.this.renderTooltip(matrixStack, new StringTextComponent(this.name + " | " + text), mouseX, mouseY);

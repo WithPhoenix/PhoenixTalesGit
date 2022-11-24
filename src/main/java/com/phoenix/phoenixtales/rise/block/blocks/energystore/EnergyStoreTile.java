@@ -1,6 +1,7 @@
 package com.phoenix.phoenixtales.rise.block.blocks.energystore;
 
 import com.phoenix.phoenixtales.rise.block.RiseTileEntities;
+import com.phoenix.phoenixtales.rise.block.blocks.EnergyBaseTile;
 import com.phoenix.phoenixtales.rise.service.RiseEnergyStorage;
 import com.phoenix.phoenixtales.rise.service.enums.EnergyHandlingType;
 import net.minecraft.block.BlockState;
@@ -27,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+public class EnergyStoreTile extends EnergyBaseTile implements ITickableTileEntity, INamedContainerProvider {
 
     //TODO config screen to set transferRatePerTick and outputsides/inputsides
 
@@ -83,7 +84,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
             return handlerOpt.cast();
         } else if (cap == CapabilityEnergy.ENERGY) {
             if (side == null) return super.getCapability(cap, null);
-            if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.INPUT) {
+            if (this.CONFIG.get(side) == EnergyHandlingType.INPUT) {
                 return storageOpt.cast();
             }
         }
@@ -92,8 +93,8 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
 
 
     public <T> LazyOptional<T> getCapForCable(Direction side) {
-        if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.INPUT
-                || this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(side)) == EnergyHandlingType.OUTPUT) {
+        if (this.CONFIG.get(side) == EnergyHandlingType.INPUT
+                || this.CONFIG.get(side) == EnergyHandlingType.OUTPUT) {
             return storageOpt.cast();
         }
         return LazyOptional.empty();
@@ -119,7 +120,7 @@ public class EnergyStoreTile extends TileEntity implements ITickableTileEntity, 
     //extract energy
     private void handleWorld() {
         for (Direction d : Direction.values()) {
-            if (this.getBlockState().get(EnergyStore.FACING_TO_PROPERTY_MAP.get(d)) == EnergyHandlingType.OUTPUT) {
+            if (this.CONFIG.get(d) == EnergyHandlingType.OUTPUT) {
                 TileEntity neighbor = world != null ? world.getTileEntity(this.pos.offset(d)) : null;
                 if (neighbor != null) {
                     neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).ifPresent(cap -> {

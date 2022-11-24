@@ -21,7 +21,6 @@ public class SideConfiguration implements INBTSerializable<CompoundNBT> {
         this.reset();
     }
 
-
     public void set(Direction direction, EnergyHandlingType type) {
         CONFIG.put(direction, type);
     }
@@ -56,10 +55,10 @@ public class SideConfiguration implements INBTSerializable<CompoundNBT> {
                 re = facing.getOpposite();
                 break;
             case LEFT:
-                re = this.getClockWise(facing);
+                re = facing.rotateY();
                 break;
             case RIGHT:
-                re = this.getCounterClockWise(facing);
+                re = facing.rotateYCCW();
                 break;
             case BOTTOM:
                 re = Direction.DOWN;
