@@ -33,26 +33,26 @@ import java.util.Map;
 @SuppressWarnings("deprecation")
 public class EnergyStore extends EnergyBaseBlock {
 
-    public static final EnumProperty<EnergyHandlingType> NORTH = EnumProperty.create("north", EnergyHandlingType.class);
-    public static final EnumProperty<EnergyHandlingType> SOUTH = EnumProperty.create("south", EnergyHandlingType.class);
-    public static final EnumProperty<EnergyHandlingType> WEST = EnumProperty.create("west", EnergyHandlingType.class);
-    public static final EnumProperty<EnergyHandlingType> EAST = EnumProperty.create("east", EnergyHandlingType.class);
-    public static final EnumProperty<EnergyHandlingType> DOWN = EnumProperty.create("down", EnergyHandlingType.class);
-    public static final EnumProperty<EnergyHandlingType> UP = EnumProperty.create("up", EnergyHandlingType.class);
+    //public static final EnumProperty<EnergyHandlingType> NORTH = EnumProperty.create("north", EnergyHandlingType.class);
+    //public static final EnumProperty<EnergyHandlingType> SOUTH = EnumProperty.create("south", EnergyHandlingType.class);
+    //public static final EnumProperty<EnergyHandlingType> WEST = EnumProperty.create("west", EnergyHandlingType.class);
+    //public static final EnumProperty<EnergyHandlingType> EAST = EnumProperty.create("east", EnergyHandlingType.class);
+    //public static final EnumProperty<EnergyHandlingType> DOWN = EnumProperty.create("down", EnergyHandlingType.class);
+    //public static final EnumProperty<EnergyHandlingType> UP = EnumProperty.create("up", EnergyHandlingType.class);
 
 
-    public static final Map<Direction, EnumProperty<EnergyHandlingType>> FACING_TO_PROPERTY_MAP = Util.make(Maps.newEnumMap(Direction.class), (p) -> {
-        p.put(Direction.NORTH, NORTH);
-        p.put(Direction.SOUTH, SOUTH);
-        p.put(Direction.WEST, WEST);
-        p.put(Direction.EAST, EAST);
-        p.put(Direction.DOWN, DOWN);
-        p.put(Direction.UP, UP);
-    });
+    //public static final Map<Direction, EnumProperty<EnergyHandlingType>> FACING_TO_PROPERTY_MAP = Util.make(Maps.newEnumMap(Direction.class), (p) -> {
+    //  p.put(Direction.NORTH, NORTH);
+    //p.put(Direction.SOUTH, SOUTH);
+    //p.put(Direction.WEST, WEST);
+    //p.put(Direction.EAST, EAST);
+    //p.put(Direction.DOWN, DOWN);
+    //p.put(Direction.UP, UP);
+    //});
 
     public EnergyStore() {
         super(Properties.create(Material.IRON, MaterialColor.GRAY).hardnessAndResistance(5.0f, 5.0f).harvestTool(ToolType.PICKAXE).harvestLevel(2).setRequiresTool().sound(SoundType.METAL));
-        this.setDefaultState(this.getStateContainer().getBaseState().with(NORTH, EnergyHandlingType.NONE).with(SOUTH, EnergyHandlingType.NONE).with(WEST, EnergyHandlingType.NONE).with(EAST, EnergyHandlingType.NONE).with(DOWN, EnergyHandlingType.NONE).with(UP, EnergyHandlingType.NONE));
+        //  this.setDefaultState(this.getStateContainer().getBaseState().with(NORTH, EnergyHandlingType.NONE).with(SOUTH, EnergyHandlingType.NONE).with(WEST, EnergyHandlingType.NONE).with(EAST, EnergyHandlingType.NONE).with(DOWN, EnergyHandlingType.NONE).with(UP, EnergyHandlingType.NONE));
     }
 
     @Override
@@ -73,29 +73,29 @@ public class EnergyStore extends EnergyBaseBlock {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        CompoundNBT nbt = stack.getTag();
-        if (nbt == null) {
-            super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-            return;
-        }
+        // CompoundNBT nbt = stack.getTag();
+        //if (nbt == null) {
+        //  super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        // return;
+        //}
 //        CompoundNBT val = nbt.contains("direction") ? nbt.getCompound("direction") : null;
 //        if (val != null) {
 //            for (int i = 0; i < 6; i++) {
 //                state = state.with(EnergyStore.DIRECTION_TO_FACING_MAP.get(i), DirectionOrNone.valueOf(val.getString(String.valueOf(i))));
 //            }
 //        }
-        CompoundNBT val = nbt.contains("handling") ? nbt.getCompound("handling") : null;
-        if (val != null) {
-            state = state.with(NORTH, EnergyHandlingType.valueOf(val.getString("0")));
-            state = state.with(SOUTH, EnergyHandlingType.valueOf(val.getString("1")));
-            state = state.with(WEST, EnergyHandlingType.valueOf(val.getString("2")));
-            state = state.with(EAST, EnergyHandlingType.valueOf(val.getString("3")));
-            state = state.with(DOWN, EnergyHandlingType.valueOf(val.getString("4")));
-            state = state.with(UP, EnergyHandlingType.valueOf(val.getString("5")));
-        }
-        worldIn.setBlockState(pos, state);
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+        //CompoundNBT val = nbt.contains("handling") ? nbt.getCompound("handling") : null;
+        //if (val != null) {
+        //  state = state.with(NORTH, EnergyHandlingType.valueOf(val.getString("0")));
+        // state = state.with(SOUTH, EnergyHandlingType.valueOf(val.getString("1")));
+        //state = state.with(WEST, EnergyHandlingType.valueOf(val.getString("2")));
+        //state = state.with(EAST, EnergyHandlingType.valueOf(val.getString("3")));
+        //state = state.with(DOWN, EnergyHandlingType.valueOf(val.getString("4")));
+        //state = state.with(UP, EnergyHandlingType.valueOf(val.getString("5")));
     }
+    //worldIn.setBlockState(pos, state);
+    //super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+    
 
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {

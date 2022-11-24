@@ -2,10 +2,15 @@ package com.phoenix.phoenixtales.rise.block.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 //only to find the blocks handling energy
 public abstract class EnergyBaseBlock extends Block {
@@ -24,6 +29,13 @@ public abstract class EnergyBaseBlock extends Block {
     public EnergyBaseBlock(Properties prop) {
         super(prop);
         this.setDefaultState(this.getStateContainer().getBaseState().with(FACING, Direction.NORTH));
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        Direction d = placer != null ?  placer.getHorizontalFacing().getOpposite() : Direction.NORTH;
+        worldIn.setBlockState(pos, state.with(FACING, d));
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
 
     @Override

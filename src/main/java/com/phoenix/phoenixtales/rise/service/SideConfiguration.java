@@ -50,7 +50,7 @@ public class SideConfiguration implements INBTSerializable<CompoundNBT> {
 
     private Direction relativeToLocal(RelativeDirection direction) {
         Direction facing = tileIn.getBlockState().get(EnergyBaseBlock.FACING);
-        Direction re = facing;
+        Direction re;
         switch (direction) {
             case BACK:
                 re = facing.getOpposite();
@@ -67,6 +67,8 @@ public class SideConfiguration implements INBTSerializable<CompoundNBT> {
             case TOP:
                 re = Direction.UP;
                 break;
+            default:
+                re = facing;
         }
         return re;
     }
@@ -82,10 +84,22 @@ public class SideConfiguration implements INBTSerializable<CompoundNBT> {
     }
 
     private Direction getClockWise(Direction d) {
-        return null;
+        Direction[] directions = new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
+        for (int i = 0; i < directions.length; i++) {
+            if (directions[i] == d) {
+                return directions[i == directions.length - 1 ? 0 : (i + 1)];
+            }
+        }
+        throw new IllegalArgumentException(d + " is not a valid argument");
     }
 
     private Direction getCounterClockWise(Direction d) {
-        return null;
+        Direction[] directions = new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
+        for (int i = 0; i < directions.length; i++) {
+            if (directions[i] == d) {
+                return directions[(i == 0 ? directions.length : i) - 1];
+            }
+        }
+        throw new IllegalArgumentException(d + " is not a valid argument");
     }
 }
