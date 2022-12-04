@@ -24,6 +24,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({"unchecked"})
 public class PressingCategory implements IRecipeCategory<PressingRecipe>, IRecipeTransferInfo<PressContainer> {
     private static final int inputSlot = 0;
     private static final int outputSlot = 1;

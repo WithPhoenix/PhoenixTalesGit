@@ -79,7 +79,9 @@ public class SideConfiguration implements INBTSerializable<CompoundNBT> {
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
+        CompoundNBT config = new CompoundNBT();
 
+        nbt.put("sideconfig", config);
     }
 
     private Direction getClockWise(Direction d) {

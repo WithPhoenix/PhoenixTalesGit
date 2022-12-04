@@ -35,9 +35,6 @@ public class EnergyStoreScreen extends ContainerScreen<EnergyStoreContainer> {
     private EnergyStoreTile tile = null;
     private int page;
 
-    //todo button der mit der himmelsrichtung beziffert ist und beim hovern den status anzeigt
-    //todo die buttons neu placen
-
     //todo widget das als energyanzeige fungiert, für alles verwendbar, zeigt alle möglchen stats an
     SideConfigButton[] sideConfigButtons = new SideConfigButton[6];
     private ImageButton nextPage = new ImageButton(this.guiLeft + 177, this.guiTop + 70, 15, 15, 0, 0, 16, NEXT_PAGE_BUTTON_TEXTURE, (button) -> {

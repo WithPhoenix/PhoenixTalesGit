@@ -9,8 +9,12 @@ public enum EnergyHandlingType implements IStringSerializable {
 
     private final int index;
 
-    private EnergyHandlingType(int index) {
+   EnergyHandlingType(int index) {
         this.index = index;
+    }
+
+    public int index() {
+        return index;
     }
 
     public boolean isNone() {

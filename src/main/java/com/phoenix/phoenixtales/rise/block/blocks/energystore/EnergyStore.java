@@ -1,6 +1,7 @@
 package com.phoenix.phoenixtales.rise.block.blocks.energystore;
 
 import com.phoenix.phoenixtales.rise.block.blocks.EnergyBaseBlock;
+import com.phoenix.phoenixtales.rise.block.blocks.EnergyBaseTile;
 import com.phoenix.phoenixtales.rise.item.RiseItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -10,7 +11,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -60,13 +60,10 @@ public class EnergyStore extends EnergyBaseBlock {
                 items.set(i, ((EnergyStoreTile) tileentity).getItemOn(i));
             }
             InventoryHelper.dropItems(worldIn, pos, items);
+            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), super.getBlockItem((EnergyBaseTile) tileentity, RiseItems.ENERGY_STORE));
         }
+        worldIn.removeTileEntity(pos);
         super.onReplaced(state, worldIn, pos, newState, isMoving);
-    }
-
-    @Override
-    public ItemStack getBlockItem() {
-        return new ItemStack(RiseItems.ENERGY_STORE);
     }
 
     @Nullable
