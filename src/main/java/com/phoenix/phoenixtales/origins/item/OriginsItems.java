@@ -5,6 +5,7 @@ import com.phoenix.phoenixtales.core.creativetab.BlockTab;
 import com.phoenix.phoenixtales.core.creativetab.ItemTab;
 import com.phoenix.phoenixtales.origins.block.OriginsBlocks;
 import com.phoenix.phoenixtales.origins.item.items.DecoPortItem;
+import com.phoenix.phoenixtales.origins.item.items.GuideItem;
 import com.phoenix.phoenixtales.rise.item.items.Sulfur;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -20,6 +21,7 @@ public class OriginsItems {
 //    public static final Item CreativeTabBlock = createItem("ctblock", new Item(new Item.Properties()));
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static final Item GUIDE = createItem("guide", new GuideItem());
     public static final Item REALMSTONE = createItem("realmstone", new OriginsBlockItem(OriginsBlocks.REALMSTONE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));
 
     public static final Item SEARING_STONE = createItem("searing_stone", new OriginsBlockItem(OriginsBlocks.SEARING_STONE, new Item.Properties().group(BlockTab.BLOCK_GROUP)));

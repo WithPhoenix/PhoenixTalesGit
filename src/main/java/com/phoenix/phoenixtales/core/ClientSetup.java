@@ -85,6 +85,7 @@ public class ClientSetup {
         ScreenManager.registerFactory(RiseContainers.PRESS_CONTAINER, PressScreen::new);
         ScreenManager.registerFactory(RiseContainers.ALLOY_CONTAINER, AlloyScreen::new);
         ScreenManager.registerFactory(RiseContainers.HT_FACTORY, HTFactoryScreen::new);
+
     }
 
     private static void bindTileRenderers() {

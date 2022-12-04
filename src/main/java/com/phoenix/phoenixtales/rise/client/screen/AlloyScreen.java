@@ -13,7 +13,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class AlloyScreen extends ContainerScreen<AlloyContainer> {
-
     private static final ResourceLocation TEXTURE = new ResourceLocation(PhoenixTales.MOD_ID, "textures/gui/alloy_gui.png");
     private AlloyTile tile = null;
 
