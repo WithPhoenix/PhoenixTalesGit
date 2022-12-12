@@ -1,10 +1,9 @@
 package com.phoenix.phoenixtales.rise.block.blocks.cable.tile;
 
-import com.phoenix.phoenixtales.core.PhoenixTales;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitBlock;
 import com.phoenix.phoenixtales.rise.block.blocks.ConduitTile;
-import com.phoenix.phoenixtales.rise.service.enums.TechnologyType;
 import com.phoenix.phoenixtales.rise.service.conduit.network.CableManager;
+import com.phoenix.phoenixtales.rise.service.enums.TechnologyType;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
@@ -20,12 +19,10 @@ import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GenericCableTile extends ConduitTile implements ITickableTileEntity {
     private final TechnologyType type;
-    private List<Link> links;
 
     private CableManager manager;
     private LazyOptional<IEnergyStorage> lazyManager;
@@ -43,45 +40,12 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
         this.lazyManager = LazyOptional.of(() -> manager);
     }
 
-    public void updateManager() {
-        this.manager.update(this.pos);
+    public void updateManager(BlockPos p) {
+        this.manager.update(p);
     }
-
-    public CableManager getNetwork() {
-        return manager;
-    }
-
-    public List<Link> getLinks() {
-        if (this.world == null) return new ArrayList<>();
-        this.update(pos);
-        if (this.links == null) return new ArrayList<>();
-        return links;
-    }
-
 
     public CableManager getManager() {
         return manager;
-    }
-
-    public void update(@Nullable BlockPos pos) {
-        if (pos == null) {
-            pos = this.pos;
-        }
-        PhoenixTales.log.debug("world not null" + hasWorld());
-        for (Direction d : Direction.values()) {
-            if (!(world.getTileEntity(pos) instanceof GenericCableTile)) return;
-            if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
-                if (manager.cables.contains(pos.offset(d))) return;
-                this.update(pos.offset(d));
-            }
-            this.manager.cables.add(pos);
-            return;
-        }
-    }
-
-    //can i put this method in CableManager?
-    public void setLinks(List<Link> links) {
-        this.links = links;
     }
 
     private boolean hasMnrg() {
@@ -128,7 +92,7 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
             TileEntity neighbor = world != null ? world.getTileEntity(this.pos.offset(d)) : null;
             if (neighbor != null) {
                 if (neighbor instanceof GenericCableTile) continue;
-                    neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).ifPresent(cap -> {
+                neighbor.getCapability(CapabilityEnergy.ENERGY, d.getOpposite()).ifPresent(cap -> {
                     int push = this.manager.extractEnergy(this.type.transferRate(), true);
                     if (push > 0) {
                         push = cap.receiveEnergy(push, false);
@@ -157,3 +121,18 @@ public class GenericCableTile extends ConduitTile implements ITickableTileEntity
         }
     }
 }
+//public void update(@Nullable BlockPos pos) {
+//        if (pos == null) {
+//        pos = this.pos;
+//        }
+//        PhoenixTales.log.debug("world not null" + hasWorld());
+//        for (Direction d : Direction.values()) {
+//        if (!(world.getTileEntity(pos) instanceof GenericCableTile)) return;
+//        if (world.getBlockState(pos).get(ConduitBlock.FACING_TO_PROPERTY_MAP.get(d))) {
+//        if (manager.cables.contains(pos.offset(d))) return;
+//        this.update(pos.offset(d));
+//        }
+//        this.manager.cables.add(pos);
+//        return;
+//        }
+//        }

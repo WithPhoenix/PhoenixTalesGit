@@ -52,42 +52,24 @@ public class GenericCable extends ConduitBlock {
             GenericCableTile tile = (GenericCableTile) tile1;
             tile.initManger(worldIn);
         }
-//
-//            boolean networkExists = false;
-//            List<ICableNetwork> networks = new ArrayList<>();
-//            for (Direction d : Direction.values()) {
-//                TileEntity tileEntity = worldIn.getTileEntity(pos.offset(d));
-//                if (tileEntity instanceof GenericCableTile) {
-//                    networkExists = true;
-//                    ICableNetwork network = ((GenericCableTile) tileEntity).getNetwork();
-//                    networks.add(network);
-//                }
-//            }
-//
-//            if (!networkExists) {
-//                switch (tile.getTechnologyType()) {
-//                    case SIMPLE:
-//                        tile.init(new CableNetwork(0, worldIn, pos, 200));
-//                        break;
-//                    case NORMAL:
-//                        tile.init(new CableNetwork(0, worldIn, pos, 500));
-//                        break;
-//                    case ADVANCED:
-//                        tile.init(new CableNetwork(0, worldIn, pos, 1200));
-//                        break;
-//                    case OVERLOADED:
-//                        tile.init(new CableNetwork(0, worldIn, pos, 5000));
-//                        break;
-//                }
-//            }
-//        }
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
     }
 
     @Override
     public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (newState.getBlock() == state.getBlock()) {
-            return;
+        if (newState.getBlock() == state.getBlock()) return;
+
+        TileEntity tile1 = worldIn.getTileEntity(pos);
+        if (tile1 == null) return;
+        if (tile1 instanceof GenericCableTile) {
+            GenericCableTile tile = (GenericCableTile) tile1;
+            for (Direction d : Direction.values()) {
+                TileEntity t = worldIn.getTileEntity(pos.offset(d));
+                if (t == null) return;
+                if (t instanceof GenericCableTile) {
+                    ((GenericCableTile) t).updateManager(pos.offset(d));
+                }
+            }
         }
 //        TileEntity tile = worldIn.getTileEntity(pos);
 //        if (tile instanceof GenericCableTile) {
@@ -99,19 +81,7 @@ public class GenericCable extends ConduitBlock {
     @Override
     public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos pos2, boolean b) {
         super.neighborChanged(state, world, pos, block, pos2, b);
-        TileEntity tile1 = world.getTileEntity(pos);
-        if (tile1 == null) return;
-        if (tile1 instanceof GenericCableTile) {
-            GenericCableTile tile = (GenericCableTile) tile1;
-            tile.updateManager();
-        }
     }
-
-    @Override
-    public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
-        super.onNeighborChange(state, world, pos, neighbor);
-    }
-
 
     //    @Override
 //    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
